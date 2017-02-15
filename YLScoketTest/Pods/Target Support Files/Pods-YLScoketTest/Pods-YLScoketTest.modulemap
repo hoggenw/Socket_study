@@ -1,0 +1,6 @@
+framework module Pods_YLScoketTest {
+  umbrella header "Pods-YLScoketTest-umbrella.h"
+
+  export *
+  module * { export * }
+}
