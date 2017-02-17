@@ -8,10 +8,15 @@
 
 #import "ViewController.h"
 #import "YLSocketManager.h"
+#import "YLGCDAsyncSocketManager.h"
+#import "YLSocketRocktManager.h"
+
 @interface ViewController ()
 
 @property (nonatomic,strong)UITextField * putInTextFeild;
 @property (nonatomic,strong)YLSocketManager *manager;
+@property (nonatomic,strong)YLGCDAsyncSocketManager *GCDManager;
+@property (nonatomic, strong)YLSocketRocktManager *socketManager;
 
 @end
 
@@ -19,7 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _manager = [YLSocketManager share];
+    //_GCDManager = [YLGCDAsyncSocketManager shareManger];
+
+    _socketManager = [YLSocketRocktManager shareManger];
     [self intialUI];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -52,18 +59,29 @@
     [button3 addTarget:self action:@selector(disconnect) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button3];
     
+    UIButton  * button4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button4.backgroundColor = [UIColor brownColor];
+    button4.frame = CGRectMake( self.view.bounds.size.width/2 - 30,  self.view.bounds.size.height/2 + 150,  60,  50);
+    [button4 setTitle:@"心跳" forState:normal];
+    [button4 addTarget:self action:@selector(ping) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button4];
+    
     self.putInTextFeild = [UITextField new];
     _putInTextFeild.frame = CGRectMake( self.view.bounds.size.width/2 - 100, 64,  200,  50);
     _putInTextFeild.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_putInTextFeild];
     
+    
+    
 }
 
 - (void)sendMassege {
     if (_putInTextFeild.text.length > 0) {
-        [_manager sendMassege:_putInTextFeild.text];
+       // [_manager sendMassege:_putInTextFeild.text];
+       //  [_GCDManager sendMassege:_putInTextFeild.text];
+        [_socketManager sendMassege:_putInTextFeild.text];
     }else {
-        [_manager sendMassege:@"你好，宝贝"];
+        [_socketManager sendMassege:@"你好，宝贝"];
     }
     
     
@@ -71,15 +89,25 @@
 
 - (void)connect {
     
-    [_manager connectFirst];
+   // [_manager connectFirst];
+//    if ([_GCDManager connect]) {
+//        NSLog(@"连接成功");
+//    }
+    [_socketManager connect];
+
     
 }
 
 - (void)disconnect {
     
-    [_manager disconnectFirst];
+   // [_manager disconnectFirst];
+    // [_GCDManager disconnnet];
+    [_socketManager disconnnet];
     
-    
+}
+
+- (void)ping {
+    [_socketManager ping];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

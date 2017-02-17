@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */; };
 		11849E1E1E52AFD0006D682D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E1D1E52AFD0006D682D /* main.m */; };
 		11849E211E52AFD0006D682D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E201E52AFD0006D682D /* AppDelegate.m */; };
 		11849E241E52AFD0006D682D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E231E52AFD0006D682D /* ViewController.m */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11273A511E55772300B9B5C6 /* YLSocketRocktManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSocketRocktManager.h; sourceTree = "<group>"; };
+		11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketRocktManager.m; sourceTree = "<group>"; };
 		11849E191E52AFD0006D682D /* YLScoketTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLScoketTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11849E1D1E52AFD0006D682D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11849E1F1E52AFD0006D682D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 				11849E351E52B3DC006D682D /* YLSocketManager.m */,
 				11EAA2D31E53F57900F63754 /* YLGCDAsyncSocketManager.h */,
 				11EAA2D41E53F57900F63754 /* YLGCDAsyncSocketManager.m */,
+				11273A511E55772300B9B5C6 /* YLSocketRocktManager.h */,
+				11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */,
 			);
 			name = manager;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				11849E211E52AFD0006D682D /* AppDelegate.m in Sources */,
 				11EAA2D51E53F57900F63754 /* YLGCDAsyncSocketManager.m in Sources */,
 				11849E1E1E52AFD0006D682D /* main.m in Sources */,
+				11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +375,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KD59NK3467;
 				INFOPLIST_FILE = YLScoketTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.YLScoketTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -382,6 +389,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KD59NK3467;
 				INFOPLIST_FILE = YLScoketTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.YLScoketTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";

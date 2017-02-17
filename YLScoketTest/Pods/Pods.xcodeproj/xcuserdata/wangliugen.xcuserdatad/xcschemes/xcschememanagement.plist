@@ -14,10 +14,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SocketRocket.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4E603981120B5770057D5958C7BF8CE2</key>
+		<key>6876CB03CF2A0F666E33CD92FB86E9CE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>86F541832EBF1906B9C0AFEE3EE2E9BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

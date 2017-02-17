@@ -1,57 +1,23 @@
 //
-//  YLGCDAsyncSocketManager.h
+//  YLSocketRocktManager.h
 //  YLScoketTest
 //
-//  Created by 王留根 on 17/2/15.
+//  Created by 王留根 on 17/2/16.
 //  Copyright © 2017年 ios-mac. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface YLGCDAsyncSocketManager : NSObject 
+@interface YLSocketRocktManager : NSObject
 
 + (instancetype)shareManger;
 
-- (BOOL)connect;
+- (void)connect;
 
 - (void)disconnnet;
 
 - (void)sendMassege:(NSString *)message;
 
-- (void)pullMassege;
+- (void)ping;
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
