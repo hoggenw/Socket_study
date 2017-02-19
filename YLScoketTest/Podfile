@@ -8,5 +8,6 @@ target ‘YLScoketTest’ do
     use_frameworks!
     pod 'CocoaAsyncSocket'
     pod 'SocketRocket'
+    pod 'MQTTKit'
     
 end

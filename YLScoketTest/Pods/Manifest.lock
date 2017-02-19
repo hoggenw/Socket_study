@@ -2,16 +2,19 @@ PODS:
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
+  - MQTTKit (0.1.0)
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
   - CocoaAsyncSocket
+  - MQTTKit
   - SocketRocket
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
+  MQTTKit: a4e6b8aa92db1aeae917d2b773fd72a7749937c4
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: cf187bba49c04f2f6cbad9a641cc6bd52b1b1451
+PODFILE CHECKSUM: c47f02fd0bf0a67b5bc0f2e73704cfe9aea7e1b3
 
 COCOAPODS: 1.2.0

@@ -53,6 +53,7 @@ static const uint16_t port = 6969;
 
 //发送消息
 - (void)sendMassege:(NSString *)message {
+    
     NSData * data = [message dataUsingEncoding:NSUTF8StringEncoding];
     [_gcdSocket writeData:data withTimeout:-1 tag:110];
 }

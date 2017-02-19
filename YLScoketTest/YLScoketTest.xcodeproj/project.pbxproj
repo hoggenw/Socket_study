@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */; };
+		11273A581E5687EC00B9B5C6 /* YLMQTTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */; };
 		11849E1E1E52AFD0006D682D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E1D1E52AFD0006D682D /* main.m */; };
 		11849E211E52AFD0006D682D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E201E52AFD0006D682D /* AppDelegate.m */; };
 		11849E241E52AFD0006D682D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E231E52AFD0006D682D /* ViewController.m */; };
@@ -22,6 +23,8 @@
 /* Begin PBXFileReference section */
 		11273A511E55772300B9B5C6 /* YLSocketRocktManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSocketRocktManager.h; sourceTree = "<group>"; };
 		11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketRocktManager.m; sourceTree = "<group>"; };
+		11273A561E5687EC00B9B5C6 /* YLMQTTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLMQTTManager.h; sourceTree = "<group>"; };
+		11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLMQTTManager.m; sourceTree = "<group>"; };
 		11849E191E52AFD0006D682D /* YLScoketTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLScoketTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11849E1D1E52AFD0006D682D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11849E1F1E52AFD0006D682D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +108,8 @@
 				11EAA2D41E53F57900F63754 /* YLGCDAsyncSocketManager.m */,
 				11273A511E55772300B9B5C6 /* YLSocketRocktManager.h */,
 				11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */,
+				11273A561E5687EC00B9B5C6 /* YLMQTTManager.h */,
+				11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */,
 			);
 			name = manager;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				11849E361E52B3DC006D682D /* YLSocketManager.m in Sources */,
 				11849E211E52AFD0006D682D /* AppDelegate.m in Sources */,
 				11EAA2D51E53F57900F63754 /* YLGCDAsyncSocketManager.m in Sources */,
+				11273A581E5687EC00B9B5C6 /* YLMQTTManager.m in Sources */,
 				11849E1E1E52AFD0006D682D /* main.m in Sources */,
 				11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */,
 			);

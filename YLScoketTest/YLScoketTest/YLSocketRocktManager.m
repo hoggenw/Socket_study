@@ -30,7 +30,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 @end
 
-static NSString * host = @"192.168.31.27";
+static NSString * host = @"10.117.100.134 ";
 static const uint16_t port = 6969;
 
 
