@@ -10,10 +10,11 @@
 #import "MQTTKit.h"
 
 
-static NSString * host = @"10.117.100.134 ";
+
+static NSString * host = @"192.168.20.14";
 static const uint16_t port = 6969;
 static NSString *clinetId = @"wangliugen";
-
+static NSString *clinetOther = @"clinetOther ";
 
 @interface YLMQTTManager ()
 
@@ -36,12 +37,16 @@ static NSString *clinetId = @"wangliugen";
     if (_client) {
         [self disConnnect];
     }
-    _client = [[MQTTClient alloc] initWithClientId:clinetId];
+    _client = [[MQTTClient alloc] initWithClientId: clinetOther];
     _client.port = port;
     
+    __weak typeof(self) weakSelf = self;
     [_client setMessageHandler:^(MQTTMessage * message) {
         //收到消息的回调，前提是得先订阅
         NSString *messageString = [[NSString alloc] initWithData:message.payload encoding:NSUTF8StringEncoding];
+        if (weakSelf.delegate != nil) {
+            [weakSelf.delegate receiveMessage: [NSString stringWithFormat:@"收到消息： %@", messageString]];
+        }
         NSLog(@"收到服务端发送的消息：%@",messageString);
     }];
     
@@ -50,7 +55,7 @@ static NSString *clinetId = @"wangliugen";
             case ConnectionAccepted:
                 NSLog(@"MQTT连接成功");
                 //订阅自己的ID，这样收到消息就能回调
-                [_client subscribe:_client.clientID withCompletionHandler:^(NSArray *grantedQos) {
+                [_client subscribe: clinetId  withCompletionHandler:^(NSArray *grantedQos) {
                     NSLog(@"订阅成功");
                 }];
                 
@@ -74,7 +79,7 @@ static NSString *clinetId = @"wangliugen";
 
 - (void)disConnnect {
     if (_client) {
-        [_client unsubscribe:_client.clientID withCompletionHandler:^{
+        [_client unsubscribe: clinetId withCompletionHandler:^{
            
             NSLog(@"取消订阅wangliugen成功");
         }];
@@ -94,7 +99,7 @@ static NSString *clinetId = @"wangliugen";
 //    AtLeastOnce,
 //    ExactlyOnce
 //} MQTTQualityOfService;分别对应最多发送一次，至少发送一次，精确只发送一次。
-    [_client publishString:message toTopic:clinetId withQos:ExactlyOnce retain:YES completionHandler:^(int mid) {
+    [_client publishString:message toTopic: clinetOther withQos:ExactlyOnce retain:YES completionHandler:^(int mid) {
         
     }];
 }

@@ -30,9 +30,9 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 @end
 
-static NSString * host = @"10.117.100.134 ";
+static NSString * host = @"192.168.20.14";
 static const uint16_t port = 6969;
-
+ 
 
 @implementation YLSocketRocktManager
 
@@ -66,7 +66,7 @@ static const uint16_t port = 6969;
     self_dispatch_main_async_safe(^{
         [self destoryHeartBeat];
         __weak typeof(self) weakSelf = self;
-        _heartBeat = [NSTimer scheduledTimerWithTimeInterval:3*60 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        _heartBeat = [NSTimer scheduledTimerWithTimeInterval: 3*60 repeats:YES block:^(NSTimer * _Nonnull timer) {
             NSLog(@"heart beat");
             [weakSelf sendMassege:@"heart"];
         }];
@@ -127,7 +127,11 @@ static const uint16_t port = 6969;
 }
 
 - (void)ping {
-    [_webSocket sendPing:nil];
+    NSLog(@"_webSocket.readyState: %@",@(_webSocket.readyState));
+    if (_webSocket.readyState == SR_CONNECTING || _webSocket.readyState == SR_OPEN ) {
+        [_webSocket sendPing:nil];
+    }
+    
 }
 
 #pragma mark - SRWebSocketDelegate
@@ -154,7 +158,9 @@ static const uint16_t port = 6969;
     NSLog(@"被关闭连接，code:%ld,reason:%@,wasClean:%d",code,reason,wasClean);
     if (code == disConnectByUser) {
         [self disconnnet];
+        NSLog(@"用户操作，终端连接");
     } else {
+        NSLog(@"非用户操作重连");
         [self reConnect];
     }
     [self destoryHeartBeat];
@@ -162,7 +168,7 @@ static const uint16_t port = 6969;
 
 //sendPing的时候，如果网络通的话，则会收到回调，但是必须保证ScocketOpen，否则会crash
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
-    NSLog(@"收到PONG回调");
+    NSLog(@"收到PONG回调: %@",[[NSString alloc] initWithData:pongPayload encoding: NSUTF8StringEncoding]);
 }
 
 //将收到的消息，是否需要把data转换为NSString，每次收到消息都会被调用，默认YES

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7DA85AFF32A0B83D27138927AF9010B81E235931",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7DA85AFF32A0B83D27138927AF9010B81E235931" : 9223372036854775807,
+    "222B69FF653E0466D3FD5CA4384850C1AAF7BAF4" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D3E27136-AA9F-4536-A487-F699CA77EA59",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7DA85AFF32A0B83D27138927AF9010B81E235931" : "Socket_study\/",
+    "222B69FF653E0466D3FD5CA4384850C1AAF7BAF4" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "YLScoketTest",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "YLScoketTest\/YLScoketTest.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hoggenw\/YLTestCode.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "222B69FF653E0466D3FD5CA4384850C1AAF7BAF4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hoggenw\/Socket_study.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7DA85AFF32A0B83D27138927AF9010B81E235931"
+    }
+  ]
+}

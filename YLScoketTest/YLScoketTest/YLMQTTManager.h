@@ -8,7 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol receiveMessageDelegate<NSObject>
+
+- (void)receiveMessage:(NSString *)message;
+
+@end
+
 @interface YLMQTTManager : NSObject
+
+@property (nonatomic, weak)id<receiveMessageDelegate> delegate;
 
 + (instancetype)shareManager ;
 

@@ -12,6 +12,8 @@
 #import <netinet/in.h>
 #import <arpa/inet.h>
 
+
+
 @interface YLSocketManager ()
     
 @property (nonatomic,assign) BOOL ifContinue;
@@ -44,7 +46,7 @@
     _clienScoket = CreateClineSocket();
     NSLog(@"_clienScoket = %d",_clienScoket);
     //服务器Ip
-    const char * server_ip = "192.168.31.27";
+    const char * server_ip = "192.168.20.14";
     short server_port = 6969;
     //等于0说明连接失败
     if (ConnectionToServer(_clienScoket,server_ip,server_port) == 0) {
@@ -62,9 +64,9 @@ static int ConnectionToServer(int clinet_socket,const char *sever_ip, unsigned s
     memset(&sAddr, '0', sizeof(sAddr));
     //端口转换
     //htons是将整型变量从主机字节顺序转变成网络字节顺序，赋值端口号
-    sAddr.sin_port = htons(6969);
+    sAddr.sin_port = htons(port);
     //设置IPv4
-    sAddr.sin_family = AF_INET;
+    sAddr.sin_family =  AF_INET;
     //inet_aton是一个改进的方法将一个字符串Ip地址转换为一个32为的网络序列IP地址
     //如果这个函数成功，函数的返回值非零，如果输入地址不正确则返回零。
     //ip地址转换
@@ -99,7 +101,8 @@ static int CreateClineSocket() {
 
 -(void)disconnectFirst {
     _ifContinue = NO;
-    close(self.clienScoket);
+    int result = close(self.clienScoket);
+    NSLog(@"disconnect = %@",@(result));
     
 }
 //发送消息

@@ -9,5 +9,9 @@ target ‘YLScoketTest’ do
     pod 'CocoaAsyncSocket'
     pod 'SocketRocket'
     pod 'MQTTKit'
+    pod 'Masonry'
+    pod 'Masonry'
+    pod 'MBProgressHUD'
+    #pod 'ChatKit'
     
 end

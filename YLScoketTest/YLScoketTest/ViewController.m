@@ -11,10 +11,15 @@
 #import "YLGCDAsyncSocketManager.h"
 #import "YLSocketRocktManager.h"
 #import "YLMQTTManager.h"
+#import "YLHintView.h"
+//#import <ChatKit/LCChatKit.h>
 
-@interface ViewController ()
+#define managerType 4
+
+@interface ViewController ()<receiveMessageDelegate>
 
 @property (nonatomic,strong)UITextField * putInTextFeild;
+@property (nonatomic,strong)UITextField * putOutTextFeild;
 @property (nonatomic,strong)UIImageView * sendImageView;
 
 @property (nonatomic,strong)YLSocketManager *manager;
@@ -28,10 +33,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //_GCDManager = [YLGCDAsyncSocketManager shareManger];
-
-    //_socketManager = [YLSocketRocktManager shareManger];
-    _mqttManager = [YLMQTTManager shareManager];
+    switch (managerType) {
+        case 1:
+            self.manager = [YLSocketManager share];
+            break;
+        case 2:
+            _GCDManager = [YLGCDAsyncSocketManager shareManger];
+            break;
+        case 3:
+            _socketManager = [YLSocketRocktManager shareManger];
+            break;
+        case 4:
+            _mqttManager = [YLMQTTManager shareManager];
+            _mqttManager.delegate = self;
+            break;
+            
+        default:
+            break;
+    }
+    
     [self intialUI];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -85,21 +105,79 @@
     _putInTextFeild.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_putInTextFeild];
     
+    
+    self.putOutTextFeild = [UITextField new];
+    _putOutTextFeild.frame = CGRectMake( self.view.bounds.size.width/2 - 100,  self.view.bounds.size.height/2 + 180,  200,  50);
+    _putOutTextFeild.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_putOutTextFeild];
+    
     self.sendImageView = [UIImageView new];
     
+    
+    UIButton  * button4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button4.backgroundColor = [UIColor brownColor];
+    button4.frame = CGRectMake( self.view.bounds.size.width/2 + 40,  self.view.bounds.size.height/2 + 120,  60,  50);
+    [button4 setTitle:@"pingpong" forState:normal];
+    [button4 addTarget:self action:@selector(ping) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button4];
     
     
     
 }
 
+- (void)testSDk {
+    // 用于单聊，默认会创建一个只包含两个成员的 unique 对话(如果已经存在则直接进入，不会重复创建)
+    //LCCKConversationViewController *conversationViewController = [[LCCKConversationViewController alloc] initWithPeerId: @"ssdsadcfsadasdas"];
+//    [self presentViewController: conversationViewController animated: true completion:^{
+//
+//    }];
+}
+
+- (void)receiveMessage:(NSString *)message {
+    dispatch_async(dispatch_get_main_queue(), ^{
+       self.putOutTextFeild.text = message;
+    });
+    //[YLHintView showMessageOnThisPage: message];
+}
 - (void)sendMassege {
     if (_putInTextFeild.text.length > 0) {
-       // [_manager sendMassege:_putInTextFeild.text];
-       //  [_GCDManager sendMassege:_putInTextFeild.text];
-        //[_socketManager sendMassege:_putInTextFeild.text];
-        [_mqttManager sendMessage:_putInTextFeild.text];
+        switch (managerType) {
+            case 1:
+                [_manager sendMassege:_putInTextFeild.text];
+                break;
+            case 2:
+                [_GCDManager sendMassege:_putInTextFeild.text];
+                break;
+            case 3:
+                [_socketManager sendMassege:_putInTextFeild.text];
+                break;
+            case 4:
+                [_mqttManager sendMessage:_putInTextFeild.text];
+                break;
+                
+            default:
+                break;
+        }
     }else {
-        [_mqttManager sendMessage:@"你好。宝贝"];
+        NSString *defaultString = @"你好。宝贝";
+        switch (managerType) {
+                
+            case 1:
+                [_manager sendMassege: defaultString];
+                break;
+            case 2:
+                [_GCDManager sendMassege: defaultString];
+                break;
+            case 3:
+                [_socketManager sendMassege: defaultString];
+                break;
+            case 4:
+                [_mqttManager sendMessage: defaultString];
+                break;
+                
+            default:
+                break;
+        }
     }
     
     
@@ -110,22 +188,52 @@
 }
 
 - (void)connect {
-    
-   // [_manager connectFirst];
-//    if ([_GCDManager connect]) {
-//        NSLog(@"连接成功");
-//    }
-//    [_socketManager connect];
-    [_mqttManager connect];
+    switch (managerType) {
+            
+        case 1:
+            [_manager connectFirst];
+            break;
+        case 2:
+            if ([_GCDManager connect]) {
+                NSLog(@"连接成功");
+            }
 
+            break;
+        case 3:
+             [_socketManager connect];
+            break;
+        case 4:
+             [_mqttManager connect];
+            break;
+            
+        default:
+            break;
+    }
+    
     
 }
 
 - (void)disconnect {
     
-   // [_manager disconnectFirst];
-    // [_GCDManager disconnnet];
-    [_mqttManager disConnnect];
+    switch (managerType) {
+            
+        case 1:
+            [_manager disconnectFirst];
+            break;
+        case 2:
+             [_GCDManager disconnnet];
+            break;
+        case 3:
+            [_socketManager disconnnet];
+            break;
+        case 4:
+           [_mqttManager disConnnect];
+            break;
+            
+        default:
+            break;
+    }
+    
     
 }
 

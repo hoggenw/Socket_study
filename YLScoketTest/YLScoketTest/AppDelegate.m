@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+//#import <ChatKit/LCChatKit.h>
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame: [UIScreen mainScreen].bounds];
+    [self.window makeKeyAndVisible];
+    self.window.rootViewController = [ViewController new];
+    //[LCChatKit setAppId:@"ieA27oQutnb2Rfi9ElW9LFK6-gzGzoHsz" appKey: @"SDpMdaUQk43dCeao303HDQHn"];
     return YES;
 }
 

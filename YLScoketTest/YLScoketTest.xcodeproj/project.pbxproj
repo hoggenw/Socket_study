@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */; };
 		11273A581E5687EC00B9B5C6 /* YLMQTTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */; };
+		116B6726200DD89F005AA5E0 /* YLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B6724200DD89F005AA5E0 /* YLLabel.m */; };
+		116B6727200DD89F005AA5E0 /* YLHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B6725200DD89F005AA5E0 /* YLHintView.m */; };
 		11849E1E1E52AFD0006D682D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E1D1E52AFD0006D682D /* main.m */; };
 		11849E211E52AFD0006D682D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E201E52AFD0006D682D /* AppDelegate.m */; };
 		11849E241E52AFD0006D682D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E231E52AFD0006D682D /* ViewController.m */; };
@@ -25,6 +27,10 @@
 		11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketRocktManager.m; sourceTree = "<group>"; };
 		11273A561E5687EC00B9B5C6 /* YLMQTTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLMQTTManager.h; sourceTree = "<group>"; };
 		11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLMQTTManager.m; sourceTree = "<group>"; };
+		116B6722200DD89F005AA5E0 /* YLHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLHintView.h; sourceTree = "<group>"; };
+		116B6723200DD89F005AA5E0 /* YLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLLabel.h; sourceTree = "<group>"; };
+		116B6724200DD89F005AA5E0 /* YLLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLLabel.m; sourceTree = "<group>"; };
+		116B6725200DD89F005AA5E0 /* YLHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLHintView.m; sourceTree = "<group>"; };
 		11849E191E52AFD0006D682D /* YLScoketTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLScoketTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11849E1D1E52AFD0006D682D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11849E1F1E52AFD0006D682D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,6 +83,10 @@
 		11849E1B1E52AFD0006D682D /* YLScoketTest */ = {
 			isa = PBXGroup;
 			children = (
+				116B6722200DD89F005AA5E0 /* YLHintView.h */,
+				116B6725200DD89F005AA5E0 /* YLHintView.m */,
+				116B6723200DD89F005AA5E0 /* YLLabel.h */,
+				116B6724200DD89F005AA5E0 /* YLLabel.m */,
 				11849E331E52AFDD006D682D /* manager */,
 				11849E1F1E52AFD0006D682D /* AppDelegate.h */,
 				11849E201E52AFD0006D682D /* AppDelegate.m */,
@@ -165,7 +175,7 @@
 				TargetAttributes = {
 					11849E181E52AFD0006D682D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = KD59NK3467;
+						DevelopmentTeam = 87F6Z4326W;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -208,9 +218,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MQTTKit/MQTTKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -238,13 +259,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YLScoketTest-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -255,6 +279,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				11849E241E52AFD0006D682D /* ViewController.m in Sources */,
+				116B6726200DD89F005AA5E0 /* YLLabel.m in Sources */,
+				116B6727200DD89F005AA5E0 /* YLHintView.m in Sources */,
 				11849E361E52B3DC006D682D /* YLSocketManager.m in Sources */,
 				11849E211E52AFD0006D682D /* AppDelegate.m in Sources */,
 				11EAA2D51E53F57900F63754 /* YLGCDAsyncSocketManager.m in Sources */,
@@ -379,7 +405,7 @@
 			baseConfigurationReference = 7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = KD59NK3467;
+				DEVELOPMENT_TEAM = 87F6Z4326W;
 				INFOPLIST_FILE = YLScoketTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -393,7 +419,7 @@
 			baseConfigurationReference = 700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = KD59NK3467;
+				DEVELOPMENT_TEAM = 87F6Z4326W;
 				INFOPLIST_FILE = YLScoketTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

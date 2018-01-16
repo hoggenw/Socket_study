@@ -17,7 +17,7 @@
 
 @end
 
-static NSString * host = @"192.168.31.27";
+static NSString * host = @"192.168.20.14";
 static const uint16_t port = 6969;
 
 @implementation YLGCDAsyncSocketManager
@@ -79,6 +79,7 @@ static const uint16_t port = 6969;
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"断开连接，host:%@,port:%d",sock.localHost,sock.localPort);
     //断线重连代写
+    [self connect];
 }
 
 //写成功的回调
