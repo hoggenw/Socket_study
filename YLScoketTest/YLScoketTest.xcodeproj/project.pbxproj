@@ -7,44 +7,129 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */; };
-		11273A581E5687EC00B9B5C6 /* YLMQTTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */; };
-		116B6726200DD89F005AA5E0 /* YLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B6724200DD89F005AA5E0 /* YLLabel.m */; };
-		116B6727200DD89F005AA5E0 /* YLHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B6725200DD89F005AA5E0 /* YLHintView.m */; };
-		11849E1E1E52AFD0006D682D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E1D1E52AFD0006D682D /* main.m */; };
-		11849E211E52AFD0006D682D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E201E52AFD0006D682D /* AppDelegate.m */; };
-		11849E241E52AFD0006D682D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E231E52AFD0006D682D /* ViewController.m */; };
-		11849E271E52AFD0006D682D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11849E251E52AFD0006D682D /* Main.storyboard */; };
-		11849E291E52AFD0006D682D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11849E281E52AFD0006D682D /* Assets.xcassets */; };
-		11849E2C1E52AFD0006D682D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11849E2A1E52AFD0006D682D /* LaunchScreen.storyboard */; };
-		11849E361E52B3DC006D682D /* YLSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11849E351E52B3DC006D682D /* YLSocketManager.m */; };
-		11EAA2D51E53F57900F63754 /* YLGCDAsyncSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EAA2D41E53F57900F63754 /* YLGCDAsyncSocketManager.m */; };
+		116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B672920118FB6005AA5E0 /* Assets.xcassets */; };
+		116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B672E20118FB6005AA5E0 /* YLUITabBarViewController.m */; };
+		116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B672F20118FB6005AA5E0 /* YLNavigationController.m */; };
+		116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B673020118FB6005AA5E0 /* AppDelegate.m */; };
+		116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B673820118FB6005AA5E0 /* UILabel+Extension.m */; };
+		116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B673B20118FB6005AA5E0 /* UIViewController+Extension.m */; };
+		116B677C20118FB6005AA5E0 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B673C20118FB6005AA5E0 /* UIImage+Extension.m */; };
+		116B677D20118FB6005AA5E0 /* UIImageView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B673D20118FB6005AA5E0 /* UIImageView+Extension.m */; };
+		116B677E20118FB6005AA5E0 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B673F20118FB6005AA5E0 /* NSDate+Extension.m */; };
+		116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B674020118FB6005AA5E0 /* NSTimer+Extension.m */; };
+		116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B674120118FB6005AA5E0 /* UIColor+Extension.m */; };
+		116B678120118FB6005AA5E0 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B674220118FB6005AA5E0 /* NSString+Extension.m */; };
+		116B678220118FB6005AA5E0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B674620118FB6005AA5E0 /* UIView+Extension.m */; };
+		116B678420118FB6005AA5E0 /* YLGCDAsyncSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675020118FB6005AA5E0 /* YLGCDAsyncSocketManager.m */; };
+		116B678520118FB6005AA5E0 /* YLSocketRocktManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675320118FB6005AA5E0 /* YLSocketRocktManager.m */; };
+		116B678620118FB6005AA5E0 /* YLSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675620118FB6005AA5E0 /* YLSocketManager.m */; };
+		116B678720118FB6005AA5E0 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675720118FB6005AA5E0 /* AccountManager.m */; };
+		116B678820118FB6005AA5E0 /* YLMQTTManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675920118FB6005AA5E0 /* YLMQTTManager.m */; };
+		116B678920118FB6005AA5E0 /* LocalSQliteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675A20118FB6005AA5E0 /* LocalSQliteManager.m */; };
+		116B678A20118FB6005AA5E0 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B675C20118FB6005AA5E0 /* NetworkManager.m */; };
+		116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B676220118FB6005AA5E0 /* YLDeviceUtil.m */; };
+		116B678C20118FB6005AA5E0 /* YLHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B676420118FB6005AA5E0 /* YLHintView.m */; };
+		116B678D20118FB6005AA5E0 /* YLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B676720118FB6005AA5E0 /* YLLabel.m */; };
+		116B678E20118FB6005AA5E0 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B676D20118FB6005AA5E0 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B677120118FB6005AA5E0 /* NSData+Base64.m */; };
+		116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B677220118FB6005AA5E0 /* CLLocation+Sino.m */; };
+		116B679120118FB6005AA5E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B677420118FB6005AA5E0 /* main.m */; };
+		116B679220118FB6005AA5E0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 116B677520118FB6005AA5E0 /* Info.plist */; };
+		116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67A020119ACB005AA5E0 /* FriendDiscoveredViewController.m */; };
+		116B67A420119AE7005AA5E0 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67A320119AE7005AA5E0 /* ChatListViewController.m */; };
+		116B67AB20119CBB005AA5E0 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67A720119CBA005AA5E0 /* UserModel.m */; };
+		116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67AD2011C5E6005AA5E0 /* ChatViewController.m */; };
+		116B67B12011C980005AA5E0 /* ChatListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67B02011C980005AA5E0 /* ChatListTableViewCell.m */; };
+		116B67B42011CA1B005AA5E0 /* ChatListUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67B32011CA1B005AA5E0 /* ChatListUserModel.m */; };
+		116B67B72011D038005AA5E0 /* ChatUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67B62011D038005AA5E0 /* ChatUserModel.m */; };
+		116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 116B67B92011D4D1005AA5E0 /* send_head.jpg */; };
+		116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 116B67BA2011D4D2005AA5E0 /* receive_head.jpg */; };
+		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
+		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
 		E2FB72C60EC512A5CA19AEB6 /* Pods_YLScoketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		11273A511E55772300B9B5C6 /* YLSocketRocktManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSocketRocktManager.h; sourceTree = "<group>"; };
-		11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketRocktManager.m; sourceTree = "<group>"; };
-		11273A561E5687EC00B9B5C6 /* YLMQTTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLMQTTManager.h; sourceTree = "<group>"; };
-		11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLMQTTManager.m; sourceTree = "<group>"; };
-		116B6722200DD89F005AA5E0 /* YLHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLHintView.h; sourceTree = "<group>"; };
-		116B6723200DD89F005AA5E0 /* YLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLLabel.h; sourceTree = "<group>"; };
-		116B6724200DD89F005AA5E0 /* YLLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLLabel.m; sourceTree = "<group>"; };
-		116B6725200DD89F005AA5E0 /* YLHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLHintView.m; sourceTree = "<group>"; };
+		116B672920118FB6005AA5E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		116B672C20118FB6005AA5E0 /* YLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLNavigationController.h; sourceTree = "<group>"; };
+		116B672D20118FB6005AA5E0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		116B672E20118FB6005AA5E0 /* YLUITabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLUITabBarViewController.m; sourceTree = "<group>"; };
+		116B672F20118FB6005AA5E0 /* YLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLNavigationController.m; sourceTree = "<group>"; };
+		116B673020118FB6005AA5E0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		116B673120118FB6005AA5E0 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		116B673220118FB6005AA5E0 /* YLUITabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLUITabBarViewController.h; sourceTree = "<group>"; };
+		116B673420118FB6005AA5E0 /* UIImageView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Extension.h"; sourceTree = "<group>"; };
+		116B673520118FB6005AA5E0 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		116B673620118FB6005AA5E0 /* NSTimer+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Extension.h"; sourceTree = "<group>"; };
+		116B673720118FB6005AA5E0 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		116B673820118FB6005AA5E0 /* UILabel+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extension.m"; sourceTree = "<group>"; };
+		116B673920118FB6005AA5E0 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		116B673A20118FB6005AA5E0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		116B673B20118FB6005AA5E0 /* UIViewController+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
+		116B673C20118FB6005AA5E0 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		116B673D20118FB6005AA5E0 /* UIImageView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Extension.m"; sourceTree = "<group>"; };
+		116B673E20118FB6005AA5E0 /* UILabel+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extension.h"; sourceTree = "<group>"; };
+		116B673F20118FB6005AA5E0 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		116B674020118FB6005AA5E0 /* NSTimer+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Extension.m"; sourceTree = "<group>"; };
+		116B674120118FB6005AA5E0 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		116B674220118FB6005AA5E0 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		116B674320118FB6005AA5E0 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		116B674420118FB6005AA5E0 /* UIViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
+		116B674520118FB6005AA5E0 /* ExtensionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensionHeader.h; sourceTree = "<group>"; };
+		116B674620118FB6005AA5E0 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		116B675020118FB6005AA5E0 /* YLGCDAsyncSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLGCDAsyncSocketManager.m; sourceTree = "<group>"; };
+		116B675120118FB6005AA5E0 /* ManagersHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagersHeader.h; sourceTree = "<group>"; };
+		116B675220118FB6005AA5E0 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		116B675320118FB6005AA5E0 /* YLSocketRocktManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketRocktManager.m; sourceTree = "<group>"; };
+		116B675420118FB6005AA5E0 /* LocalSQliteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalSQliteManager.h; sourceTree = "<group>"; };
+		116B675520118FB6005AA5E0 /* YLMQTTManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLMQTTManager.h; sourceTree = "<group>"; };
+		116B675620118FB6005AA5E0 /* YLSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketManager.m; sourceTree = "<group>"; };
+		116B675720118FB6005AA5E0 /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		116B675820118FB6005AA5E0 /* YLGCDAsyncSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLGCDAsyncSocketManager.h; sourceTree = "<group>"; };
+		116B675920118FB6005AA5E0 /* YLMQTTManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLMQTTManager.m; sourceTree = "<group>"; };
+		116B675A20118FB6005AA5E0 /* LocalSQliteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalSQliteManager.m; sourceTree = "<group>"; };
+		116B675B20118FB6005AA5E0 /* YLSocketRocktManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSocketRocktManager.h; sourceTree = "<group>"; };
+		116B675C20118FB6005AA5E0 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		116B675D20118FB6005AA5E0 /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		116B675E20118FB6005AA5E0 /* YLSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSocketManager.h; sourceTree = "<group>"; };
+		116B676020118FB6005AA5E0 /* YLDeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLDeviceUtil.h; sourceTree = "<group>"; };
+		116B676120118FB6005AA5E0 /* UtilsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsHeader.h; sourceTree = "<group>"; };
+		116B676220118FB6005AA5E0 /* YLDeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLDeviceUtil.m; sourceTree = "<group>"; };
+		116B676420118FB6005AA5E0 /* YLHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLHintView.m; sourceTree = "<group>"; };
+		116B676520118FB6005AA5E0 /* YLLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLLabel.h; sourceTree = "<group>"; };
+		116B676620118FB6005AA5E0 /* CustomHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomHeader.h; sourceTree = "<group>"; };
+		116B676720118FB6005AA5E0 /* YLLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLLabel.m; sourceTree = "<group>"; };
+		116B676820118FB6005AA5E0 /* YLHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLHintView.h; sourceTree = "<group>"; };
+		116B676B20118FB6005AA5E0 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		116B676C20118FB6005AA5E0 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		116B676D20118FB6005AA5E0 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		116B676E20118FB6005AA5E0 /* CLLocation+Sino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Sino.h"; sourceTree = "<group>"; };
+		116B677020118FB6005AA5E0 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		116B677120118FB6005AA5E0 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		116B677220118FB6005AA5E0 /* CLLocation+Sino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+Sino.m"; sourceTree = "<group>"; };
+		116B677420118FB6005AA5E0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		116B677520118FB6005AA5E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		116B679F20119ACB005AA5E0 /* FriendDiscoveredViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendDiscoveredViewController.h; sourceTree = "<group>"; };
+		116B67A020119ACB005AA5E0 /* FriendDiscoveredViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendDiscoveredViewController.m; sourceTree = "<group>"; };
+		116B67A220119AE7005AA5E0 /* ChatListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
+		116B67A320119AE7005AA5E0 /* ChatListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
+		116B67A720119CBA005AA5E0 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		116B67A820119CBA005AA5E0 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		116B67AC2011C5E6005AA5E0 /* ChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		116B67AD2011C5E6005AA5E0 /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		116B67AF2011C980005AA5E0 /* ChatListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListTableViewCell.h; sourceTree = "<group>"; };
+		116B67B02011C980005AA5E0 /* ChatListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListTableViewCell.m; sourceTree = "<group>"; };
+		116B67B22011CA1B005AA5E0 /* ChatListUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListUserModel.h; sourceTree = "<group>"; };
+		116B67B32011CA1B005AA5E0 /* ChatListUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListUserModel.m; sourceTree = "<group>"; };
+		116B67B52011D038005AA5E0 /* ChatUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUserModel.h; sourceTree = "<group>"; };
+		116B67B62011D038005AA5E0 /* ChatUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatUserModel.m; sourceTree = "<group>"; };
+		116B67B92011D4D1005AA5E0 /* send_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = send_head.jpg; sourceTree = "<group>"; };
+		116B67BA2011D4D2005AA5E0 /* receive_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = receive_head.jpg; sourceTree = "<group>"; };
+		116B67BD2011F57C005AA5E0 /* ChatBoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatBoxViewController.h; sourceTree = "<group>"; };
+		116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatBoxViewController.m; sourceTree = "<group>"; };
+		116B67C02011F58E005AA5E0 /* ChatShowMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatShowMessageViewController.h; sourceTree = "<group>"; };
+		116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatShowMessageViewController.m; sourceTree = "<group>"; };
 		11849E191E52AFD0006D682D /* YLScoketTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLScoketTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		11849E1D1E52AFD0006D682D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		11849E1F1E52AFD0006D682D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		11849E201E52AFD0006D682D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		11849E221E52AFD0006D682D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		11849E231E52AFD0006D682D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		11849E261E52AFD0006D682D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		11849E281E52AFD0006D682D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		11849E2B1E52AFD0006D682D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		11849E2D1E52AFD0006D682D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		11849E341E52B3DC006D682D /* YLSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSocketManager.h; sourceTree = "<group>"; };
-		11849E351E52B3DC006D682D /* YLSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSocketManager.m; sourceTree = "<group>"; };
-		11EAA2D31E53F57900F63754 /* YLGCDAsyncSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLGCDAsyncSocketManager.h; sourceTree = "<group>"; };
-		11EAA2D41E53F57900F63754 /* YLGCDAsyncSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLGCDAsyncSocketManager.m; sourceTree = "<group>"; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YLScoketTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +147,314 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		116B672820118FB6005AA5E0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				116B67B82011D472005AA5E0 /* TemporaryPic */,
+				116B672920118FB6005AA5E0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		116B672A20118FB6005AA5E0 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				116B674720118FB6005AA5E0 /* Module */,
+				116B674F20118FB6005AA5E0 /* Management */,
+				116B675F20118FB6005AA5E0 /* Utils */,
+				116B673320118FB6005AA5E0 /* Category */,
+				116B676320118FB6005AA5E0 /* Custom */,
+				116B672B20118FB6005AA5E0 /* BaseMain */,
+				116B676920118FB6005AA5E0 /* Vendor */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		116B672B20118FB6005AA5E0 /* BaseMain */ = {
+			isa = PBXGroup;
+			children = (
+				116B673120118FB6005AA5E0 /* PrefixHeader.pch */,
+				116B672D20118FB6005AA5E0 /* AppDelegate.h */,
+				116B673020118FB6005AA5E0 /* AppDelegate.m */,
+				116B672C20118FB6005AA5E0 /* YLNavigationController.h */,
+				116B672F20118FB6005AA5E0 /* YLNavigationController.m */,
+				116B673220118FB6005AA5E0 /* YLUITabBarViewController.h */,
+				116B672E20118FB6005AA5E0 /* YLUITabBarViewController.m */,
+			);
+			path = BaseMain;
+			sourceTree = "<group>";
+		};
+		116B673320118FB6005AA5E0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				116B674520118FB6005AA5E0 /* ExtensionHeader.h */,
+				116B673420118FB6005AA5E0 /* UIImageView+Extension.h */,
+				116B673D20118FB6005AA5E0 /* UIImageView+Extension.m */,
+				116B673520118FB6005AA5E0 /* NSString+Extension.h */,
+				116B674220118FB6005AA5E0 /* NSString+Extension.m */,
+				116B673620118FB6005AA5E0 /* NSTimer+Extension.h */,
+				116B674020118FB6005AA5E0 /* NSTimer+Extension.m */,
+				116B673720118FB6005AA5E0 /* UIColor+Extension.h */,
+				116B674120118FB6005AA5E0 /* UIColor+Extension.m */,
+				116B673E20118FB6005AA5E0 /* UILabel+Extension.h */,
+				116B673820118FB6005AA5E0 /* UILabel+Extension.m */,
+				116B673920118FB6005AA5E0 /* NSDate+Extension.h */,
+				116B673F20118FB6005AA5E0 /* NSDate+Extension.m */,
+				116B673A20118FB6005AA5E0 /* UIView+Extension.h */,
+				116B674620118FB6005AA5E0 /* UIView+Extension.m */,
+				116B674420118FB6005AA5E0 /* UIViewController+Extension.h */,
+				116B673B20118FB6005AA5E0 /* UIViewController+Extension.m */,
+				116B674320118FB6005AA5E0 /* UIImage+Extension.h */,
+				116B673C20118FB6005AA5E0 /* UIImage+Extension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		116B674720118FB6005AA5E0 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				116B67A520119CBA005AA5E0 /* Mine */,
+				116B6795201199EC005AA5E0 /* FriendDiscovered */,
+				116B679420119998005AA5E0 /* ChatPage */,
+				116B67932011997D005AA5E0 /* ChatList */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		116B674F20118FB6005AA5E0 /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				116B675120118FB6005AA5E0 /* ManagersHeader.h */,
+				116B675220118FB6005AA5E0 /* NetworkManager.h */,
+				116B675C20118FB6005AA5E0 /* NetworkManager.m */,
+				116B675D20118FB6005AA5E0 /* AccountManager.h */,
+				116B675720118FB6005AA5E0 /* AccountManager.m */,
+				116B675820118FB6005AA5E0 /* YLGCDAsyncSocketManager.h */,
+				116B675020118FB6005AA5E0 /* YLGCDAsyncSocketManager.m */,
+				116B675B20118FB6005AA5E0 /* YLSocketRocktManager.h */,
+				116B675320118FB6005AA5E0 /* YLSocketRocktManager.m */,
+				116B675420118FB6005AA5E0 /* LocalSQliteManager.h */,
+				116B675A20118FB6005AA5E0 /* LocalSQliteManager.m */,
+				116B675520118FB6005AA5E0 /* YLMQTTManager.h */,
+				116B675920118FB6005AA5E0 /* YLMQTTManager.m */,
+				116B675E20118FB6005AA5E0 /* YLSocketManager.h */,
+				116B675620118FB6005AA5E0 /* YLSocketManager.m */,
+			);
+			path = Management;
+			sourceTree = "<group>";
+		};
+		116B675F20118FB6005AA5E0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				116B676120118FB6005AA5E0 /* UtilsHeader.h */,
+				116B676020118FB6005AA5E0 /* YLDeviceUtil.h */,
+				116B676220118FB6005AA5E0 /* YLDeviceUtil.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		116B676320118FB6005AA5E0 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				116B676520118FB6005AA5E0 /* YLLabel.h */,
+				116B676720118FB6005AA5E0 /* YLLabel.m */,
+				116B676820118FB6005AA5E0 /* YLHintView.h */,
+				116B676420118FB6005AA5E0 /* YLHintView.m */,
+				116B676620118FB6005AA5E0 /* CustomHeader.h */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		116B676920118FB6005AA5E0 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				116B676F20118FB6005AA5E0 /* Base64 */,
+				116B676A20118FB6005AA5E0 /* GTMBase64 */,
+				116B676E20118FB6005AA5E0 /* CLLocation+Sino.h */,
+				116B677220118FB6005AA5E0 /* CLLocation+Sino.m */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		116B676A20118FB6005AA5E0 /* GTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				116B676B20118FB6005AA5E0 /* GTMBase64.h */,
+				116B676C20118FB6005AA5E0 /* GTMDefines.h */,
+				116B676D20118FB6005AA5E0 /* GTMBase64.m */,
+			);
+			path = GTMBase64;
+			sourceTree = "<group>";
+		};
+		116B676F20118FB6005AA5E0 /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				116B677020118FB6005AA5E0 /* NSData+Base64.h */,
+				116B677120118FB6005AA5E0 /* NSData+Base64.m */,
+			);
+			path = Base64;
+			sourceTree = "<group>";
+		};
+		116B677320118FB6005AA5E0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				116B677420118FB6005AA5E0 /* main.m */,
+				116B677520118FB6005AA5E0 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		116B67932011997D005AA5E0 /* ChatList */ = {
+			isa = PBXGroup;
+			children = (
+				116B679E20119A8E005AA5E0 /* Controllers */,
+				116B679D20119A8E005AA5E0 /* Modles */,
+				116B679C20119A8E005AA5E0 /* Views */,
+			);
+			path = ChatList;
+			sourceTree = "<group>";
+		};
+		116B679420119998005AA5E0 /* ChatPage */ = {
+			isa = PBXGroup;
+			children = (
+				116B679920119A80005AA5E0 /* Controllers */,
+				116B679A20119A80005AA5E0 /* Modles */,
+				116B679B20119A80005AA5E0 /* Views */,
+			);
+			path = ChatPage;
+			sourceTree = "<group>";
+		};
+		116B6795201199EC005AA5E0 /* FriendDiscovered */ = {
+			isa = PBXGroup;
+			children = (
+				116B679820119A75005AA5E0 /* Controllers */,
+				116B679620119A75005AA5E0 /* Modles */,
+				116B679720119A75005AA5E0 /* Views */,
+			);
+			path = FriendDiscovered;
+			sourceTree = "<group>";
+		};
+		116B679620119A75005AA5E0 /* Modles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modles;
+			sourceTree = "<group>";
+		};
+		116B679720119A75005AA5E0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		116B679820119A75005AA5E0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				116B679F20119ACB005AA5E0 /* FriendDiscoveredViewController.h */,
+				116B67A020119ACB005AA5E0 /* FriendDiscoveredViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		116B679920119A80005AA5E0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				116B67AC2011C5E6005AA5E0 /* ChatViewController.h */,
+				116B67AD2011C5E6005AA5E0 /* ChatViewController.m */,
+				116B67BD2011F57C005AA5E0 /* ChatBoxViewController.h */,
+				116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */,
+				116B67C02011F58E005AA5E0 /* ChatShowMessageViewController.h */,
+				116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		116B679A20119A80005AA5E0 /* Modles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modles;
+			sourceTree = "<group>";
+		};
+		116B679B20119A80005AA5E0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		116B679C20119A8E005AA5E0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				116B67AF2011C980005AA5E0 /* ChatListTableViewCell.h */,
+				116B67B02011C980005AA5E0 /* ChatListTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		116B679D20119A8E005AA5E0 /* Modles */ = {
+			isa = PBXGroup;
+			children = (
+				116B67B22011CA1B005AA5E0 /* ChatListUserModel.h */,
+				116B67B32011CA1B005AA5E0 /* ChatListUserModel.m */,
+				116B67B52011D038005AA5E0 /* ChatUserModel.h */,
+				116B67B62011D038005AA5E0 /* ChatUserModel.m */,
+			);
+			path = Modles;
+			sourceTree = "<group>";
+		};
+		116B679E20119A8E005AA5E0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				116B67A220119AE7005AA5E0 /* ChatListViewController.h */,
+				116B67A320119AE7005AA5E0 /* ChatListViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		116B67A520119CBA005AA5E0 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				116B67A620119CBA005AA5E0 /* Modles */,
+				116B67A920119CBA005AA5E0 /* Controllers */,
+				116B67AA20119CBA005AA5E0 /* Views */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		116B67A620119CBA005AA5E0 /* Modles */ = {
+			isa = PBXGroup;
+			children = (
+				116B67A720119CBA005AA5E0 /* UserModel.m */,
+				116B67A820119CBA005AA5E0 /* UserModel.h */,
+			);
+			path = Modles;
+			sourceTree = "<group>";
+		};
+		116B67A920119CBA005AA5E0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		116B67AA20119CBA005AA5E0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		116B67B82011D472005AA5E0 /* TemporaryPic */ = {
+			isa = PBXGroup;
+			children = (
+				116B67BA2011D4D2005AA5E0 /* receive_head.jpg */,
+				116B67B92011D4D1005AA5E0 /* send_head.jpg */,
+			);
+			path = TemporaryPic;
+			sourceTree = "<group>";
+		};
 		11849E101E52AFCF006D682D = {
 			isa = PBXGroup;
 			children = (
@@ -83,45 +476,11 @@
 		11849E1B1E52AFD0006D682D /* YLScoketTest */ = {
 			isa = PBXGroup;
 			children = (
-				116B6722200DD89F005AA5E0 /* YLHintView.h */,
-				116B6725200DD89F005AA5E0 /* YLHintView.m */,
-				116B6723200DD89F005AA5E0 /* YLLabel.h */,
-				116B6724200DD89F005AA5E0 /* YLLabel.m */,
-				11849E331E52AFDD006D682D /* manager */,
-				11849E1F1E52AFD0006D682D /* AppDelegate.h */,
-				11849E201E52AFD0006D682D /* AppDelegate.m */,
-				11849E221E52AFD0006D682D /* ViewController.h */,
-				11849E231E52AFD0006D682D /* ViewController.m */,
-				11849E251E52AFD0006D682D /* Main.storyboard */,
-				11849E281E52AFD0006D682D /* Assets.xcassets */,
-				11849E2A1E52AFD0006D682D /* LaunchScreen.storyboard */,
-				11849E2D1E52AFD0006D682D /* Info.plist */,
-				11849E1C1E52AFD0006D682D /* Supporting Files */,
+				116B672A20118FB6005AA5E0 /* Sources */,
+				116B672820118FB6005AA5E0 /* Resources */,
+				116B677320118FB6005AA5E0 /* Supporting Files */,
 			);
 			path = YLScoketTest;
-			sourceTree = "<group>";
-		};
-		11849E1C1E52AFD0006D682D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				11849E1D1E52AFD0006D682D /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		11849E331E52AFDD006D682D /* manager */ = {
-			isa = PBXGroup;
-			children = (
-				11849E341E52B3DC006D682D /* YLSocketManager.h */,
-				11849E351E52B3DC006D682D /* YLSocketManager.m */,
-				11EAA2D31E53F57900F63754 /* YLGCDAsyncSocketManager.h */,
-				11EAA2D41E53F57900F63754 /* YLGCDAsyncSocketManager.m */,
-				11273A511E55772300B9B5C6 /* YLSocketRocktManager.h */,
-				11273A521E55772300B9B5C6 /* YLSocketRocktManager.m */,
-				11273A561E5687EC00B9B5C6 /* YLMQTTManager.h */,
-				11273A571E5687EC00B9B5C6 /* YLMQTTManager.m */,
-			);
-			name = manager;
 			sourceTree = "<group>";
 		};
 		96ECC804C56461F52BEAC866 /* Pods */ = {
@@ -203,9 +562,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11849E2C1E52AFD0006D682D /* LaunchScreen.storyboard in Resources */,
-				11849E291E52AFD0006D682D /* Assets.xcassets in Resources */,
-				11849E271E52AFD0006D682D /* Main.storyboard in Resources */,
+				116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */,
+				116B679220118FB6005AA5E0 /* Info.plist in Resources */,
+				116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */,
+				116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,19 +579,33 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTKit/MQTTKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SSKeychain/SSKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/SWTableViewCell/SWTableViewCell.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
+				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWTableViewCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -278,38 +652,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11849E241E52AFD0006D682D /* ViewController.m in Sources */,
-				116B6726200DD89F005AA5E0 /* YLLabel.m in Sources */,
-				116B6727200DD89F005AA5E0 /* YLHintView.m in Sources */,
-				11849E361E52B3DC006D682D /* YLSocketManager.m in Sources */,
-				11849E211E52AFD0006D682D /* AppDelegate.m in Sources */,
-				11EAA2D51E53F57900F63754 /* YLGCDAsyncSocketManager.m in Sources */,
-				11273A581E5687EC00B9B5C6 /* YLMQTTManager.m in Sources */,
-				11849E1E1E52AFD0006D682D /* main.m in Sources */,
-				11273A531E55772300B9B5C6 /* YLSocketRocktManager.m in Sources */,
+				116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */,
+				116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */,
+				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
+				116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */,
+				116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */,
+				116B677D20118FB6005AA5E0 /* UIImageView+Extension.m in Sources */,
+				116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */,
+				116B678D20118FB6005AA5E0 /* YLLabel.m in Sources */,
+				116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */,
+				116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */,
+				116B67B12011C980005AA5E0 /* ChatListTableViewCell.m in Sources */,
+				116B678620118FB6005AA5E0 /* YLSocketManager.m in Sources */,
+				116B678820118FB6005AA5E0 /* YLMQTTManager.m in Sources */,
+				116B678420118FB6005AA5E0 /* YLGCDAsyncSocketManager.m in Sources */,
+				116B678A20118FB6005AA5E0 /* NetworkManager.m in Sources */,
+				116B678120118FB6005AA5E0 /* NSString+Extension.m in Sources */,
+				116B678720118FB6005AA5E0 /* AccountManager.m in Sources */,
+				116B67AB20119CBB005AA5E0 /* UserModel.m in Sources */,
+				116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */,
+				116B67B72011D038005AA5E0 /* ChatUserModel.m in Sources */,
+				116B678220118FB6005AA5E0 /* UIView+Extension.m in Sources */,
+				116B679120118FB6005AA5E0 /* main.m in Sources */,
+				116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */,
+				116B67A420119AE7005AA5E0 /* ChatListViewController.m in Sources */,
+				116B677E20118FB6005AA5E0 /* NSDate+Extension.m in Sources */,
+				116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */,
+				116B677C20118FB6005AA5E0 /* UIImage+Extension.m in Sources */,
+				116B678920118FB6005AA5E0 /* LocalSQliteManager.m in Sources */,
+				116B678520118FB6005AA5E0 /* YLSocketRocktManager.m in Sources */,
+				116B67B42011CA1B005AA5E0 /* ChatListUserModel.m in Sources */,
+				116B678E20118FB6005AA5E0 /* GTMBase64.m in Sources */,
+				116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */,
+				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
+				116B678C20118FB6005AA5E0 /* YLHintView.m in Sources */,
+				116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		11849E251E52AFD0006D682D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				11849E261E52AFD0006D682D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		11849E2A1E52AFD0006D682D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				11849E2B1E52AFD0006D682D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		11849E2E1E52AFD0006D682D /* Debug */ = {
@@ -405,8 +786,10 @@
 			baseConfigurationReference = 7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 87F6Z4326W;
-				INFOPLIST_FILE = YLScoketTest/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YLScoketTest/Sources/BaseMain/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/YLScoketTest/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.YLScoketTest;
@@ -419,8 +802,10 @@
 			baseConfigurationReference = 700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 87F6Z4326W;
-				INFOPLIST_FILE = YLScoketTest/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YLScoketTest/Sources/BaseMain/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/YLScoketTest/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.YLScoketTest;
