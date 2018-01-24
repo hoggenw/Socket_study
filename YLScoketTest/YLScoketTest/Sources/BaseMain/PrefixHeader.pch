@@ -22,7 +22,15 @@
 #import <MJRefresh/MJRefresh.h>
 #import <YYModel/YYModel.h>
 #define ScreenWidth   [[UIScreen mainScreen] bounds].size.width
-#define ScreenHeight     [UIScreen mainScreen] bounds].size.height
+#define ScreenHeight     [[UIScreen mainScreen] bounds].size.height
+
+#define HEIGHT_STATUSBAR    20 // 状态栏
+#define HEIGHT_TABBAR       49 // 标签
+#define HEIGHT_NAVBAR       44 // 导航
+
+
+#define     PATH_DOCUMENT                   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+#define     PATH_CHATREC_IMAGE              [PATH_DOCUMENT stringByAppendingPathComponent:@"ChatRec/Images"]
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

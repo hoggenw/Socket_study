@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatShowMessageViewController : UIViewController
+@class ChatShowMessageViewController;
+@class ChatMessageModel;
+
+@protocol ChatShowMessageViewControllerDelegate <NSObject>
+
+- (void)didTapChatMessageView:(ChatShowMessageViewController *)chatMessageViewController;
 
 @end
+
+@interface ChatShowMessageViewController : UITableViewController
+
+@property (nonatomic,weak) id<ChatShowMessageViewControllerDelegate> delegate;
+
+- (void)scrollToBottom ;
+
+- (void) addNewMessage:(ChatMessageModel *)message;
+
+@end
+

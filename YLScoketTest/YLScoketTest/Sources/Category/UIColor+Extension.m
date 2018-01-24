@@ -24,6 +24,11 @@
     return [UIColor colorWithRed:red green:green blue:blue alpha:a];
 }
 
++ (UIColor *)myColorWithRed:(float)r green:(float)g blue:(float)b alpha:(float)a
+{
+    return [UIColor colorWithRed:r/255.0 green: g/255.0 blue: b/255.0 alpha: a];
+}
+
 + (UIColor *)colorWithHexString:(NSString *)hexString {
     NSString *removeSharpMarkhexString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
     NSScanner *scanner = [NSScanner scannerWithString:removeSharpMarkhexString];

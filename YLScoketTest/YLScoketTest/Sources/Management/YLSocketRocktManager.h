@@ -8,7 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol receiveMessageDelegate<NSObject>
+
+- (void)receiveMessage:(NSString *)message;
+
+@end
+
 @interface YLSocketRocktManager : NSObject
+
+
+@property (nonatomic, weak)id<receiveMessageDelegate> delegate;
 
 + (instancetype)shareManger;
 

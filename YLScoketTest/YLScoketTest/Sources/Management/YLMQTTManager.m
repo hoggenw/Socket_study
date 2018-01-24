@@ -10,7 +10,7 @@
 #import "MQTTKit.h"
 
 
-
+//192.168.20.14
 static NSString * host = @"192.168.20.14";
 static const uint16_t port = 6969;
 static NSString *clinetId = @"wangliugen";
@@ -29,7 +29,7 @@ static NSString *clinetOther = @"clinetOther ";
     dispatch_once(&onceToken, ^{
         manager = [[self alloc] init];
     });
-    
+    [manager initSocket];
     return  manager;
 }
 
@@ -37,16 +37,16 @@ static NSString *clinetOther = @"clinetOther ";
     if (_client) {
         [self disConnnect];
     }
-    _client = [[MQTTClient alloc] initWithClientId: clinetOther];
+    _client = [[MQTTClient alloc] initWithClientId: clinetId];
     _client.port = port;
     
     __weak typeof(self) weakSelf = self;
     [_client setMessageHandler:^(MQTTMessage * message) {
         //收到消息的回调，前提是得先订阅
         NSString *messageString = [[NSString alloc] initWithData:message.payload encoding:NSUTF8StringEncoding];
-        if (weakSelf.delegate != nil) {
-            [weakSelf.delegate receiveMessage: [NSString stringWithFormat:@"收到消息： %@", messageString]];
-        }
+//        if (weakSelf.delegate != nil) {
+//            [weakSelf.delegate receiveMessage: [NSString stringWithFormat:@"%@", messageString]];
+//        }
         NSLog(@"收到服务端发送的消息：%@",messageString);
     }];
     
@@ -99,8 +99,8 @@ static NSString *clinetOther = @"clinetOther ";
 //    AtLeastOnce,
 //    ExactlyOnce
 //} MQTTQualityOfService;分别对应最多发送一次，至少发送一次，精确只发送一次。
-    [_client publishString:message toTopic: clinetOther withQos:ExactlyOnce retain:YES completionHandler:^(int mid) {
-        
+    [_client publishString:message toTopic: clinetId withQos:ExactlyOnce retain:YES completionHandler:^(int mid) {
+        NSLog(@"消息已发送");
     }];
 }
 

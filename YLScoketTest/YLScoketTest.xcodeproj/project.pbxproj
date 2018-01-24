@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760E320170D3300E0D94F /* ChatOtherUserModel.m */; };
+		115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760E92017148300E0D94F /* YLMessageTableViewCell.m */; };
+		115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760EC2017175300E0D94F /* YLTextTableViewCell.m */; };
+		115760F020171D3C00E0D94F /* YLImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760EF20171D3C00E0D94F /* YLImageMessageCell.m */; };
+		115760F320171D4D00E0D94F /* YLVoiceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760F220171D4D00E0D94F /* YLVoiceMessageCell.m */; };
+		115760F620171D5D00E0D94F /* YLSystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760F520171D5D00E0D94F /* YLSystemMessageCell.m */; };
+		115760FB2017225100E0D94F /* YLChatBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760FA2017225100E0D94F /* YLChatBoxView.m */; };
+		115760FE201729A800E0D94F /* YLChatBoxMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760FD201729A800E0D94F /* YLChatBoxMoreView.m */; };
+		11576101201820D900E0D94F /* YLChatFaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11576100201820D900E0D94F /* YLChatFaceView.m */; };
 		116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B672920118FB6005AA5E0 /* Assets.xcassets */; };
 		116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B672E20118FB6005AA5E0 /* YLUITabBarViewController.m */; };
 		116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B672F20118FB6005AA5E0 /* YLNavigationController.m */; };
@@ -46,10 +55,29 @@
 		116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 116B67BA2011D4D2005AA5E0 /* receive_head.jpg */; };
 		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
 		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
+		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
 		E2FB72C60EC512A5CA19AEB6 /* Pods_YLScoketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		115760E220170D3300E0D94F /* ChatOtherUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatOtherUserModel.h; sourceTree = "<group>"; };
+		115760E320170D3300E0D94F /* ChatOtherUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatOtherUserModel.m; sourceTree = "<group>"; };
+		115760E82017148300E0D94F /* YLMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLMessageTableViewCell.h; sourceTree = "<group>"; };
+		115760E92017148300E0D94F /* YLMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLMessageTableViewCell.m; sourceTree = "<group>"; };
+		115760EB2017175300E0D94F /* YLTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLTextTableViewCell.h; sourceTree = "<group>"; };
+		115760EC2017175300E0D94F /* YLTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLTextTableViewCell.m; sourceTree = "<group>"; };
+		115760EE20171D3C00E0D94F /* YLImageMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLImageMessageCell.h; sourceTree = "<group>"; };
+		115760EF20171D3C00E0D94F /* YLImageMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLImageMessageCell.m; sourceTree = "<group>"; };
+		115760F120171D4D00E0D94F /* YLVoiceMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLVoiceMessageCell.h; sourceTree = "<group>"; };
+		115760F220171D4D00E0D94F /* YLVoiceMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLVoiceMessageCell.m; sourceTree = "<group>"; };
+		115760F420171D5D00E0D94F /* YLSystemMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLSystemMessageCell.h; sourceTree = "<group>"; };
+		115760F520171D5D00E0D94F /* YLSystemMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLSystemMessageCell.m; sourceTree = "<group>"; };
+		115760F92017225100E0D94F /* YLChatBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLChatBoxView.h; sourceTree = "<group>"; };
+		115760FA2017225100E0D94F /* YLChatBoxView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLChatBoxView.m; sourceTree = "<group>"; };
+		115760FC201729A800E0D94F /* YLChatBoxMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLChatBoxMoreView.h; sourceTree = "<group>"; };
+		115760FD201729A800E0D94F /* YLChatBoxMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLChatBoxMoreView.m; sourceTree = "<group>"; };
+		115760FF201820D900E0D94F /* YLChatFaceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLChatFaceView.h; sourceTree = "<group>"; };
+		11576100201820D900E0D94F /* YLChatFaceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLChatFaceView.m; sourceTree = "<group>"; };
 		116B672920118FB6005AA5E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		116B672C20118FB6005AA5E0 /* YLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLNavigationController.h; sourceTree = "<group>"; };
 		116B672D20118FB6005AA5E0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -129,6 +157,8 @@
 		116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatBoxViewController.m; sourceTree = "<group>"; };
 		116B67C02011F58E005AA5E0 /* ChatShowMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatShowMessageViewController.h; sourceTree = "<group>"; };
 		116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatShowMessageViewController.m; sourceTree = "<group>"; };
+		116B67C320157D71005AA5E0 /* ChatMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatMessageModel.h; sourceTree = "<group>"; };
+		116B67C420157D71005AA5E0 /* ChatMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatMessageModel.m; sourceTree = "<group>"; };
 		11849E191E52AFD0006D682D /* YLScoketTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YLScoketTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +177,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		115760F720171F6300E0D94F /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				115760E82017148300E0D94F /* YLMessageTableViewCell.h */,
+				115760E92017148300E0D94F /* YLMessageTableViewCell.m */,
+				115760EB2017175300E0D94F /* YLTextTableViewCell.h */,
+				115760EC2017175300E0D94F /* YLTextTableViewCell.m */,
+				115760EE20171D3C00E0D94F /* YLImageMessageCell.h */,
+				115760EF20171D3C00E0D94F /* YLImageMessageCell.m */,
+				115760F120171D4D00E0D94F /* YLVoiceMessageCell.h */,
+				115760F220171D4D00E0D94F /* YLVoiceMessageCell.m */,
+				115760F420171D5D00E0D94F /* YLSystemMessageCell.h */,
+				115760F520171D5D00E0D94F /* YLSystemMessageCell.m */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		115760F820171F7600E0D94F /* Box */ = {
+			isa = PBXGroup;
+			children = (
+				115760F92017225100E0D94F /* YLChatBoxView.h */,
+				115760FA2017225100E0D94F /* YLChatBoxView.m */,
+				115760FC201729A800E0D94F /* YLChatBoxMoreView.h */,
+				115760FD201729A800E0D94F /* YLChatBoxMoreView.m */,
+				115760FF201820D900E0D94F /* YLChatFaceView.h */,
+				11576100201820D900E0D94F /* YLChatFaceView.m */,
+			);
+			path = Box;
+			sourceTree = "<group>";
+		};
 		116B672820118FB6005AA5E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +433,10 @@
 		116B679A20119A80005AA5E0 /* Modles */ = {
 			isa = PBXGroup;
 			children = (
+				116B67C320157D71005AA5E0 /* ChatMessageModel.h */,
+				116B67C420157D71005AA5E0 /* ChatMessageModel.m */,
+				115760E220170D3300E0D94F /* ChatOtherUserModel.h */,
+				115760E320170D3300E0D94F /* ChatOtherUserModel.m */,
 			);
 			path = Modles;
 			sourceTree = "<group>";
@@ -380,6 +444,8 @@
 		116B679B20119A80005AA5E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				115760F820171F7600E0D94F /* Box */,
+				115760F720171F6300E0D94F /* Message */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -586,6 +652,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTKit/MQTTKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/ProtocolBuffers/ProtocolBuffers.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SSKeychain/SSKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SWTableViewCell/SWTableViewCell.framework",
@@ -601,6 +668,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtocolBuffers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWTableViewCell.framework",
@@ -654,14 +722,17 @@
 			files = (
 				116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */,
 				116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */,
+				115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */,
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
 				116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */,
 				116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */,
 				116B677D20118FB6005AA5E0 /* UIImageView+Extension.m in Sources */,
+				11576101201820D900E0D94F /* YLChatFaceView.m in Sources */,
 				116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */,
 				116B678D20118FB6005AA5E0 /* YLLabel.m in Sources */,
 				116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */,
 				116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */,
+				115760F620171D5D00E0D94F /* YLSystemMessageCell.m in Sources */,
 				116B67B12011C980005AA5E0 /* ChatListTableViewCell.m in Sources */,
 				116B678620118FB6005AA5E0 /* YLSocketManager.m in Sources */,
 				116B678820118FB6005AA5E0 /* YLMQTTManager.m in Sources */,
@@ -671,22 +742,29 @@
 				116B678720118FB6005AA5E0 /* AccountManager.m in Sources */,
 				116B67AB20119CBB005AA5E0 /* UserModel.m in Sources */,
 				116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */,
+				115760FB2017225100E0D94F /* YLChatBoxView.m in Sources */,
 				116B67B72011D038005AA5E0 /* ChatUserModel.m in Sources */,
 				116B678220118FB6005AA5E0 /* UIView+Extension.m in Sources */,
 				116B679120118FB6005AA5E0 /* main.m in Sources */,
 				116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */,
+				115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */,
 				116B67A420119AE7005AA5E0 /* ChatListViewController.m in Sources */,
 				116B677E20118FB6005AA5E0 /* NSDate+Extension.m in Sources */,
 				116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */,
+				115760F020171D3C00E0D94F /* YLImageMessageCell.m in Sources */,
 				116B677C20118FB6005AA5E0 /* UIImage+Extension.m in Sources */,
 				116B678920118FB6005AA5E0 /* LocalSQliteManager.m in Sources */,
 				116B678520118FB6005AA5E0 /* YLSocketRocktManager.m in Sources */,
+				115760FE201729A800E0D94F /* YLChatBoxMoreView.m in Sources */,
 				116B67B42011CA1B005AA5E0 /* ChatListUserModel.m in Sources */,
 				116B678E20118FB6005AA5E0 /* GTMBase64.m in Sources */,
+				115760F320171D4D00E0D94F /* YLVoiceMessageCell.m in Sources */,
 				116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */,
 				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
+				115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */,
 				116B678C20118FB6005AA5E0 /* YLHintView.m in Sources */,
 				116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */,
+				116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

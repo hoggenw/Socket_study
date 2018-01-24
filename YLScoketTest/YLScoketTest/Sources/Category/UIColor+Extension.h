@@ -18,4 +18,6 @@
 
 + (UIColor *)getDarkerColorFromColor1:(UIColor *)color1 color2:(UIColor *)color2;
 
++ (UIColor *)myColorWithRed:(float)r green:(float)g blue:(float)b alpha:(float)a;
+
 @end

@@ -10,8 +10,17 @@
 #import "ChatBoxViewController.h"
 #import "ChatUserModel.h"
 #import "ChatShowMessageViewController.h"
+#import "ChatMessageModel.h"
+#import "ChatOtherUserModel.h"
+#import "YLSocketRocktManager.h"
 
-@interface ChatViewController ()
+@interface ChatViewController ()<ChatShowMessageViewControllerDelegate,ChatBoxViewControllerDelegate,receiveMessageDelegate>
+
+@property(nonatomic,assign) CGFloat viewHeight;
+
+@property(nonatomic,strong)ChatShowMessageViewController * chatMessageVC;
+@property(nonatomic,strong)ChatBoxViewController * chatBoxVC;
+@property(nonatomic,strong) YLSocketRocktManager *manager;
 
 @end
 
@@ -20,6 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.user.username;
+    _manager = [YLSocketRocktManager shareManger];
+    _manager.delegate = self;
+    // 主屏幕的高度减去导航的高度，减去状态栏的高度。在PCH头文件
+    _viewHeight = ScreenHeight - HEIGHT_NAVBAR - HEIGHT_STATUSBAR;
+    [self.view  addSubview:self.chatMessageVC.view];
+    [self addChildViewController:self.chatMessageVC];
+    
+    [self.view  addSubview:self.chatBoxVC.view];
+    [self addChildViewController:self.chatBoxVC];
     // Do any additional setup after loading the view.
 }
 
@@ -28,14 +46,111 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Public Methods
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+#pragma mark - Events
+
+
+#pragma mark - Private Methods
+
+- (ChatBoxViewController *)chatBoxVC {
+    if (_chatBoxVC == nil) {
+        _chatBoxVC = [ChatBoxViewController new];
+        _chatBoxVC.view.frame = CGRectMake(0, ScreenHeight - HEIGHT_TABBAR, ScreenWidth,  ScreenHeight);
+        _chatBoxVC.delegate = self;
+    }
+    
+    return _chatBoxVC;
 }
-*/
+
+- (ChatShowMessageViewController *)chatMessageVC {
+    if (_chatMessageVC == nil) {
+        _chatMessageVC = [[ChatShowMessageViewController  alloc] init];
+        _chatMessageVC.view.frame = CGRectMake(0, HEIGHT_STATUSBAR + HEIGHT_NAVBAR, ScreenWidth, ScreenHeight - HEIGHT_TABBAR - HEIGHT_STATUSBAR - HEIGHT_NAVBAR);// 0  状态 + 导航 宽 viweH - tabbarH
+        _chatMessageVC.delegate = self;// 代理
+    }
+    
+    return _chatMessageVC;
+}
+
+
+
+
+#pragma mark - Extension Delegate or Protocol
+
+# pragma mark -  receiveMessageDelegate
+
+-(void)receiveMessage:(NSString *)message {
+    /**
+     *   TLMessage 是一条消息的数据模型。纪录消息的各种属性
+     就因为又有下面的这个，所以就有了你发一条，又会多一条的显示效果！！
+     */
+    
+    ChatMessageModel *recMessage = [[ChatMessageModel alloc] init];
+    recMessage.messageType = YLMessageTypeText;
+    recMessage.ownerTyper = YLMessageOwnerTypeOther;
+    recMessage.date = [NSDate date];// 当前时间
+    recMessage.text = message;
+    //recMessage.imagePath = message.imagePath;
+    //receive_head
+    ChatUserModel * otherUser = [[ChatUserModel alloc] init];
+    otherUser.username = @"";// 名字
+    otherUser.userID = @"li-bokun";// ID
+    otherUser.avatarURL = @"receive_head.jpg";// 图片
+    recMessage.from = otherUser;
+    [self.chatMessageVC addNewMessage:recMessage];
+    
+}
+- (void)didTapChatMessageView:(ChatShowMessageViewController *)chatMessageViewController {
+    [self.chatBoxVC resignFirstResponder];
+}
+
+//ChatBoxViewControllerDelegate
+
+// chatBoxView 高度改变
+- (void)chatBoxViewController:(ChatBoxViewController *)chatboxViewController
+       didChangeChatBoxHeight:(CGFloat)height {
+    self.chatMessageVC.view.height = _viewHeight - height;
+    self.chatBoxVC.view.top = self.chatMessageVC.view.top + self.chatMessageVC.view.height;
+    [self.chatMessageVC scrollToBottom];
+    
+}
+// 发送消息
+- (void) chatBoxViewController:(ChatBoxViewController *)chatboxViewController
+                   sendMessage:(ChatMessageModel *)message {
+    // 发送的消息数据模型
+    message.from = [ChatOtherUserModel sharedOtherUser].user; //发送者
+    [self.manager sendMassege: message.text];
+    [self.chatMessageVC addNewMessage: message];
+    
+}
+
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -57,6 +57,7 @@ static const uint16_t port = 6969;
     queue.maxConcurrentOperationCount = 1;
     [_webSocket setDelegateOperationQueue:queue];
     [_webSocket open];
+    [self connect];
 
 }
 
@@ -137,6 +138,9 @@ static const uint16_t port = 6969;
 #pragma mark - SRWebSocketDelegate
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+    if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
+        [_delegate receiveMessage: message];
+    }
     NSLog(@"服务器返回消息：%@",message);
 }
 
