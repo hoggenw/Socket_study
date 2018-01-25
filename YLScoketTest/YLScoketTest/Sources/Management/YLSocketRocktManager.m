@@ -8,6 +8,8 @@
 
 #import "YLSocketRocktManager.h"
 #import "SocketRocket.h"
+ #import "Message.pbobjc.h"
+#import "GPBProtocolBuffers_RuntimeSupport.h"
 
 typedef NS_ENUM(NSInteger,DisConnectType) {
     disConnectByUser = 1000,
@@ -103,7 +105,14 @@ static const uint16_t port = 6969;
 }
 
 -(void)sendMassege:(NSString *)message {
-    [_webSocket send:message];
+    YLmessage * pmessage = [YLmessage new];
+    pmessage.text = message;
+    NSData *originData = [message dataUsingEncoding: NSUTF8StringEncoding];
+    NSLog(@"originData : %@", originData);
+    // 序列化为Data
+    NSData *data = [pmessage data];
+    NSLog(@"%@",data);
+    [_webSocket send: data];
     
 }
 //重连机制
@@ -139,7 +148,10 @@ static const uint16_t port = 6969;
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-        [_delegate receiveMessage: message];
+        NSError *error;
+         YLmessage * pmessage  = [[YLmessage alloc] initWithData:message error:&error];
+        NSLog(@"%@",pmessage.description);
+        [_delegate receiveMessage: pmessage.text];
     }
     NSLog(@"服务器返回消息：%@",message);
 }

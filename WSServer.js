@@ -19,7 +19,7 @@ wss.on('connection', function(ws) {
     if (message == 'heart') {
       ws.send('收到:' + 'heart' + '证明你是活的');
     } else {
-      ws.send('收到:' + message);
+      ws.send(message);
     }
 
 

@@ -19,7 +19,7 @@ target ‘YLScoketTest’ do
     pod 'SSKeychain'
     pod 'YYModel'
     pod 'SWTableViewCell'
-    pod 'ProtocolBuffers'
+    #pod 'ProtocolBuffers'
     #pod 'ChatKit'
     
 end
