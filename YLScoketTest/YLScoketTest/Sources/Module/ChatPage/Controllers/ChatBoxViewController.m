@@ -13,7 +13,7 @@
 #import "ChatMessageModel.h"
 
 #define HEIGHT_CHATBOXVIEW  215// 更多 view
-@interface ChatBoxViewController ()<YLChatBoxDelegate>
+@interface ChatBoxViewController ()<YLChatBoxDelegate,YLChatBoxFaceViewDelegate>
 
 @property (nonatomic, assign) CGRect keyboardFrame;
 @property (nonatomic, strong) YLChatBoxView *chatBox;
@@ -267,6 +267,18 @@
     }
 }
 
+#pragma mark - YLChatBoxFaceViewDelegate
+- (void) chatBoxFaceViewDidSelectedFace:(ChatFace *)face type:(YLFaceType)type {
+    
+}
+- (void) chatBoxFaceViewDeleteButtonDown{
+    
+}
+- (void) chatBoxFaceViewSendButtonDown{
+    
+}
+
+
 
 #pragma mark - Getter
 - (YLChatBoxView *) chatBox
@@ -296,7 +308,7 @@
 {
     if (_chatBoxFaceView == nil) {
         _chatBoxFaceView = [[YLChatFaceView alloc] initWithFrame:CGRectMake(0, HEIGHT_TABBAR, ScreenWidth, HEIGHT_CHATBOXVIEW)];
-        
+        _chatBoxFaceView.delegate = self;
     }
     return _chatBoxFaceView;
 }

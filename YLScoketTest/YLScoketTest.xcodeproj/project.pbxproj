@@ -41,6 +41,9 @@
 		11576161201889E200E0D94F /* GPBUnknownField.m in Sources */ = {isa = PBXBuildFile; fileRef = 11576147201889E100E0D94F /* GPBUnknownField.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		11576162201889E200E0D94F /* GPBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1157614A201889E200E0D94F /* GPBUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		11576163201889E200E0D94F /* GPBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1157614B201889E200E0D94F /* GPBMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		115761662019CDB000E0D94F /* YLChatFaceItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 115761652019CDB000E0D94F /* YLChatFaceItemView.m */; };
+		115761692019D19E00E0D94F /* YLChatBoxItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 115761682019D19E00E0D94F /* YLChatBoxItemView.m */; };
+		1157616C2019E0DA00E0D94F /* YLChatFaceMenuVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1157616B2019E0DA00E0D94F /* YLChatFaceMenuVIew.m */; };
 		116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B672920118FB6005AA5E0 /* Assets.xcassets */; };
 		116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B672E20118FB6005AA5E0 /* YLUITabBarViewController.m */; };
 		116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B672F20118FB6005AA5E0 /* YLNavigationController.m */; };
@@ -167,6 +170,12 @@
 		11576149201889E200E0D94F /* GPBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDescriptor.h; sourceTree = "<group>"; };
 		1157614A201889E200E0D94F /* GPBUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPBUtilities.m; sourceTree = "<group>"; };
 		1157614B201889E200E0D94F /* GPBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPBMessage.m; sourceTree = "<group>"; };
+		115761642019CDB000E0D94F /* YLChatFaceItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLChatFaceItemView.h; sourceTree = "<group>"; };
+		115761652019CDB000E0D94F /* YLChatFaceItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLChatFaceItemView.m; sourceTree = "<group>"; };
+		115761672019D19E00E0D94F /* YLChatBoxItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLChatBoxItemView.h; sourceTree = "<group>"; };
+		115761682019D19E00E0D94F /* YLChatBoxItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLChatBoxItemView.m; sourceTree = "<group>"; };
+		1157616A2019E0DA00E0D94F /* YLChatFaceMenuVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLChatFaceMenuVIew.h; sourceTree = "<group>"; };
+		1157616B2019E0DA00E0D94F /* YLChatFaceMenuVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLChatFaceMenuVIew.m; sourceTree = "<group>"; };
 		116B672920118FB6005AA5E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		116B672C20118FB6005AA5E0 /* YLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLNavigationController.h; sourceTree = "<group>"; };
 		116B672D20118FB6005AA5E0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -292,6 +301,12 @@
 				115760FD201729A800E0D94F /* YLChatBoxMoreView.m */,
 				115760FF201820D900E0D94F /* YLChatFaceView.h */,
 				11576100201820D900E0D94F /* YLChatFaceView.m */,
+				115761642019CDB000E0D94F /* YLChatFaceItemView.h */,
+				115761652019CDB000E0D94F /* YLChatFaceItemView.m */,
+				115761672019D19E00E0D94F /* YLChatBoxItemView.h */,
+				115761682019D19E00E0D94F /* YLChatBoxItemView.m */,
+				1157616A2019E0DA00E0D94F /* YLChatFaceMenuVIew.h */,
+				1157616B2019E0DA00E0D94F /* YLChatFaceMenuVIew.m */,
 			);
 			path = Box;
 			sourceTree = "<group>";
@@ -909,6 +924,7 @@
 				116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */,
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
 				115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */,
+				115761692019D19E00E0D94F /* YLChatBoxItemView.m in Sources */,
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
 				1157614C201889E200E0D94F /* GPBCodedOutputStream.m in Sources */,
 				116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */,
@@ -917,6 +933,7 @@
 				116B677D20118FB6005AA5E0 /* UIImageView+Extension.m in Sources */,
 				1157615E201889E200E0D94F /* GPBRootObject.m in Sources */,
 				1157614D201889E200E0D94F /* GPBExtensionInternals.m in Sources */,
+				1157616C2019E0DA00E0D94F /* YLChatFaceMenuVIew.m in Sources */,
 				11576101201820D900E0D94F /* YLChatFaceView.m in Sources */,
 				116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */,
 				1157615D201889E200E0D94F /* Struct.pbobjc.m in Sources */,
@@ -926,6 +943,7 @@
 				116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */,
 				116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */,
 				1157615A201889E200E0D94F /* Wrappers.pbobjc.m in Sources */,
+				115761662019CDB000E0D94F /* YLChatFaceItemView.m in Sources */,
 				115760F620171D5D00E0D94F /* YLSystemMessageCell.m in Sources */,
 				116B67B12011C980005AA5E0 /* ChatListTableViewCell.m in Sources */,
 				116B678620118FB6005AA5E0 /* YLSocketManager.m in Sources */,
