@@ -45,10 +45,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
-     [super routerEventWithName:eventName userInfo:userInfo];
-    
-}
 
 
 - (void)scrollToBottom {

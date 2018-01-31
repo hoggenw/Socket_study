@@ -265,16 +265,12 @@
 /**
  *  发送文本消息
  */
-- (void)chatBox:(YLChatBoxView *)chatBox sendTextMessage:(NSString *)textMessage {
+- (void)chatBox:(YLChatBoxView *)chatBox sendTextMessage:(ChatMessageModel *)textMessage {
     
-    ChatMessageModel * message = [[ChatMessageModel alloc] init];
-    message.messageType = YLMessageTypeText;
-    message.ownerTyper = YLMessageOwnerTypeSelf;
-    message.text = textMessage;
-    message.date = [NSDate  date];
+    
     if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
         
-        [_delegate chatBoxViewController:self sendMessage:message];
+        [_delegate chatBoxViewController:self sendMessage: textMessage];
         
     }
     
@@ -321,7 +317,7 @@
                                                               @(PHAssetCollectionSubtypeSmartAlbumVideos), //视频
                                                               //@(PHAssetCollectionSubtypeSmartAlbumBursts) //连拍模式拍摄的照片
                                                               ];
-            imagePickerController.mediaType = QBImagePickerMediaTypeImage;//图片和视频
+            imagePickerController.mediaType = QBImagePickerMediaTypeAny;//图片和视频
             imagePickerController.showsNumberOfSelectedAssets = YES;//在界面下方显示已经选择图像的数量
             [self presentViewController:imagePickerController animated:YES completion:nil];  
             NSLog(@"相册");
@@ -412,7 +408,7 @@
 //                         NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
 //                     }];
                 }else if (asset.mediaType == PHAssetMediaTypeVideo){
-                    
+                    NSLog(@"视频Type");
                 }
             });
             index++;

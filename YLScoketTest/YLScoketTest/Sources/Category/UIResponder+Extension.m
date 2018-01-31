@@ -11,6 +11,8 @@
 @implementation UIResponder (Extension)
 
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
+    //NSLog(@"%@",NSStringFromClass([self class]));
+    //顺着相应链传递
     [[self nextResponder] routerEventWithName:eventName userInfo:userInfo];
 }
 

@@ -91,7 +91,12 @@
 {
     if (self.textView.text.length > 0) {     // send Text
         if (_delegate && [_delegate respondsToSelector:@selector(chatBox:sendTextMessage:)]) {
-            [_delegate chatBox:self sendTextMessage:self.textView.text];
+            ChatMessageModel * message = [[ChatMessageModel alloc] init];
+            message.messageType = YLMessageTypeText;
+            message.ownerTyper = YLMessageOwnerTypeSelf;
+            message.text = self.textView.text;
+            message.date = [NSDate  date];
+            [_delegate chatBox:self sendTextMessage: message];
         }
     }
     [self.textView setText:@""];

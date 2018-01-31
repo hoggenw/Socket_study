@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class ChatFace;
 @class YLChatBoxView;
+@class ChatMessageModel;
+
 typedef NS_ENUM(NSInteger, YLChatBoxStatus) {
     /**
      *  无状态
@@ -37,9 +39,9 @@ typedef NS_ENUM(NSInteger, YLChatBoxStatus) {
 
 - (void)chatBox:(YLChatBoxView *)chatBox changeStatusForm:(YLChatBoxStatus)fromStatus to:(YLChatBoxStatus)toStatus;
 /**
- *  发送文本消息
+ *  发送消息
  */
-- (void)chatBox:(YLChatBoxView *)chatBox sendTextMessage:(NSString *)textMessage;
+- (void)chatBox:(YLChatBoxView *)chatBox sendTextMessage:(ChatMessageModel *)textMessage;
 - (void)chatBox:(YLChatBoxView *)chatBox changeChatBoxHeight:(CGFloat)height;
 
 @end

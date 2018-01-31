@@ -49,11 +49,13 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
+    //如果继续向super传值，则响应链被截断
+   // [super routerEventWithName:eventName userInfo: userInfo];
     ChatMessageModel *model = [userInfo objectForKey:kChoiceCellMessageModelKey];
     if ([eventName isEqualToString:kRouterEventCellImageTapEventName]) {
         //点击图片
         if (model != nil) {
-          // [self chatImageCellPressed:model];
+           [self chatImageCellPressed:model];
         }
         
     }
