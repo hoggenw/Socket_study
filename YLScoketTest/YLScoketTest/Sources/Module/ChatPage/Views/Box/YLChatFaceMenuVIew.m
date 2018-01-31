@@ -7,6 +7,8 @@
 //
 
 #import "YLChatFaceMenuVIew.h"
+#import "ChatMessageModel.h"
+
 
 
 @interface YLChatFaceMenuVIew()
@@ -32,6 +34,167 @@
     
 }
 
+-(void)setFaceGroupArray:(NSMutableArray *)faceGroupArray {
+    _faceGroupArray = faceGroupArray;
+    float w = self.height * 1.25;
+    [self.addButton setFrame:CGRectMake(0, 0, w, self.height)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(w, 6, 0.5, self.height - 12)];
+    [line setBackgroundColor: [UIColor myColorWithRed:188 green:188 blue:188 alpha:0.6]];
+    [self addSubview:line];
+    
+    [self.sendButton setFrame:CGRectMake(self.width - w * 1.2, 0, w * 1.2, self.height)];
+    [self.scrollView setFrame:CGRectMake(w + 0.5, 0, self.width - self.addButton.width, self.height)];
+    [self.scrollView setContentSize:CGSizeMake(w * (faceGroupArray.count + 3), self.scrollView.height)];
+    float x = 0;
+    int i = 0;
+    /**
+     *   在数据源 faceGroupArray 里面去找表情菜单栏里面的表情分组，该分组也是用YLFaceGroup这个 Model 存储的，里面有组相关的属性。
+     */
+    for (ChatFaceGroup *group in faceGroupArray) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, w, self.height)];
+        [button.imageView setContentMode:UIViewContentModeCenter];
+        [button setImage:[UIImage imageNamed:group.groupImageName] forState:UIControlStateNormal];
+        [button setTag:i ++];// 不同的组按钮有不同的Tag
+        [button addTarget:self action:@selector(buttonDown:) forControlEvents:UIControlEventTouchDown];
+        [self.faceMenuViewArray addObject:button];
+        [self.scrollView addSubview:button];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(button.left + button.width, 6, 0.5, self.height - 12)];
+        [line setBackgroundColor:  [UIColor myColorWithRed:188 green:188 blue:188 alpha:0.6]];
+        [self.scrollView addSubview:line];
+        x += button.width + 0.5;
+    }
+    [self buttonDown:[self.faceMenuViewArray firstObject]];
+}
 
+/**
+ *  @return
+ */
+#pragma mark - Event Response
+- (void) buttonDown:(UIButton *)sender
+{
+    
+    if (sender.tag == -1) {
+        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxFaceMenuViewAddButtonDown)]) {
+            [_delegate chatBoxFaceMenuViewAddButtonDown];
+        }
+    }
+    // 发送点击事假
+    else if (sender.tag == -2) {
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxFaceMenuViewSendButtonDown)]) {
+            [_delegate chatBoxFaceMenuViewSendButtonDown];
+        }
+    }
+    else
+    {
+        
+        for (UIButton *button in self.faceMenuViewArray)
+        {
+            [button setBackgroundColor:[UIColor whiteColor]];
+        }
+        
+        [sender setBackgroundColor:  [UIColor myColorWithRed:188 green:188 blue:188 alpha:0.6]];
+        if ([[_faceGroupArray objectAtIndex:sender.tag] faceType] == YLFaceTypeEmoji)
+        {
+            [self addSubview:self.sendButton];
+            self.scrollView.width = self.width - self.addButton.width - self.sendButton.width - 1;
+
+        }
+        else
+        {
+            [self.sendButton removeFromSuperview];
+             self.scrollView.width = self.width - self.addButton.width - 0.5;
+        }
+        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxFaceMenuView:didSelectedFaceMenuIndex:)])
+        {
+            [_delegate chatBoxFaceMenuView:self didSelectedFaceMenuIndex:sender.tag];
+        }
+        
+    }
+}
+
+#pragma mark - Getter
+- (UIButton *) addButton
+{
+    if (_addButton == nil) {
+        _addButton = [[UIButton alloc] init];
+        _addButton.tag = -1;
+        [_addButton setImage:[UIImage imageNamed:@"Card_AddIcon"] forState:UIControlStateNormal];
+        [_addButton addTarget:self action:@selector(buttonDown:) forControlEvents:UIControlEventTouchDown];
+    }
+    return _addButton;
+}
+
+- (UIButton *) sendButton
+{
+    if (_sendButton == nil) {
+        _sendButton = [[UIButton alloc] init];
+        [_sendButton setTitle:@"发送" forState:UIControlStateNormal];
+        [_sendButton.titleLabel setFont:[UIFont systemFontOfSize:15.0f]];
+        [_sendButton setBackgroundColor:[UIColor colorWithRed:0.1 green:0.4 blue:0.8 alpha:1.0]];
+        _sendButton.tag = -2;
+        [_sendButton addTarget:self action:@selector(buttonDown:) forControlEvents:UIControlEventTouchDown];
+    }
+    return _sendButton;
+}
+
+- (UIScrollView *) scrollView
+{
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] init];
+        [_scrollView setShowsHorizontalScrollIndicator:NO];
+        [_scrollView setShowsVerticalScrollIndicator:NO];
+        [_scrollView setScrollsToTop:NO];
+    }
+    return _scrollView;
+}
+
+- (NSMutableArray *) faceMenuViewArray
+{
+    if (_faceMenuViewArray == nil) {
+        _faceMenuViewArray = [[NSMutableArray alloc] init];
+    }
+    return _faceMenuViewArray;
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

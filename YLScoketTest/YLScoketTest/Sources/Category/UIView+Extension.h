@@ -45,6 +45,9 @@ typedef enum : NSInteger {
 @property (nonatomic) CGPoint origin;
 @property (nonatomic) CGSize size;
 
+@property (nonatomic) CGFloat centerX;
+@property (nonatomic) CGFloat centerY;
+
 - (void)topAdd:(CGFloat)add;
 - (void)leftAdd:(CGFloat)add;
 - (void)widthAdd:(CGFloat)add;

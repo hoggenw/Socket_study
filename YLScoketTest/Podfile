@@ -18,7 +18,8 @@ target ‘YLScoketTest’ do
     pod 'SDWebImage'
     pod 'SSKeychain'
     pod 'YYModel'
-    pod 'SWTableViewCell'
+    #pod 'SWTableViewCell'
+    pod 'QBImagePickerController'
     #pod 'ProtocolBuffers'
     #pod 'ChatKit'
     

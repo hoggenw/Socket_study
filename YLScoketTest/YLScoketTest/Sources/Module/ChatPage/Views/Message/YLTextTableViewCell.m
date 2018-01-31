@@ -50,7 +50,7 @@
 -(void)setMessageModel:(ChatMessageModel *)messageModel {
     [super setMessageModel: messageModel];
     _messageTextLabel.size = messageModel.messageSize;
-    _messageTextLabel.text = messageModel.text;
+    [_messageTextLabel setAttributedText:messageModel.attrText];
 }
 - (UILabel *) messageTextLabel
 {

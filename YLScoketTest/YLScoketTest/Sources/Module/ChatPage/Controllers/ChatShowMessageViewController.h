@@ -15,11 +15,14 @@
 
 - (void)didTapChatMessageView:(ChatShowMessageViewController *)chatMessageViewController;
 
+
 @end
 
 @interface ChatShowMessageViewController : UITableViewController
 
 @property (nonatomic,weak) id<ChatShowMessageViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray<ChatMessageModel *> * imageMessageModels;
+
 
 - (void)scrollToBottom ;
 

@@ -11,14 +11,22 @@
 #import "YLChatBoxView.h"
 #import "YLChatBoxMoreView.h"
 #import "ChatMessageModel.h"
+#import "YLChatBoxItemView.h"
+#import <QBImagePickerController/QBImagePickerController.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 #define HEIGHT_CHATBOXVIEW  215// 更多 view
-@interface ChatBoxViewController ()<YLChatBoxDelegate,YLChatBoxFaceViewDelegate>
+@interface ChatBoxViewController ()<YLChatBoxDelegate,YLChatBoxFaceViewDelegate,YLChatBoxMoreViewDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, assign) CGRect keyboardFrame;
 @property (nonatomic, strong) YLChatBoxView *chatBox;
 @property (nonatomic, strong) YLChatBoxMoreView *chatBoxMoreView;
 @property (nonatomic, strong) YLChatFaceView *chatBoxFaceView;
+//方形压缩图image 数组
+//@property(nonatomic,strong) NSMutableArray<UIImage *> * imageArray;
+//大图image 数组
+//@property(nonatomic,strong) NSMutableArray<NSData *> * bigImageArray;
 
 @end
 
@@ -131,6 +139,19 @@
         
     }
 }
+
+- (void)takePhoto {
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.sourceType = sourceType;
+        imagePickerController.mediaTypes = @[CFBridgingRelease(kUTTypeImage)];
+        imagePickerController.allowsEditing = false;
+        imagePickerController.delegate = self;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
+}
+
 
 #pragma mark - YLChatBoxDelegate
 
@@ -258,6 +279,7 @@
     }
     
 }
+
 - (void)chatBox:(YLChatBoxView *)chatBox changeChatBoxHeight:(CGFloat)height {
     self.chatBoxFaceView.top = height;
     self.chatBoxMoreView.top = height;
@@ -269,14 +291,139 @@
 
 #pragma mark - YLChatBoxFaceViewDelegate
 - (void) chatBoxFaceViewDidSelectedFace:(ChatFace *)face type:(YLFaceType)type {
-    
+    if (type == YLFaceTypeEmoji) {
+        [self.chatBox addEmojiFace:face];
+    }
 }
 - (void) chatBoxFaceViewDeleteButtonDown{
-    
+    [self.chatBox deleteButtonDown];
 }
 - (void) chatBoxFaceViewSendButtonDown{
+     [self.chatBox sendCurrentMessage];
+}
+
+
+#pragma mark - TLChatBoxMoreViewDelegate
+- (void) chatBoxMoreView:(YLChatBoxMoreView *)chatBoxMoreView didSelectItem:(YLChatBoxItem)itemType
+{
+    
+    switch (itemType) {
+            
+        case YLChatBoxItemAlbum:{//相册
+            QBImagePickerController *imagePickerController = [QBImagePickerController new];
+            imagePickerController.delegate = self;
+            imagePickerController.allowsMultipleSelection = YES;
+            imagePickerController.maximumNumberOfSelection = 8;//设置选择图像数量上限
+            imagePickerController.assetCollectionSubtypes = @[
+                                                              @(PHAssetCollectionSubtypeSmartAlbumUserLibrary), //相机胶卷
+                                                              @(PHAssetCollectionSubtypeAlbumMyPhotoStream), //我的照片流
+                                                              @(PHAssetCollectionSubtypeSmartAlbumPanoramas), //全景图
+                                                              @(PHAssetCollectionSubtypeSmartAlbumVideos), //视频
+                                                              //@(PHAssetCollectionSubtypeSmartAlbumBursts) //连拍模式拍摄的照片
+                                                              ];
+            imagePickerController.mediaType = QBImagePickerMediaTypeImage;//图片和视频
+            imagePickerController.showsNumberOfSelectedAssets = YES;//在界面下方显示已经选择图像的数量
+            [self presentViewController:imagePickerController animated:YES completion:nil];  
+            NSLog(@"相册");
+            break;
+        }
+        case YLChatBoxItemCamera:{//拍摄
+            [self takePhoto];
+            NSLog(@"拍摄");
+            break;
+        }
+        default:
+            break;
+    }
     
 }
+#pragma mark - Image Picker Controller Delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+    if (!image) {
+        image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        ChatMessageModel * message = [[ChatMessageModel alloc] init];
+        message.messageType = YLMessageTypeImage;
+        message.ownerTyper = YLMessageOwnerTypeSelf;
+        message.image = [image compressImageWithSice:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38)];
+        message.imagePath = @"file:";//[[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+        message.date = [NSDate  date];
+        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
+            
+            [_delegate chatBoxViewController:self sendMessage:message];
+            
+        }
+        NSLog(@"info = %@, image: %@",info,message.image);
+    }];
+}
+
+#pragma mark -QBImagePickerControllerDelegate
+//选中
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
+    [self dismissViewControllerAnimated:YES completion:^{
+        //NSLog(@"%@",assets);
+        int index = 0;
+        for (PHAsset * asset in assets) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(index * 0.5 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                if (asset.mediaType == PHAssetMediaTypeImage) {
+                    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+                    options.version = PHImageRequestOptionsVersionCurrent;
+                    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+                    options.synchronous = YES;
+                    [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                   
+                        ChatMessageModel * message = [[ChatMessageModel alloc] init];
+                        message.messageType = YLMessageTypeImage;
+                        message.ownerTyper = YLMessageOwnerTypeSelf;
+                        message.image = result;
+                        message.imagePath = @"file:";//[[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+                        message.date = [NSDate  date];
+                        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
+                            
+                            [_delegate chatBoxViewController:self sendMessage:message];
+                            
+                        }
+                        NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
+                    }];
+                    
+//                    [[PHImageManager defaultManager] requestImageDataForAsset:asset
+//                                                                      options:options
+//                                                                resultHandler:
+//                     ^(NSData *imageData,
+//                       NSString *dataUTI,
+//                       UIImageOrientation orientation,
+//                       NSDictionary *info) {
+//
+//                         UIImage * thumbnail = [[UIImage imageWithData: imageData] compressImage: 0.1];
+//                         ChatMessageModel * message = [[ChatMessageModel alloc] init];
+//                         message.messageType = YLMessageTypeImage;
+//                         message.ownerTyper = YLMessageOwnerTypeSelf;
+//                         message.image = thumbnail;
+//                         message.imagePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+//                         message.date = [NSDate  date];
+//                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
+//
+//                             [_delegate chatBoxViewController:self sendMessage:message];
+//
+//                         }
+//                         NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
+//                     }];
+                }else if (asset.mediaType == PHAssetMediaTypeVideo){
+                    
+                }
+            });
+            index++;
+        }
+    }];
+}
+//取消
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 
@@ -298,7 +445,33 @@
 {
     if (_chatBoxMoreView == nil) {
         _chatBoxMoreView = [[YLChatBoxMoreView alloc] initWithFrame:CGRectMake(0, HEIGHT_TABBAR, ScreenWidth, HEIGHT_CHATBOXVIEW)];
-        
+        YLChatBoxItemView *photosItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"照片"
+                                                                                imageName:@"sharemore_pic"];
+        YLChatBoxItemView *takePictureItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"拍摄"
+                                                                                     imageName:@"sharemore_video"];
+        YLChatBoxItemView *videoItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"小视频"
+                                                                               imageName:@"sharemore_sight"];
+//        YLChatBoxItemView *videoCallItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"视频聊天"
+//                                                                                   imageName:@"sharemore_videovoip"];
+//        YLChatBoxItemView *giftItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"红包"
+//                                                                              imageName:@"sharemore_wallet"];
+//        YLChatBoxItemView *transferItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"转账"
+//                                                                                  imageName:@"sharemorePay"];
+        YLChatBoxItemView *positionItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"位置"
+                                                                                  imageName:@"sharemore_location"];
+//        YLChatBoxItemView *favoriteItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"收藏"
+//                                                                                  imageName:@"sharemore_myfav"];
+//        YLChatBoxItemView *businessCardItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"名片"
+//                                                                                      imageName:@"sharemore_friendcard" ];
+//        YLChatBoxItemView *interphoneItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"实时对讲机"
+//                                                                                    imageName:@"sharemore_wxtalk" ];
+        YLChatBoxItemView *voiceItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"语音输入"
+                                                                               imageName:@"sharemore_voiceinput"];
+//        YLChatBoxItemView *cardsItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"卡券"
+//                                                                               imageName:@"sharemore_wallet"];
+//        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
+        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem,positionItem, voiceItem, nil]];
+        _chatBoxMoreView.delegate = self;
     }
     return _chatBoxMoreView;
 }
@@ -312,15 +485,19 @@
     }
     return _chatBoxFaceView;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//-(NSMutableArray<NSData *> *)bigImageArray {
+//    if (_bigImageArray == nil) {
+//        _bigImageArray = [NSMutableArray array];
+//    }
+//    return _bigImageArray;
+//}
+//-(NSMutableArray<UIImage *> *)imageArray {
+//    if (_imageArray == nil) {
+//        _imageArray = [NSMutableArray array];
+//    }
+//    return _imageArray;
+//}
 
 @end
 

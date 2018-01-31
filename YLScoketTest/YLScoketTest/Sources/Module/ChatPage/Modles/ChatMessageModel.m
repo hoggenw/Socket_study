@@ -39,7 +39,10 @@ static ChatFaceHeleper * faceHeleper = nil;
 #pragma mark - Public Methods
 - (NSArray *) getFaceArrayByGroupID:(NSString *)groupID
 {
-    NSArray *array = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:groupID ofType:@"plist"]];
+    
+    //NSLog(@"groupID：%@  path: %@ path2: %@",groupID,[[NSBundle mainBundle] pathForResource: [NSString stringWithFormat:@"Supporting Files/%@", groupID] ofType:@"plist"] ,[[NSBundle mainBundle] pathForResource: [NSString stringWithFormat:@"%@", groupID] ofType:@"plist"] );
+    NSArray *array = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@", groupID] ofType:@"plist"]];
+    //NSLog(@"array.count: %@", @(array.count));
     NSMutableArray *data = [[NSMutableArray alloc] initWithCapacity:array.count];
     for (NSDictionary *dic in array) {
         ChatFace *face = [[ChatFace alloc] init];
@@ -81,7 +84,7 @@ static UILabel *label = nil;
     if (self = [super init]) {
         
         if (label == nil) {
-            label = [[UILabel alloc] init];
+            label = [UILabel new];
             [label setNumberOfLines:0];
             [label setFont:[UIFont systemFontOfSize:16.0f]];
         }
@@ -191,8 +194,9 @@ static UILabel *label = nil;
             
         case YLMessageTypeImage:
         {
-            NSString *path = [NSString stringWithFormat:@"%@/%@", PATH_CHATREC_IMAGE, self.imagePath];
-            _image = [UIImage imageNamed:path];
+            //NSString *path = self.imagePath;
+            //_image = [UIImage imageWithContentsOfFile: path];
+            //NSLog(@"path：%@   获取路径的image： %@",path,_image);
             if (_image != nil) {
                 _messageSize = (_image.size.width > ScreenWidth * 0.5 ? CGSizeMake(ScreenWidth * 0.5, ScreenWidth * 0.5 / _image.size.width * _image.size.height) : _image.size);
                 _messageSize = (_messageSize.height > 60 ? (_messageSize.height < 200 ? _messageSize : CGSizeMake(_messageSize.width, 200)) : CGSizeMake(60.0 / _messageSize.height * _messageSize.width, 60));

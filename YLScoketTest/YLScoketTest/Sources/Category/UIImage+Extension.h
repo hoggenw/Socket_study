@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, YLImageType) {
+    YLImageJpeg,
+    YLImagePng,
+    YLImageGif,
+    YLImageTiif,
+    YLImageUnkonw
+};
+
 @interface UIImage (Extension)
 
 /**
@@ -26,5 +34,13 @@
  *  根据图片的中心点去拉伸图片并返回
  */
 - (UIImage *)resizableImageWithCenterPoint;
+
+/**
+ * 获取图片类型
+ */
+- (YLImageType )typeForImageData:(NSData *)data ;
+
+//压缩图片到指定大小()
+- (UIImage *)compressImageWithSice:(CGSize )rectSize;
 
 @end

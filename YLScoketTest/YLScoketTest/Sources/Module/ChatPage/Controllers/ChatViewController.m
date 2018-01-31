@@ -13,6 +13,8 @@
 #import "ChatMessageModel.h"
 #import "ChatOtherUserModel.h"
 #import "YLSocketRocktManager.h"
+#import "YLPhotoPreviewController.h"
+
 
 @interface ChatViewController ()<ChatShowMessageViewControllerDelegate,ChatBoxViewControllerDelegate,receiveMessageDelegate>
 
@@ -21,6 +23,7 @@
 @property(nonatomic,strong)ChatShowMessageViewController * chatMessageVC;
 @property(nonatomic,strong)ChatBoxViewController * chatBoxVC;
 @property(nonatomic,strong) YLSocketRocktManager *manager;
+
 
 @end
 
@@ -45,12 +48,29 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
+    ChatMessageModel *model = [userInfo objectForKey:kChoiceCellMessageModelKey];
+    if ([eventName isEqualToString:kRouterEventCellImageTapEventName]) {
+        //点击图片
+        if (model != nil) {
+          // [self chatImageCellPressed:model];
+        }
+        
+    }
+}
 #pragma mark - Public Methods
 
 
 #pragma mark - Events
-
+// 图片cell的被点击
+- (void)chatImageCellPressed:(ChatMessageModel *)model {
+    NSInteger  index = [self.chatMessageVC.imageMessageModels indexOfObject: model];
+    YLPhotoPreviewController *photoPreview = [YLPhotoPreviewController new];
+    photoPreview.currentIndex = index;
+    photoPreview.models = self.chatMessageVC.imageMessageModels;
+    photoPreview.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:photoPreview animated:YES completion:nil];
+}
 
 #pragma mark - Private Methods
 
@@ -121,7 +141,34 @@
                    sendMessage:(ChatMessageModel *)message {
     // 发送的消息数据模型
     message.from = [ChatOtherUserModel sharedOtherUser].user; //发送者
-    [self.manager sendMassege: message.text];
+    switch (message.messageType) {
+        case  YLMessageTypeImage:{ // 图片
+            message.text = @"这是图片";
+            [self.manager sendMassege: message.text];
+            break;
+        }
+        case  YLMessageTypeText:{ // 文字
+            [self.manager sendMassege: message.text];
+            break;
+        }
+        case  YLMessageTypeVoice:{ // 语音
+            break;
+        }
+        case  YLMessageTypeVideo:{ // 视频
+            NSLog(@"视频暂时不处理");
+            break;
+        }
+        case  YLMessageTypeFile:{ // 文件
+            break;
+        }
+        case  YLMessageTypeLocation:{ // 位置
+            break;
+        }
+        default:
+            break;
+    }
+    
+    
     [self.chatMessageVC addNewMessage: message];
     
 }

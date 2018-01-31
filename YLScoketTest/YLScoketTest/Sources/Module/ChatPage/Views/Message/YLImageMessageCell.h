@@ -8,8 +8,12 @@
 
 #import "YLMessageTableViewCell.h"
 
+@class ChatMessageModel;
+
 @interface YLImageMessageCell : YLMessageTableViewCell
 
 @property (nonatomic, strong) UIImageView *messageImageView;
+@property (nonatomic, copy) void (^imageViewCellTapAction)(ChatMessageModel *);
+
 
 @end

@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) NSMutableArray <ChatMessageModel *> *dataArray;
 
+
+
 @end
 
 @implementation ChatShowMessageViewController
@@ -43,22 +45,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
+     [super routerEventWithName:eventName userInfo:userInfo];
+    
+}
 
 
 - (void)scrollToBottom {
     //当我们执行该方法是，有可能由于reload方法在等待主线程执行，而直接执行下面的方法，这时候还没有reload，cell，会出现数组越界的情况
     if (_dataArray.count > 0) {
-        //NSInteger lastRowIndex =  [self.tableView numberOfRowsInSection: 0] - 1;
-        //NSLog(@"scrollToBottom lastRowIndex: %@",@(lastRowIndex));
-//        if (lastRowIndex >= 0) {
-//            
-//        }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: (_dataArray.count - 1)  inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+            NSInteger lastRowIndex =  [self.tableView numberOfRowsInSection: 0] - 1;
+            NSLog(@"scrollToBottom lastRowIndex: %@",@(lastRowIndex));
+            if (lastRowIndex >= 0 && _dataArray.count >  [self.tableView numberOfRowsInSection: 0]) {
+                [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: lastRowIndex  inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+            }else{
+                [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: (_dataArray.count - 1)  inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                
+            }
         });
-        
         // tableView 定位到的cell 滚动到相应的位置，后面的 atScrollPosition 是一个枚举类型
-       
+        
     }
 }
 
@@ -68,6 +75,9 @@
      *  数据源添加一条消息，刷新数据
      */
     [self.dataArray addObject:message];
+    if (message.messageType == YLMessageTypeImage) {
+        [self.imageMessageModels addObject: message];
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
@@ -76,6 +86,8 @@
     [self scrollToBottom];
     
 }
+
+
 
 #pragma mark - Table view data source
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -129,14 +141,23 @@
     return _dataArray;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(NSMutableArray<ChatMessageModel *> *)imageMessageModels {
+    if (_imageMessageModels == nil) {
+        _imageMessageModels = [NSMutableArray array];
+    }
+    return _imageMessageModels;
 }
-*/
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+

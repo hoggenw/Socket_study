@@ -20,7 +20,11 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+   // Configure the view for the selected state
+}
+
+- (void)imageViewTaped:(UITapGestureRecognizer *)sender {
+    [self routerEventWithName: kRouterEventCellImageTapEventName userInfo: @{ kChoiceCellMessageModelKey : self.messageModel}];
 }
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -81,6 +85,8 @@
         _messageImageView = [[UIImageView alloc] init];
         [_messageImageView setContentMode:UIViewContentModeScaleAspectFill];
         [_messageImageView setClipsToBounds:YES];
+        _messageImageView.userInteractionEnabled = true;
+        [_messageImageView addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(imageViewTaped:)]];
     }
     return _messageImageView;
 }

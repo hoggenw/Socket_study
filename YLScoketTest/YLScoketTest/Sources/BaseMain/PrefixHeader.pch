@@ -11,6 +11,7 @@
 
 #import "ManagersHeader.h"
 #import "UtilsHeader.h"
+#import "YLConstantValue.h"
 #import "CustomHeader.h"
 #import "ExtensionHeader.h"
 
@@ -21,6 +22,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <MJRefresh/MJRefresh.h>
 #import <YYModel/YYModel.h>
+
 #define ScreenWidth   [[UIScreen mainScreen] bounds].size.width
 #define ScreenHeight     [[UIScreen mainScreen] bounds].size.height
 
@@ -30,7 +32,7 @@
 
 
 #define     PATH_DOCUMENT                   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
-#define     PATH_CHATREC_IMAGE              [PATH_DOCUMENT stringByAppendingPathComponent:@"ChatRec/Images"]
+//#define     PATH_CHATREC_IMAGE              [PATH_DOCUMENT stringByAppendingPathComponent:@"ChatRec/Images"]
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

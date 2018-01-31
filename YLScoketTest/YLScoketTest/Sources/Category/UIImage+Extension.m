@@ -67,4 +67,56 @@
     return newImage;
 }
 
+//压缩图片到指定大小()
+- (UIImage *)compressImageWithSice:(CGSize )rectSize  {
+    
+    
+    CGFloat width = rectSize.width;
+    CGFloat height = rectSize.height;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(width ,height));
+    [self drawInRect:CGRectMake(0, 0, width, height)];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+
+- (YLImageType )typeForImageData:(NSData *)data {
+    
+    
+    uint8_t c;
+    
+    [data getBytes:&c length:1];
+    
+    
+    
+    switch (c) {
+            
+        case 0xFF:
+            
+            return YLImageJpeg;
+            
+        case 0x89:
+            
+            return YLImagePng;
+            
+        case 0x47:
+            
+            return YLImageGif;
+            
+        case 0x49:
+            
+        case 0x4D:
+            
+            return YLImageTiif;
+            
+    }
+    
+    return YLImageUnkonw;
+    
+}
+
 @end
