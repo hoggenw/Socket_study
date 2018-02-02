@@ -11,6 +11,18 @@
 		111CB19020205F2C0035D245 /* YLPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB18F20205F2C0035D245 /* YLPhotoPreviewCell.m */; };
 		111CB19920206F710035D245 /* UIResponder+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB19820206F710035D245 /* UIResponder+Extension.m */; };
 		111CB19D202073670035D245 /* YLConstantValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB19C202073670035D245 /* YLConstantValue.m */; };
+		111CB1E5202300380035D245 /* MicrophoneBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1D9202300370035D245 /* MicrophoneBottomView.m */; };
+		111CB1E6202300380035D245 /* MicrophoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1DC202300370035D245 /* MicrophoneView.m */; };
+		111CB1E7202300380035D245 /* TopViewAnimaton.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1DE202300370035D245 /* TopViewAnimaton.m */; };
+		111CB1E8202300380035D245 /* MicrophoneTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1E2202300370035D245 /* MicrophoneTopView.m */; };
+		111CB1E9202300380035D245 /* TopArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1E3202300370035D245 /* TopArcView.m */; };
+		111CB1EA202300380035D245 /* YLVoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1E4202300380035D245 /* YLVoiceView.m */; };
+		111CB1EF202418370035D245 /* YLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB1EE202418370035D245 /* YLImageView.m */; };
+		111CB220202442450035D245 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 111CB21A202442450035D245 /* libopencore-amrnb.a */; };
+		111CB228202442B70035D245 /* amr_wav_converter.c in Sources */ = {isa = PBXBuildFile; fileRef = 111CB227202442B70035D245 /* amr_wav_converter.c */; };
+		111CB230202447D80035D245 /* DPAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB229202447D70035D245 /* DPAudioPlayer.m */; };
+		111CB231202447D80035D245 /* DPAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB22B202447D70035D245 /* DPAudioRecorder.m */; };
+		111CB232202447D80035D245 /* JX_GCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB22C202447D70035D245 /* JX_GCDTimerManager.m */; };
 		115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760E320170D3300E0D94F /* ChatOtherUserModel.m */; };
 		115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760E92017148300E0D94F /* YLMessageTableViewCell.m */; };
 		115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760EC2017175300E0D94F /* YLTextTableViewCell.m */; };
@@ -101,6 +113,29 @@
 		111CB19820206F710035D245 /* UIResponder+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+Extension.m"; sourceTree = "<group>"; };
 		111CB19B202073670035D245 /* YLConstantValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLConstantValue.h; sourceTree = "<group>"; };
 		111CB19C202073670035D245 /* YLConstantValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLConstantValue.m; sourceTree = "<group>"; };
+		111CB1D9202300370035D245 /* MicrophoneBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicrophoneBottomView.m; sourceTree = "<group>"; };
+		111CB1DA202300370035D245 /* MicrophoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicrophoneView.h; sourceTree = "<group>"; };
+		111CB1DB202300370035D245 /* TopViewAnimaton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewAnimaton.h; sourceTree = "<group>"; };
+		111CB1DC202300370035D245 /* MicrophoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicrophoneView.m; sourceTree = "<group>"; };
+		111CB1DD202300370035D245 /* TopArcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopArcView.h; sourceTree = "<group>"; };
+		111CB1DE202300370035D245 /* TopViewAnimaton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopViewAnimaton.m; sourceTree = "<group>"; };
+		111CB1DF202300370035D245 /* MicrophoneBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicrophoneBottomView.h; sourceTree = "<group>"; };
+		111CB1E0202300370035D245 /* MicrophoneTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicrophoneTopView.h; sourceTree = "<group>"; };
+		111CB1E1202300370035D245 /* YLVoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLVoiceView.h; sourceTree = "<group>"; };
+		111CB1E2202300370035D245 /* MicrophoneTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicrophoneTopView.m; sourceTree = "<group>"; };
+		111CB1E3202300370035D245 /* TopArcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopArcView.m; sourceTree = "<group>"; };
+		111CB1E4202300380035D245 /* YLVoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLVoiceView.m; sourceTree = "<group>"; };
+		111CB1ED202418370035D245 /* YLImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLImageView.h; sourceTree = "<group>"; };
+		111CB1EE202418370035D245 /* YLImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLImageView.m; sourceTree = "<group>"; };
+		111CB21A202442450035D245 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		111CB227202442B70035D245 /* amr_wav_converter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amr_wav_converter.c; sourceTree = "<group>"; };
+		111CB229202447D70035D245 /* DPAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPAudioPlayer.m; sourceTree = "<group>"; };
+		111CB22A202447D70035D245 /* amr_wav_converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amr_wav_converter.h; sourceTree = "<group>"; };
+		111CB22B202447D70035D245 /* DPAudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPAudioRecorder.m; sourceTree = "<group>"; };
+		111CB22C202447D70035D245 /* JX_GCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JX_GCDTimerManager.m; sourceTree = "<group>"; };
+		111CB22D202447D70035D245 /* DPAudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAudioRecorder.h; sourceTree = "<group>"; };
+		111CB22E202447D80035D245 /* JX_GCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JX_GCDTimerManager.h; sourceTree = "<group>"; };
+		111CB22F202447D80035D245 /* DPAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAudioPlayer.h; sourceTree = "<group>"; };
 		115760E220170D3300E0D94F /* ChatOtherUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatOtherUserModel.h; sourceTree = "<group>"; };
 		115760E320170D3300E0D94F /* ChatOtherUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatOtherUserModel.m; sourceTree = "<group>"; };
 		115760E82017148300E0D94F /* YLMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLMessageTableViewCell.h; sourceTree = "<group>"; };
@@ -283,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FB72C60EC512A5CA19AEB6 /* Pods_YLScoketTest.framework in Frameworks */,
+				111CB220202442450035D245 /* libopencore-amrnb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +332,50 @@
 				111CB18F20205F2C0035D245 /* YLPhotoPreviewCell.m */,
 			);
 			path = YLPhotoPreview;
+			sourceTree = "<group>";
+		};
+		111CB1D82023001A0035D245 /* VoiceView */ = {
+			isa = PBXGroup;
+			children = (
+				111CB1DF202300370035D245 /* MicrophoneBottomView.h */,
+				111CB1D9202300370035D245 /* MicrophoneBottomView.m */,
+				111CB1E0202300370035D245 /* MicrophoneTopView.h */,
+				111CB1E2202300370035D245 /* MicrophoneTopView.m */,
+				111CB1DA202300370035D245 /* MicrophoneView.h */,
+				111CB1DC202300370035D245 /* MicrophoneView.m */,
+				111CB1DD202300370035D245 /* TopArcView.h */,
+				111CB1E3202300370035D245 /* TopArcView.m */,
+				111CB1DB202300370035D245 /* TopViewAnimaton.h */,
+				111CB1DE202300370035D245 /* TopViewAnimaton.m */,
+				111CB1E1202300370035D245 /* YLVoiceView.h */,
+				111CB1E4202300380035D245 /* YLVoiceView.m */,
+			);
+			path = VoiceView;
+			sourceTree = "<group>";
+		};
+		111CB1EC202418130035D245 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				111CB1ED202418370035D245 /* YLImageView.h */,
+				111CB1EE202418370035D245 /* YLImageView.m */,
+			);
+			path = BaseView;
+			sourceTree = "<group>";
+		};
+		111CB215202442450035D245 /* Recorder&Player */ = {
+			isa = PBXGroup;
+			children = (
+				111CB22A202447D70035D245 /* amr_wav_converter.h */,
+				111CB22F202447D80035D245 /* DPAudioPlayer.h */,
+				111CB229202447D70035D245 /* DPAudioPlayer.m */,
+				111CB22D202447D70035D245 /* DPAudioRecorder.h */,
+				111CB22B202447D70035D245 /* DPAudioRecorder.m */,
+				111CB22E202447D80035D245 /* JX_GCDTimerManager.h */,
+				111CB22C202447D70035D245 /* JX_GCDTimerManager.m */,
+				111CB227202442B70035D245 /* amr_wav_converter.c */,
+				111CB21A202442450035D245 /* libopencore-amrnb.a */,
+			);
+			path = "Recorder&Player";
 			sourceTree = "<group>";
 		};
 		115760F720171F6300E0D94F /* Message */ = {
@@ -542,6 +622,7 @@
 		116B676320118FB6005AA5E0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				111CB1EC202418130035D245 /* BaseView */,
 				116B676520118FB6005AA5E0 /* YLLabel.h */,
 				116B676720118FB6005AA5E0 /* YLLabel.m */,
 				116B676820118FB6005AA5E0 /* YLHintView.h */,
@@ -554,6 +635,7 @@
 		116B676920118FB6005AA5E0 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				111CB215202442450035D245 /* Recorder&Player */,
 				1157610B2018891E00E0D94F /* Protubuf */,
 				116B676F20118FB6005AA5E0 /* Base64 */,
 				116B676A20118FB6005AA5E0 /* GTMBase64 */,
@@ -674,6 +756,7 @@
 		116B679B20119A80005AA5E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				111CB1D82023001A0035D245 /* VoiceView */,
 				111CB18D20205F0F0035D245 /* YLPhotoPreview */,
 				115760F820171F7600E0D94F /* Box */,
 				115760F720171F6300E0D94F /* Message */,
@@ -952,10 +1035,13 @@
 			files = (
 				111CB19920206F710035D245 /* UIResponder+Extension.m in Sources */,
 				11576162201889E200E0D94F /* GPBUtilities.m in Sources */,
+				111CB231202447D80035D245 /* DPAudioRecorder.m in Sources */,
 				116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */,
 				11576161201889E200E0D94F /* GPBUnknownField.m in Sources */,
 				116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */,
+				111CB1E6202300380035D245 /* MicrophoneView.m in Sources */,
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
+				111CB1EF202418370035D245 /* YLImageView.m in Sources */,
 				115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */,
 				115761692019D19E00E0D94F /* YLChatBoxItemView.m in Sources */,
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
@@ -964,6 +1050,7 @@
 				116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */,
 				111CB19020205F2C0035D245 /* YLPhotoPreviewCell.m in Sources */,
 				11576155201889E200E0D94F /* Timestamp.pbobjc.m in Sources */,
+				111CB228202442B70035D245 /* amr_wav_converter.c in Sources */,
 				116B677D20118FB6005AA5E0 /* UIImageView+Extension.m in Sources */,
 				1157615E201889E200E0D94F /* GPBRootObject.m in Sources */,
 				1157614D201889E200E0D94F /* GPBExtensionInternals.m in Sources */,
@@ -982,6 +1069,8 @@
 				115761662019CDB000E0D94F /* YLChatFaceItemView.m in Sources */,
 				115760F620171D5D00E0D94F /* YLSystemMessageCell.m in Sources */,
 				116B67B12011C980005AA5E0 /* ChatListTableViewCell.m in Sources */,
+				111CB1E9202300380035D245 /* TopArcView.m in Sources */,
+				111CB1E7202300380035D245 /* TopViewAnimaton.m in Sources */,
 				116B678620118FB6005AA5E0 /* YLSocketManager.m in Sources */,
 				11576153201889E200E0D94F /* GPBDictionary.m in Sources */,
 				116B678820118FB6005AA5E0 /* YLMQTTManager.m in Sources */,
@@ -997,6 +1086,7 @@
 				116B678220118FB6005AA5E0 /* UIView+Extension.m in Sources */,
 				116B679120118FB6005AA5E0 /* main.m in Sources */,
 				11576154201889E200E0D94F /* Type.pbobjc.m in Sources */,
+				111CB1E8202300380035D245 /* MicrophoneTopView.m in Sources */,
 				116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */,
 				11576152201889E200E0D94F /* GPBCodedInputStream.m in Sources */,
 				115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */,
@@ -1009,6 +1099,7 @@
 				115760F020171D3C00E0D94F /* YLImageMessageCell.m in Sources */,
 				116B677C20118FB6005AA5E0 /* UIImage+Extension.m in Sources */,
 				116B678920118FB6005AA5E0 /* LocalSQliteManager.m in Sources */,
+				111CB230202447D80035D245 /* DPAudioPlayer.m in Sources */,
 				116B678520118FB6005AA5E0 /* YLSocketRocktManager.m in Sources */,
 				115760FE201729A800E0D94F /* YLChatBoxMoreView.m in Sources */,
 				11576160201889E200E0D94F /* GPBArray.m in Sources */,
@@ -1016,14 +1107,17 @@
 				116B678E20118FB6005AA5E0 /* GTMBase64.m in Sources */,
 				1157614F201889E200E0D94F /* GPBDescriptor.m in Sources */,
 				115760F320171D4D00E0D94F /* YLVoiceMessageCell.m in Sources */,
+				111CB232202447D80035D245 /* JX_GCDTimerManager.m in Sources */,
 				11576159201889E200E0D94F /* Duration.pbobjc.m in Sources */,
 				116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */,
 				1157615F201889E200E0D94F /* GPBUnknownFieldSet.m in Sources */,
+				111CB1E5202300380035D245 /* MicrophoneBottomView.m in Sources */,
 				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
 				11576163201889E200E0D94F /* GPBMessage.m in Sources */,
 				115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */,
 				11576151201889E200E0D94F /* GPBExtensionRegistry.m in Sources */,
 				1157615C201889E200E0D94F /* FieldMask.pbobjc.m in Sources */,
+				111CB1EA202300380035D245 /* YLVoiceView.m in Sources */,
 				116B678C20118FB6005AA5E0 /* YLHintView.m in Sources */,
 				116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */,
 				116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */,
@@ -1128,6 +1222,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 87F6Z4326W;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YLScoketTest/Sources/BaseMain/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/YLScoketTest/Sources/Vendor";
 				INFOPLIST_FILE = "$(SRCROOT)/YLScoketTest/Supporting Files/Info.plist";
@@ -1136,6 +1231,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor",
+					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor/Recorder&Player",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.YLScoketTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1149,6 +1245,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 87F6Z4326W;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YLScoketTest/Sources/BaseMain/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/YLScoketTest/Sources/Vendor";
 				INFOPLIST_FILE = "$(SRCROOT)/YLScoketTest/Supporting Files/Info.plist";
@@ -1157,6 +1254,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor",
+					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor/Recorder&Player",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.YLScoketTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";

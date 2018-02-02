@@ -84,9 +84,13 @@ static UILabel *label = nil;
     if (self = [super init]) {
         
         if (label == nil) {
-            label = [UILabel new];
-            [label setNumberOfLines:0];
-            [label setFont:[UIFont systemFontOfSize:16.0f]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+              label = [UILabel new];
+                [label setNumberOfLines:0];
+                [label setFont:[UIFont systemFontOfSize:16.0f]];
+            });
+            
+           
         }
     }
     
@@ -206,9 +210,20 @@ static UILabel *label = nil;
             }
             break;
         }
-        case YLMessageTypeVoice:
+        case YLMessageTypeVoice:{
+            float width = 60;
+            if (self.voiceSeconds > 3 &&  self.voiceSeconds <= 6) {
+                width = 90;
+            }else if (self.voiceSeconds > 3 &&  self.voiceSeconds <= 10){
+                width = 120;
+            }else if (self.voiceSeconds > 10 &&  self.voiceSeconds <= 16){
+                width = 150;
+            }else if (self.voiceSeconds > 16){
+                width = 180;
+            }
+            _messageSize = CGSizeMake(width, 35);
             break;
-            
+        }
         case YLMessageTypeSystem:
             break;
             
@@ -230,6 +245,11 @@ static UILabel *label = nil;
         case YLMessageTypeImage:
             
             return self.messageSize.height + 20;
+            break;
+            
+        case YLMessageTypeVoice:
+            
+            return 35 + 20;
             break;
             
         default:

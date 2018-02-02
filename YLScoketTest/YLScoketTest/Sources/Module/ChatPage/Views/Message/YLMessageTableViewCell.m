@@ -103,10 +103,10 @@
     }
 }
 
-- (UIImageView *)avatarImageView {
+- (YLImageView *)avatarImageView {
     if (_avatarImageView == nil) {
         float imageWidth = 40;
-        _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageWidth, imageWidth)];
+        _avatarImageView = [[YLImageView alloc] initWithFrame:CGRectMake(0, 0, imageWidth, imageWidth)];
         [_avatarImageView setHidden:YES];
     }
     return  _avatarImageView;
@@ -114,10 +114,10 @@
 /**
  *  聊天背景图
  */
-- (UIImageView *) messageBackgroundImageView
+- (YLImageView *) messageBackgroundImageView
 {
     if (_messageBackgroundImageView == nil) {
-        _messageBackgroundImageView = [[UIImageView alloc] init];
+        _messageBackgroundImageView = [[YLImageView alloc] init];
         [_messageBackgroundImageView setHidden:YES];
     }
     return _messageBackgroundImageView;

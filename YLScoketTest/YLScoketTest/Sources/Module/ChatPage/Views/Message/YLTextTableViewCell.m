@@ -42,9 +42,10 @@
     [self.messageTextLabel setOrigin:CGPointMake(x, y)];
     
     x -= 18;                                    // 左边距离头像 5
-    y = self.avatarImageView.top - 5;       // 上边与头像对齐 (北京图像有5个像素偏差)
+    y = self.avatarImageView.top - 5;       // 上边与头像对齐
     float h = MAX(self.messageTextLabel.height + 30, self.avatarImageView.height + 10);
     [self.messageBackgroundImageView setFrame:CGRectMake(x, y, self.messageTextLabel.width + 40, h)];
+    
 }
 
 -(void)setMessageModel:(ChatMessageModel *)messageModel {

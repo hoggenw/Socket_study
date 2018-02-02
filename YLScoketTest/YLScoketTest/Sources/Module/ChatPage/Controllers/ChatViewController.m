@@ -154,6 +154,7 @@
             break;
         }
         case  YLMessageTypeVoice:{ // 语音
+            
             break;
         }
         case  YLMessageTypeVideo:{ // 视频

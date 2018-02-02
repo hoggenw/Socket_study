@@ -8,12 +8,15 @@
 
 #import "YLChatBoxView.h"
 #import "ChatMessageModel.h"
+#import "YLVoiceView.h"
 
 #define     CHATBOX_BUTTON_WIDTH        37
 #define     HEIGHT_TEXTVIEW             HEIGHT_TABBAR * 0.74
 #define     MAX_TEXTVIEW_HEIGHT         104
 
 @interface YLChatBoxView()<UITextViewDelegate>
+
+@property (nonatomic, strong) YLVoiceView * voiceView;
 
 @property (nonatomic, strong) UIView *topLine; // 顶部的线
 @property (nonatomic, strong) UIButton *voiceButton; // 声音按钮
@@ -357,18 +360,33 @@
 {
     [_talkButton setTitle:@"松开 结束" forState:UIControlStateNormal];
     [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.5]] forState:UIControlStateNormal];
+    //录音响应
+    [self.voiceView startAnimation];
+    
+    
 }
+
 
 - (void) talkButtonUpInside:(UIButton *)sender
 {
     [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
     [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
+    
+    [self.voiceView stopArcAnimation];
+    [self.voiceView removeFromSuperview];
+    self.voiceView = nil;
+    
+    
 }
 
 - (void) talkButtonUpOutside:(UIButton *)sender
 {
     [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
     [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
+    
+    [self.voiceView stopArcAnimation];
+    [self.voiceView removeFromSuperview];
+    self.voiceView = nil;
 }
 
 #pragma mark - Getter
@@ -455,7 +473,12 @@
     return _talkButton;
 }
 
-
+- (YLVoiceView *)voiceView {
+    if (_voiceView == nil) {
+        _voiceView = [[YLVoiceView alloc] initWithFrame:CGRectZero];
+    }
+    return _voiceView;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

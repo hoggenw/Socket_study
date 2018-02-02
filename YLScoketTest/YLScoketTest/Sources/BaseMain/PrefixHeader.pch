@@ -9,11 +9,14 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#ifdef __OBJC__
+
 #import "ManagersHeader.h"
 #import "UtilsHeader.h"
 #import "YLConstantValue.h"
 #import "CustomHeader.h"
 #import "ExtensionHeader.h"
+#import "YLImageView.h"
 
 #import <SSKeychain/SSKeychain.h>
 #import <SDWebImage/UIButton+WebCache.h>
@@ -32,6 +35,9 @@
 
 
 #define     PATH_DOCUMENT                   [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+#endif
+
+
 //#define     PATH_CHATREC_IMAGE              [PATH_DOCUMENT stringByAppendingPathComponent:@"ChatRec/Images"]
 
 // Include any system framework and library headers here that should be included in all compilation units.
