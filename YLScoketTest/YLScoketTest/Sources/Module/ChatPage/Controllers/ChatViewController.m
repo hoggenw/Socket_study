@@ -154,7 +154,8 @@
             break;
         }
         case  YLMessageTypeVoice:{ // 语音
-            
+            message.text = @"这是语音";
+            [self.manager sendMassege: message.text];
             break;
         }
         case  YLMessageTypeVideo:{ // 视频

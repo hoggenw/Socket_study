@@ -149,11 +149,12 @@ static DPAudioRecorder *recorderManager = nil;
     
     //返回amr音频文件Data,用于传输或存储
     NSData *cacheAudioData = [NSData dataWithContentsOfFile:amrRecordFilePath];
+    NSLog(@"%@ -------  %@", @([self fileSizeAtPath:wavRecordFilePath]), @([self fileSizeAtPath:amrRecordFilePath]));
     
     //大于最小录音时长时,发送数据
     if (audioTimeLength > MIN_RECORDER_TIME) {
         if (self.audioRecorderFinishRecording) {
-            self.audioRecorderFinishRecording(cacheAudioData, audioTimeLength);
+            self.audioRecorderFinishRecording(cacheAudioData, audioTimeLength,wavRecordFilePath);
         }
     } else {
         if (self.audioRecordingFail) {
@@ -169,6 +170,14 @@ static DPAudioRecorder *recorderManager = nil;
         timer = NULL;
     }
     
+}
+//单个文件的大小
+- (long long)fileSizeAtPath:(NSString*) filePath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    }
+    return 0;
 }
 
 //音频值测量

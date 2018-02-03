@@ -9,6 +9,7 @@
 #import "YLChatBoxView.h"
 #import "ChatMessageModel.h"
 #import "YLVoiceView.h"
+#import "DPAudioRecorder.h"
 
 #define     CHATBOX_BUTTON_WIDTH        37
 #define     HEIGHT_TEXTVIEW             HEIGHT_TABBAR * 0.74
@@ -41,6 +42,8 @@
         [self addSubview:self.moreButton];
         [self addSubview:self.talkButton];
         self.status = YLChatBoxStatusNothing;//初始化状态是空
+        
+        
     }
     
     return self;
@@ -140,10 +143,10 @@
 }
 
 /**
-*  TextView 的输入内容一改变就调用这个方法，
-*
-*
-*/
+ *  TextView 的输入内容一改变就调用这个方法，
+ *
+ *
+ */
 - (void) textViewDidChange:(UITextView *)textView
 {
     /**
@@ -263,6 +266,68 @@
             
         }
     }
+    __weak typeof(self) weakSelf = self;
+    //录音完成回调
+    [DPAudioRecorder sharedInstance].audioRecorderFinishRecording = ^(NSData *data, NSUInteger audioTimeLength,NSString * localPath) {
+        NSLog(@"录音完成回调: 时长：%@",@(audioTimeLength));
+        if (_delegate && [_delegate respondsToSelector:@selector(chatBox:sendTextMessage:)]) {
+            ChatMessageModel * message = [[ChatMessageModel alloc] init];
+            message.messageType = YLMessageTypeVoice;
+            message.ownerTyper = YLMessageOwnerTypeSelf;
+            message.voiceSeconds = audioTimeLength;
+            message.voicePath = localPath;
+            message.date = [NSDate  date];
+            [_delegate chatBox:self sendTextMessage: message];
+        }
+        [weakSelf.voiceView stopArcAnimation];
+        [weakSelf.voiceView removeFromSuperview];
+        weakSelf.voiceView = nil;
+    };
+    
+    //录音开始回调
+    [DPAudioRecorder sharedInstance].audioStartRecording = ^(BOOL isRecording) {
+        NSLog(@"录音开始回调");
+    };
+    
+    //录音失败回调
+    [DPAudioRecorder sharedInstance].audioRecordingFail = ^(NSString *reason) {
+        [weakSelf.voiceView stopArcAnimation];
+        [weakSelf.voiceView removeFromSuperview];
+        weakSelf.voiceView = nil;
+        [YLHintView showMessageOnThisPage: reason];
+    };
+    
+    //音频值测量回调
+    [DPAudioRecorder sharedInstance].audioSpeakPower = ^(float power) {
+        NSInteger count = 0;
+        switch ((int)(power*10)) {
+            case 1:
+            case 2:
+                count = 1;
+                break;
+            case 3:
+            case 4:
+                count = 2;
+                break;
+            case 5:
+            case 6:
+                count = 3;
+                break;
+            case 7:
+            case 8:
+                count = 4;
+                break;
+            case 9:
+            case 10:
+                count = 5;
+                break;
+            default:
+                break;
+        }
+        //录音响应
+        [weakSelf.voiceView startARCTopAnimation:count];
+        NSLog(@"音频值测量回调 : %@",@(count));
+    };
 }
 
 /**
@@ -355,14 +420,14 @@
         }
     }
 }
-
+#pragma mark - 发送录音
 - (void) talkButtonDown:(UIButton *)sender
 {
     [_talkButton setTitle:@"松开 结束" forState:UIControlStateNormal];
-    [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.5]] forState:UIControlStateNormal];
-    //录音响应
-    [self.voiceView startAnimation];
+    //开始录音
+    [[DPAudioRecorder sharedInstance] startRecording];
     
+    [_talkButton setBackgroundColor: [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.5]];
     
 }
 
@@ -370,23 +435,17 @@
 - (void) talkButtonUpInside:(UIButton *)sender
 {
     [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
-    [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
-    
-    [self.voiceView stopArcAnimation];
-    [self.voiceView removeFromSuperview];
-    self.voiceView = nil;
-    
-    
+    //结束录音
+    [[DPAudioRecorder sharedInstance] stopRecording];
+    [_talkButton setBackgroundColor: [UIColor clearColor]];
 }
 
 - (void) talkButtonUpOutside:(UIButton *)sender
 {
     [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
-    [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
-    
-    [self.voiceView stopArcAnimation];
-    [self.voiceView removeFromSuperview];
-    self.voiceView = nil;
+    [_talkButton setBackgroundColor: [UIColor clearColor]];
+    //结束录音
+    [[DPAudioRecorder sharedInstance] stopRecording];
 }
 
 #pragma mark - Getter
@@ -458,7 +517,9 @@
         [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
         [_talkButton setTitle:@"松开 结束" forState:UIControlStateHighlighted];
         [_talkButton setTitleColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0] forState:UIControlStateNormal];
-        [_talkButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.5]] forState:UIControlStateHighlighted];
+        
+        [_talkButton setBackgroundColor: [UIColor clearColor]];
+        
         [_talkButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
         [_talkButton.layer setMasksToBounds:YES];
         [_talkButton.layer setCornerRadius:4.0f];
@@ -480,11 +541,12 @@
     return _voiceView;
 }
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end
+

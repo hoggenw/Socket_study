@@ -8,6 +8,7 @@
 
 #import "YLVoiceMessageCell.h"
 #import "ChatMessageModel.h"
+#import "DPAudioPlayer.h"
 
 @implementation YLVoiceMessageCell
 
@@ -19,7 +20,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -79,11 +80,18 @@
     __weak typeof(self) weakSelf = self;
     [self.messageBackgroundImageView setTapActionWithBlock:^{
         [weakSelf.voiceImageView startAnimating];
-    }];
-    self.timeLabel.text = @"6\"";
+        //播放url
+        NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
+        [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.voicePath];
         
-
-
+        [DPAudioPlayer sharedInstance].playComplete = ^{
+            [weakSelf.voiceImageView stopAnimating];
+        };
+    }];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@\"",@(messageModel.voiceSeconds)];
+    
+    
+    
     
 }
 
@@ -114,3 +122,4 @@
 }
 
 @end
+

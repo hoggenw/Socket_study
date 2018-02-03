@@ -17,8 +17,6 @@
 @property(nonatomic,strong)TopViewAnimaton * arcAnimation;
 @property(nonatomic,strong)MicrophoneView * microphoneView;
 
-@property(nonatomic,strong)NSTimer *timer;
-@property(nonatomic,assign)NSInteger count;
 /**
  *  线宽
  */
@@ -54,7 +52,6 @@
 //        self.isColid = NO;
         self.lineColor = [UIColor greenColor];
         self.colidColor = self.lineColor;
-        self.count = 0;
         self.layer.cornerRadius = self.width/2;
         self.clipsToBounds = true;
         self.backgroundColor = [[UIColor brownColor] colorWithAlphaComponent:0.8];
@@ -92,39 +89,20 @@
     [self addSubview: self.microphoneView];
 }
 
-//开始动画
-- (void)startAnimation {
-    [self.timer resumeTimer];
-}
 
-- (void)startARCTopAnimation {
-    [self.arcAnimation startAnimation: self.count];
-    self.count++;
-    if (self.count > 5) {
-        self.count = 0;
-    }
+
+- (void)startARCTopAnimation:(NSUInteger) count {
+    [self.arcAnimation startAnimation: count];
     
 }
 
 - (void)stopArcAnimation{
-    [self.timer pauseTimer];
-    if (self.timer) {
-        [self.timer invalidate];
-        self.timer = nil;
-        self.timer = nil;
-    }
-    self.count = 0;
+
     [self.arcAnimation stopAnimation];
   
 
 }
-
-- (NSTimer *)timer {
-    if (_timer == nil) {
-            self.timer = [NSTimer scheduledTimerWithTimeInterval: 0.3 target:self selector:@selector(startARCTopAnimation) userInfo:nil  repeats: YES];
-    }
-    return _timer;
-}
+\
 
 @end
 

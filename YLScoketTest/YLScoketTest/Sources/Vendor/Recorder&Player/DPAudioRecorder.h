@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^AudioRecorderFinishRecordingBlock)(NSData *data, NSUInteger audioTimeLength);
+typedef void(^AudioRecorderFinishRecordingBlock)(NSData *data, NSUInteger audioTimeLength,NSString * localPath);
 
 typedef void(^AudioStartRecordingBlock)(BOOL isRecording);
 

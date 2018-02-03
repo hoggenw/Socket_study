@@ -56,6 +56,7 @@
 }
 
 - (void)startAnimation:(NSInteger)count{
+    
     for (int i = 0; i < 5 ; i++) {
         TopArcView * view = self.views[i];
         if (i<count) {

@@ -14,7 +14,7 @@
 
 
 //开始动画
-- (void)startAnimation;
+- (void)startARCTopAnimation:(NSUInteger) count;
 - (void)stopArcAnimation;
 
 @end

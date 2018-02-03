@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface DPAudioPlayer () <AVAudioPlayerDelegate>
 {
@@ -58,15 +59,54 @@ static DPAudioPlayer *playerManager = nil;
 
 - (void)startPlayWithURL:(NSString *)urlStr
 {
-    __weak __typeof(&*self)weakSelf = self;
-    [self downloadFileWithURL:urlStr parameters:@{} savedPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"AMRTemporaryRadio.amr"] downloadSuccess:^(NSURLResponse *response, NSURL *filePath) {
-        NSData *data = [NSData dataWithContentsOfURL:filePath];
-        [weakSelf startPlayWithData:data];
-    } downloadFailure:^(NSError *error) {
-        NSLog(@"");
-    } downloadProgress:^(NSProgress *downloadProgress) {
-        NSLog(@"总大小：%lld,当前大小:%lld",downloadProgress.totalUnitCount,downloadProgress.completedUnitCount);
-    }];
+    
+    if ([urlStr hasPrefix:@"/private"]) {
+        //[self startPlayWithData: [NSData dataWithContentsOfFile:urlStr]];
+       [self startPlayWithPath:[NSURL URLWithString: urlStr]];
+         NSLog(@"使用本地数据");
+    }else {
+        __weak __typeof(&*self)weakSelf = self;
+        [self downloadFileWithURL:urlStr parameters:@{} savedPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"AMRTemporaryRadio.amr"] downloadSuccess:^(NSURLResponse *response, NSURL *filePath) {
+            NSData *data = [NSData dataWithContentsOfURL:filePath];
+            [weakSelf startPlayWithData:data];
+        } downloadFailure:^(NSError *error) {
+            NSLog(@"错误");
+        } downloadProgress:^(NSProgress *downloadProgress) {
+            NSLog(@"总大小：%lld,当前大小:%lld",downloadProgress.totalUnitCount,downloadProgress.completedUnitCount);
+        }];
+    }
+    
+    
+    
+}
+
+-(void)startPlayWithPath:(NSURL *)path {
+    if (isPlaying) return;
+    //打开红外传感器
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+    //默认情况下扬声器播放
+    AVAudioSessionPortOverride portOverride = AVAudioSessionPortOverrideNone;
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort:portOverride error:nil];
+    
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:path error:nil];
+    self.audioPlayer.meteringEnabled = YES;
+    self.audioPlayer.delegate = self;
+    self.audioPlayer.volume = 1.0;
+    self.audioPlayer.numberOfLoops = 0;
+    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
+    
+    if ([self.audioPlayer isPlaying]) {
+        isPlaying = YES;
+        if (self.startPlaying) {
+            self.startPlaying(YES);
+        }
+    } else {
+        isPlaying = NO;
+        if (self.startPlaying) {
+            self.startPlaying(NO);
+        }
+    }
 }
 
 - (void)startPlayWithData:(NSData *)data

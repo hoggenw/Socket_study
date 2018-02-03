@@ -24,7 +24,7 @@
 - (NSDate *)beginOfTheWeek;
 - (NSInteger)weekday;
 - (NSString *)formatMonthAndDay;
-- (NSString *)formatYYMMDDHHMM;
+- (NSString *)formatYYMMDDHHMMSS;
 - (NSString *)formatMMDDHHMM;
 - (NSString *)formatMMDD;
 - (NSString *)countDownBySecond;
