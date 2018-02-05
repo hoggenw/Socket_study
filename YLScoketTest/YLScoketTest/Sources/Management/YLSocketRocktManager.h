@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class ChatMessageModel;
+
+@class YLmessageModel;
+
 @protocol receiveMessageDelegate<NSObject>
 
-- (void)receiveMessage:(NSString *)message;
+- (void)receiveMessage:(YLmessageModel *)message;
 
 @end
 
@@ -25,7 +29,7 @@
 
 - (void)disconnnet;
 
-- (void)sendMassege:(NSString *)message;
+-(void)sendMassege:(ChatMessageModel *)messageModel ;
 
 - (void)ping;
 

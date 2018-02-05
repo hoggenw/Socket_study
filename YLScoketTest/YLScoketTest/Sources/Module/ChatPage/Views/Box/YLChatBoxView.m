@@ -269,13 +269,14 @@
     __weak typeof(self) weakSelf = self;
     //录音完成回调
     [DPAudioRecorder sharedInstance].audioRecorderFinishRecording = ^(NSData *data, NSUInteger audioTimeLength,NSString * localPath) {
-        NSLog(@"录音完成回调: 时长：%@",@(audioTimeLength));
+        NSLog(@"录音完成回调: 时长：%@, localPath: %@",@(audioTimeLength),localPath);
         if (_delegate && [_delegate respondsToSelector:@selector(chatBox:sendTextMessage:)]) {
             ChatMessageModel * message = [[ChatMessageModel alloc] init];
             message.messageType = YLMessageTypeVoice;
             message.ownerTyper = YLMessageOwnerTypeSelf;
             message.voiceSeconds = audioTimeLength;
             message.voicePath = localPath;
+            message.voiceData = data;
             message.date = [NSDate  date];
             [_delegate chatBox:self sendTextMessage: message];
         }
@@ -326,7 +327,7 @@
         }
         //录音响应
         [weakSelf.voiceView startARCTopAnimation:count];
-        NSLog(@"音频值测量回调 : %@",@(count));
+       // NSLog(@"音频值测量回调 : %@",@(count));
     };
 }
 

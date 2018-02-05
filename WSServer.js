@@ -8,19 +8,15 @@ wss.on('connection', function(ws) {
 
 
 
-	ws.send('You are' + wss.clients.length);
+	//ws.send('You are' + wss.clients.length);
 
 
 	//收到消息回调
 	ws.on('message', function(message) {
 		console.log(message);
 
+		ws.send(message);
 
-		if (message == 'heart') {
-			ws.send('收到:' + 'heart' + '证明你是活的');
-		} else {
-			ws.send(message);
-		}
 
 
 	});

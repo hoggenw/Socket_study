@@ -345,7 +345,7 @@
         message.messageType = YLMessageTypeImage;
         message.ownerTyper = YLMessageOwnerTypeSelf;
         message.image = [image compressImageWithSice:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38)];
-        message.imagePath = @"file:";//[[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+        message.imagePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
         message.date = [NSDate  date];
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
             
@@ -370,21 +370,22 @@
                     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
                     options.synchronous = YES;
                     [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-                   
+
                         ChatMessageModel * message = [[ChatMessageModel alloc] init];
                         message.messageType = YLMessageTypeImage;
                         message.ownerTyper = YLMessageOwnerTypeSelf;
                         message.image = result;
-                        message.imagePath = @"file:";//[[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+                        message.imagePath = @"file:"; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+                        message.voiceData = UIImagePNGRepresentation(result);
                         message.date = [NSDate  date];
                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
-                            
+
                             [_delegate chatBoxViewController:self sendMessage:message];
-                            
+
                         }
                         NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
                     }];
-                    
+
 //                    [[PHImageManager defaultManager] requestImageDataForAsset:asset
 //                                                                      options:options
 //                                                                resultHandler:
@@ -393,13 +394,14 @@
 //                       UIImageOrientation orientation,
 //                       NSDictionary *info) {
 //
-//                         UIImage * thumbnail = [[UIImage imageWithData: imageData] compressImage: 0.1];
+//                         UIImage * thumbnail = [[UIImage imageWithData: imageData] compressImage: 0.2];
 //                         ChatMessageModel * message = [[ChatMessageModel alloc] init];
 //                         message.messageType = YLMessageTypeImage;
 //                         message.ownerTyper = YLMessageOwnerTypeSelf;
 //                         message.image = thumbnail;
 //                         message.imagePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
 //                         message.date = [NSDate  date];
+//                         message.voiceData = UIImagePNGRepresentation(thumbnail);
 //                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
 //
 //                             [_delegate chatBoxViewController:self sendMessage:message];

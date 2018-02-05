@@ -44,15 +44,27 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MessageRoot : GPBRootObject
 @end
 
-#pragma mark - YLmessage
+#pragma mark - YLmessageModel
 
-typedef GPB_ENUM(YLmessage_FieldNumber) {
-  YLmessage_FieldNumber_Text = 1,
+typedef GPB_ENUM(YLmessageModel_FieldNumber) {
+  YLmessageModel_FieldNumber_Name = 1,
+  YLmessageModel_FieldNumber_VoiceLength = 2,
+  YLmessageModel_FieldNumber_MessageType = 3,
+  YLmessageModel_FieldNumber_VoiceData = 4,
+  YLmessageModel_FieldNumber_TextString = 5,
 };
 
-@interface YLmessage : GPBMessage
+@interface YLmessageModel : GPBMessage
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *text;
+@property(nonatomic, readwrite, copy, null_resettable) NSString *textString;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *name;
+
+@property(nonatomic, readwrite) int32_t messageType;
+
+@property(nonatomic, readwrite) uint32_t voiceLength;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSData *voiceData;
 
 @end
 

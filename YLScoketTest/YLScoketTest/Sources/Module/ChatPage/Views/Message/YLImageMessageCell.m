@@ -57,10 +57,17 @@
 {
     [super setMessageModel:messageModel];
     if(messageModel.imagePath != nil) {
-        if (messageModel.imagePath.length > 0) {
+        if (messageModel.image !=  nil) {
             [self.messageImageView setImage:messageModel.image];
-        }
-        else {
+            
+        }else if(messageModel.voiceData.length > 20) {
+            [self.messageImageView setImage: [UIImage imageWithData: messageModel.voiceData]];
+            
+        }else if(messageModel.imagePath.length > 0) {
+            NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString: messageModel.imagePath]];
+            [self.messageImageView setImage: [UIImage imageWithData: data]];
+            
+        }else {
             // network Image
         }
         

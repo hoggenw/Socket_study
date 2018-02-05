@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, YLMessageOwnerType){
  *  消息类型
  */
 typedef NS_ENUM(NSInteger, YLMessageType){
-    YLMessageTypeUnknown,       // 未知
+    YLMessageTypeUnknown = 0,       // 未知
     YLMessageTypeSystem,        // 系统
     YLMessageTypeText,          // 文字
     YLMessageTypeImage,         // 图片
@@ -84,6 +84,7 @@ typedef NS_ENUM(NSUInteger, YLMessageReadState) {
 @property (nonatomic, assign) NSUInteger voiceSeconds;              // 语音时间
 @property (nonatomic, strong) NSString *voiceUrl;                   // 网络语音URL
 @property (nonatomic, strong) NSString *voicePath;                  // 本地语音Path
+@property (nonatomic, strong) NSData *voiceData;                  // 本地语音
 
 @end
 

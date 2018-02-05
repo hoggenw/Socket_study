@@ -60,6 +60,7 @@ static DPAudioPlayer *playerManager = nil;
 - (void)startPlayWithURL:(NSString *)urlStr
 {
     
+    
     if ([urlStr hasPrefix:@"/private"]) {
         //[self startPlayWithData: [NSData dataWithContentsOfFile:urlStr]];
        [self startPlayWithPath:[NSURL URLWithString: urlStr]];
@@ -79,6 +80,8 @@ static DPAudioPlayer *playerManager = nil;
     
     
 }
+
+
 
 -(void)startPlayWithPath:(NSURL *)path {
     if (isPlaying) return;

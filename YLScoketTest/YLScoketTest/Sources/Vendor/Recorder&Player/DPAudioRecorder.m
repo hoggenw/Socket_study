@@ -105,7 +105,7 @@ static DPAudioRecorder *recorderManager = nil;
     
     [[JX_GCDTimerManager sharedInstance]scheduledDispatchTimerWithName:TimerName timeInterval:1 queue:nil repeats:YES actionOption:AbandonPreviousAction action:^{
         audioTimeLength ++;
-        if (audioTimeLength >= 30) { //大于等于60秒停止
+        if (audioTimeLength >= 30) { //大于等于30秒停止
             [self stopRecording];
         }
     }];

@@ -10,6 +10,8 @@
 #import "SocketRocket.h"
  #import "Message.pbobjc.h"
 #import "GPBProtocolBuffers_RuntimeSupport.h"
+#import "ChatMessageModel.h"
+#import "ChatOtherUserModel.h"
 
 typedef NS_ENUM(NSInteger,DisConnectType) {
     disConnectByUser = 1000,
@@ -71,7 +73,11 @@ static const uint16_t port = 6969;
         __weak typeof(self) weakSelf = self;
         _heartBeat = [NSTimer scheduledTimerWithTimeInterval: 3*60 repeats:YES block:^(NSTimer * _Nonnull timer) {
             NSLog(@"heart beat");
-            [weakSelf sendMassege:@"heart"];
+             ChatMessageModel * message = [ChatMessageModel new];
+            message.from = [ChatOtherUserModel sharedOtherUser].user;
+            message.messageType = YLMessageTypeText;
+            message.text = @"heart";
+            [weakSelf sendMassege: message];
         }];
         [[NSRunLoop currentRunLoop]addTimer:_heartBeat forMode:NSRunLoopCommonModes];
     });
@@ -104,11 +110,43 @@ static const uint16_t port = 6969;
     }
 }
 
--(void)sendMassege:(NSString *)message {
-    YLmessage * pmessage = [YLmessage new];
-    pmessage.text = message;
-    NSData *originData = [message dataUsingEncoding: NSUTF8StringEncoding];
-    NSLog(@"originData : %@", originData);
+-(void)sendMassege:(ChatMessageModel *)messageModel {
+    
+    YLmessageModel * pmessage = [YLmessageModel new];
+    switch (messageModel.messageType) {
+        case  YLMessageTypeImage:{ // 图片
+            pmessage.textString = @"这是图片";
+            pmessage.messageType = YLMessageTypeImage;
+            pmessage.name = messageModel.imagePath;
+            pmessage.voiceData = messageModel.voiceData;
+            break;
+        }
+        case  YLMessageTypeText:{ // 文字
+             pmessage.textString = messageModel.text;
+            pmessage.name = messageModel.from.username;
+            pmessage.messageType = YLMessageTypeText;
+            break;
+        }
+        case  YLMessageTypeVoice:{ // 语音
+            pmessage.name =  messageModel.from.username;
+            pmessage.voiceData = messageModel.voiceData;
+            pmessage.messageType = YLMessageTypeVoice;
+            pmessage.voiceLength = (uint32_t) messageModel.voiceSeconds;
+            break;
+        }
+        case  YLMessageTypeVideo:{ // 视频
+            NSLog(@"视频暂时不处理");
+            break;
+        }
+        case  YLMessageTypeFile:{ // 文件
+            break;
+        }
+        case  YLMessageTypeLocation:{ // 位置
+            break;
+        }
+        default:
+            break;
+    }
     // 序列化为Data
     NSData *data = [pmessage data];
     NSLog(@"%@",data);
@@ -149,9 +187,9 @@ static const uint16_t port = 6969;
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
         NSError *error;
-         YLmessage * pmessage  = [[YLmessage alloc] initWithData:message error:&error];
-        NSLog(@"%@",pmessage.description);
-        [_delegate receiveMessage: pmessage.text];
+        YLmessageModel * pmessage  = [[YLmessageModel alloc] initWithData:message error:&error];
+        //NSLog(@"%@",pmessage.description);
+        [_delegate receiveMessage: pmessage];
     }
     NSLog(@"服务器返回消息：%@",message);
 }

@@ -80,9 +80,14 @@
     __weak typeof(self) weakSelf = self;
     [self.messageBackgroundImageView setTapActionWithBlock:^{
         [weakSelf.voiceImageView startAnimating];
-        //播放url
-        NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
-        [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.voicePath];
+        if (messageModel.voiceData .length > 20) {
+            [[DPAudioPlayer sharedInstance] startPlayWithData: messageModel.voiceData];
+        }else{
+            //播放url
+            NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
+            [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.voicePath];
+        }
+        
         
         [DPAudioPlayer sharedInstance].playComplete = ^{
             [weakSelf.voiceImageView stopAnimating];

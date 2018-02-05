@@ -36,22 +36,30 @@ static GPBFileDescriptor *MessageRoot_FileDescriptor(void) {
   static GPBFileDescriptor *descriptor = NULL;
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
-    descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"wlg"
+    descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"YL"
                                                      syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
 
-#pragma mark - YLmessage
+#pragma mark - YLmessageModel
 
-@implementation YLmessage
+@implementation YLmessageModel
 
-@dynamic text;
+@dynamic textString;
+@dynamic name;
+@dynamic messageType;
+@dynamic voiceLength;
+@dynamic voiceData;
 
-typedef struct YLmessage__storage_ {
+typedef struct YLmessageModel__storage_ {
   uint32_t _has_storage_[1];
-  NSString *text;
-} YLmessage__storage_;
+  uint32_t voiceLength;
+  int32_t messageType;
+  NSString *name;
+  NSData *voiceData;
+  NSString *textString;
+} YLmessageModel__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -60,23 +68,64 @@ typedef struct YLmessage__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "text",
+        .name = "name",
         .dataTypeSpecific.className = NULL,
-        .number = YLmessage_FieldNumber_Text,
-        .hasIndex = 0,
-        .offset = (uint32_t)offsetof(YLmessage__storage_, text),
+        .number = YLmessageModel_FieldNumber_Name,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(YLmessageModel__storage_, name),
         .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "voiceLength",
+        .dataTypeSpecific.className = NULL,
+        .number = YLmessageModel_FieldNumber_VoiceLength,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(YLmessageModel__storage_, voiceLength),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "messageType",
+        .dataTypeSpecific.className = NULL,
+        .number = YLmessageModel_FieldNumber_MessageType,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(YLmessageModel__storage_, messageType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeInt32,
+      },
+      {
+        .name = "voiceData",
+        .dataTypeSpecific.className = NULL,
+        .number = YLmessageModel_FieldNumber_VoiceData,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(YLmessageModel__storage_, voiceData),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeBytes,
+      },
+      {
+        .name = "textString",
+        .dataTypeSpecific.className = NULL,
+        .number = YLmessageModel_FieldNumber_TextString,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(YLmessageModel__storage_, textString),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[YLmessage class]
+        [GPBDescriptor allocDescriptorForClass:[YLmessageModel class]
                                      rootClass:[MessageRoot class]
                                           file:MessageRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(YLmessage__storage_)
+                                   storageSize:sizeof(YLmessageModel__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\004\002\013\000\003\013\000\004\t\000\005\n\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }

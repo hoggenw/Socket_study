@@ -14,6 +14,7 @@
 #import "ChatOtherUserModel.h"
 #import "YLSocketRocktManager.h"
 #import "YLPhotoPreviewController.h"
+#import "Message.pbobjc.h"
 
 
 @interface ChatViewController ()<ChatShowMessageViewControllerDelegate,ChatBoxViewControllerDelegate,receiveMessageDelegate>
@@ -103,17 +104,50 @@
 
 # pragma mark -  receiveMessageDelegate
 
--(void)receiveMessage:(NSString *)message {
+-(void)receiveMessage:(YLmessageModel *)message {
     /**
      *   TLMessage 是一条消息的数据模型。纪录消息的各种属性
      就因为又有下面的这个，所以就有了你发一条，又会多一条的显示效果！！
      */
-    
     ChatMessageModel *recMessage = [[ChatMessageModel alloc] init];
-    recMessage.messageType = YLMessageTypeText;
-    recMessage.ownerTyper = YLMessageOwnerTypeOther;
+    switch (message.messageType) {
+        case  YLMessageTypeImage:{ // 图片
+            recMessage.messageType = YLMessageTypeImage;
+            recMessage.ownerTyper = YLMessageOwnerTypeOther;
+            recMessage.imagePath = message.name;
+            recMessage.image = [UIImage imageWithData:  message.voiceData];
+            break;
+        }
+        case  YLMessageTypeText:{ // 文字
+            recMessage.text = message.textString;
+            recMessage.messageType = YLMessageTypeText;
+            recMessage.ownerTyper = YLMessageOwnerTypeOther;
+            break;
+        }
+        case  YLMessageTypeVoice:{ // 语音
+            recMessage.voiceData = message.voiceData;
+            recMessage.messageType = YLMessageTypeVoice;
+            recMessage.ownerTyper = YLMessageOwnerTypeOther;
+            recMessage.voiceSeconds = message.voiceLength;
+            break;
+        }
+        case  YLMessageTypeVideo:{ // 视频
+            NSLog(@"视频暂时不处理");
+            break;
+        }
+        case  YLMessageTypeFile:{ // 文件
+            break;
+        }
+        case  YLMessageTypeLocation:{ // 位置
+            break;
+        }
+        default:
+            break;
+    }
+    
+
     recMessage.date = [NSDate date];// 当前时间
-    recMessage.text = message;
+    
     //recMessage.imagePath = message.imagePath;
     //receive_head
     ChatUserModel * otherUser = [[ChatUserModel alloc] init];
@@ -143,36 +177,7 @@
                    sendMessage:(ChatMessageModel *)message {
     // 发送的消息数据模型
     message.from = [ChatOtherUserModel sharedOtherUser].user; //发送者
-    switch (message.messageType) {
-        case  YLMessageTypeImage:{ // 图片
-            message.text = @"这是图片";
-            [self.manager sendMassege: message.text];
-            break;
-        }
-        case  YLMessageTypeText:{ // 文字
-            [self.manager sendMassege: message.text];
-            break;
-        }
-        case  YLMessageTypeVoice:{ // 语音
-            message.text = @"这是语音";
-            [self.manager sendMassege: message.text];
-            break;
-        }
-        case  YLMessageTypeVideo:{ // 视频
-            NSLog(@"视频暂时不处理");
-            break;
-        }
-        case  YLMessageTypeFile:{ // 文件
-            break;
-        }
-        case  YLMessageTypeLocation:{ // 位置
-            break;
-        }
-        default:
-            break;
-    }
-    
-    
+    [self.manager sendMassege:message];
     [self.chatMessageVC addNewMessage: message];
     
 }
