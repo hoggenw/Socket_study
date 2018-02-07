@@ -352,7 +352,7 @@
             [_delegate chatBoxViewController:self sendMessage:message];
             
         }
-        NSLog(@"info = %@, image: %@",info,message.image);
+        //NSLog(@"info = %@, image: %@",info,message.image);
     }];
 }
 
@@ -383,7 +383,7 @@
                             [_delegate chatBoxViewController:self sendMessage:message];
 
                         }
-                        NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
+                       // NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
                     }];
 
 //                    [[PHImageManager defaultManager] requestImageDataForAsset:asset

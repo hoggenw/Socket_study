@@ -52,7 +52,7 @@
     if (_dataArray.count > 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSInteger lastRowIndex =  [self.tableView numberOfRowsInSection: 0] - 1;
-            NSLog(@"scrollToBottom lastRowIndex: %@",@(lastRowIndex));
+            //NSLog(@"scrollToBottom lastRowIndex: %@",@(lastRowIndex));
             if (lastRowIndex >= 0 && _dataArray.count >  [self.tableView numberOfRowsInSection: 0]) {
                 [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: lastRowIndex  inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
             }else{
@@ -78,7 +78,7 @@
         [self.tableView reloadData];
     });
     
-    NSLog(@"addNewMessage self.dataArray: %@",@(self.dataArray.count));
+    
     [self scrollToBottom];
     
 }
@@ -92,7 +92,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    NSLog(@"addNewMessage self.dataArray: %@",@(self.dataArray.count));
     return _dataArray.count;
 }
 
@@ -115,6 +115,8 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ChatMessageModel *message = [_dataArray objectAtIndex:indexPath.row];
+    
+   // NSLog(@"message.cellHeight: %@",@(message.cellHeight));
     return message.cellHeight;
 }
 
