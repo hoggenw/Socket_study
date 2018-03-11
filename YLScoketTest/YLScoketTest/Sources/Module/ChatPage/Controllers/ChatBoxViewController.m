@@ -256,7 +256,6 @@
             }
             return;
         }
-            
         default:
             break;
     }
@@ -320,12 +319,12 @@
             imagePickerController.mediaType = QBImagePickerMediaTypeAny;//图片和视频
             imagePickerController.showsNumberOfSelectedAssets = YES;//在界面下方显示已经选择图像的数量
             [self presentViewController:imagePickerController animated:YES completion:nil];  
-            NSLog(@"相册");
+            //NSLog(@"相册");
             break;
         }
         case YLChatBoxItemCamera:{//拍摄
             [self takePhoto];
-            NSLog(@"拍摄");
+            //NSLog(@"拍摄");
             break;
         }
         default:
@@ -386,29 +385,7 @@
                        // NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
                     }];
 
-//                    [[PHImageManager defaultManager] requestImageDataForAsset:asset
-//                                                                      options:options
-//                                                                resultHandler:
-//                     ^(NSData *imageData,
-//                       NSString *dataUTI,
-//                       UIImageOrientation orientation,
-//                       NSDictionary *info) {
-//
-//                         UIImage * thumbnail = [[UIImage imageWithData: imageData] compressImage: 0.2];
-//                         ChatMessageModel * message = [[ChatMessageModel alloc] init];
-//                         message.messageType = YLMessageTypeImage;
-//                         message.ownerTyper = YLMessageOwnerTypeSelf;
-//                         message.image = thumbnail;
-//                         message.imagePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
-//                         message.date = [NSDate  date];
-//                         message.voiceData = UIImagePNGRepresentation(thumbnail);
-//                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
-//
-//                             [_delegate chatBoxViewController:self sendMessage:message];
-//
-//                         }
-//                         NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
-//                     }];
+
                 }else if (asset.mediaType == PHAssetMediaTypeVideo){
                     NSLog(@"视频Type");
                 }
