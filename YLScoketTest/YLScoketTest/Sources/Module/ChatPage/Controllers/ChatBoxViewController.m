@@ -426,25 +426,25 @@
                                                                                      imageName:@"sharemore_video"];
         YLChatBoxItemView *videoItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"小视频"
                                                                                imageName:@"sharemore_sight"];
-//        YLChatBoxItemView *videoCallItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"视频聊天"
-//                                                                                   imageName:@"sharemore_videovoip"];
-//        YLChatBoxItemView *giftItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"红包"
-//                                                                              imageName:@"sharemore_wallet"];
-//        YLChatBoxItemView *transferItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"转账"
-//                                                                                  imageName:@"sharemorePay"];
+        YLChatBoxItemView *videoCallItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"视频聊天"
+                                                                                   imageName:@"sharemore_videovoip"];
+        YLChatBoxItemView *giftItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"红包"
+                                                                              imageName:@"sharemore_wallet"];
+        YLChatBoxItemView *transferItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"转账"
+                                                                                  imageName:@"sharemorePay"];
         YLChatBoxItemView *positionItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"位置"
                                                                                   imageName:@"sharemore_location"];
-//        YLChatBoxItemView *favoriteItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"收藏"
-//                                                                                  imageName:@"sharemore_myfav"];
-//        YLChatBoxItemView *businessCardItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"名片"
-//                                                                                      imageName:@"sharemore_friendcard" ];
-//        YLChatBoxItemView *interphoneItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"实时对讲机"
-//                                                                                    imageName:@"sharemore_wxtalk" ];
+        YLChatBoxItemView *favoriteItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"收藏"
+                                                                                  imageName:@"sharemore_myfav"];
+        YLChatBoxItemView *businessCardItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"名片"
+                                                                                      imageName:@"sharemore_friendcard" ];
+        YLChatBoxItemView *interphoneItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"实时对讲机"
+                                                                                    imageName:@"sharemore_wxtalk" ];
         YLChatBoxItemView *voiceItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"语音输入"
                                                                                imageName:@"sharemore_voiceinput"];
-//        YLChatBoxItemView *cardsItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"卡券"
-//                                                                               imageName:@"sharemore_wallet"];
-//        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
+        YLChatBoxItemView *cardsItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"卡券"
+                                                                               imageName:@"sharemore_wallet"];
+        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
         [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem,positionItem, voiceItem, nil]];
         _chatBoxMoreView.delegate = self;
     }
