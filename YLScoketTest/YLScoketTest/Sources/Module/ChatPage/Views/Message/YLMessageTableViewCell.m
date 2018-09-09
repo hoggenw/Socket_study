@@ -119,6 +119,7 @@
     if (_messageBackgroundImageView == nil) {
         _messageBackgroundImageView = [[YLImageView alloc] init];
         [_messageBackgroundImageView setHidden:YES];
+        _messageBackgroundImageView.userInteractionEnabled = true;
     }
     return _messageBackgroundImageView;
 }

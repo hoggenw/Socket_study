@@ -444,7 +444,7 @@
                                                                                imageName:@"sharemore_voiceinput"];
         YLChatBoxItemView *cardsItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"卡券"
                                                                                imageName:@"sharemore_wallet"];
-        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
+//        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
         [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem,positionItem, voiceItem, nil]];
         _chatBoxMoreView.delegate = self;
     }

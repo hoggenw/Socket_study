@@ -177,7 +177,7 @@
                    sendMessage:(ChatMessageModel *)message {
     // 发送的消息数据模型
     message.from = [ChatOtherUserModel sharedOtherUser].user; //发送者
-    [self.manager sendMassege:message];
+    //[self.manager sendMassege:message];
     [self.chatMessageVC addNewMessage: message];
     
 }

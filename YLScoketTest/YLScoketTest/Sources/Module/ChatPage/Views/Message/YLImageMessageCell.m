@@ -25,6 +25,7 @@
 }
 
 - (void)imageViewTaped:(UITapGestureRecognizer *)sender {
+    NSLog(@"图片点击");
     [self routerEventWithName: kRouterEventCellImageTapEventName userInfo: @{ kChoiceCellMessageModelKey : self.messageModel}];
 }
 
