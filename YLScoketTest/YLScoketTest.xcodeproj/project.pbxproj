@@ -88,7 +88,6 @@
 		116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B677120118FB6005AA5E0 /* NSData+Base64.m */; };
 		116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B677220118FB6005AA5E0 /* CLLocation+Sino.m */; };
 		116B679120118FB6005AA5E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B677420118FB6005AA5E0 /* main.m */; };
-		116B679220118FB6005AA5E0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 116B677520118FB6005AA5E0 /* Info.plist */; };
 		116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67A020119ACB005AA5E0 /* FriendDiscoveredViewController.m */; };
 		116B67A420119AE7005AA5E0 /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67A320119AE7005AA5E0 /* ChatListViewController.m */; };
 		116B67AB20119CBB005AA5E0 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67A720119CBA005AA5E0 /* UserModel.m */; };
@@ -943,7 +942,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */,
-				116B679220118FB6005AA5E0 /* Info.plist in Resources */,
 				116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */,
 				116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */,
 				11576171201F216400E0D94F /* normal_face.plist in Resources */,
