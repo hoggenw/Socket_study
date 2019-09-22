@@ -209,7 +209,7 @@ static const uint16_t port = 6969;
 
 //网络连接中断被调用
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"被关闭连接，code:%ld,reason:%@,wasClean:%d",code,reason,wasClean);
+    NSLog(@"被关闭连接，code:%ld,reason:%@,wasClean:%d",(long)code,reason,wasClean);
     if (code == disConnectByUser) {
         [self disconnnet];
         NSLog(@"用户操作，终端连接");
