@@ -42,6 +42,8 @@
 +(UIView *)hintViewWith:(NSString *)timeString;
 //删除提示订单未在限定的时间支付取消订单
 +(void)deleteButtonAction;
+/**AlertVC展示消息*/
++(void)showAlertMessage:(NSString *)message title:(NSString *)title;
 
 
 //颜色

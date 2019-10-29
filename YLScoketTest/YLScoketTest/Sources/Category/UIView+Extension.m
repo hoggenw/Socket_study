@@ -7,6 +7,7 @@
 //
 
 #import "UIView+Extension.h"
+#import "Masonry.h"
 
 @implementation UIView (Extension)
 
@@ -137,6 +138,7 @@
  */
 - (void)addLineWithSide:(LineViewSide)side lineColor:(UIColor *)color lineHeight:(CGFloat)height leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin
 {
+   
     UIView *lineView = [[UIView alloc] init];
     [self addSubview:lineView];
     //TODO 这里的约束应修正为最原生的约束，实现完全独立，而不是依赖masonry
@@ -153,7 +155,6 @@
                 // 线条在view的底部
             case LineViewSideInBottom:
                 make.bottom.equalTo(self);
-                
                 make.left.equalTo(self).offset(leftMargin);
                 make.right.equalTo(self).offset(-rightMargin);
                 make.height.equalTo(@(height));
@@ -233,5 +234,22 @@
         [view removeFromSuperview];
     }
 }
+
+-(void)circular{
+    [self cornerRadius: 0];
+}
+-(void)cornerRadius:(float)radius{
+    float width = self.bounds.size.width -radius;
+    float height = self.bounds.size.height -radius;
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(width, height)];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+    //设置大小
+    maskLayer.frame = self.bounds;
+    //设置图形样子
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+}
+
 
 @end

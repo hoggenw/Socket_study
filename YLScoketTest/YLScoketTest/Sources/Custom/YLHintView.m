@@ -64,6 +64,8 @@
 }
 
 
+
+
 //提示订单未在限定的时间支付取消订单
 +(UIView *)hintViewWith:(NSString *)timeString{
     //单例初始化
@@ -82,7 +84,7 @@
     }
 
     manager.timeLabel.userInteractionEnabled = YES;
-    manager.timeLabel.clipsToBounds = YES;
+    [manager.hintLabel cornerRadius:5];
     manager.timeLabel.textAlignment = NSTextAlignmentLeft;
     manager.timeLabel.font = [UIFont systemFontOfSize:11];
     manager.timeLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
@@ -103,17 +105,22 @@
 +(void)showMessageOnThisPage:(NSString *)message {
     //单例初始化
     YLHintView *manager= [self shareHintView];
-    manager.tag = 3333;
     //初始化成功
     if (manager !=  nil) {
         //如果没有显示提示
-        if (manager.hintLabel == nil) {
-            [self showHintView:message];
-        }else{
-            [self hintViewRemoveFromSuperview];
-            [self showHintView:message];
-            
-        }
+        dispatch_queue_t queue = dispatch_get_main_queue();
+        //NSLog(@"asyncMain---begin");
+        dispatch_async(queue, ^{
+            manager.tag = 3333;
+            if (manager.hintLabel == nil) {
+                [self showHintView:message];
+            }else{
+                [self hintViewRemoveFromSuperview];
+                [self showHintView:message];
+                
+            }
+        });
+       
     }
 }
 +(void)hintViewRemoveFromSuperview {
@@ -144,18 +151,29 @@
     
     [[[UIApplication sharedApplication].delegate window] addSubview:manager];
     
-    manager.hintLabel.layer.cornerRadius = 5;
+
     manager.hintLabel.userInteractionEnabled = NO;
-    manager.hintLabel.clipsToBounds = YES;
+    [manager.hintLabel cornerRadius:5];
     manager.hintLabel.textAlignment = NSTextAlignmentCenter;
     manager.hintLabel.font = [UIFont systemFontOfSize:15];
     manager.hintLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8];
     manager.hintLabel.textColor = [UIColor whiteColor];
     manager.hintLabel.text = message;
     manager.hintLabel.numberOfLines = 0;
-    manager.timer = [NSTimer scheduledTimerWithTimeInterval: 1.8 target:self selector:@selector(hintViewRemoveFromSuperview) userInfo:nil repeats:NO];
+    manager.timer = [NSTimer scheduledTimerWithTimeInterval: 2.5 target:self selector:@selector(hintViewRemoveFromSuperview) userInfo:nil repeats:NO];
     [[NSRunLoop currentRunLoop] addTimer:manager.timer
                                  forMode: NSDefaultRunLoopMode];
+}
+
++(void)showAlertMessage:(NSString *)message title:(NSString *)title {
+    
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message: message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction  = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:okAction];
+    [window.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 +(void)loadAnimationShow {
@@ -218,11 +236,5 @@
     
 }
 
-+(UIColor *)colorWithHex:(NSInteger)hexRGBValue {
-    return [UIColor colorWithRed:(((hexRGBValue & 0xFF0000) >> 16) / 255.0)
-                           green:(((hexRGBValue & 0xFF00) >> 8) / 255.0)
-                            blue:((hexRGBValue & 0xFF) / 255.0)
-                           alpha:1.0];
-}
 
 @end

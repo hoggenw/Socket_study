@@ -154,7 +154,7 @@
 }
 
 - (NSString *)formatMMDDHHMM {
-    return [self formatDate:@"MM-dda HH:mm"];
+    return [self formatDate:@"MM-dd HH:mm"];
 }
 
 - (NSString *)formatMMDD {

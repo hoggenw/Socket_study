@@ -14,7 +14,8 @@
 #import "ChatOtherUserModel.h"
 #import "YLSocketRocktManager.h"
 #import "YLPhotoPreviewController.h"
-#import "Message.pbobjc.h"
+
+#import "UserMessage.pbobjc.h"
 
 
 @interface ChatViewController ()<ChatShowMessageViewControllerDelegate,ChatBoxViewControllerDelegate,receiveMessageDelegate>
@@ -36,7 +37,7 @@
     _manager = [YLSocketRocktManager shareManger];
     _manager.delegate = self;
     // 主屏幕的高度减去导航的高度，减去状态栏的高度。在PCH头文件
-    _viewHeight = ScreenHeight - HEIGHT_NAVBAR - HEIGHT_STATUSBAR;
+    _viewHeight = ScreenHeight - kNavigationHeight;
     [self.view  addSubview:self.chatMessageVC.view];
     [self addChildViewController:self.chatMessageVC];
     
@@ -80,7 +81,7 @@
 - (ChatBoxViewController *)chatBoxVC {
     if (_chatBoxVC == nil) {
         _chatBoxVC = [ChatBoxViewController new];
-        _chatBoxVC.view.frame = CGRectMake(0, ScreenHeight - HEIGHT_TABBAR, ScreenWidth,  ScreenHeight);
+        _chatBoxVC.view.frame = CGRectMake(0, ScreenHeight -  HEIGHT_TABBAR, ScreenWidth,  ScreenHeight);
         _chatBoxVC.delegate = self;
     }
     
@@ -177,7 +178,7 @@
                    sendMessage:(ChatMessageModel *)message {
     // 发送的消息数据模型
     message.from = [ChatOtherUserModel sharedOtherUser].user; //发送者
-    //[self.manager sendMassege:message];
+    [self.manager sendMassege:message];
     [self.chatMessageVC addNewMessage: message];
     
 }

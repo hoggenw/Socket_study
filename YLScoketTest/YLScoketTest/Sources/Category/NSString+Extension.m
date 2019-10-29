@@ -11,7 +11,6 @@
 #import <CommonCrypto/CommonHMAC.h>
 #import <CommonCrypto/CommonCryptor.h>
 #import "NSData+Base64.h"
-#import "GTMBase64.h"
 
 
 static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJS-xPfWE04rLY5Dp";
@@ -46,18 +45,27 @@ static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJ
  */
 - (BOOL)isEmpty
 {
-    BOOL emptyFlag = NO;
-    if (!self) {
-        emptyFlag = YES;
+   if (self == nil || self == NULL)
+    {
+        return YES;
     }
-    else if ([self isEqual:[NSNull null]]) {
-        emptyFlag = YES;
+    else if ([self isEqual:@"<null>"] || [self isMemberOfClass:[NSNull class]])
+    {
+        return YES;
     }
-    else if (0 == self.length) {
-        emptyFlag = YES;
+    else if (self.length == 0)
+    {
+        return YES;
     }
-    
-    return emptyFlag;
+    else
+    {
+        NSString *str = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if (str.length == 0)
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 
@@ -77,7 +85,8 @@ static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJ
  */
 - (BOOL)isPhoneNumber
 {
-    NSString * regex = @"^1\\d{10}$";
+    NSString * regex = @"^1+[0-9]{10}";
+    
     return [self isMatchRegex:regex];
 }
 
@@ -86,10 +95,64 @@ static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJ
  */
 - (BOOL)isIdentityForChina
 {
-    NSString *regex = @"^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
-    return [self isMatchRegex:regex];
+    NSString *regex = @"(^[0-9]{15}$)|([0-9]{17}([0-9]|X)$)";
+    //判断是否为空
+       if (self==nil||self.length <= 0) {
+           return NO;
+       }
+       if(![self isMatchRegex:regex]){
+           return NO;
+       }      //判断生日是否合法
+       NSRange range = NSMakeRange(6,8);
+       NSString *datestr = [self substringWithRange:range];
+       NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+       [formatter setDateFormat : @"yyyyMMdd"];
+       if([formatter dateFromString:datestr]==nil){
+           return NO;
+       }
+       //判断校验位
+       if(self.length==18)
+       {
+           NSArray *idCardWi= @[ @"7", @"9", @"10", @"5", @"8", @"4", @"2", @"1", @"6", @"3", @"7", @"9", @"10", @"5", @"8", @"4", @"2" ]; //将前17位加权因子保存在数组里
+           NSArray * idCardY=@[ @"1", @"0", @"10", @"9", @"8", @"7", @"6", @"5", @"4", @"3", @"2" ]; //这是除以11后，可能产生的11位余数、验证码，也保存成数组
+           int idCardWiSum=0; //用来保存前17位各自乖以加权因子后的总和
+           for(int i=0;i<17;i++){
+               idCardWiSum+=[[self substringWithRange:NSMakeRange(i,1)] intValue]*[idCardWi[i] intValue];
+           }
+           int idCardMod=idCardWiSum%11;//计算出校验码所在数组的位置
+           NSString *idCardLast=[self substringWithRange:NSMakeRange(17,1)];//得到最后一位身份证号码
+           //如果等于2，则说明校验码是10，身份证号码最后一位应该是X
+           if(idCardMod==2){
+               if([idCardLast isEqualToString:@"X"]||[idCardLast isEqualToString:@"x"]){
+                   return YES;
+               }else{
+                   return NO;
+               }
+           }else{
+               //用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
+               if([idCardLast intValue]==[idCardY[idCardMod] intValue]){
+                   return YES;
+               }else{
+                   return NO;
+               }
+           }
+       }
+       return NO;
 }
 
+- (BOOL)checkNumber;
+{
+    if (self.length == 0) return NO;
+    NSString *regex =@"[0-9]*";
+    return [self isMatchRegex: regex];
+}
+
+- (BOOL)checkChinese
+{
+    if (self.length == 0) return NO;
+    NSString *regex = @"[\u4e00-\u9fa5]+";
+    return [self isMatchRegex: regex];
+}
 
 // md5加密
 - (NSString *)md5String
@@ -113,80 +176,89 @@ static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJ
     return [string md5String];
 }
 
+-(NSAttributedString *)attributedStringWith:(NSDictionary *)attributedStringDictionary {
+    NSMutableAttributedString *attributrString = [[NSMutableAttributedString alloc] initWithString: self ];
 
 
-+ (NSString *)encryptDESForString:(NSString *)strOrigin key:(NSString *)key
-{
-    return [self encrypt:strOrigin encryptOrDecrypt:kCCEncrypt key:key];
+    
+    NSRange stringRange = [self rangeOfString: self];
+    [attributrString setAttributes: attributedStringDictionary range: stringRange];
+    
+    return  [attributrString copy] ;
 }
 
-+ (NSString *)decryptDESWithString:(NSString*)strDES key:(NSString*)key
-{
-    //    return nil;
-    
-    return [self encrypt:strDES encryptOrDecrypt:kCCDecrypt key:key];
-    
-}
+//+ (NSString *)encryptDESForString:(NSString *)strOrigin key:(NSString *)key
+//{
+//    return [self encrypt:strOrigin encryptOrDecrypt:kCCEncrypt key:key];
+//}
+//
+//+ (NSString *)decryptDESWithString:(NSString*)strDES key:(NSString*)key
+//{
+//    //    return nil;
+//
+//    return [self encrypt:strDES encryptOrDecrypt:kCCDecrypt key:key];
+//
+//}
 
-+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key
-{
-    const void *vplainText;
-    size_t plainTextBufferSize;
-    
-    if (encryptOperation == kCCDecrypt)
-    {
-        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];
-        plainTextBufferSize = [decryptData length];
-        vplainText = [decryptData bytes];
-    }
-    else
-    {
-        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];
-        plainTextBufferSize = [encryptData length];
-        vplainText = (const void *)[encryptData bytes];
-    }
-    
-    CCCryptorStatus ccStatus;
-    uint8_t *bufferPtr = NULL;
-    size_t bufferPtrSize = 0;
-    size_t movedBytes = 0;
-    
-    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
-    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
-    memset((void *)bufferPtr, 0x0, bufferPtrSize);
-    
-    //    NSString *initVec = @"init Kurodo";
-    //    const void *vinitVec = (const void *) [initVec UTF8String];
-    char iv[8] = {(char)0xef, (char)0x34, (char)0x56, (char)0x78, (char)0x90, (char)0xab, (char)0xcd, (char)0xef};
-    const void *vkey = (const void *) [key UTF8String];
-    
-    ccStatus = CCCrypt(encryptOperation,
-                       kCCAlgorithmDES,
-                       kCCOptionPKCS7Padding,
-                       vkey,
-                       kCCKeySizeDES,
-                       //                       vinitVec,
-                       iv,
-                       vplainText,
-                       plainTextBufferSize,
-                       (void *)bufferPtr,
-                       bufferPtrSize,
-                       &movedBytes);
-    
-    NSString *result = nil;
-    
-    if (encryptOperation == kCCDecrypt)
-    {
-        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes] encoding:NSUTF8StringEncoding];
-    }
-    else
-    {
-        NSData *data = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
-        result = [GTMBase64 stringByEncodingData:data];
-    }
-    
-    return result;
-}
+//+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key
+//{
+//    const void *vplainText;
+//    size_t plainTextBufferSize;
+//
+//    if (encryptOperation == kCCDecrypt)
+//    {
+//        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];
+//        plainTextBufferSize = [decryptData length];
+//        vplainText = [decryptData bytes];
+//    }
+//    else
+//    {
+//        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];
+//        plainTextBufferSize = [encryptData length];
+//        vplainText = (const void *)[encryptData bytes];
+//    }
+//
+//    CCCryptorStatus ccStatus;
+//    uint8_t *bufferPtr = NULL;
+//    size_t bufferPtrSize = 0;
+//    size_t movedBytes = 0;
+//
+//    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
+//    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+//    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+//
+//    //    NSString *initVec = @"init Kurodo";
+//    //    const void *vinitVec = (const void *) [initVec UTF8String];
+//    char iv[8] = {(char)0xef, (char)0x34, (char)0x56, (char)0x78, (char)0x90, (char)0xab, (char)0xcd, (char)0xef};
+//    const void *vkey = (const void *) [key UTF8String];
+//
+//    ccStatus = CCCrypt(encryptOperation,
+//                       kCCAlgorithmDES,
+//                       kCCOptionPKCS7Padding,
+//                       vkey,
+//                       kCCKeySizeDES,
+//                       //                       vinitVec,
+//                       iv,
+//                       vplainText,
+//                       plainTextBufferSize,
+//                       (void *)bufferPtr,
+//                       bufferPtrSize,
+//                       &movedBytes);
+//
+//    NSString *result = nil;
+//
+//    if (encryptOperation == kCCDecrypt)
+//    {
+//        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes] encoding:NSUTF8StringEncoding];
+//    }
+//    else
+//    {
+//        NSData *data = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+//        result = [GTMBase64 stringByEncodingData:data];
+//    }
+//
+//    return result;
+//}
 
 
 
@@ -361,6 +433,23 @@ static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJ
     }
     
     return md;
+}
+
+- (NSDictionary *)dictionaryWithJsonString {
+    if (self == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
 }
 
 @end

@@ -67,4 +67,16 @@ typedef enum : NSInteger {
 /** 移除所有子控件 */
 - (void)removeAllSubViews;
 
+/**
+ 圆形
+ */
+-(void)circular;
+
+/**
+ 倒角
+
+ @param radius 倒角size
+ */
+-(void)cornerRadius:(float)radius;
+
 @end

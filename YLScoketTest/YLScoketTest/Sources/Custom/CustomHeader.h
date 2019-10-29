@@ -10,5 +10,6 @@
 #define CustomHeader_h
 
 #import "YLHintView.h"
+#import "YLImageView.h"
 
 #endif /* CustomHeader_h */

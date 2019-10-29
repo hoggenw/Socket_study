@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "YLUITabBarViewController.h"
+#import "YLSocketRocktManager.h"
+
 
 @interface AppDelegate ()
 
@@ -24,7 +26,7 @@
     NSDictionary * childSecond = @{@"childVCName":@"FriendDiscoveredViewController",@"title":@"朋友圈",@"iconName":@"tabbr_discover_icon",@"selectedIconName":@"tabbr_discover_icon"};
     YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  @[childFrist,childSecond]];
     self.window.rootViewController = tabarVC;
-   
+    [YLSocketRocktManager shareManger];
 
     
     return YES;

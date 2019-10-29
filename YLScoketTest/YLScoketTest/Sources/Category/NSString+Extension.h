@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kRegexNumber @"^[0-9]+$"
+
 @interface NSString (Extension)
 
 /**
@@ -49,8 +51,14 @@
  */
 - (BOOL)isIdentityForChina;
 
-
-
+/**
+*  数字判断
+*/
+- (BOOL)checkNumber;
+/**
+*  中文判断
+*/
+- (BOOL)checkChinese;
 
 #pragma mark - 加密部分
 
@@ -68,4 +76,9 @@
 /** Base64解码 */
 + (NSString*)decodeBase64String:(NSString*)strBase64;
 
+/**NSMutableAttributedString*/
+
+-(NSAttributedString *)attributedStringWith:(NSDictionary *)attributedStringDictionary;
+/** 字符串转字典 */
+- (NSDictionary *)dictionaryWithJsonString;
 @end

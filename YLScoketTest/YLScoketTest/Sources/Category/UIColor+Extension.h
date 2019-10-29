@@ -20,4 +20,6 @@
 
 + (UIColor *)myColorWithRed:(float)r green:(float)g blue:(float)b alpha:(float)a;
 
++ (UIColor *)RandomColor;
+
 @end
