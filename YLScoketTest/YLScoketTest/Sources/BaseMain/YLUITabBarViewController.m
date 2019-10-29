@@ -21,9 +21,14 @@
 
 
 - (instancetype)initWithChildVCInfoArray:(NSArray<NSDictionary *> *)array {
+    NSDictionary * childFrist = @{@"childVCName":@"ChatListViewController",@"title":@"消息",@"iconName":@"tabbar_message_icon",@"selectedIconName":@"tabbar_message_icon"};
+     NSDictionary * childSecond = @{@"childVCName":@"AddressBookViewController",@"title":@"通信录",@"iconName":@"tabbar_addresbook_icon",@"selectedIconName":@"tabbar_addresbook_icon"};
+     NSDictionary * childThird = @{@"childVCName":@"FriendDiscoveredViewController",@"title":@"朋友圈",@"iconName":@"tabbr_discover_icon",@"selectedIconName":@"tabbr_discover_icon"};
+     
+      NSDictionary * childFourth = @{@"childVCName":@"MIneViewController",@"title":@"我的",@"iconName":@"tabbar_mine_icon",@"selectedIconName":@"tabbar_mine_icon"};
     if (self = [super init]) {
         NSLog(@"array count %@",@(array.count));
-        self.childVCInfo = [NSArray arrayWithArray: array];
+        self.childVCInfo = @[childFrist,childSecond,childThird,childFourth];
          NSLog(@"childVCInfo count %@",@(_childVCInfo.count));
         [self initialUserInterface];
     }

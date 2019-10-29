@@ -11,15 +11,16 @@
 @class UserModel;
 @interface AccountManager : NSObject
 
-
 + (instancetype)sharedInstance;
 //获取用户模型
 - (UserModel *)fetch;
 - (void)remove;
 - (void)update:(UserModel *)user;
+- (void)update;
 //判断是否登录
 - (BOOL)isLogin;
 //获取账号或token
 - (NSString *)fetchAccessToken;
 - (NSString *)fetchUserAccount;
+- (void)missLoginDeal ;
 @end

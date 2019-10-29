@@ -138,6 +138,15 @@
 		A5852FA92367D583009E5CB3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5852FA82367D583009E5CB3 /* SystemConfiguration.framework */; };
 		A5852FAB2367D58C009E5CB3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5852FAA2367D58C009E5CB3 /* UIKit.framework */; };
 		A5852FAD2367D594009E5CB3 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5852FAC2367D594009E5CB3 /* VideoToolbox.framework */; };
+		A5852FB42367E2B0009E5CB3 /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FB32367E2B0009E5CB3 /* AddressBookViewController.m */; };
+		A5852FB72367E2CA009E5CB3 /* MIneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FB62367E2CA009E5CB3 /* MIneViewController.m */; };
+		A5852FC123681F5F009E5CB3 /* BannerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FB923681F5F009E5CB3 /* BannerScrollView.m */; };
+		A5852FC223681F5F009E5CB3 /* GuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FBA23681F5F009E5CB3 /* GuidanceViewController.m */; };
+		A5852FC323681F5F009E5CB3 /* YLProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FBB23681F5F009E5CB3 /* YLProgressView.m */; };
+		A5852FC423681F5F009E5CB3 /* AdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FBC23681F5F009E5CB3 /* AdvertisementViewController.m */; };
+		A5852FCD2368203C009E5CB3 /* VoteLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FC82368203C009E5CB3 /* VoteLoginViewController.m */; };
+		A5852FCE2368203C009E5CB3 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5852FCB2368203C009E5CB3 /* LoginView.xib */; };
+		A5852FCF2368203C009E5CB3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FCC2368203C009E5CB3 /* LoginView.m */; };
 		E2FB72C60EC512A5CA19AEB6 /* Pods_YLScoketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -400,6 +409,23 @@
 		A5852FA82367D583009E5CB3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A5852FAA2367D58C009E5CB3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5852FAC2367D594009E5CB3 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		A5852FB22367E2B0009E5CB3 /* AddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
+		A5852FB32367E2B0009E5CB3 /* AddressBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		A5852FB52367E2CA009E5CB3 /* MIneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MIneViewController.h; path = YLScoketTest/Sources/Module/AddressBok/Controllers/MIneViewController.h; sourceTree = SOURCE_ROOT; };
+		A5852FB62367E2CA009E5CB3 /* MIneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MIneViewController.m; path = YLScoketTest/Sources/Module/AddressBok/Controllers/MIneViewController.m; sourceTree = SOURCE_ROOT; };
+		A5852FB923681F5F009E5CB3 /* BannerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerScrollView.m; sourceTree = "<group>"; };
+		A5852FBA23681F5F009E5CB3 /* GuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidanceViewController.m; sourceTree = "<group>"; };
+		A5852FBB23681F5F009E5CB3 /* YLProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLProgressView.m; sourceTree = "<group>"; };
+		A5852FBC23681F5F009E5CB3 /* AdvertisementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisementViewController.m; sourceTree = "<group>"; };
+		A5852FBD23681F5F009E5CB3 /* GuidanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidanceViewController.h; sourceTree = "<group>"; };
+		A5852FBE23681F5F009E5CB3 /* BannerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerScrollView.h; sourceTree = "<group>"; };
+		A5852FBF23681F5F009E5CB3 /* YLProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressView.h; sourceTree = "<group>"; };
+		A5852FC023681F5F009E5CB3 /* AdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementViewController.h; sourceTree = "<group>"; };
+		A5852FC72368203C009E5CB3 /* VoteLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteLoginViewController.h; sourceTree = "<group>"; };
+		A5852FC82368203C009E5CB3 /* VoteLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteLoginViewController.m; sourceTree = "<group>"; };
+		A5852FCA2368203C009E5CB3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		A5852FCB2368203C009E5CB3 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		A5852FCC2368203C009E5CB3 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YLScoketTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -692,6 +718,9 @@
 		116B674720118FB6005AA5E0 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				A5852FC52368203C009E5CB3 /* Login */,
+				A5852FB823681F5F009E5CB3 /* Advertisement */,
+				A5852FAE2367E23E009E5CB3 /* AddressBok */,
 				116B67A520119CBA005AA5E0 /* Mine */,
 				116B6795201199EC005AA5E0 /* FriendDiscovered */,
 				116B679420119998005AA5E0 /* ChatPage */,
@@ -937,8 +966,8 @@
 		116B67A620119CBA005AA5E0 /* Modles */ = {
 			isa = PBXGroup;
 			children = (
-				116B67A720119CBA005AA5E0 /* UserModel.m */,
 				116B67A820119CBA005AA5E0 /* UserModel.h */,
+				116B67A720119CBA005AA5E0 /* UserModel.m */,
 			);
 			path = Modles;
 			sourceTree = "<group>";
@@ -946,6 +975,8 @@
 		116B67A920119CBA005AA5E0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A5852FB52367E2CA009E5CB3 /* MIneViewController.h */,
+				A5852FB62367E2CA009E5CB3 /* MIneViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1017,6 +1048,82 @@
 				A5852F4F2367CDD1009E5CB3 /* Factory.h */,
 			);
 			path = Factory;
+			sourceTree = "<group>";
+		};
+		A5852FAE2367E23E009E5CB3 /* AddressBok */ = {
+			isa = PBXGroup;
+			children = (
+				A5852FAF2367E23E009E5CB3 /* Modles */,
+				A5852FB02367E23E009E5CB3 /* Controllers */,
+				A5852FB12367E23E009E5CB3 /* Views */,
+			);
+			path = AddressBok;
+			sourceTree = "<group>";
+		};
+		A5852FAF2367E23E009E5CB3 /* Modles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modles;
+			sourceTree = "<group>";
+		};
+		A5852FB02367E23E009E5CB3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A5852FB22367E2B0009E5CB3 /* AddressBookViewController.h */,
+				A5852FB32367E2B0009E5CB3 /* AddressBookViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A5852FB12367E23E009E5CB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A5852FB823681F5F009E5CB3 /* Advertisement */ = {
+			isa = PBXGroup;
+			children = (
+				A5852FC023681F5F009E5CB3 /* AdvertisementViewController.h */,
+				A5852FBC23681F5F009E5CB3 /* AdvertisementViewController.m */,
+				A5852FBD23681F5F009E5CB3 /* GuidanceViewController.h */,
+				A5852FBA23681F5F009E5CB3 /* GuidanceViewController.m */,
+				A5852FBE23681F5F009E5CB3 /* BannerScrollView.h */,
+				A5852FB923681F5F009E5CB3 /* BannerScrollView.m */,
+				A5852FBF23681F5F009E5CB3 /* YLProgressView.h */,
+				A5852FBB23681F5F009E5CB3 /* YLProgressView.m */,
+			);
+			path = Advertisement;
+			sourceTree = "<group>";
+		};
+		A5852FC52368203C009E5CB3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A5852FC62368203C009E5CB3 /* Controllers */,
+				A5852FC92368203C009E5CB3 /* Views */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		A5852FC62368203C009E5CB3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A5852FC72368203C009E5CB3 /* VoteLoginViewController.h */,
+				A5852FC82368203C009E5CB3 /* VoteLoginViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A5852FC92368203C009E5CB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A5852FCA2368203C009E5CB3 /* LoginView.h */,
+				A5852FCC2368203C009E5CB3 /* LoginView.m */,
+				A5852FCB2368203C009E5CB3 /* LoginView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F90F0564EA6A2E1D378E14BE /* Frameworks */ = {
@@ -1113,6 +1220,7 @@
 				116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */,
 				116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */,
 				116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */,
+				A5852FCE2368203C009E5CB3 /* LoginView.xib in Resources */,
 				11576171201F216400E0D94F /* normal_face.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1188,8 +1296,10 @@
 				111CB19920206F710035D245 /* UIResponder+Extension.m in Sources */,
 				11576162201889E200E0D94F /* GPBUtilities.m in Sources */,
 				A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */,
+				A5852FC123681F5F009E5CB3 /* BannerScrollView.m in Sources */,
 				111CB231202447D80035D245 /* DPAudioRecorder.m in Sources */,
 				A5852F7E2367CE04009E5CB3 /* YLImageView.m in Sources */,
+				A5852FCF2368203C009E5CB3 /* LoginView.m in Sources */,
 				116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */,
 				11576161201889E200E0D94F /* GPBUnknownField.m in Sources */,
 				A5852F402367CDA8009E5CB3 /* BaseMessage.pbobjc.m in Sources */,
@@ -1198,6 +1308,7 @@
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
 				A5852F5C2367CDD1009E5CB3 /* UIButton+Factory.m in Sources */,
 				115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */,
+				A5852FCD2368203C009E5CB3 /* VoteLoginViewController.m in Sources */,
 				115761692019D19E00E0D94F /* YLChatBoxItemView.m in Sources */,
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
 				1157614C201889E200E0D94F /* GPBCodedOutputStream.m in Sources */,
@@ -1240,11 +1351,13 @@
 				116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */,
 				115760FB2017225100E0D94F /* YLChatBoxView.m in Sources */,
 				116B67B72011D038005AA5E0 /* ChatUserModel.m in Sources */,
+				A5852FC323681F5F009E5CB3 /* YLProgressView.m in Sources */,
 				116B678220118FB6005AA5E0 /* UIView+Extension.m in Sources */,
 				A5852F6B2367CDF0009E5CB3 /* UIScrollView+Extension.m in Sources */,
 				116B679120118FB6005AA5E0 /* main.m in Sources */,
 				11576154201889E200E0D94F /* Type.pbobjc.m in Sources */,
 				111CB1E8202300380035D245 /* MicrophoneTopView.m in Sources */,
+				A5852FB72367E2CA009E5CB3 /* MIneViewController.m in Sources */,
 				A5852F7D2367CE04009E5CB3 /* YLThread.m in Sources */,
 				116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */,
 				11576152201889E200E0D94F /* GPBCodedInputStream.m in Sources */,
@@ -1259,6 +1372,7 @@
 				11576158201889E200E0D94F /* Api.pbobjc.m in Sources */,
 				A5852F612367CDD1009E5CB3 /* UserDefUtils.m in Sources */,
 				116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */,
+				A5852FC223681F5F009E5CB3 /* GuidanceViewController.m in Sources */,
 				115760F020171D3C00E0D94F /* YLImageMessageCell.m in Sources */,
 				116B677C20118FB6005AA5E0 /* UIImage+Extension.m in Sources */,
 				116B678920118FB6005AA5E0 /* LocalSQliteManager.m in Sources */,
@@ -1282,11 +1396,13 @@
 				115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */,
 				11576151201889E200E0D94F /* GPBExtensionRegistry.m in Sources */,
 				1157615C201889E200E0D94F /* FieldMask.pbobjc.m in Sources */,
+				A5852FC423681F5F009E5CB3 /* AdvertisementViewController.m in Sources */,
 				A5852F7F2367CE04009E5CB3 /* YLSliderSelectView.m in Sources */,
 				111CB1EA202300380035D245 /* YLVoiceView.m in Sources */,
 				116B678C20118FB6005AA5E0 /* YLHintView.m in Sources */,
 				A5852F7B2367CE04009E5CB3 /* PopupView.m in Sources */,
 				116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */,
+				A5852FB42367E2B0009E5CB3 /* AddressBookViewController.m in Sources */,
 				116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

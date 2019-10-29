@@ -8,6 +8,8 @@
 
 #import "AccountManager.h"
 #import "UserModel.h"
+#import "YLHintView.h"
+#import <SSKeychain/SSKeychain.h>
 
 
 @interface AccountManager()
@@ -38,6 +40,13 @@
     return  manager;
 }
 
+- (UserModel *)user {
+    if (_user == nil) {
+        _user = [UserModel new];
+    }
+    return _user;
+}
+
 - (NSString *)fetchAccessToken {
     return [self fetch].accessToken;
 }
@@ -45,9 +54,27 @@
     return [self fetch].phone;
 }
 
+- (void)update {
+    if (self.user) {
+        NSString *bundleIdentifier = [[NSBundle mainBundle] infoDictionary][@"CFBundleIdentifier"];
+        NSArray *accounts = [SSKeychain accountsForService:bundleIdentifier];
+         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if (accounts.count > 0) {
+            
+            NSDictionary *account = accounts.firstObject;
+            
+            NSString *phoneNumber = account[@"acct"];
+            
+            [SSKeychain deletePasswordForService:bundleIdentifier account:phoneNumber];
+            [userDefaults removeObjectForKey:phoneNumber];
+        }
+            [SSKeychain setPassword: @"1" forService:bundleIdentifier account: self.user.phone];
+            [userDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:_user] forKey: self.user.phone];
+            [userDefaults synchronize];
+    }
+}
 
 - (UserModel *)fetch {
-    if (!self.user) {
         NSString *bundleIdentifier = [[NSBundle mainBundle] infoDictionary][@"CFBundleIdentifier"];
         NSArray *accounts = [SSKeychain accountsForService:bundleIdentifier];
         if (accounts.count > 0) {
@@ -59,7 +86,6 @@
                 self.user = (UserModel *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
             }
         }
-    }
     
     return self.user;
 }
@@ -80,21 +106,40 @@
 }
 
 - (void)update:(UserModel *)user {
-    if (self.user) {
+    if (user) {
         self.user = user;
         NSString *bundleIdentifier = [[NSBundle mainBundle] infoDictionary][@"CFBundleIdentifier"];
+        NSLog(@"%@",bundleIdentifier);
         NSArray *accounts = [SSKeychain accountsForService:bundleIdentifier];
         if (accounts.count > 0) {
             NSDictionary *account = accounts.firstObject;
             NSString *phoneNumber = account[@"acct"];
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:user] forKey:phoneNumber];
+            if ([phoneNumber isEqualToString: user.phone]) {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:user] forKey:phoneNumber];
+            }else {
+                [self update];
+            }
+           
+        }else {
+            [self update];
         }
     }
 }
-
+#pragma mark - todo登陆z设置为已登录
 - (BOOL)isLogin {
-    return (self.user.accessToken && self.user.accessToken.length > 0);
+    return ([self fetchAccessToken] && [self fetchAccessToken] .length > 0);
+}
+
+- (void)missLoginDeal {
+    
+    self.user.userID = @"";
+    self.user.accessToken = @"";
+    self.user.phone = @"";
+    self.user.paySet = @"";
+    self.user.name = @"";
+    self.user.logintType = @"";
+    [self update];
 }
 
 @end

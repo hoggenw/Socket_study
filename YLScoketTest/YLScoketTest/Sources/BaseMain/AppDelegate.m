@@ -9,7 +9,11 @@
 #import "AppDelegate.h"
 #import "YLUITabBarViewController.h"
 #import "YLSocketRocktManager.h"
-
+#import "AdvertisementViewController.h"
+#import "GuidanceViewController.h"
+#import "AFNetworkActivityIndicatorManager.h"
+#import "VoteLoginViewController.h"
+#import "YLNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -18,19 +22,172 @@
 @implementation AppDelegate
 
 
+- (void)setTheme{
+        [[UINavigationBar appearance] setBarTintColor: ThemeColor ];
+       //设置导航栏标题颜色
+       [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+       //设置状态栏颜色 在Info.plist中设置UIViewControllerBasedStatusBarAppearance 为NO
+       [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;//改变状态栏的颜色为白色
+       //设置返回字体颜色
+       [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+       
+       
+       [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName, nil]
+                                                forState:UIControlStateNormal];
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //[self setTheme];
+    //[[AccountManager sharedInstance] missLoginDeal];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
-    NSDictionary * childFrist = @{@"childVCName":@"ChatListViewController",@"title":@"消息",@"iconName":@"tabbar_message_icon",@"selectedIconName":@"tabbar_message_icon"};
-    NSDictionary * childSecond = @{@"childVCName":@"FriendDiscoveredViewController",@"title":@"朋友圈",@"iconName":@"tabbr_discover_icon",@"selectedIconName":@"tabbr_discover_icon"};
-    YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  @[childFrist,childSecond]];
-    self.window.rootViewController = tabarVC;
+ 
+    
+    
+    
+    AdvertisementViewController *tb = [AdvertisementViewController new];
+       //先判断是否是首次登陆
+       if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
+       {[AdvertisementViewController new];
+           GuidanceViewController *guidanceViewController = [GuidanceViewController new];
+           self.window.rootViewController = guidanceViewController;
+           
+       }else if ([AccountManager sharedInstance].isLogin) {
+           //有广告数据才进入广告页面
+           NSArray<NSString *> * urlString = [[NSUserDefaults standardUserDefaults] objectForKey: AdvertisementURLs];
+           if (urlString != nil && urlString.count > 0) {
+               tb.imageUrls = [urlString copy];
+               [self.window setRootViewController:tb];
+           }else {
+               YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
+               self.window.rootViewController = tabarVC;
+           }
+           
+           
+       }else{
+           self.window.rootViewController = [[YLNavigationController alloc] initWithRootViewController:[VoteLoginViewController new]];
+       }
+    
     [YLSocketRocktManager shareManger];
 
+  //注冊消息推送
+  UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
+  [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+  // 2.注册远程推送 或者 用application代理的方式注册
+  [application registerForRemoteNotifications];
+    
+    [self netWorkChangeEvent];
+      
+      //远程通知调用，未启动app时候需要在此做相关调用
+      // 取到url scheme跳转信息 未启动时走这一步
+      NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+      if (url.absoluteString.length > 0) {
+          //NSString * urlString = url.absoluteString;
+          //NSLog(@"=============%@",urlString);
+          return  YES;
+      }
     
     return YES;
 }
+
+#pragma mark - 检测网络状态变化
+-(void)netWorkChangeEvent
+{
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    NSURL *url = [NSURL URLWithString:@"http://baidu.com"];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+    [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        self.netWorkStatesCode = status;
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"当前使用的是流量模式");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"当前使用的是wifi模式");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"断网了");
+                break;
+            case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"变成了未知网络状态");
+                break;
+                
+            default:
+                break;
+        }
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"netWorkChangeEventNotification" object:@(status)];
+    }];
+    [manager.reachabilityManager startMonitoring];
+}
+
+#pragma mark - deviceToken
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    //ios 13 已经无法获取token
+//    NSString * hexToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+//                          stringByReplacingOccurrencesOfString: @">" withString: @""]
+//                         stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    if (![deviceToken isKindOfClass:[NSData class]]) return;
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    
+    NSLog(@"%@", hexToken);
+    [YLHintView showAlertMessage:hexToken title:@"获取deviceToken"];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"注册远程通知失败: %@", error);
+}
+
+//ios9以上用这个回调
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    
+    /*
+     sourceApplication: 跳转app
+     urlString: 为其他app传参的要素
+     */
+    NSString * urlString = url.absoluteString;
+    NSLog(@"=============%@",urlString);
+    if ([urlString rangeOfString:@"ss"].location != NSNotFound) {
+        
+    }
+    
+    
+    NSString *str = [url absoluteString];
+    if ([str hasPrefix:@"wx"])//微信回调
+    {
+//        [WXApi handleOpenURL:url delegate:self];
+    }
+    else if ([str hasPrefix:@""])
+    {
+        //跳转支付宝钱包进行支付，处理支付结果
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic)
+//         ];
+        
+    }
+    
+    
+    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
+//    BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
+//    if (!result) {
+//        // 其他如支付等SDK的回调
+//    }else{
+//        NSLog(@"");
+//    }
+//    return result;
+    return true;
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

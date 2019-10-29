@@ -12,24 +12,8 @@
 
 /**头像*/
 @property (nonatomic, copy) NSString *avatar;
-/**优惠券数量*/
-@property (nonatomic, copy) NSString *couponCount;
-/**浏览商品数量*/
-@property (nonatomic, copy) NSString *itemViewedCount;
-/** 商家资质认证状态  0未提交 1待审核 2审核通过 3认证失败  */
-@property (nonatomic, copy) NSString *verificationState;
-/**银行认证状态 0：未认证  10：审核处理中  20：已认证  -10： 审核不通过 */
-@property (nonatomic, copy) NSString *contractStatus;
-/**关注商品数量*/
-@property (nonatomic, copy) NSString *itemFollowedCount;
 /***/
-@property (nonatomic, copy) NSString *email;
-/**待付商品数量*/
-@property (nonatomic, copy) NSString *pendingPaymentCount;
-/**待收货商品数量*/
-@property (nonatomic, copy) NSString *pendingReceiptCount;
-/**快速补货商品数量*/
-@property (nonatomic, copy) NSString *quickSupplyCount;
+@property (nonatomic, copy) NSString *userID;
 /***/
 @property (nonatomic, copy) NSString *name;
 /**是否为正常用户*/
@@ -39,6 +23,16 @@
 /***/
 @property (nonatomic, copy) NSString *phone;
 
+@property (nonatomic, copy) NSString *logintType;
+
+@property (nonatomic, copy) NSString *displayName;
+
+
+
+//@(user.uid)  @(user.contactId),user.photoUrlSmall
+
+//是否设置支付密码
+@property (nonatomic, copy) NSString *paySet;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (instancetype)initWithOther:(UserModel *)other accessToken:(NSString *)accessToken;
