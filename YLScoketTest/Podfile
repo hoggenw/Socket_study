@@ -22,5 +22,6 @@ target ‘YLScoketTest’ do
     pod 'QBImagePickerController'
     #pod 'ProtocolBuffers'
     #pod 'ChatKit'
+    pod 'ReactiveObjC'
     
 end

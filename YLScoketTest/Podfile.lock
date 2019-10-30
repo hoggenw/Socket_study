@@ -23,6 +23,7 @@ PODS:
   - MJRefresh (3.2.0)
   - MQTTKit (0.1.0)
   - QBImagePickerController (3.4.0)
+  - ReactiveObjC (3.1.1)
   - SDWebImage (5.0.2):
     - SDWebImage/Core (= 5.0.2)
   - SDWebImage/Core (5.0.2)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - MJRefresh
   - MQTTKit
   - QBImagePickerController
+  - ReactiveObjC
   - SDWebImage
   - SocketRocket
   - SSKeychain
@@ -54,6 +56,7 @@ SPEC REPOS:
     - MJRefresh
     - MQTTKit
     - QBImagePickerController
+    - ReactiveObjC
     - SDWebImage
     - SocketRocket
     - SSKeychain
@@ -68,11 +71,12 @@ SPEC CHECKSUMS:
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   MQTTKit: a4e6b8aa92db1aeae917d2b773fd72a7749937c4
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDWebImage: 6764b5fa0f73c203728052955dbefa2bf1f33282
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: d60a13f71b71aaf988fd7bf49097f47c0eba6c31
+PODFILE CHECKSUM: 70ae12ef5a82bc5dad5b388c49579b8db254309d
 
 COCOAPODS: 1.5.3
