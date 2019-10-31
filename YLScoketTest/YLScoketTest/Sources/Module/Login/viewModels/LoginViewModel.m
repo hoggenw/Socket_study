@@ -22,7 +22,13 @@
 - (void)initSource {
     _loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-              
+            UserModel * model = [UserModel new];
+            model.userID = @"dads";
+            model.accessToken = @"dsads";
+            model.name = self.loginInfo[@"username"];
+            [UserDefUtils saveString:model.name forKey:@"account"];
+            [subscriber sendNext: model];
+            [subscriber sendCompleted];
             
             return  nil;
         }];
@@ -31,7 +37,8 @@
     
     _personalCommand = [[RACCommand alloc]initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
            return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-               
+               [subscriber sendNext: nil];
+               [subscriber sendCompleted];
               
                return nil;
            }];

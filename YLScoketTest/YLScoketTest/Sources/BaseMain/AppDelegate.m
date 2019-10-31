@@ -66,22 +66,21 @@
     [manager.reachabilityManager startMonitoring];
 }
 
-//- (void)setKeyBoard
-//{
-//    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager];
-//    keyboardManager.enable = YES;
-//    keyboardManager.shouldResignOnTouchOutside = YES;
-//    keyboardManager.enableAutoToolbar = NO;
-//    keyboardManager.keyboardDistanceFromTextField = 5.0f;
-//    
-//}
+- (void)setKeyBoard {
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager];
+    keyboardManager.enable = YES;
+    keyboardManager.shouldResignOnTouchOutside = YES;
+    keyboardManager.enableAutoToolbar = NO;
+    keyboardManager.keyboardDistanceFromTextField = 5.0f;
+    
+}
 
 
 #pragma  mark-  application 开始
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //[self setTheme];
-    [[AccountManager sharedInstance] missLoginDeal];
+    //[[AccountManager sharedInstance] missLoginDeal];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
@@ -116,7 +115,7 @@
        }\
     
     [YLSocketRocktManager shareManger];
-    //[self setKeyBoard];
+    [self setKeyBoard];
   //注冊消息推送
   UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
   [[UIApplication sharedApplication] registerUserNotificationSettings:settings];

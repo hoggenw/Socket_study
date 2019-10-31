@@ -74,8 +74,9 @@
     
     #pragma clang diagnostic ignored "-Wundeclared-selector"
     _registerBtn = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-           make.titleForState(@"前往注册", UIControlStateNormal).titleColorForState(UIColor.blueColor, UIControlStateNormal).titleFont(FONT(13)).addAction(self, @selector(registerAction), UIControlEventTouchUpInside).addToSuperView(self).backgroundImageForState([UIImage imageWithColor:UIColor.blackColor], UIControlStateNormal);
+           make.titleForState(@"前往注册", UIControlStateNormal).titleColorForState(UIColor.blueColor, UIControlStateNormal).titleFont(FONT(13)).addAction(self, @selector(registerAction), UIControlEventTouchUpInside).addToSuperView(self);
        }];
+    
     
     _confirmBtn = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
            make.backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateNormal).backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateHighlighted).backgroundImageForState([UIImage imageWithColor:UICOLOR(0x8EDEE9)], UIControlStateDisabled);
@@ -103,7 +104,8 @@
     }];
     UIView * line1 =[self.accountTF addLineWithSide:LineViewSideOutBottom lineColor:UIColor.lightGrayColor lineHeight:0.5 leftMargin:0 rightMargin:0];
     UIView * line2 = [self.pwdTF addLineWithSide:LineViewSideOutBottom lineColor:UIColor.lightGrayColor lineHeight:0.5 leftMargin:0 rightMargin:-47];
-    [_confirmBtn cornerRadius:4];
+    _confirmBtn.layer.cornerRadius = 5;
+    _confirmBtn.clipsToBounds = true;
     
     _accountLine = [UIView new];
        _accountLine.backgroundColor = UIColor.greenColor;
@@ -147,7 +149,7 @@
         }
         else
         {
-          //  [YLHintView showMessageOnThisPage:@"请输入正确的手机号"];
+            [YLHintView showMessageOnThisPage:@"请输入正确的手机号"];
         }
         return NO;
     }

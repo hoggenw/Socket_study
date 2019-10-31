@@ -23,6 +23,6 @@ target ‘YLScoketTest’ do
     #pod 'ProtocolBuffers'
     #pod 'ChatKit'
     pod 'ReactiveObjC'
-   # pod 'IQKeyboardManager'
+    pod 'IQKeyboardManager'
     
 end

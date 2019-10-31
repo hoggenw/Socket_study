@@ -70,6 +70,9 @@
     
     [[_loginView rac_signalForSelector:@selector(confirmAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         @strongify(self)
+        RACTupleUnpack(UIButton *btn) = x;
+        btn.enabled = false;
+        self.viewModel.loginInfo = @{@"username":self.loginView.accountTF.text, @"password":self.loginView.pwdTF.text};
         
     }];
   
@@ -95,7 +98,12 @@
       
       [_viewModel.personalCommand.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
           @strongify(self)
-         
+          NSLog(@"获取个人数据");
+          AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+          YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc]initWithChildVCInfoArray:  nil];
+         AppDele.window.rootViewController = tabarVC;
+             
+            
       }];
     
 }
@@ -119,3 +127,4 @@
 #pragma mark - Extension Delegate or Protocol
 
 @end
+
