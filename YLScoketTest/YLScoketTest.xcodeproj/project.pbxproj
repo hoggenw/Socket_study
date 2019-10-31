@@ -144,9 +144,9 @@
 		A5852FC223681F5F009E5CB3 /* GuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FBA23681F5F009E5CB3 /* GuidanceViewController.m */; };
 		A5852FC323681F5F009E5CB3 /* YLProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FBB23681F5F009E5CB3 /* YLProgressView.m */; };
 		A5852FC423681F5F009E5CB3 /* AdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FBC23681F5F009E5CB3 /* AdvertisementViewController.m */; };
-		A5852FCD2368203C009E5CB3 /* VoteLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FC82368203C009E5CB3 /* VoteLoginViewController.m */; };
-		A5852FCE2368203C009E5CB3 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5852FCB2368203C009E5CB3 /* LoginView.xib */; };
+		A5852FCD2368203C009E5CB3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FC82368203C009E5CB3 /* LoginViewController.m */; };
 		A5852FCF2368203C009E5CB3 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852FCC2368203C009E5CB3 /* LoginView.m */; };
+		A5CBED4523699467004806B0 /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CBED4423699467004806B0 /* LoginViewModel.m */; };
 		E2FB72C60EC512A5CA19AEB6 /* Pods_YLScoketTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -421,11 +421,12 @@
 		A5852FBE23681F5F009E5CB3 /* BannerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerScrollView.h; sourceTree = "<group>"; };
 		A5852FBF23681F5F009E5CB3 /* YLProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLProgressView.h; sourceTree = "<group>"; };
 		A5852FC023681F5F009E5CB3 /* AdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementViewController.h; sourceTree = "<group>"; };
-		A5852FC72368203C009E5CB3 /* VoteLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteLoginViewController.h; sourceTree = "<group>"; };
-		A5852FC82368203C009E5CB3 /* VoteLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteLoginViewController.m; sourceTree = "<group>"; };
+		A5852FC72368203C009E5CB3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		A5852FC82368203C009E5CB3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A5852FCA2368203C009E5CB3 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		A5852FCB2368203C009E5CB3 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		A5852FCC2368203C009E5CB3 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		A5CBED4323699467004806B0 /* LoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
+		A5CBED4423699467004806B0 /* LoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewModel.m; sourceTree = "<group>"; };
 		CE1A91D39A1D7725D54A2FD6 /* Pods_YLScoketTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YLScoketTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1038,9 +1039,9 @@
 			isa = PBXGroup;
 			children = (
 				A5852F472367CDD1009E5CB3 /* UILabel+Factory.m */,
-				A5852F482367CDD1009E5CB3 /* UIButton+Factory.h */,
 				A5852F492367CDD1009E5CB3 /* UITableView+Factory.m */,
 				A5852F4A2367CDD1009E5CB3 /* UITextField+Factory.m */,
+				A5852F482367CDD1009E5CB3 /* UIButton+Factory.h */,
 				A5852F4B2367CDD1009E5CB3 /* UIButton+Factory.m */,
 				A5852F4C2367CDD1009E5CB3 /* UILabel+Factory.h */,
 				A5852F4D2367CDD1009E5CB3 /* UITableView+Factory.h */,
@@ -1101,6 +1102,7 @@
 		A5852FC52368203C009E5CB3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A5CBED4223699445004806B0 /* viewModels */,
 				A5852FC62368203C009E5CB3 /* Controllers */,
 				A5852FC92368203C009E5CB3 /* Views */,
 			);
@@ -1110,8 +1112,8 @@
 		A5852FC62368203C009E5CB3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A5852FC72368203C009E5CB3 /* VoteLoginViewController.h */,
-				A5852FC82368203C009E5CB3 /* VoteLoginViewController.m */,
+				A5852FC72368203C009E5CB3 /* LoginViewController.h */,
+				A5852FC82368203C009E5CB3 /* LoginViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1121,9 +1123,17 @@
 			children = (
 				A5852FCA2368203C009E5CB3 /* LoginView.h */,
 				A5852FCC2368203C009E5CB3 /* LoginView.m */,
-				A5852FCB2368203C009E5CB3 /* LoginView.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A5CBED4223699445004806B0 /* viewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A5CBED4323699467004806B0 /* LoginViewModel.h */,
+				A5CBED4423699467004806B0 /* LoginViewModel.m */,
+			);
+			path = viewModels;
 			sourceTree = "<group>";
 		};
 		F90F0564EA6A2E1D378E14BE /* Frameworks */ = {
@@ -1220,7 +1230,6 @@
 				116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */,
 				116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */,
 				116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */,
-				A5852FCE2368203C009E5CB3 /* LoginView.xib in Resources */,
 				11576171201F216400E0D94F /* normal_face.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1238,6 +1247,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MQTTKit/MQTTKit.framework",
@@ -1254,6 +1264,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MQTTKit.framework",
@@ -1310,7 +1321,7 @@
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
 				A5852F5C2367CDD1009E5CB3 /* UIButton+Factory.m in Sources */,
 				115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */,
-				A5852FCD2368203C009E5CB3 /* VoteLoginViewController.m in Sources */,
+				A5852FCD2368203C009E5CB3 /* LoginViewController.m in Sources */,
 				115761692019D19E00E0D94F /* YLChatBoxItemView.m in Sources */,
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
 				1157614C201889E200E0D94F /* GPBCodedOutputStream.m in Sources */,
@@ -1327,6 +1338,7 @@
 				A5852F5A2367CDD1009E5CB3 /* UITableView+Factory.m in Sources */,
 				A5852F6A2367CDF0009E5CB3 /* NSObject+Extension.m in Sources */,
 				11576101201820D900E0D94F /* YLChatFaceView.m in Sources */,
+				A5CBED4523699467004806B0 /* LoginViewModel.m in Sources */,
 				116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */,
 				111CB18C20205DAE0035D245 /* YLPhotoPreviewController.m in Sources */,
 				1157615D201889E200E0D94F /* Struct.pbobjc.m in Sources */,
@@ -1506,6 +1518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				DEVELOPMENT_TEAM = KD59NK3467;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1534,6 +1547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				DEVELOPMENT_TEAM = KD59NK3467;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

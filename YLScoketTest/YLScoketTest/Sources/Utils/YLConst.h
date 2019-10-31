@@ -18,8 +18,9 @@ extern NSString *const kChoiceCellMessageModelKey;
 extern NSString *const kDTActionHandlerTapGestureKey;
 extern NSString *const kDTActionHandlerTapBlockKey;
 extern NSString *const kImageUrlString;
-extern NSString * const YLKVOAssociateObservers;
-extern NSString * const YLKVOClassPrefix;
-extern NSString * const kYLDISPATCH_QUEUE_T_Observers;
+extern NSString *const YLKVOAssociateObservers;
+extern NSString *const YLKVOClassPrefix;
+extern NSString *const kYLDISPATCH_QUEUE_T_Observers;
+extern NSString *const YLLoginSucessSaveAccout ;
 
 NS_ASSUME_NONNULL_END

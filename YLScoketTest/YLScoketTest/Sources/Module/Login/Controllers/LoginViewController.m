@@ -1,17 +1,17 @@
 //
-//  VoteLoginViewController.m
+//  LoginViewController.m
 //  Vote
 //
 //  Created by 王留根 on 2018/6/13.
 //  Copyright © 2018年 OwnersVote. All rights reserved.
 //
 
-#import "VoteLoginViewController.h"
+#import "LoginViewController.h"
 #import "LoginView.h"
 #import "YLUITabBarViewController.h"
 #import "LoginViewModel.h"
 
-@interface VoteLoginViewController ()
+@interface LoginViewController ()
 
 @property (nonatomic, strong)LoginView * loginView;
 @property (nonatomic, assign) NSInteger loginType;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation VoteLoginViewController
+@implementation LoginViewController
 
 
 #pragma mark - Override Methods

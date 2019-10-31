@@ -9,6 +9,8 @@
 #import "AdvertisementViewController.h"
 #import "BannerScrollView.h"
 #import "YLUITabBarViewController.h"
+#import "YLNavigationController.h"
+#import "LoginViewController.h"
 
 
 @interface AdvertisementViewController()
@@ -45,6 +47,8 @@
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -63,10 +67,18 @@
             return weakSelf.imageUrls.count;
         }];
     }
+    
 }
 
 - (void)jumpToTabbar  {
     AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([AccountManager sharedInstance].isLogin) {
+        YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
+             AppDele.window.rootViewController = tabarVC;
+    }else{
+        AppDele.window.rootViewController =  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+    }
+
     //    if (AppDele.isUpdate)
     //    {
     //        [YLHintView showMessageOnThisPage: @"需要更新版本，才能继续使用"];
@@ -77,8 +89,7 @@
     //
     //    }
     
-      YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
-      AppDele.window.rootViewController = tabarVC;
+     
     
     
 }

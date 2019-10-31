@@ -12,7 +12,7 @@
 #import "AdvertisementViewController.h"
 #import "GuidanceViewController.h"
 #import "AFNetworkActivityIndicatorManager.h"
-#import "VoteLoginViewController.h"
+#import "LoginViewController.h"
 #import "YLNavigationController.h"
 
 @interface AppDelegate ()
@@ -36,64 +36,6 @@
                                                           [UIColor whiteColor], NSForegroundColorAttributeName, nil]
                                                 forState:UIControlStateNormal];
 }
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    //[self setTheme];
-    //[[AccountManager sharedInstance] missLoginDeal];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window makeKeyAndVisible];
- 
-    
-    
-    
-    AdvertisementViewController *tb = [AdvertisementViewController new];
-       //先判断是否是首次登陆
-       if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
-       {[AdvertisementViewController new];
-           GuidanceViewController *guidanceViewController = [GuidanceViewController new];
-           self.window.rootViewController = guidanceViewController;
-           
-       }else if ([AccountManager sharedInstance].isLogin) {
-           //有广告数据才进入广告页面
-           NSArray<NSString *> * urlString = [[NSUserDefaults standardUserDefaults] objectForKey: AdvertisementURLs];
-           if (urlString != nil && urlString.count > 0) {
-               tb.imageUrls = [urlString copy];
-               [self.window setRootViewController:tb];
-           }else {
-               YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
-               self.window.rootViewController = tabarVC;
-           }
-           
-           
-       }else{
-           self.window.rootViewController = [[YLNavigationController alloc] initWithRootViewController:[VoteLoginViewController new]];
-       }
-    
-    [YLSocketRocktManager shareManger];
-
-  //注冊消息推送
-  UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
-  [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-  // 2.注册远程推送 或者 用application代理的方式注册
-  [application registerForRemoteNotifications];
-    
-    [self netWorkChangeEvent];
-      
-      //远程通知调用，未启动app时候需要在此做相关调用
-      // 取到url scheme跳转信息 未启动时走这一步
-      NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-      if (url.absoluteString.length > 0) {
-          //NSString * urlString = url.absoluteString;
-          //NSLog(@"=============%@",urlString);
-          return  YES;
-      }
-    
-    return YES;
-}
-
 #pragma mark - 检测网络状态变化
 -(void)netWorkChangeEvent
 {
@@ -123,6 +65,79 @@
     }];
     [manager.reachabilityManager startMonitoring];
 }
+
+//- (void)setKeyBoard
+//{
+//    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager];
+//    keyboardManager.enable = YES;
+//    keyboardManager.shouldResignOnTouchOutside = YES;
+//    keyboardManager.enableAutoToolbar = NO;
+//    keyboardManager.keyboardDistanceFromTextField = 5.0f;
+//    
+//}
+
+
+#pragma  mark-  application 开始
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    //[self setTheme];
+    [[AccountManager sharedInstance] missLoginDeal];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window makeKeyAndVisible];
+ 
+    
+    
+    AdvertisementViewController *tb = [AdvertisementViewController new];
+       //先判断是否是首次登陆
+       if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
+       {[AdvertisementViewController new];
+           GuidanceViewController *guidanceViewController = [GuidanceViewController new];
+           self.window.rootViewController = guidanceViewController;
+           
+       }else {
+           //有广告数据才进入广告页面
+           NSArray<NSString *> * urlString = [[NSUserDefaults standardUserDefaults] objectForKey: AdvertisementURLs];
+           if (urlString != nil && urlString.count > 0) {
+               tb.imageUrls = [urlString copy];
+               [self.window setRootViewController:tb];
+           }else {
+               
+               if ([AccountManager sharedInstance].isLogin) {
+                   YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
+                   self.window.rootViewController = tabarVC;
+               }else{
+                self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+               }
+               
+           }
+           
+           
+       }\
+    
+    [YLSocketRocktManager shareManger];
+    //[self setKeyBoard];
+  //注冊消息推送
+  UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
+  [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+  // 2.注册远程推送 或者 用application代理的方式注册
+  [application registerForRemoteNotifications];
+    
+    [self netWorkChangeEvent];
+      
+      //远程通知调用，未启动app时候需要在此做相关调用
+      // 取到url scheme跳转信息 未启动时走这一步
+      NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+      if (url.absoluteString.length > 0) {
+          //NSString * urlString = url.absoluteString;
+          //NSLog(@"=============%@",urlString);
+          return  YES;
+      }
+    
+    return YES;
+}
+
+
 
 #pragma mark - deviceToken
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

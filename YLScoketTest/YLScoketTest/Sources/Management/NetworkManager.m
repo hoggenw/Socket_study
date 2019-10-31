@@ -8,7 +8,7 @@
 
 #import "NetworkManager.h"
 #import "YLDeviceUtil.h"
-#import "VoteLoginViewController.h"
+#import "LoginViewController.h"
 
 #define NetworkTimeoutInterval 20.0
 
@@ -81,7 +81,7 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
         
         if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
             AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[VoteLoginViewController new]];
+            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
             [[AccountManager sharedInstance] missLoginDeal];
              return ;
         }
@@ -106,7 +106,7 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
         
         if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
             AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[VoteLoginViewController new]];
+            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
             [[AccountManager sharedInstance] missLoginDeal];
             return ;
         }
@@ -130,7 +130,7 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
         if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
             AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[VoteLoginViewController new]];
+            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
             [[AccountManager sharedInstance] missLoginDeal];
              return ;
         }
@@ -169,7 +169,7 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
         if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
             AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[VoteLoginViewController new]];
+            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
             [[AccountManager sharedInstance] missLoginDeal];
             return ;
         }

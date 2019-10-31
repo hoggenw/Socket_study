@@ -60,7 +60,7 @@ static const uint16_t commandMessage = 1;
     if (_webSocket) {
         return;
     }
-    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen",host,port]] protocols:@[@"chat",@"superchat"]];
+    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&token=1232",host,port]] protocols:@[@"chat",@"superchat"]];
     _webSocket.delegate = self;
     //设置代理线程Queue
     NSOperationQueue *queue = [NSOperationQueue new];

@@ -113,7 +113,7 @@
 
 @implementation UIButton (Factory)
 
-+(instancetype)makeBUtton:(void (^)(ButtonMaker * make))buttonMaker{
++(instancetype)makeButton:(void (^)(ButtonMaker * make))buttonMaker{
     ButtonMaker * maker = [ButtonMaker new];
     maker.button = [self buttonWithType:UIButtonTypeCustom];
     maker.button.adjustsImageWhenHighlighted = NO;

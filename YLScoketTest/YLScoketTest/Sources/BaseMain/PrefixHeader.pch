@@ -26,7 +26,14 @@
 #define AdvertisementURLs @"AdvertisementURLs"
 #define USER_APPID           @"5b5a8028"
 
-
+//加载图片
+#define IMAGE(name) [UIImage imageNamed:name]
+//font
+#define UICOLOR(x) [UIColor colorWithHex:x]
+//font
+#define FONT(x) [UIFont systemFontOfSize:x]
+//bold_font
+#define BOLD_FONT(x) [UIFont boldSystemFontOfSize:x]
 
 ///debug模式下,打印数据
 #ifdef DEBUG
@@ -53,7 +60,8 @@
 #import <MJRefresh/MJRefresh.h>
 #import <YYModel/YYModel.h>
 #import <SSKeychain/SSKeychain.h>
-
+#import <ReactiveObjC/ReactiveObjC.h>
+//#import <IQKeyboardManager/IQKeyboardManager.h>
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

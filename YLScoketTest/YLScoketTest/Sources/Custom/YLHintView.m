@@ -150,7 +150,7 @@
     }];
     
     [[[UIApplication sharedApplication].delegate window] addSubview:manager];
-    
+    [[[UIApplication sharedApplication].delegate window] bringSubviewToFront:manager];
 
     manager.hintLabel.userInteractionEnabled = NO;
     [manager.hintLabel cornerRadius:5];

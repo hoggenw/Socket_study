@@ -1,5 +1,5 @@
 //
-//  VoteLoginViewController.h
+//  LoginViewController.h
 //  Vote
 //
 //  Created by 王留根 on 2018/6/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VoteLoginViewController : UIViewController
+@interface LoginViewController : UIViewController
 
 @end

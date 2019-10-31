@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIButton (Factory)
 
-+(instancetype)makeBUtton:(void (^) (ButtonMaker *make))buttonMaker;
++(instancetype)makeButton:(void (^) (ButtonMaker *make))buttonMaker;
 
 @end
 

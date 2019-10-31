@@ -136,7 +136,7 @@
  *  @param leftMargin  左侧间距，上下方向时为顶部间距
  *  @param rightMargin 右侧间距，上下方向时为底部间距
  */
-- (void)addLineWithSide:(LineViewSide)side lineColor:(UIColor *)color lineHeight:(CGFloat)height leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin
+- (UIView *)addLineWithSide:(LineViewSide)side lineColor:(UIColor *)color lineHeight:(CGFloat)height leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin
 {
    
     UIView *lineView = [[UIView alloc] init];
@@ -225,6 +225,7 @@
                 break;
         }
     }];
+    return lineView;
 }
 
 // 移除所有子控件
