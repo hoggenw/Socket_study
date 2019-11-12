@@ -1,4 +1,4 @@
-
+source 'https://github.com/CocoaPods/Specs.git'
 # Uncomment this line to define a global platform for your project
  platform :ios, ‘8.0’
 
@@ -11,7 +11,7 @@ target ‘YLScoketTest’ do
     pod 'SocketRocket'
     pod 'MQTTKit'
     pod 'Masonry'
-    pod 'MBProgressHUD'
+    #pod 'MBProgressHUD'
     pod 'AFNetworking'
     pod 'MJRefresh'
     pod 'FMDB'
