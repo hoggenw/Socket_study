@@ -74,7 +74,7 @@
     
     #pragma clang diagnostic ignored "-Wundeclared-selector"
     _registerBtn = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-           make.titleForState(@"前往注册", UIControlStateNormal).titleColorForState(UIColor.blueColor, UIControlStateNormal).titleFont(FONT(13)).addAction(self, @selector(registerAction), UIControlEventTouchUpInside).addToSuperView(self);
+           make.titleForState(@"前往注册", UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9), UIControlStateNormal).titleFont(FONT(13)).addAction(self, @selector(registerAction), UIControlEventTouchUpInside).addToSuperView(self);
        }];
     
     

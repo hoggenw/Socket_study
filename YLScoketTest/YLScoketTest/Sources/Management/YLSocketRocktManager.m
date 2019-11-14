@@ -7,7 +7,7 @@
 //
 
 #import "YLSocketRocktManager.h"
-#import "SocketRocket.h"
+//#import "SocketRocket.h"
  #import "UserMessage.pbobjc.h"
 #import "BaseMessage.pbobjc.h"
 #import "GPBProtocolBuffers_RuntimeSupport.h"

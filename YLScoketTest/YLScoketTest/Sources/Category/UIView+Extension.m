@@ -7,7 +7,6 @@
 //
 
 #import "UIView+Extension.h"
-#import "Masonry.h"
 
 @implementation UIView (Extension)
 

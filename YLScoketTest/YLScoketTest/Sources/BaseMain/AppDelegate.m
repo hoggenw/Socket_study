@@ -11,9 +11,9 @@
 #import "YLSocketRocktManager.h"
 #import "AdvertisementViewController.h"
 #import "GuidanceViewController.h"
-#import "AFNetworkActivityIndicatorManager.h"
 #import "LoginViewController.h"
 #import "YLNavigationController.h"
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 @interface AppDelegate ()
 

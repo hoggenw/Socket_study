@@ -10,6 +10,7 @@
 #import "LoginView.h"
 #import "YLUITabBarViewController.h"
 #import "LoginViewModel.h"
+#import "RegisterViewController.h"
 
 @interface LoginViewController ()
 
@@ -61,13 +62,16 @@
         make.top.equalTo(self.view.mas_top).offset(kNavigationHeight + 20);
         make.left.right.bottom.equalTo(self.view);
     }];
+#pragma mark - 前往注册
     @weakify(self)
     [[_loginView rac_signalForSelector:@selector(registerAction)] subscribeNext:^(RACTuple * _Nullable x) {
         @strongify(self)
+        RegisterViewController * registVC = [RegisterViewController new];
+        PUSH(registVC);
         
     }];
     
-    
+#pragma mark - 登录
     [[_loginView rac_signalForSelector:@selector(confirmAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         @strongify(self)
         RACTupleUnpack(UIButton *btn) = x;
@@ -101,7 +105,7 @@
           NSLog(@"获取个人数据");
           AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
           YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc]initWithChildVCInfoArray:  nil];
-         AppDele.window.rootViewController = tabarVC;
+          AppDele.window.rootViewController = tabarVC;
              
             
       }];

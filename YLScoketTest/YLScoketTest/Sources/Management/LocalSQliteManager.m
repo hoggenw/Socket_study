@@ -7,7 +7,7 @@
 //
 
 #import "LocalSQliteManager.h"
-#include "FMDB.h"
+#import <FMDB/FMDB.h>
 
 @implementation LocalSQliteManager{
     FMDatabase *fmdb;

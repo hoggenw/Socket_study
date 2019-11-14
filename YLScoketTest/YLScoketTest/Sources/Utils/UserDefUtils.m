@@ -7,7 +7,6 @@
 //
 
 #import "UserDefUtils.h"
-#import "YYModel.h"
 
 @implementation UserDefUtils
 /**

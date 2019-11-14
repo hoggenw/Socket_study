@@ -34,6 +34,10 @@
 #define FONT(x) [UIFont systemFontOfSize:x]
 //bold_font
 #define BOLD_FONT(x) [UIFont boldSystemFontOfSize:x]
+//push
+#define PUSH(v) [self.navigationController pushViewController:v animated:YES]
+//pop
+#define POP [self.navigationController popViewControllerAnimated:YES]
 
 ///debug模式下,打印数据
 #ifdef DEBUG
@@ -52,8 +56,6 @@
 #import "CustomHeader.h"
 #import "AppDelegate.h"
 #import "ExtensionHeader.h"
-#import <SDWebImage/UIButton+WebCache.h>
-#import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/SDWebImage.h>
 #import <Masonry/Masonry.h>
 #import <AFNetworking/AFNetworking.h>
@@ -62,6 +64,7 @@
 #import <SSKeychain/SSKeychain.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import <SocketRocket/SocketRocket.h>
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

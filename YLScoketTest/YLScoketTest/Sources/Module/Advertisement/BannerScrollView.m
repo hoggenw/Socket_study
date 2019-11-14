@@ -9,7 +9,7 @@
 #import "BannerScrollView.h"
 #import "NSTimer+Extension.h"
 #import "YLProgressView.h"
-#import "UIImage+GIF.h"
+//#import "UIImage+GIF.h"
 
 #define VIEW_WIDTH  [[UIScreen mainScreen]bounds].size.width
 #define VIEW_HEIGHT CGRectGetHeight(self.bounds)

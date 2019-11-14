@@ -8,8 +8,7 @@
 
 #import "YLHintView.h"
 #import "YLLabel.h"
-#import "Masonry.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface YLHintView ()
 

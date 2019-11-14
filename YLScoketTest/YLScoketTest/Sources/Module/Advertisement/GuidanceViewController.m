@@ -8,6 +8,8 @@
 
 #import "GuidanceViewController.h"
 #import "YLUITabBarViewController.h"
+#import "YLNavigationController.h"
+#import "LoginViewController.h"
 
 #define PAGE_NUMBER 5
 
@@ -113,8 +115,12 @@
     {
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"firstLaunch"];
         AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
-        AppDele.window.rootViewController = tabarVC;;
+           if ([AccountManager sharedInstance].isLogin) {
+               YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
+                    AppDele.window.rootViewController = tabarVC;
+           }else{
+               AppDele.window.rootViewController =  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+           }
     }else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
