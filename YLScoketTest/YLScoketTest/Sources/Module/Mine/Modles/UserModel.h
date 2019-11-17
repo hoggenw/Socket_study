@@ -25,7 +25,6 @@
 
 @property (nonatomic, copy) NSString *logintType;
 
-@property (nonatomic, copy) NSString *displayName;
 
 
 

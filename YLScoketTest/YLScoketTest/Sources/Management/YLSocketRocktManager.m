@@ -37,7 +37,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 @end
 
-static NSString * host = @"192.168.0.198";
+static NSString * host = @"192.168.0.167";
 static const uint16_t port = 6969;
 
 static const uint16_t commonModule = 101;

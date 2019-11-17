@@ -20,9 +20,6 @@
         _isEnabled = @"";
         _accessToken = @"";
         _phone = @"";
-        _paySet = @"";
-        _logintType= @"";
-        _displayName = @"";
     }
     return self;
 }
@@ -31,14 +28,11 @@
     self = [super init];
     if (self) {
         _avatar = dictionary[@"avatar"];
-        _userID = dictionary[@"userID"];
-        _name = dictionary[@"name"];
-        _isEnabled = dictionary[@"isEnabled"];
+        _userID = dictionary[@"userId"];
+        _name = dictionary[@"userName"];
+        _isEnabled = dictionary[@"status"];
         _accessToken = dictionary[@"accessToken"];
-        _phone = dictionary[@"phone"];
-        _paySet = dictionary[@"paySet"];
-        _logintType = dictionary[@"logintType"];
-        _displayName = dictionary[@"displayName"];
+        _phone = dictionary[@"mobile"];
     }
     return self;
 }
@@ -52,9 +46,6 @@
         _isEnabled = other.isEnabled;
         _accessToken = accessToken;
         _phone = other.phone;
-        _paySet = other.paySet;
-        _logintType = other.logintType;
-        _displayName = other.displayName;
         
     }
     return self;
@@ -70,9 +61,6 @@
     [aCoder encodeObject:self.isEnabled forKey:@"isEnabled"];
     [aCoder encodeObject:self.accessToken forKey:@"accessToken"];
     [aCoder encodeObject:self.phone forKey:@"phone"];
-    [aCoder encodeObject:self.paySet forKey:@"paySet"];
-    [aCoder encodeObject:self.logintType forKey:@"logintType"];
-    [aCoder encodeObject:self.displayName forKey:@"displayName"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -84,9 +72,6 @@
         self.isEnabled = [aDecoder decodeObjectForKey:@"isEnabled"] ;
         self.accessToken = [aDecoder decodeObjectForKey:@"accessToken"];
         self.phone = [aDecoder decodeObjectForKey:@"phone"];
-        self.paySet = [aDecoder decodeObjectForKey:@"paySet"];
-        self.logintType = [aDecoder decodeObjectForKey:@"logintType"];
-        self.displayName = [aDecoder decodeObjectForKey:@"displayName"];
     }
     return self;
 }

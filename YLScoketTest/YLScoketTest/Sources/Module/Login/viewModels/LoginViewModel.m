@@ -22,13 +22,23 @@
 - (void)initSource {
     _loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-            UserModel * model = [UserModel new];
-            model.userID = @"dads";
-            model.accessToken = @"dsads";
-            model.name = self.loginInfo[@"username"];
-            [UserDefUtils saveString:model.name forKey:@"account"];
-            [subscriber sendNext: model];
-            [subscriber sendCompleted];
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,LoginAPI] paramBody:_loginInfo needToken:false returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    UserModel * model = [UserModel new];
+                    model.userID = @"dads";
+                    model.accessToken = @"dsads";
+                    model.name = self.loginInfo[@"username"];
+                    [UserDefUtils saveString:model.name forKey:@"account"];
+                    [subscriber sendNext: model];
+                    [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            
             
             return  nil;
         }];

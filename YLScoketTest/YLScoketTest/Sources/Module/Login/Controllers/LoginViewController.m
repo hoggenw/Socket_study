@@ -67,6 +67,10 @@
     [[_loginView rac_signalForSelector:@selector(registerAction)] subscribeNext:^(RACTuple * _Nullable x) {
         @strongify(self)
         RegisterViewController * registVC = [RegisterViewController new];
+        registVC.successblock = ^(NSDictionary * dic){
+            self.loginView.accountTF.text = StirngWithDic(dic[@"account"]);
+            self.loginView.pwdTF.text = StirngWithDic(dic[@"passworld"]);
+        };
         PUSH(registVC);
         
     }];
@@ -76,7 +80,7 @@
         @strongify(self)
         RACTupleUnpack(UIButton *btn) = x;
         btn.enabled = false;
-        self.viewModel.loginInfo = @{@"username":self.loginView.accountTF.text, @"password":self.loginView.pwdTF.text};
+        self.viewModel.loginInfo = @{@"phone":self.loginView.accountTF.text, @"password":self.loginView.pwdTF.text};
         
     }];
   

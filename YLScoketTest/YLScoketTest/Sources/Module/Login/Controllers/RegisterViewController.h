@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RegisterViewController : UIViewController
 
+@property (nonatomic, copy)SuccessCallBack successblock;
+
 @end
 
 NS_ASSUME_NONNULL_END

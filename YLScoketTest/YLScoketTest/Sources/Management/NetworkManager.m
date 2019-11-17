@@ -15,14 +15,21 @@
 
 
 //https
-NSString * const BaseUrl = @"https://community.coinsolid.com";
+NSString * const BaseUrl = @"http://192.168.0.167:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
 
+#pragma mark- 接口
+
+NSString * const RegistCodeAPI = @"api/login/getKaptchaImage";
+
+NSString * const LoginAPI = @"api/login/userLogin";
+
+NSString * const RegisterAPI = @"api/login/register";
 
 @interface NetworkManager()
 @property (nonatomic, strong) NetworkManager * netManager;
 @end
-
+static AFHTTPSessionManager *sessionManager = nil;
 @implementation NetworkManager
 
 -(instancetype)init {
@@ -67,6 +74,40 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
 
 
 
+#pragma mark- 上传图片
+
+-(void)postImageUploadApiParam:(NSData *)data returnBlock:(ReturnBlock)infoBlock{
+     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true];
+    [manager POST:[NSString stringWithFormat:@""] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data
+                                          name:@"file"
+                                      fileName:@"file.jpeg"
+                                      mimeType:@"image/jpeg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+          NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+              if([errnos isEqualToString:@"0"]){ //成功
+                  self.returnBlock = infoBlock;
+                  self.returnBlock(dict);
+                  
+              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+             
+              }else {
+                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+              }
+        self.returnBlock = infoBlock;
+         self.returnBlock(dict);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSDictionary *errorDic = @{@"errno":@"-1"};
+            self.returnBlock = infoBlock;
+                  self.returnBlock(errorDic);
+        [self dealError: @"网络请求没有成功"];
+    }];
+    
+}
+
 
 
 
@@ -78,21 +119,25 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
     [manager POST:requestURL parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-        
-        if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
-            AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
-            [[AccountManager sharedInstance] missLoginDeal];
-             return ;
+         NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        if([errnos isEqualToString:@"0"]){ //成功
+           
+            
+        }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+       
+        }else {
+            [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
         }
+            self.returnBlock = infoBlock;
+           self.returnBlock(dict);
+       
         
-        self.returnBlock = infoBlock;
-        self.returnBlock(dict);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"failure error: %@", error);
-        NSDictionary *dict = @{@"returnInfo" : @NO};
-        self.returnBlock = infoBlock;
-        self.returnBlock(dict);
+        NSDictionary *errorDic = @{@"errno":@"-1"};
+         self.returnBlock = infoBlock;
+              self.returnBlock(errorDic);
+        [self dealError: @"网络请求没有成功"];
     }];
 }
 
@@ -102,22 +147,25 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
     [manager POST:requestURL parameters:paramDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-        
-        if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
-            AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
-            [[AccountManager sharedInstance] missLoginDeal];
-            return ;
-        }
-        
+
+          NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+              if([errnos isEqualToString:@"0"]){ //成功
+                  
+                  
+              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+             
+              }else {
+                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+              }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"failure error: %@", error);
-        NSDictionary *dict = @{@"returnInfo" : @NO};
+        NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
-        self.returnBlock(dict);
+        self.returnBlock(errorDic);
+        NSLog(@"error ： %@",error);
+       [self dealError: @"网络请求没有成功"];
     }];
 
 }
@@ -127,22 +175,24 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
     [manager GET:requestURL parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-        if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
-            AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
-            [[AccountManager sharedInstance] missLoginDeal];
-             return ;
-        }
+         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+              if([errnos isEqualToString:@"0"]){ //成功
+                 
+                  
+              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+             
+              }else {
+                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+              }
         self.returnBlock = infoBlock;
-        
         self.returnBlock(dict);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSDictionary *dict = @{@"returnInfo" : @NO};
-        NSLog(@"error:%@",error);
-        self.returnBlock = infoBlock;
-        self.returnBlock(dict);
+        NSDictionary *errorDic = @{@"errno":@"-1"};
+        
+         self.returnBlock = infoBlock;
+              self.returnBlock(errorDic);
+       [self dealError: @"网络请求没有成功"];
         
     }];
 }
@@ -151,14 +201,23 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
     
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
     [manager DELETE:requestURL parameters:paramDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-        
+         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+              if([errnos isEqualToString:@"0"]){ //成功
+                 
+                  
+              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+             
+              }else {
+                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+              }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSDictionary *dict = @{@"returnInfo" : @NO};
-        self.returnBlock = infoBlock;
-        self.returnBlock(dict);
+        NSDictionary *errorDic = @{@"errno":@"-1"};
+          self.returnBlock = infoBlock;
+              self.returnBlock(errorDic);
+        [self dealError: @"网络请求没有成功"];
     }];
 }
 
@@ -167,33 +226,47 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
     [manager PUT:requestURL parameters:paramDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-        if ([[NSString stringWithFormat:@"%@" ,dict[@"retcode"]] isEqualToString:@"127"]) {
-            AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            AppDele.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
-            [[AccountManager sharedInstance] missLoginDeal];
-            return ;
-        }
+               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+              if([errnos isEqualToString:@"0"]){ //成功
+                 
+                  
+              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+             
+              }else {
+                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+              }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
+       
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSDictionary *dict = @{@"returnInfo" : @NO};
+        NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
-        self.returnBlock(dict);
+              self.returnBlock(errorDic);
+       [self dealError: @"网络请求没有成功"];
     }];
+}
+
+
+-(void)dealError:(NSString *)errorMessage {
+    [YLHintView showMessageOnThisPage: errorMessage];
 }
 
 #pragma  mark - 头部文件设置
 - (AFHTTPSessionManager *)getSessionManager:(BOOL)needToken
 {
-    static AFHTTPSessionManager *sessionManager = nil;
+    if (sessionManager != nil) {
+        return  sessionManager;
+    }
     sessionManager = [AFHTTPSessionManager manager];
-    sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
+    //sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
     //(这里设置涉及到AFHTTPRequestSerializer  ，AFJSONRequestSerializer java 后台getParameter能否收到参数，AFHTTPRequestSerializer能)测试无效
     
-    [sessionManager.requestSerializer setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
-    [sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //[sessionManager.requestSerializer setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+    [sessionManager.requestSerializer setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     //[sessionManager.requestSerializer setValue:@"application/form-data" forHTTPHeaderField:@"Content-Type"];
     [sessionManager.requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+    //sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil ,nil];
     
     sessionManager.requestSerializer.timeoutInterval = NetworkTimeoutInterval;
     
@@ -218,8 +291,7 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
     //[sessionManager.requestSerializer setValue:@"Paw/3.0.14 (Macintosh; OS X/10.12.5) GCDHTTPRequest"forHTTPHeaderField:@"User-Agent"];
     if (needToken) {
         UserModel * user = [[AccountManager sharedInstance] fetch];
-        NSLog(@"yltoken = %@", user.accessToken);
-        [sessionManager.requestSerializer setValue: @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpblR5cGUiOiIyIiwibG9naW5OYW1lIjoiYWRtaW4iLCJleHAiOjE1NDM4MzE1MzQsInVzZXJJZCI6IncxMjM0NTYifQ.fRtN4k7s9Fu71XiRFUw_Hj7edn3fswsxvPM9qKHXPz4" forHTTPHeaderField:@"token"];
+        [sessionManager.requestSerializer setValue:user.accessToken forHTTPHeaderField:@"token"];
     }
     return sessionManager;
 }

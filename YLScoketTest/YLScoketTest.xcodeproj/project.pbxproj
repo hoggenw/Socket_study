@@ -94,6 +94,7 @@
 		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
 		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
 		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
+		87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */; };
 		87D0E2FB237CE224004ECC78 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FA237CE224004ECC78 /* RegisterViewController.m */; };
 		87D0E2FE237CE246004ECC78 /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FD237CE246004ECC78 /* RegisterView.m */; };
 		A5852F402367CDA8009E5CB3 /* BaseMessage.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F3D2367CDA8009E5CB3 /* BaseMessage.pbobjc.m */; };
@@ -345,6 +346,8 @@
 		11849E191E52AFD0006D682D /* 7聊.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7聊.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
+		87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewModel.h; sourceTree = "<group>"; };
+		87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewModel.m; sourceTree = "<group>"; };
 		87D0E2F9237CE224004ECC78 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		87D0E2FA237CE224004ECC78 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		87D0E2FC237CE246004ECC78 /* RegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterView.h; sourceTree = "<group>"; };
@@ -1142,6 +1145,8 @@
 			children = (
 				A5CBED4323699467004806B0 /* LoginViewModel.h */,
 				A5CBED4423699467004806B0 /* LoginViewModel.m */,
+				87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */,
+				87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */,
 			);
 			path = viewModels;
 			sourceTree = "<group>";
@@ -1356,6 +1361,7 @@
 				1157614E201889E200E0D94F /* GPBWellKnownTypes.m in Sources */,
 				116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */,
 				A5852F602367CDD1009E5CB3 /* LanguageUtil.m in Sources */,
+				87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */,
 				A5852F5E2367CDD1009E5CB3 /* FileManager.m in Sources */,
 				116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */,
 				1157615A201889E200E0D94F /* Wrappers.pbobjc.m in Sources */,

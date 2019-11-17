@@ -12,27 +12,19 @@
 @interface RegisterView ()
 
 
-/** 电话号码 输入框 */
-@property (weak, nonatomic) UITextField * phoneField;
 @property (weak, nonatomic)  UILabel * phoneLabelHint;
 
-/** 昵称*/
-@property (weak, nonatomic) UITextField * nameField;
+
 @property (weak, nonatomic)  UILabel * nameLabelHint;
 
-/** 验证码 输入框 */
-@property (weak, nonatomic) UITextField * codeField;
-/** 设置密码 输入框 */
-@property (weak, nonatomic) UITextField * secretField;
+
 
 /** 确认密码 输入框 */
 @property (weak, nonatomic) UITextField * secondSecretField;
 @property (weak, nonatomic)  UILabel * secretLabelHint;
 
-@property (weak, nonatomic) UIButton * saveBtn;
 
 @property (strong, nonatomic) UIButton * policyButton;
-
 @property (weak, nonatomic) UIButton * secretBtn;
 
 @property (weak, nonatomic) UIButton * secondSecretBtn;
@@ -238,7 +230,6 @@
         [view addSubview:button];
         
         [button addTarget:self action:@selector(codeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"获取验证码" forState: UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize: 14];
         [button setTitleColor: [UIColor blueColor] forState: UIControlStateNormal];
         [button setTitleColor: [UIColor lightGrayColor] forState: UIControlStateDisabled];
@@ -248,9 +239,21 @@
         }];
         [button addLineWithSide: LineViewSideInLeft lineColor: [UIColor lightGrayColor] lineHeight: 0.5 leftMargin: 10 rightMargin:10];
         button.enabled = true;
+        UILabel * codeLable =  [UILabel makeLabel:^(LabelMaker * _Nonnull make) {
+               make.text(@"点击刷新验证码").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
+           }];
+        codeLable.textAlignment = NSTextAlignmentRight;
+        [codeLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(button);
+            make.top.equalTo(button.mas_bottom).offset(2);
+            make.height.equalTo(@(15));
+        }];
+        
+        
         self.codeBtn = button;
         self.codeField = textField;
         self.codeField.keyboardType = UIKeyboardTypeNumberPad;
+        [self codeBtnClick: button];
         view;
         
     });
@@ -413,6 +416,17 @@
        {
            [_policyButton setImage:[UIImage imageNamed:@"check-"] forState:UIControlStateNormal];
        }
+}
+
+- (void)codeBtnClick:(UIButton *)button {
+    
+    [[NetworkManager sharedInstance] generalGetWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,RegistCodeAPI] param:nil returnBlock:^(NSDictionary *returnDict) {
+        NSString * base64String = [NSString stringWithFormat:@"%@",returnDict[@"data"][@"img"]];
+        // 将base64字符串转为NSData
+        NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64String options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+        // 将NSData转为UIImage
+       [button setBackgroundImage:[UIImage imageWithData: decodeData] forState: UIControlStateNormal ];
+    }];
 }
 
 - (void)showPassWord:(UIButton *)sender {

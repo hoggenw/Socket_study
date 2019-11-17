@@ -39,6 +39,9 @@
 //pop
 #define POP [self.navigationController popViewControllerAnimated:YES]
 
+ //pop
+ #define StirngWithDic(value) [NSString stringWithFormat:@"%@",value];
+
 ///debug模式下,打印数据
 #ifdef DEBUG
 #define NSLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )

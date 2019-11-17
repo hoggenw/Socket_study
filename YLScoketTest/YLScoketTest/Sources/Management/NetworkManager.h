@@ -13,8 +13,12 @@ typedef void (^ReturnBlock)(NSDictionary *returnDict);
 
 extern NSString * const BaseUrl;              // 网络请求的BaseUrl
 extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
-
-
+//注册验证码接口
+extern NSString * const RegistCodeAPI;
+//登录接口
+extern NSString * const LoginAPI;
+//注册接口
+extern NSString * const RegisterAPI;
 
 @interface NetworkManager : NSObject
 
@@ -26,7 +30,7 @@ extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
 
 
 // 上传图片接口
--(void)postImageUploadApiParam:(NSDictionary *)paramDic returnBlock:(ReturnBlock)infoBlock;
+-(void)postImageUploadApiParam:(NSData *)data returnBlock:(ReturnBlock)infoBlock;
 
 
 //放入请求头

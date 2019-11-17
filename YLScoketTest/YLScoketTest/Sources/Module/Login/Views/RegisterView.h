@@ -16,6 +16,22 @@ NS_ASSUME_NONNULL_BEGIN
 /** 获取验证码 按钮 */
 @property (weak, nonatomic) UIButton * codeBtn;
 
+
+/** 电话号码 输入框 */
+@property (weak, nonatomic) UITextField * phoneField;
+
+/** 昵称*/
+@property (weak, nonatomic) UITextField * nameField;
+/** 验证码 输入框 */
+@property (weak, nonatomic) UITextField * codeField;
+/** 设置密码 输入框 */
+@property (weak, nonatomic) UITextField * secretField;
+
+
+@property (weak, nonatomic) UIButton * saveBtn;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

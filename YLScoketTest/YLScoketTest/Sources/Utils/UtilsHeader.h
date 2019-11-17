@@ -38,4 +38,7 @@ typedef NS_ENUM(NSInteger, PopupViewType){
     DefaultStyle  = 0,
   
 };
+
+typedef void(^SuccessCallBack)(NSDictionary * successDictionary);
+
 #endif /* UtilsHeader_h */
