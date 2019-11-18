@@ -12,7 +12,7 @@ target ‘YLScoketTest’ do
   pod 'MQTTKit'
   pod 'Masonry'
   pod 'MBProgressHUD'
-  pod 'AFNetworking'
+  pod 'AFNetworking' 
   pod 'MJRefresh'
   pod 'FMDB'
   pod 'SDWebImage'

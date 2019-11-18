@@ -103,7 +103,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         NSDictionary *errorDic = @{@"errno":@"-1"};
             self.returnBlock = infoBlock;
                   self.returnBlock(errorDic);
-        [self dealError: @"网络请求没有成功"];
+        [self dealError: @"网络请求发生错误"];
     }];
     
 }
@@ -137,17 +137,18 @@ static AFHTTPSessionManager *sessionManager = nil;
         NSDictionary *errorDic = @{@"errno":@"-1"};
          self.returnBlock = infoBlock;
               self.returnBlock(errorDic);
-        [self dealError: @"网络请求没有成功"];
+        [self dealError: @"网络请求发生错误"];
     }];
 }
 
 //放入请求体
 - (void)postWithURL:(NSString *)requestURL paramBody:(NSDictionary *)paramDic needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
-    [manager POST:requestURL parameters:paramDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    
+    [manager POST:requestURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
         
-    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
           NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
                NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
               if([errnos isEqualToString:@"0"]){ //成功
@@ -162,11 +163,21 @@ static AFHTTPSessionManager *sessionManager = nil;
         self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
-        self.returnBlock = infoBlock;
-        self.returnBlock(errorDic);
-        NSLog(@"error ： %@",error);
-       [self dealError: @"网络请求没有成功"];
+               self.returnBlock = infoBlock;
+               self.returnBlock(errorDic);
+               for (NSString * key in error.userInfo.allKeys) {
+                   NSLog(@"error key = %@, valeu = %@",key,error.userInfo[key]);
+                   if ([key isEqualToString:@"com.alamofire.serialization.response.error.data"]) {
+                       NSData * data = error.userInfo[key];
+                       NSLog(@"错误dat啊： %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                       
+                   }
+               }
+               NSLog(@"error ： %@",error);
+              [self dealError: @"网络请求发生错误"];
     }];
+
+
 
 }
 
@@ -192,7 +203,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         
          self.returnBlock = infoBlock;
               self.returnBlock(errorDic);
-       [self dealError: @"网络请求没有成功"];
+       [self dealError: @"网络请求发生错误"];
         
     }];
 }
@@ -217,7 +228,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         NSDictionary *errorDic = @{@"errno":@"-1"};
           self.returnBlock = infoBlock;
               self.returnBlock(errorDic);
-        [self dealError: @"网络请求没有成功"];
+        [self dealError: @"网络请求发生错误"];
     }];
 }
 
@@ -242,7 +253,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
               self.returnBlock(errorDic);
-       [self dealError: @"网络请求没有成功"];
+       [self dealError: @"网络请求发生错误"];
     }];
 }
 
@@ -259,10 +270,10 @@ static AFHTTPSessionManager *sessionManager = nil;
     }
     sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
-    //sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+    sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
     //(这里设置涉及到AFHTTPRequestSerializer  ，AFJSONRequestSerializer java 后台getParameter能否收到参数，AFHTTPRequestSerializer能)测试无效
     
-    //[sessionManager.requestSerializer setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+    [sessionManager.requestSerializer setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
     [sessionManager.requestSerializer setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     //[sessionManager.requestSerializer setValue:@"application/form-data" forHTTPHeaderField:@"Content-Type"];
     [sessionManager.requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];

@@ -25,12 +25,12 @@
             
             [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,LoginAPI] paramBody:_loginInfo needToken:false returnBlock:^(NSDictionary *returnDict) {
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
-                    UserModel * model = [UserModel new];
-                    model.userID = @"dads";
-                    model.accessToken = @"dsads";
-                    model.name = self.loginInfo[@"username"];
-                    [UserDefUtils saveString:model.name forKey:@"account"];
-                    [subscriber sendNext: model];
+                    NSDictionary * userDic = returnDict[@"data"];
+                    UserModel * user = [[UserModel alloc] initWithDictionary: userDic[@"user"]];
+                    user.accessToken = [NSString stringWithFormat:@"%@",userDic[@"token"]];
+                    [[AccountManager sharedInstance] update: user];
+                    [UserDefUtils saveString:user.phone forKey:@"account"];
+                    [subscriber sendNext: user];
                     [subscriber sendCompleted];
                 }else {
                     [subscriber sendNext: nil];
@@ -45,14 +45,7 @@
       
     }];
     
-    _personalCommand = [[RACCommand alloc]initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
-           return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-               [subscriber sendNext: nil];
-               [subscriber sendCompleted];
-              
-               return nil;
-           }];
-       }];
+
     
 }
 
@@ -61,8 +54,5 @@
     [_loginCommand execute:nil];
 }
 
--(void)setUserId:(NSString *)userId{
-    _userId = userId;
-    [_personalCommand execute:nil];
-}
+
 @end

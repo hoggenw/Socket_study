@@ -45,7 +45,7 @@
             return ;
         }
         _registerView.saveBtn.enabled = false;
-        NSDictionary * info = @{@"password":_registerView.secretField.text,@"phone":_registerView.phoneField.text,@"name":_registerView.nameField.text,@"code":_registerView.codeField.text};
+        NSDictionary * info = @{@"password":_registerView.secretField.text.md5String,@"phone":_registerView.phoneField.text,@"name":_registerView.nameField.text,@"code":_registerView.codeField.text};
         _registerViewModel.registerInfo = info;
         
         
@@ -72,6 +72,7 @@
                      if (self.successblock) {
                          NSDictionary * info = @{@"password":_registerView.secretField.text,@"phone":_registerView.phoneField.text};
                          self.successblock(info);
+                         POP;
                      }
                  }
     }];

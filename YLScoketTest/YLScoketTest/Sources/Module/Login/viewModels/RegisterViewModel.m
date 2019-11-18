@@ -26,11 +26,18 @@
             
             [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,RegisterAPI] paramBody:_registerInfo needToken:false returnBlock:^(NSDictionary *returnDict) {
                 
-                NSDictionary * userDic = returnDict[@"data"];
-                UserModel * user = [[UserModel alloc] initWithDictionary: userDic];
-                [[AccountManager sharedInstance] update: user];
-                [subscriber sendNext: user];
-                [subscriber sendCompleted];
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+//                   NSDictionary * userDic = returnDict[@"data"];
+//                    UserModel * user = [[UserModel alloc] initWithDictionary: userDic];
+//                    [[AccountManager sharedInstance] update: user];
+                   [subscriber sendNext: @(true)];
+                   [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+               
                
             }];
 
@@ -47,3 +54,4 @@
     
 }
 @end
+

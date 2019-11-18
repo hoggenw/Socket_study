@@ -68,8 +68,8 @@
         @strongify(self)
         RegisterViewController * registVC = [RegisterViewController new];
         registVC.successblock = ^(NSDictionary * dic){
-            self.loginView.accountTF.text = StirngWithDic(dic[@"account"]);
-            self.loginView.pwdTF.text = StirngWithDic(dic[@"passworld"]);
+            self.loginView.accountTF.text = StirngWithDic(dic[@"phone"]);
+            self.loginView.pwdTF.text = StirngWithDic(dic[@"password"]);
         };
         PUSH(registVC);
         
@@ -80,7 +80,7 @@
         @strongify(self)
         RACTupleUnpack(UIButton *btn) = x;
         btn.enabled = false;
-        self.viewModel.loginInfo = @{@"phone":self.loginView.accountTF.text, @"password":self.loginView.pwdTF.text};
+        self.viewModel.loginInfo = @{@"phone":self.loginView.accountTF.text, @"password":self.loginView.pwdTF.text.md5String};
         
     }];
   
@@ -99,19 +99,11 @@
           }
           else
           {
-              UserModel *model = (UserModel *)x;
-              self.viewModel.userId = model.userID;
+             AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+              YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc]initWithChildVCInfoArray:  nil];
+              AppDele.window.rootViewController = tabarVC;
+
           }
-      }];
-      
-      [_viewModel.personalCommand.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
-          @strongify(self)
-          NSLog(@"获取个人数据");
-          AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-          YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc]initWithChildVCInfoArray:  nil];
-          AppDele.window.rootViewController = tabarVC;
-             
-            
       }];
     
 }
