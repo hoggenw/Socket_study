@@ -29,7 +29,10 @@
 - (BOOL)isEmpty;
 
 
-
+/**
+ 把姓名转化成拼音且首字母大写
+ */
+- (NSString *)transformCharacter;
 
 
 //TODO 可以考拉将正则部分单独再提取个NSString+Match/Regex的分类

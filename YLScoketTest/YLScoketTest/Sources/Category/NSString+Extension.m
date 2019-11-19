@@ -91,6 +91,19 @@ static NSString * base64hash=@"T62tz1XHCUjk8NBveQaInA3GMswumo7gc~9VZRdqhbKyiOFlJ
 }
 
 /**
+ 把姓名转化成拼音且首字母大写
+ */
+- (NSString *)transformCharacter {
+    
+    NSMutableString *str = [self mutableCopy];
+    CFStringTransform((CFMutableStringRef) str, NULL, kCFStringTransformMandarinLatin, NO);
+    CFStringTransform((CFMutableStringRef)str, NULL, kCFStringTransformStripDiacritics, NO);
+    NSString *pinYin = [str stringByReplacingOccurrencesOfString:@" " withString:@""];;
+    
+    return [pinYin uppercaseString];
+}
+
+/**
  *  身份证号判断
  */
 - (BOOL)isIdentityForChina

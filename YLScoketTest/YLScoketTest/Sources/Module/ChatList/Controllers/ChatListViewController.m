@@ -12,13 +12,13 @@
 #import "ChatListUserModel.h"
 #import "ChatUserModel.h"
 
-#define ModelNumber 12
 
 @interface ChatListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) NSMutableArray * dataArray;
 @property(nonatomic,strong) UITableView * tableView;
-
+//暂无数据
+@property (nonatomic, strong) UIImageView * noDataView;
 
 @end
 
@@ -60,33 +60,25 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.bounces = YES;
+   
+
+    
+    [self.noDataView setHidden: true];
+      [self.view addSubview: self.noDataView];
+      [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.centerX.equalTo(self.view.mas_centerX);
+          make.centerY.equalTo(self.view.mas_centerY);
+          make.width.equalTo(@(218));
+          make.height.equalTo(@(192));
+      }];
+      //添加刷新View
+    [self.view bringSubviewToFront: self.noDataView];
     self.dataArray = [self getDataArray];
     [self.tableView reloadData];
 }
 
 -(NSMutableArray *)getDataArray {
-    NSMutableArray *models = [[NSMutableArray alloc] initWithCapacity:20];
-    for (int j  = 0; j < 2;  j ++) {
-        for (int i  = 0; i < ModelNumber;  i ++) {
-            ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
-            item1.from = [NSString stringWithFormat:@"王八%@",@(i)];
-            item1.message = @"帅哥你好！！";
-            item1.avatarURL = [NSURL URLWithString:@"send_head.jpg"];
-            item1.messageCount = i;
-            item1.date = [NSDate date];
-            item1.needHint = i%2;
-            [models addObject:item1];
-        }
-    }
-    
-    ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
-    item1.from = [NSString stringWithFormat:@"王八%@",@(100)];
-    item1.message = @"帅哥你好！！";
-    item1.avatarURL = [NSURL URLWithString:@"send_head.jpg"];
-    item1.messageCount = 100;
-    item1.date = [NSDate date];
-    item1.needHint = true;
-    [models addObject:item1];
+    NSMutableArray *models = [NSMutableArray array];
     return models;
 }
 
@@ -95,6 +87,11 @@
 
 #pragma mark - tableView的delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.dataArray.count <= 0) {
+           [self.noDataView setHidden: false];
+       }else{
+           [self.noDataView setHidden: true];
+       }
     return _dataArray.count;
     
 }
@@ -185,6 +182,18 @@
 }
 
 
-
+-(UIImageView *)noDataView {
+    if(_noDataView == nil){
+        UIImageView *noData = [UIImageView new];
+        noData.image = [UIImage imageNamed:@"common_nodata_icon"];
+        CGRect frame = noData.frame;
+        frame.size = CGSizeMake(106, 95);
+        noData.frame = frame;
+        _noDataView = noData;
+    }
+    //    106 95
+    return _noDataView;
+}
 
 @end
+

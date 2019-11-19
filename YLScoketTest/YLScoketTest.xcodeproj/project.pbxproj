@@ -96,6 +96,7 @@
 		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
 		879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */; };
 		879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */; };
+		879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */; };
 		87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */; };
 		87D0E2FB237CE224004ECC78 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FA237CE224004ECC78 /* RegisterViewController.m */; };
 		87D0E2FE237CE246004ECC78 /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FD237CE246004ECC78 /* RegisterView.m */; };
@@ -350,6 +351,8 @@
 		879BF5042383C56600D1669E /* YlbaseMessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlbaseMessageModel.pbobjc.h; sourceTree = "<group>"; };
 		879BF5092383CB4300D1669E /* YlmessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlmessageModel.pbobjc.h; sourceTree = "<group>"; };
 		879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YlmessageModel.pbobjc.m; sourceTree = "<group>"; };
+		879BF50D2383E9FD00D1669E /* AddressBookViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookViewModel.h; sourceTree = "<group>"; };
+		879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewModel.m; sourceTree = "<group>"; };
 		87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewModel.h; sourceTree = "<group>"; };
 		87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewModel.m; sourceTree = "<group>"; };
 		87D0E2F9237CE224004ECC78 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -1035,6 +1038,15 @@
 			path = YLScoketTest;
 			sourceTree = "<group>";
 		};
+		879BF50C2383E1FF00D1669E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				879BF50D2383E9FD00D1669E /* AddressBookViewModel.h */,
+				879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		96ECC804C56461F52BEAC866 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1063,6 +1075,7 @@
 		A5852FAE2367E23E009E5CB3 /* AddressBok */ = {
 			isa = PBXGroup;
 			children = (
+				879BF50C2383E1FF00D1669E /* ViewModel */,
 				A5852FAF2367E23E009E5CB3 /* Modles */,
 				A5852FB02367E23E009E5CB3 /* Controllers */,
 				A5852FB12367E23E009E5CB3 /* Views */,
@@ -1423,6 +1436,7 @@
 				111CB1E5202300380035D245 /* MicrophoneBottomView.m in Sources */,
 				A5852F5B2367CDD1009E5CB3 /* UITextField+Factory.m in Sources */,
 				A5852F592367CDD1009E5CB3 /* UILabel+Factory.m in Sources */,
+				879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */,
 				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
 				11576163201889E200E0D94F /* GPBMessage.m in Sources */,
 				115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */,

@@ -10,11 +10,11 @@
 
 @class ChatMessageModel;
 
-@class YLmessageModel;
+@class YLMessageModel;
 
 @protocol receiveMessageDelegate<NSObject>
 
-- (void)receiveMessage:(YLmessageModel *)message;
+- (void)receiveMessage:(YLMessageModel *)message;
 
 @end
 
