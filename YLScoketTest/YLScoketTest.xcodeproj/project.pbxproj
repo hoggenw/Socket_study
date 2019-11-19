@@ -94,11 +94,11 @@
 		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
 		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
 		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
+		879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */; };
+		879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */; };
 		87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */; };
 		87D0E2FB237CE224004ECC78 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FA237CE224004ECC78 /* RegisterViewController.m */; };
 		87D0E2FE237CE246004ECC78 /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FD237CE246004ECC78 /* RegisterView.m */; };
-		A5852F402367CDA8009E5CB3 /* BaseMessage.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F3D2367CDA8009E5CB3 /* BaseMessage.pbobjc.m */; };
-		A5852F412367CDA8009E5CB3 /* UserMessage.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F3F2367CDA8009E5CB3 /* UserMessage.pbobjc.m */; };
 		A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F442367CDD0009E5CB3 /* YLIFlyHelper.m */; };
 		A5852F592367CDD1009E5CB3 /* UILabel+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F472367CDD1009E5CB3 /* UILabel+Factory.m */; };
 		A5852F5A2367CDD1009E5CB3 /* UITableView+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F492367CDD1009E5CB3 /* UITableView+Factory.m */; };
@@ -346,16 +346,16 @@
 		11849E191E52AFD0006D682D /* 7聊.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7聊.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
+		879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YlbaseMessageModel.pbobjc.m; sourceTree = "<group>"; };
+		879BF5042383C56600D1669E /* YlbaseMessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlbaseMessageModel.pbobjc.h; sourceTree = "<group>"; };
+		879BF5092383CB4300D1669E /* YlmessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlmessageModel.pbobjc.h; sourceTree = "<group>"; };
+		879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YlmessageModel.pbobjc.m; sourceTree = "<group>"; };
 		87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewModel.h; sourceTree = "<group>"; };
 		87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewModel.m; sourceTree = "<group>"; };
 		87D0E2F9237CE224004ECC78 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		87D0E2FA237CE224004ECC78 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		87D0E2FC237CE246004ECC78 /* RegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterView.h; sourceTree = "<group>"; };
 		87D0E2FD237CE246004ECC78 /* RegisterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterView.m; sourceTree = "<group>"; };
-		A5852F3C2367CDA8009E5CB3 /* BaseMessage.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMessage.pbobjc.h; sourceTree = "<group>"; };
-		A5852F3D2367CDA8009E5CB3 /* BaseMessage.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMessage.pbobjc.m; sourceTree = "<group>"; };
-		A5852F3E2367CDA8009E5CB3 /* UserMessage.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMessage.pbobjc.h; sourceTree = "<group>"; };
-		A5852F3F2367CDA8009E5CB3 /* UserMessage.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMessage.pbobjc.m; sourceTree = "<group>"; };
 		A5852F422367CDD0009E5CB3 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		A5852F432367CDD0009E5CB3 /* UserDefUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefUtils.h; sourceTree = "<group>"; };
 		A5852F442367CDD0009E5CB3 /* YLIFlyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLIFlyHelper.m; sourceTree = "<group>"; };
@@ -558,10 +558,10 @@
 		1157610220187A9600E0D94F /* Protobuf */ = {
 			isa = PBXGroup;
 			children = (
-				A5852F3C2367CDA8009E5CB3 /* BaseMessage.pbobjc.h */,
-				A5852F3D2367CDA8009E5CB3 /* BaseMessage.pbobjc.m */,
-				A5852F3E2367CDA8009E5CB3 /* UserMessage.pbobjc.h */,
-				A5852F3F2367CDA8009E5CB3 /* UserMessage.pbobjc.m */,
+				879BF5092383CB4300D1669E /* YlmessageModel.pbobjc.h */,
+				879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */,
+				879BF5042383C56600D1669E /* YlbaseMessageModel.pbobjc.h */,
+				879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */,
 			);
 			path = Protobuf;
 			sourceTree = "<group>";
@@ -1325,12 +1325,12 @@
 				11576162201889E200E0D94F /* GPBUtilities.m in Sources */,
 				A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */,
 				A5852FC123681F5F009E5CB3 /* BannerScrollView.m in Sources */,
+				879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */,
 				111CB231202447D80035D245 /* DPAudioRecorder.m in Sources */,
 				A5852F7E2367CE04009E5CB3 /* YLImageView.m in Sources */,
 				A5852FCF2368203C009E5CB3 /* LoginView.m in Sources */,
 				116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */,
 				11576161201889E200E0D94F /* GPBUnknownField.m in Sources */,
-				A5852F402367CDA8009E5CB3 /* BaseMessage.pbobjc.m in Sources */,
 				116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */,
 				111CB1E6202300380035D245 /* MicrophoneView.m in Sources */,
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
@@ -1363,6 +1363,7 @@
 				A5852F602367CDD1009E5CB3 /* LanguageUtil.m in Sources */,
 				87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */,
 				A5852F5E2367CDD1009E5CB3 /* FileManager.m in Sources */,
+				879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */,
 				116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */,
 				1157615A201889E200E0D94F /* Wrappers.pbobjc.m in Sources */,
 				115761662019CDB000E0D94F /* YLChatFaceItemView.m in Sources */,
@@ -1398,7 +1399,6 @@
 				A5852F6D2367CDF0009E5CB3 /* NSObject+YLKVO.m in Sources */,
 				11576150201889E200E0D94F /* GPBWireFormat.m in Sources */,
 				116B67A420119AE7005AA5E0 /* ChatListViewController.m in Sources */,
-				A5852F412367CDA8009E5CB3 /* UserMessage.pbobjc.m in Sources */,
 				11576156201889E200E0D94F /* Any.pbobjc.m in Sources */,
 				116B677E20118FB6005AA5E0 /* NSDate+Extension.m in Sources */,
 				11576158201889E200E0D94F /* Api.pbobjc.m in Sources */,

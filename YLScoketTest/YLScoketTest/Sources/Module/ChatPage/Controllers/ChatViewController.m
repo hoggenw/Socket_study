@@ -15,7 +15,7 @@
 #import "YLSocketRocktManager.h"
 #import "YLPhotoPreviewController.h"
 
-#import "UserMessage.pbobjc.h"
+#import "YlmessageModel.pbobjc.h"
 
 
 @interface ChatViewController ()<ChatShowMessageViewControllerDelegate,ChatBoxViewControllerDelegate,receiveMessageDelegate>
@@ -105,7 +105,7 @@
 
 # pragma mark -  receiveMessageDelegate
 
--(void)receiveMessage:(YLmessageModel *)message {
+-(void)receiveMessage:(YLMessageModel *)message {
     /**
      *   TLMessage 是一条消息的数据模型。纪录消息的各种属性
      就因为又有下面的这个，所以就有了你发一条，又会多一条的显示效果！！
@@ -115,7 +115,7 @@
         case  YLMessageTypeImage:{ // 图片
             recMessage.messageType = YLMessageTypeImage;
             recMessage.ownerTyper = YLMessageOwnerTypeOther;
-            recMessage.imagePath = message.name;
+            recMessage.imagePath = message.messageSource;
             recMessage.image = [UIImage imageWithData:  message.voiceData];
             break;
         }

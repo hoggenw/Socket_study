@@ -8,8 +8,8 @@
 
 #import "YLSocketRocktManager.h"
 //#import "SocketRocket.h"
- #import "UserMessage.pbobjc.h"
-#import "BaseMessage.pbobjc.h"
+ #import "YlmessageModel.pbobjc.h"
+#import "YlbaseMessageModel.pbobjc.h"
 #import "GPBProtocolBuffers_RuntimeSupport.h"
 #import "ChatMessageModel.h"
 #import "ChatOtherUserModel.h"
@@ -40,8 +40,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
 static NSString * host = @"192.168.0.167";
 static const uint16_t port = 6969;
 
-static const uint16_t commonModule = 101;
-static const uint16_t commandMessage = 1;
  
 
 @implementation YLSocketRocktManager
@@ -60,7 +58,12 @@ static const uint16_t commandMessage = 1;
     if (_webSocket) {
         return;
     }
-    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&token=1232",host,port]] protocols:@[@"chat",@"superchat"]];
+    AccountManager * manager = [AccountManager sharedInstance];
+    if(!manager.isLogin){
+        return;
+    }
+    UserModel * model = manager.fetch;
+    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&%@&%@",host,port,model.accessToken,model.userID]] protocols:@[@"chat",@"superchat"]];
     _webSocket.delegate = self;
     //设置代理线程Queue
     NSOperationQueue *queue = [NSOperationQueue new];
@@ -121,7 +124,7 @@ static const uint16_t commandMessage = 1;
         _webSocket = nil;
     }
 }
-
+#pragma mark- 消息发送
 -(void)sendMassege:(ChatMessageModel *)messageModel {
     
     if (!(_webSocket.readyState == SR_OPEN)) {
@@ -129,23 +132,21 @@ static const uint16_t commandMessage = 1;
         return;
     }
     
-    YLmessageModel * pmessage = [YLmessageModel new];
+    YLMessageModel * pmessage = [YLMessageModel new];
     switch (messageModel.messageType) {
         case  YLMessageTypeImage:{ // 图片
             pmessage.textString = @"这是图片";
             pmessage.messageType = YLMessageTypeImage;
-            pmessage.name = messageModel.imagePath;
+            pmessage.messageSource = messageModel.imagePath;
             pmessage.voiceData = messageModel.voiceData;
             break;
         }
         case  YLMessageTypeText:{ // 文字
             pmessage.textString = messageModel.text;
-            pmessage.name = messageModel.from.username;
             pmessage.messageType = YLMessageTypeText;
             break;
         }
         case  YLMessageTypeVoice:{ // 语音
-            pmessage.name =  messageModel.from.username;
             pmessage.voiceData = messageModel.voiceData;
             pmessage.messageType = YLMessageTypeVoice;
             pmessage.voiceLength = (uint32_t) messageModel.voiceSeconds;
@@ -164,13 +165,18 @@ static const uint16_t commandMessage = 1;
         default:
             break;
     }
+    YLUserModel * fromModel = [YLUserModel new];
+    UserModel * user = [AccountManager sharedInstance].fetch;
+    fromModel.userId = user.userID;
+    fromModel.name = user.name;
+    fromModel.avatar = user.avatar;
     // 序列化为Data
     NSData *data = [pmessage data];
     
     YLBaseMessageModel * base = [YLBaseMessageModel new];
     base.title = SokectTile;
-    base.command = commandMessage;
-    base.module = commonModule;
+    base.command = YLMessageCMDPersontoPerson;
+    base.module = YLMessageCommonModule;
     base.data_p = data;
     //NSLog(@"%@",data);
     [_webSocket send: [base data]];
@@ -213,7 +219,7 @@ static const uint16_t commandMessage = 1;
         NSError *error;
         YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
         if (baseModel != NULL) {
-            YLmessageModel * pmessage  = [[YLmessageModel alloc] initWithData:baseModel.data_p error:&error];
+            YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
             NSLog(@"%@",pmessage.description);
             if (pmessage != NULL) {
                [_delegate receiveMessage: pmessage];

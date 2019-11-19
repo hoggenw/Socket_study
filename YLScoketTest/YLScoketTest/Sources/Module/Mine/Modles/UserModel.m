@@ -27,12 +27,12 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        _avatar = dictionary[@"avatar"];
-        _userID = dictionary[@"userId"];
-        _name = dictionary[@"userName"];
-        _isEnabled = dictionary[@"status"];
-        _accessToken = dictionary[@"accessToken"];
-        _phone = dictionary[@"mobile"];
+        _avatar =  [NSString stringWithFormat:@"%@",dictionary[@"avatar"]];
+        _userID = [NSString stringWithFormat:@"%@",dictionary[@"userId"]] ;
+        _name =  [NSString stringWithFormat:@"%@",dictionary[@"userName"]];
+        _isEnabled = [NSString stringWithFormat:@"%@",dictionary[@"status"]] ;
+        _accessToken =  [NSString stringWithFormat:@"%@",dictionary[@"accessToken"]];
+        _phone =  [NSString stringWithFormat:@"%@",dictionary[@"mobile"]];
     }
     return self;
 }

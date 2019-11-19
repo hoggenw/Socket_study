@@ -53,6 +53,26 @@ typedef NS_ENUM(NSUInteger, YLMessageReadState) {
     
 };
 
+/**
+ *  消息读取状态
+ */
+typedef NS_ENUM(NSUInteger, YLMessageModule) {
+    
+    YLMessageCommonModule = 101           // 一般消息
+  
+    
+};
+
+/**
+ *  消息读取状态
+ */
+typedef NS_ENUM(NSUInteger, YLMessageCMD) {
+    
+    YLMessageCMDPersontoPerson = 1          // 一般消息commandMessage
+  
+    
+};
+
 @interface ChatMessageModel : NSObject
 
 @property (nonatomic, strong) ChatUserModel *from;                    // 发送者信息
