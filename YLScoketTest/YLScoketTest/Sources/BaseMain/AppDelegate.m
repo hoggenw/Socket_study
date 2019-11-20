@@ -106,13 +106,19 @@
                    YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
                    self.window.rootViewController = tabarVC;
                }else{
-                self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+                   POST_LOGINQUIT_NOTIFICATION;
                }
                
            }
            
            
-       }\
+       }
+        @weakify(self)
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Account_Offline object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+            @strongify(self)
+            [[AccountManager sharedInstance] remove];
+            self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+        }];
     
     [YLSocketRocktManager shareManger];
     [self setKeyBoard];

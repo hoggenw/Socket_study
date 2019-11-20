@@ -97,6 +97,7 @@
 		879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */; };
 		879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */; };
 		879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */; };
+		879BF5132384CB1000D1669E /* MIneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5122384CB1000D1669E /* MIneViewModel.m */; };
 		87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */; };
 		87D0E2FB237CE224004ECC78 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FA237CE224004ECC78 /* RegisterViewController.m */; };
 		87D0E2FE237CE246004ECC78 /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FD237CE246004ECC78 /* RegisterView.m */; };
@@ -353,6 +354,8 @@
 		879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YlmessageModel.pbobjc.m; sourceTree = "<group>"; };
 		879BF50D2383E9FD00D1669E /* AddressBookViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookViewModel.h; sourceTree = "<group>"; };
 		879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewModel.m; sourceTree = "<group>"; };
+		879BF5112384CB1000D1669E /* MIneViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIneViewModel.h; sourceTree = "<group>"; };
+		879BF5122384CB1000D1669E /* MIneViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIneViewModel.m; sourceTree = "<group>"; };
 		87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewModel.h; sourceTree = "<group>"; };
 		87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewModel.m; sourceTree = "<group>"; };
 		87D0E2F9237CE224004ECC78 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -969,6 +972,7 @@
 		116B67A520119CBA005AA5E0 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				879BF5102384CAEF00D1669E /* ViewModel */,
 				116B67A620119CBA005AA5E0 /* Modles */,
 				116B67A920119CBA005AA5E0 /* Controllers */,
 				116B67AA20119CBA005AA5E0 /* Views */,
@@ -1043,6 +1047,15 @@
 			children = (
 				879BF50D2383E9FD00D1669E /* AddressBookViewModel.h */,
 				879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		879BF5102384CAEF00D1669E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				879BF5112384CB1000D1669E /* MIneViewModel.h */,
+				879BF5122384CB1000D1669E /* MIneViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1430,6 +1443,7 @@
 				1157614F201889E200E0D94F /* GPBDescriptor.m in Sources */,
 				115760F320171D4D00E0D94F /* YLVoiceMessageCell.m in Sources */,
 				111CB232202447D80035D245 /* JX_GCDTimerManager.m in Sources */,
+				879BF5132384CB1000D1669E /* MIneViewModel.m in Sources */,
 				11576159201889E200E0D94F /* Duration.pbobjc.m in Sources */,
 				116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */,
 				1157615F201889E200E0D94F /* GPBUnknownFieldSet.m in Sources */,

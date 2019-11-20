@@ -19,6 +19,8 @@ extern NSString * const RegistCodeAPI;
 extern NSString * const LoginAPI;
 //注册接口
 extern NSString * const RegisterAPI;
+//退出登录
+extern NSString * const LoginQuitAPI;
 
 @interface NetworkManager : NSObject
 

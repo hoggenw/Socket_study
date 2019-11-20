@@ -119,7 +119,7 @@
                YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
                     AppDele.window.rootViewController = tabarVC;
            }else{
-               AppDele.window.rootViewController =  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+                POST_LOGINQUIT_NOTIFICATION;
            }
     }else {
         [self dismissViewControllerAnimated:YES completion:nil];

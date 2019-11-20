@@ -8,7 +8,6 @@
 
 #import "NetworkManager.h"
 #import "YLDeviceUtil.h"
-#import "LoginViewController.h"
 
 #define NetworkTimeoutInterval 20.0
 
@@ -23,6 +22,7 @@ NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?r
 NSString * const RegistCodeAPI = @"api/login/getKaptchaImage";
 
 NSString * const LoginAPI = @"api/login/userLogin";
+NSString * const LoginQuitAPI = @"api/login/quit";
 
 NSString * const RegisterAPI = @"api/login/register";
 
@@ -303,6 +303,7 @@ static AFHTTPSessionManager *sessionManager = nil;
     if (needToken) {
         UserModel * user = [[AccountManager sharedInstance] fetch];
         [sessionManager.requestSerializer setValue:user.accessToken forHTTPHeaderField:@"token"];
+          [sessionManager.requestSerializer setValue:user.userID forHTTPHeaderField:@"userId"];
     }
     return sessionManager;
 }
