@@ -36,24 +36,18 @@
     
     _viewmodel = [MIneViewModel new];
     [self.viewmodel.quitLoginCommand.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
-        if (x == nil) {
-            
-        }else {
-            UIWindow *window = [[UIApplication sharedApplication].delegate window];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message: @"确定退出当前账户吗？" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction  = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                  POST_LOGINQUIT_NOTIFICATION;
-            }];
-            
-            UIAlertAction *cancelAction  = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                 
-            }];
-            [alertController addAction:okAction];
-            [alertController addAction:cancelAction];
-            [window.rootViewController presentViewController:alertController animated:YES completion:nil];
-            
-           
-        }
+         UIWindow *window = [[UIApplication sharedApplication].delegate window];
+                   UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message: @"确定退出当前账户吗？" preferredStyle:UIAlertControllerStyleAlert];
+                   UIAlertAction *okAction  = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                         POST_LOGINQUIT_NOTIFICATION;
+                   }];
+                   
+                   UIAlertAction *cancelAction  = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                   }];
+                   [alertController addAction:okAction];
+                   [alertController addAction:cancelAction];
+                   [window.rootViewController presentViewController:alertController animated:YES completion:nil];
         
     }];
     

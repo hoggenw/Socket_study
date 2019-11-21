@@ -13,11 +13,10 @@
 
 
 @property (weak, nonatomic)  UILabel * phoneLabelHint;
-
-
 @property (weak, nonatomic)  UILabel * nameLabelHint;
 
-
+//7聊提示
+@property (weak, nonatomic)  UILabel * codeNameLabelHint;
 
 /** 确认密码 输入框 */
 @property (weak, nonatomic) UITextField * secondSecretField;
@@ -49,20 +48,20 @@
 - (void)initialUI {
     
     // 1.注册 视图
-       UIView * infoView = ({
-           UIView * view = [[UIView alloc] init];
-           [self addSubview:view];
-           view.backgroundColor = [UIColor whiteColor];
-           [view mas_makeConstraints:^(MASConstraintMaker *make) {
-               make.left.equalTo(self).offset(20);
-               make.right.equalTo(self).offset(-20);
-               make.top.equalTo(self).offset(20);
-           }];
-           view;
-       });
-       [self initialInfoView:infoView];
-
-     #pragma clang diagnostic ignored "-Wundeclared-selector"
+    UIView * infoView = ({
+        UIView * view = [[UIView alloc] init];
+        [self addSubview:view];
+        view.backgroundColor = [UIColor whiteColor];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(20);
+            make.right.equalTo(self).offset(-20);
+            make.top.equalTo(self).offset(20);
+        }];
+        view;
+    });
+    [self initialInfoView:infoView];
+    
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     UIButton * regiterButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
         make.titleForState(@"注   册",UIControlStateNormal).titleFont(FONT(17)).addAction(self,@selector(registerAction),UIControlEventTouchUpInside).backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateNormal).backgroundImageForState([UIImage imageWithColor:UICOLOR(0x8EDEE9)], UIControlStateDisabled).addToSuperView(self);
     }];
@@ -94,11 +93,11 @@
     [button3 addGestureRecognizer:dtap];
     [button3 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_policyButton.mas_right);
-         make.height.top.bottom.equalTo(_policyButton);
+        make.height.top.bottom.equalTo(_policyButton);
         
     }];
     [self checkPolicy];
-       
+    
     [self bindRC];
     
     
@@ -108,22 +107,22 @@
 
 -(void)bindRC {
     
-    RAC(self.saveBtn,enabled) = [RACSignal combineLatest:@[self.secretField.rac_textSignal,self.secondSecretField.rac_textSignal,self.phoneField.rac_textSignal,self.codeField.rac_textSignal,self.nameField.rac_textSignal] reduce:^id _Nonnull(NSString *pwdF, NSString *pwd, NSString *phone, NSString *code,NSString *name){
-        if (pwdF.length > 0 && pwd.length > 0 && phone.length > 0 && code.length > 0 && name.length > 0 && name.length <= 10 && pwdF.length < 20) {
+    RAC(self.saveBtn,enabled) = [RACSignal combineLatest:@[self.secretField.rac_textSignal,self.secondSecretField.rac_textSignal,self.phoneField.rac_textSignal,self.codeField.rac_textSignal,self.nameField.rac_textSignal,self.codeNameField.rac_textSignal] reduce:^id _Nonnull(NSString *pwdF, NSString *pwd, NSString *phone, NSString *code,NSString *name,NSString *codeName){
+        if (pwdF.length > 0 && pwd.length > 0 && phone.length > 0 && code.length > 0 && name.length > 0 && name.length <= 10 && pwdF.length < 20 && codeName.length > 0) {
             
             BOOL equal = [pwdF isEqualToString: pwd];
-          
+            
             return @(equal && phone.isPhoneNumber);
         }
         
         return @(false);
     }];
     
-   RAC(self.phoneLabelHint,text) = [RACSignal combineLatest:@[self.phoneField.rac_textSignal] reduce:^id _Nonnull(NSString *phone){
+    RAC(self.phoneLabelHint,text) = [RACSignal combineLatest:@[self.phoneField.rac_textSignal] reduce:^id _Nonnull(NSString *phone){
         if ( phone.length > 0 ) {
             return phone.isPhoneNumber ? @"": @"输入合规的中国大陆电话号码";
         }
-       return @"";
+        return @"";
     }];
     
     RAC(self.secretLabelHint,text) = [RACSignal combineLatest:@[self.secretField.rac_textSignal,self.secondSecretField.rac_textSignal] reduce:^id _Nonnull(NSString *pwdF, NSString *pwd){
@@ -133,19 +132,29 @@
             return equal ? @"": @"设置两次密码需要一致";
         }
         
-       return @"";
+        return @"";
     }];
     
     RAC(self.nameLabelHint,text) = [RACSignal combineLatest:@[self.nameField.rac_textSignal] reduce:^id _Nonnull(NSString *name){
-           if ( name.length >= 15) {
-               return  @"昵称需要在1-10个字符j之间";
-           }
-           
-          return @"";
-       }];
+        if ( name.length >= 15) {
+            return  @"昵称需要在1-15个字符之间";
+        }
+        
+        return @"";
+    }];
+    RAC(self.codeNameLabelHint,text) = [RACSignal combineLatest:@[self.codeNameField.rac_textSignal] reduce:^id _Nonnull(NSString *name){
+        if ( name.length >= 20) {
+            self.codeNameLabelHint.textColor = UIColor.redColor;
+            return  @"7聊号需要在1-20个字符之间";
+        }else {
+            self.codeNameLabelHint.textColor = UIColor.lightGrayColor;
+        }
+        
+        return @"";
+    }];
     
-  
-
+    
+    
     
 }
 
@@ -173,38 +182,70 @@
         view;
     });
     _phoneLabelHint =  [UILabel makeLabel:^(LabelMaker * _Nonnull make) {
-           make.text(@"").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
-       }];
+        make.text(@"").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
+    }];
     [_phoneLabelHint mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(infoView);
         make.top.equalTo(phoneView.mas_bottom).offset(2);
         make.height.equalTo(@(15));
     }];
     
+    
+    
+    
+    
     //昵称
     // 1.电话 输入框
     UIView *nameView = ({
-           UIView *view = [[UIView alloc] init];
-           [infoView addSubview:view];
-           [self setUpLineView:view leftTitle:@"昵称" bottomNeedLine:YES];
-           UITextField *textField = nil;
-           [self setUpRightInLineView:view rightField:&textField placeHolder:@"请输入您的昵称" widthString:@"昵称"];
-           [view mas_makeConstraints:^(MASConstraintMaker *make) {
-               make.left.and.right.and.height.equalTo(phoneView);
-               make.top.equalTo(phoneView.mas_bottom).offset(intervalHeight);
-           }];
-           self.nameField = textField;
-           view;
+        UIView *view = [[UIView alloc] init];
+        [infoView addSubview:view];
+        [self setUpLineView:view leftTitle:@"昵称" bottomNeedLine:YES];
+        UITextField *textField = nil;
+        [self setUpRightInLineView:view rightField:&textField placeHolder:@"请输入您的昵称" widthString:@"昵称"];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.and.height.equalTo(phoneView);
+            make.top.equalTo(phoneView.mas_bottom).offset(intervalHeight);
+        }];
+        self.nameField = textField;
+        view;
     });
     
     _nameLabelHint =  [UILabel makeLabel:^(LabelMaker * _Nonnull make) {
-              make.text(@"").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
-          }];
-       [_nameLabelHint mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.left.and.right.equalTo(infoView);
-           make.top.equalTo(nameView.mas_bottom).offset(2);
-           make.height.equalTo(@(15));
-       }];
+        make.text(@"").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
+    }];
+    [_nameLabelHint mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(infoView);
+        make.top.equalTo(nameView.mas_bottom).offset(2);
+        make.height.equalTo(@(15));
+    }];
+    
+    
+#pragma mark - 7聊号
+    // 2.验证码
+    UIView *chatCodeNameView = ({
+        UIView *view = [[UIView alloc] init];
+        [infoView addSubview:view];
+        [self setUpLineView:view leftTitle:@"7聊号" bottomNeedLine:YES];
+        UITextField *textField = nil;
+        [self setUpRightInLineView:view rightField:&textField placeHolder:@"输入你的7聊号" widthString:@"7聊号"];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.and.height.equalTo(phoneView);
+            make.top.equalTo(nameView.mas_bottom).offset(intervalHeight);
+        }];
+        self.codeNameField = textField;
+        view;
+    });
+    
+    UILabel * codeNameLable =  [UILabel makeLabel:^(LabelMaker * _Nonnull make) {
+        make.text(@"7聊号可用作为朋友搜索你的依据").font(FONT(13)).textColor(UIColor.lightGrayColor).addToSuperView(self);
+    }];
+    codeNameLable.textAlignment = NSTextAlignmentLeft;
+    [codeNameLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(chatCodeNameView);
+        make.top.equalTo(chatCodeNameView.mas_bottom).offset(2);
+        make.height.equalTo(@(15));
+    }];
+    self.codeNameLabelHint = codeNameLable;
     
     // 2.验证码
     UIView *codeView = ({
@@ -216,7 +257,7 @@
         [self setUpRightInLineView:view rightField:&textField placeHolder:@"图片验证码" widthString:@"验证码"];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.and.height.equalTo(phoneView);
-            make.top.equalTo(nameView.mas_bottom).offset(intervalHeight);
+            make.top.equalTo(chatCodeNameView.mas_bottom).offset(intervalHeight);
         }];
         [textField mas_updateConstraints:^(MASConstraintMaker *make) {
             
@@ -224,7 +265,7 @@
             
         }];
         textField.clearButtonMode = UITextFieldViewModeNever;
-
+        
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [view addSubview:button];
@@ -240,8 +281,8 @@
         [button addLineWithSide: LineViewSideInLeft lineColor: [UIColor lightGrayColor] lineHeight: 0.5 leftMargin: 10 rightMargin:10];
         button.enabled = true;
         UILabel * codeLable =  [UILabel makeLabel:^(LabelMaker * _Nonnull make) {
-               make.text(@"点击刷新验证码").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
-           }];
+            make.text(@"点击刷新验证码").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
+        }];
         codeLable.textAlignment = NSTextAlignmentRight;
         [codeLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(button);
@@ -290,7 +331,7 @@
         self.secretField = textField;
         self.secretField.secureTextEntry = true;
         view;
-
+        
     });
     
     // 3.详细地址 输入框
@@ -329,16 +370,16 @@
     });
     
     _secretLabelHint =  [UILabel makeLabel:^(LabelMaker * _Nonnull make) {
-           make.text(@"").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
-       }];
+        make.text(@"").font(FONT(13)).textColor(UIColor.redColor).addToSuperView(self);
+    }];
     [_secretLabelHint mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(infoView);
         make.top.equalTo(secondSecretView.mas_bottom).offset(2);
         make.height.equalTo(@(15));
     }];
     
-
-
+    
+    
     
 }
 
@@ -359,7 +400,7 @@
         make.right.equalTo(lineView).offset(-rightMargin);
         make.top.and.bottom.equalTo(lineView);
     }];
-
+    
     
     *rightField = textField;
 }
@@ -401,21 +442,21 @@
             make.width.equalTo(@(0.5));
             
         }];
-       
+        
     }
     
 }
 
 -(void)checkPolicy {
     _isChecked = !_isChecked;
-       if (_isChecked)
-       {
-           [_policyButton setImage:[UIImage imageNamed:@"reading-interaction"] forState:UIControlStateNormal];
-       }
-       else
-       {
-           [_policyButton setImage:[UIImage imageNamed:@"check-"] forState:UIControlStateNormal];
-       }
+    if (_isChecked)
+    {
+        [_policyButton setImage:[UIImage imageNamed:@"reading-interaction"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [_policyButton setImage:[UIImage imageNamed:@"check-"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)codeBtnClick:(UIButton *)button {
@@ -425,7 +466,7 @@
         // 将base64字符串转为NSData
         NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64String options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
         // 将NSData转为UIImage
-       [button setBackgroundImage:[UIImage imageWithData: decodeData] forState: UIControlStateNormal ];
+        [button setBackgroundImage:[UIImage imageWithData: decodeData] forState: UIControlStateNormal ];
     }];
 }
 

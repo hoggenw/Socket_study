@@ -32,8 +32,8 @@
                     [subscriber sendCompleted];
                    
                 }else {
-                    [subscriber sendNext: nil];
-                    [subscriber sendCompleted];
+                   [subscriber sendNext: nil];
+                   [subscriber sendCompleted];
                 }
                 
             }];

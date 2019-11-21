@@ -45,7 +45,7 @@
             return ;
         }
         _registerView.saveBtn.enabled = false;
-        NSDictionary * info = @{@"password":_registerView.secretField.text.md5String,@"phone":_registerView.phoneField.text,@"name":_registerView.nameField.text,@"code":_registerView.codeField.text};
+        NSDictionary * info = @{@"password":_registerView.secretField.text.md5String,@"phone":_registerView.phoneField.text,@"name":_registerView.nameField.text,@"code":_registerView.codeField.text,@"codeName":_registerView.codeNameField.text};
         _registerViewModel.registerInfo = info;
         
         

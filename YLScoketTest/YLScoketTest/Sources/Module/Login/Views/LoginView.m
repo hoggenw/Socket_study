@@ -40,28 +40,28 @@
         make.centerX.equalTo(self);
     }];
     NSAttributedString *placeholder1 = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:@{NSFontAttributeName:FONT(14), NSForegroundColorAttributeName:[UIColor colorWithHex:0xB4BDCA]}];
-      _accountTF = [UITextField makeTextField:^(TextFieldMaker *make) {
-          make.attributedPlaceholder(placeholder1).textAlignment(NSTextAlignmentLeft).textColor([UIColor colorWithHex:0x333333]).font(FONT(16)).keyboardType(UIKeyboardTypeNumbersAndPunctuation).delegate(self).clearMode(UITextFieldViewModeWhileEditing).returnKeyType(UIReturnKeyNext).addToSuperView(self);
-      }];
-      _accountTF.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"account"];
-      [_accountTF mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.left.equalTo(self).mas_offset(43);
-          make.right.equalTo(self).mas_offset(-43);
-          make.height.mas_equalTo(44);
-          make.top.equalTo(logoImageView.mas_bottom).mas_offset(48);
-      }];
-      
-      NSAttributedString *placeholder2 = [[NSAttributedString alloc] initWithString:@"请输入登录密码" attributes:@{NSFontAttributeName:FONT(14), NSForegroundColorAttributeName:UICOLOR(0xB4BDCA)}];
-      _pwdTF = [UITextField makeTextField:^(TextFieldMaker *make) {
-          make.attributedPlaceholder(placeholder2).textAlignment(NSTextAlignmentLeft).textColor(UICOLOR(0x333333)).font(FONT(16)).delegate(self).clearMode(UITextFieldViewModeWhileEditing).returnKeyType(UIReturnKeyGo).secureTextEntry(YES).addToSuperView(self);
-      }];
-      _pwdTF.enablesReturnKeyAutomatically = YES;
-      [_pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.left.equalTo(self).mas_offset(43);
-          make.right.equalTo(self).mas_offset(-90);
-          make.height.mas_equalTo(44);
-          make.top.equalTo(self.accountTF.mas_bottom).mas_offset(20);
-      }];
+    _accountTF = [UITextField makeTextField:^(TextFieldMaker *make) {
+        make.attributedPlaceholder(placeholder1).textAlignment(NSTextAlignmentLeft).textColor([UIColor colorWithHex:0x333333]).font(FONT(16)).keyboardType(UIKeyboardTypeNumbersAndPunctuation).delegate(self).clearMode(UITextFieldViewModeWhileEditing).returnKeyType(UIReturnKeyNext).addToSuperView(self);
+    }];
+    _accountTF.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"account"];
+    [_accountTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).mas_offset(43);
+        make.right.equalTo(self).mas_offset(-43);
+        make.height.mas_equalTo(44);
+        make.top.equalTo(logoImageView.mas_bottom).mas_offset(48);
+    }];
+    
+    NSAttributedString *placeholder2 = [[NSAttributedString alloc] initWithString:@"请输入登录密码" attributes:@{NSFontAttributeName:FONT(14), NSForegroundColorAttributeName:UICOLOR(0xB4BDCA)}];
+    _pwdTF = [UITextField makeTextField:^(TextFieldMaker *make) {
+        make.attributedPlaceholder(placeholder2).textAlignment(NSTextAlignmentLeft).textColor(UICOLOR(0x333333)).font(FONT(16)).delegate(self).clearMode(UITextFieldViewModeWhileEditing).returnKeyType(UIReturnKeyGo).secureTextEntry(YES).addToSuperView(self);
+    }];
+    _pwdTF.enablesReturnKeyAutomatically = YES;
+    [_pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).mas_offset(43);
+        make.right.equalTo(self).mas_offset(-90);
+        make.height.mas_equalTo(44);
+        make.top.equalTo(self.accountTF.mas_bottom).mas_offset(20);
+    }];
     
     UIButton *secureStatusBtn = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
         make.imageForState(IMAGE(@"common_hidden_logo"), UIControlStateNormal).imageForState(IMAGE(@"common_show_icon"), UIControlStateSelected).addAction(self, @selector(secureAction:), UIControlEventTouchUpInside).addToSuperView(self);
@@ -72,33 +72,33 @@
         make.right.equalTo(self).mas_offset(-55);
     }];
     
-    #pragma clang diagnostic ignored "-Wundeclared-selector"
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     _registerBtn = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-           make.titleForState(@"前往注册", UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9), UIControlStateNormal).titleFont(FONT(13)).addAction(self, @selector(registerAction), UIControlEventTouchUpInside).addToSuperView(self);
-       }];
+        make.titleForState(@"前往注册", UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9), UIControlStateNormal).titleFont(FONT(13)).addAction(self, @selector(registerAction), UIControlEventTouchUpInside).addToSuperView(self);
+    }];
     
     
     _confirmBtn = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-           make.backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateNormal).backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateHighlighted).backgroundImageForState([UIImage imageWithColor:UICOLOR(0x8EDEE9)], UIControlStateDisabled);
-           make.titleColorForState(UIColor.whiteColor, UIControlStateNormal).titleForState(@"登 录", UIControlStateNormal).titleFont(BOLD_FONT(18)).addAction(self, @selector(confirmAction:), UIControlEventTouchUpInside).addToSuperView(self);
-       }];
+        make.backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateNormal).backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateHighlighted).backgroundImageForState([UIImage imageWithColor:UICOLOR(0x8EDEE9)], UIControlStateDisabled);
+        make.titleColorForState(UIColor.whiteColor, UIControlStateNormal).titleForState(@"登 录", UIControlStateNormal).titleFont(BOLD_FONT(18)).addAction(self, @selector(confirmAction:), UIControlEventTouchUpInside).addToSuperView(self);
+    }];
     
     [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).mas_offset(-40);
-//         make.left.equalTo(self.mas_left).offset(40);
+        //         make.left.equalTo(self.mas_left).offset(40);
         make.top.equalTo(self.pwdTF.mas_bottom).mas_offset(25);
     }];
     
-
-
-
+    
+    
+    
     [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(44));
         make.left.equalTo(self.mas_left).offset(40);
         make.right.equalTo(self.mas_right).offset(-40);
         make.top.equalTo(self.registerBtn.mas_bottom).offset(55);
     }];
-      
+    
     RAC(self.confirmBtn,enabled) = [RACSignal combineLatest:@[_accountTF.rac_textSignal,_pwdTF.rac_textSignal] reduce:^id _Nonnull(NSString *account, NSString *pwd){
         return @(account.isPhoneNumber && pwd.length > 0);
     }];
@@ -108,24 +108,24 @@
     _confirmBtn.clipsToBounds = true;
     
     _accountLine = [UIView new];
-       _accountLine.backgroundColor = UIColor.greenColor;
-       [self addSubview:_accountLine];
-       [_accountLine mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.bottom.centerX.equalTo(line1);
-           make.height.mas_equalTo(1.f);
-           make.width.mas_equalTo(0);
-       }];
-
-       _pwdLine = [UIView new];
-       _pwdLine.backgroundColor = UIColor.greenColor;
-       [self addSubview:_pwdLine];
-       [_pwdLine mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.bottom.centerX.equalTo(line2);
-           make.height.mas_equalTo(1.f);
-           make.width.mas_equalTo(0);
-       }];
-//
-//    [_confirmBtn setHidden:false];
+    _accountLine.backgroundColor = UIColor.greenColor;
+    [self addSubview:_accountLine];
+    [_accountLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.centerX.equalTo(line1);
+        make.height.mas_equalTo(1.f);
+        make.width.mas_equalTo(0);
+    }];
+    
+    _pwdLine = [UIView new];
+    _pwdLine.backgroundColor = UIColor.greenColor;
+    [self addSubview:_pwdLine];
+    [_pwdLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.centerX.equalTo(line2);
+        make.height.mas_equalTo(1.f);
+        make.width.mas_equalTo(0);
+    }];
+    //
+    //    [_confirmBtn setHidden:false];
 }
 - (void)confirmAction:(UIButton *)button {}
 - (void)secureAction:(UIButton *)sender

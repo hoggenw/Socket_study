@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 昵称*/
 @property (weak, nonatomic) UITextField * nameField;
+/** 7聊号*/
+@property (weak, nonatomic) UITextField * codeNameField;
 /** 验证码 输入框 */
 @property (weak, nonatomic) UITextField * codeField;
 /** 设置密码 输入框 */
