@@ -23,18 +23,18 @@
 
 
 - (void)setTheme{
-        [[UINavigationBar appearance] setBarTintColor: ThemeColor ];
-       //设置导航栏标题颜色
-       [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-       //设置状态栏颜色 在Info.plist中设置UIViewControllerBasedStatusBarAppearance 为NO
-       [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;//改变状态栏的颜色为白色
-       //设置返回字体颜色
-       [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-       
-       
-       [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor whiteColor], NSForegroundColorAttributeName, nil]
-                                                forState:UIControlStateNormal];
+    [[UINavigationBar appearance] setBarTintColor: ThemeColor ];
+    //设置导航栏标题颜色
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //设置状态栏颜色 在Info.plist中设置UIViewControllerBasedStatusBarAppearance 为NO
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;//改变状态栏的颜色为白色
+    //设置返回字体颜色
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIColor whiteColor], NSForegroundColorAttributeName, nil]
+                                             forState:UIControlStateNormal];
 }
 #pragma mark - 检测网络状态变化
 -(void)netWorkChangeEvent
@@ -80,64 +80,68 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //[self setTheme];
-//    [[AccountManager sharedInstance] missLoginDeal];
+    //    [[AccountManager sharedInstance] missLoginDeal];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
- 
+    
     
     
     AdvertisementViewController *tb = [AdvertisementViewController new];
-       //先判断是否是首次登陆
-       if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
-       {[AdvertisementViewController new];
-           GuidanceViewController *guidanceViewController = [GuidanceViewController new];
-           self.window.rootViewController = guidanceViewController;
-           
-       }else {
-           //有广告数据才进入广告页面
-           NSArray<NSString *> * urlString = [[NSUserDefaults standardUserDefaults] objectForKey: AdvertisementURLs];
-           if (urlString != nil && urlString.count > 0) {
-               tb.imageUrls = [urlString copy];
-               [self.window setRootViewController:tb];
-           }else {
-               
-               if ([AccountManager sharedInstance].isLogin) {
-                   YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
-                   self.window.rootViewController = tabarVC;
-               }else{
-                   POST_LOGINQUIT_NOTIFICATION;
-               }
-               
-           }
-           
-           
-       }
-        @weakify(self)
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Account_Offline object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-            @strongify(self)
-            [[AccountManager sharedInstance] remove];
-            self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
-        }];
+    //先判断是否是首次登陆
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
+    {[AdvertisementViewController new];
+        GuidanceViewController *guidanceViewController = [GuidanceViewController new];
+        self.window.rootViewController = guidanceViewController;
+        
+    }else {
+        //有广告数据才进入广告页面
+        NSArray<NSString *> * urlString = [[NSUserDefaults standardUserDefaults] objectForKey: AdvertisementURLs];
+        if (urlString != nil && urlString.count > 0) {
+            tb.imageUrls = [urlString copy];
+            [self.window setRootViewController:tb];
+        }else {
+            
+            if ([AccountManager sharedInstance].isLogin) {
+                YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
+                self.window.rootViewController = tabarVC;
+            }else{
+                POST_LOGINQUIT_NOTIFICATION;
+            }
+            
+        }
+        
+        
+    }
+    @weakify(self)
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Account_Offline object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self)
+        [[AccountManager sharedInstance] remove];
+        self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Socket_Connet object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self)
+        [ [YLSocketRocktManager shareManger] connect] ;
+    }];
     
-    [YLSocketRocktManager shareManger];
+    
     [self setKeyBoard];
-  //注冊消息推送
-  UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
-  [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-  // 2.注册远程推送 或者 用application代理的方式注册
-  [application registerForRemoteNotifications];
+    //注冊消息推送
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    // 2.注册远程推送 或者 用application代理的方式注册
+    [application registerForRemoteNotifications];
     
     [self netWorkChangeEvent];
-      
-      //远程通知调用，未启动app时候需要在此做相关调用
-      // 取到url scheme跳转信息 未启动时走这一步
-      NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-      if (url.absoluteString.length > 0) {
-          //NSString * urlString = url.absoluteString;
-          //NSLog(@"=============%@",urlString);
-          return  YES;
-      }
+    
+    //远程通知调用，未启动app时候需要在此做相关调用
+    // 取到url scheme跳转信息 未启动时走这一步
+    NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    if (url.absoluteString.length > 0) {
+        //NSString * urlString = url.absoluteString;
+        //NSLog(@"=============%@",urlString);
+        return  YES;
+    }
     
     return YES;
 }
@@ -148,9 +152,9 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     //ios 13 已经无法获取token
-//    NSString * hexToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
-//                          stringByReplacingOccurrencesOfString: @">" withString: @""]
-//                         stringByReplacingOccurrencesOfString: @" " withString: @""];
+    //    NSString * hexToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+    //                          stringByReplacingOccurrencesOfString: @">" withString: @""]
+    //                         stringByReplacingOccurrencesOfString: @" " withString: @""];
     
     if (![deviceToken isKindOfClass:[NSData class]]) return;
     const unsigned *tokenBytes = [deviceToken bytes];
@@ -183,28 +187,6 @@
     }
     
     
-    NSString *str = [url absoluteString];
-    if ([str hasPrefix:@"wx"])//微信回调
-    {
-//        [WXApi handleOpenURL:url delegate:self];
-    }
-    else if ([str hasPrefix:@""])
-    {
-        //跳转支付宝钱包进行支付，处理支付结果
-//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic)
-//         ];
-        
-    }
-    
-    
-    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
-//    BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
-//    if (!result) {
-//        // 其他如支付等SDK的回调
-//    }else{
-//        NSLog(@"");
-//    }
-//    return result;
     return true;
 }
 

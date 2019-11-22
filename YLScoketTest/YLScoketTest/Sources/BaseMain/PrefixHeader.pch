@@ -40,9 +40,12 @@
 #define POP [self.navigationController popViewControllerAnimated:YES]
 
 #define Y_Notification_Account_Offline @"Y_Notification_Account_Offline"
+#define Y_Notification_Socket_Connet @"Y_Notification_Socket_Connet"
 
 //发送登录请求
 #define POST_LOGINQUIT_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Account_Offline object:nil]
+//发送socket脸基尼请求
+#define POST_SOCKETCONNET_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Socket_Connet object:nil]
  //pop
  #define StirngWithDic(value) [NSString stringWithFormat:@"%@",value];
 

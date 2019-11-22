@@ -99,9 +99,11 @@
           }
           else
           {
+              
              AppDelegate *AppDele = (AppDelegate *)[[UIApplication sharedApplication] delegate];
               YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc]initWithChildVCInfoArray:  nil];
               AppDele.window.rootViewController = tabarVC;
+              POST_SOCKETCONNET_NOTIFICATION;
 
           }
       }];
