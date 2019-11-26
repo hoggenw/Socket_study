@@ -105,6 +105,7 @@
             if ([AccountManager sharedInstance].isLogin) {
                 YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
                 self.window.rootViewController = tabarVC;
+                POST_SOCKETCONNET_NOTIFICATION;
             }else{
                 POST_LOGINQUIT_NOTIFICATION;
             }
@@ -120,7 +121,6 @@
         self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Socket_Connet object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-        @strongify(self)
         [ [YLSocketRocktManager shareManger] connect] ;
     }];
     

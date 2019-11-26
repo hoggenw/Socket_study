@@ -75,6 +75,7 @@
     if ([AccountManager sharedInstance].isLogin) {
         YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
              AppDele.window.rootViewController = tabarVC;
+         POST_SOCKETCONNET_NOTIFICATION;
     }else{
         POST_LOGINQUIT_NOTIFICATION;
     }
