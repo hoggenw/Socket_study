@@ -118,7 +118,10 @@
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Account_Offline object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         @strongify(self)
         [[AccountManager sharedInstance] remove];
-        self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];
+        });
+       
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Socket_Connet object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         [ [YLSocketRocktManager shareManger] connect] ;

@@ -8,7 +8,7 @@
 
 #import "YLSocketRocktManager.h"
 //#import "SocketRocket.h"
- #import "YlmessageModel.pbobjc.h"
+#import "YlmessageModel.pbobjc.h"
 #import "YlbaseMessageModel.pbobjc.h"
 #import "GPBProtocolBuffers_RuntimeSupport.h"
 #import "ChatMessageModel.h"
@@ -40,7 +40,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 static NSString * host = @"192.168.0.167";
 static const uint16_t port = 6969;
 
- 
+
 
 @implementation YLSocketRocktManager
 
@@ -71,7 +71,7 @@ static const uint16_t port = 6969;
     [_webSocket setDelegateOperationQueue:queue];
     [_webSocket open];
     [self connect];
-
+    
 }
 
 //初始化心跳
@@ -114,8 +114,8 @@ static const uint16_t port = 6969;
 
 - (void)connect {
     [self initSocket];
-//    //每次正常连接的时候清零重连时间
-//    _reConnectTime = 0;
+    //    //每次正常连接的时候清零重连时间
+    //    _reConnectTime = 0;
 }
 
 -(void)disconnnet {
@@ -181,7 +181,7 @@ static const uint16_t port = 6969;
     base.data_p = data;
     //NSLog(@"%@",data);
     [_webSocket send: [base data]];
-   
+    
     
 }
 //重连机制
@@ -220,15 +220,36 @@ static const uint16_t port = 6969;
         NSError *error;
         YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
         if (baseModel != NULL) {
+            
+            if (baseModel.command == 10086) {
+               
+                POST_SOCKETCONNET_NOTIFICATION;
+                return;
+            }
+            
             YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
             NSLog(@"%@",pmessage.description);
             if (pmessage != NULL) {
-               [_delegate receiveMessage: pmessage];
+                [_delegate receiveMessage: pmessage];
             }
         }
         
-        
+        return;
+    }else{
+        NSError *error;
+        YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
+        if (baseModel != NULL) {
+             [self disconnnet];
+            if (baseModel.command == 10086) {
+                POST_LOGINQUIT_NOTIFICATION;
+                return;
+            }
+            
+        }
     }
+    
+    
+    
     NSLog(@"服务器返回消息：%@",message);
 }
 

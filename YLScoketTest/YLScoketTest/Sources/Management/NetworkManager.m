@@ -303,7 +303,7 @@ static AFHTTPSessionManager *sessionManager = nil;
     if (needToken) {
         UserModel * user = [[AccountManager sharedInstance] fetch];
         [sessionManager.requestSerializer setValue:user.accessToken forHTTPHeaderField:@"token"];
-          [sessionManager.requestSerializer setValue:user.userID forHTTPHeaderField:@"userId"];
+        [sessionManager.requestSerializer setValue:user.userID forHTTPHeaderField:@"userId"];
     }
     return sessionManager;
 }

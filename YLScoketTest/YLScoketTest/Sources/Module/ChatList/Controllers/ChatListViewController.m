@@ -60,25 +60,48 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.bounces = YES;
-   
-
+    
+    
     
     [self.noDataView setHidden: true];
-      [self.view addSubview: self.noDataView];
-      [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.centerX.equalTo(self.view.mas_centerX);
-          make.centerY.equalTo(self.view.mas_centerY);
-          make.width.equalTo(@(218));
-          make.height.equalTo(@(192));
-      }];
-      //添加刷新View
+    [self.view addSubview: self.noDataView];
+    [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.centerY.equalTo(self.view.mas_centerY);
+        make.width.equalTo(@(218));
+        make.height.equalTo(@(192));
+    }];
+    //添加刷新View
     [self.view bringSubviewToFront: self.noDataView];
     self.dataArray = [self getDataArray];
     [self.tableView reloadData];
 }
 
 -(NSMutableArray *)getDataArray {
-    NSMutableArray *models = [NSMutableArray array];
+    NSMutableArray *models = [[NSMutableArray alloc] initWithCapacity:20];
+    for (int j  = 0; j < 2;  j ++) {
+        for (int i  = 0; i < 5;  i ++) {
+            ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
+            item1.from = [NSString stringWithFormat:@"王八%@",@(i)];
+            item1.message = @"帅哥你好！！";
+            item1.avatarURL = [NSURL URLWithString:@"send_head.jpg"];
+            item1.messageCount = i;
+            item1.date = [NSDate date];
+            item1.needHint = i%2;
+            [models addObject:item1];
+        }
+    }
+    
+    ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
+    item1.from = [NSString stringWithFormat:@"王八%@",@(100)];
+    item1.message = @"帅哥你好！！";
+    item1.avatarURL = [NSURL URLWithString:@"send_head.jpg"];
+    item1.messageCount = 100;
+    item1.date = [NSDate date];
+    item1.needHint = true;
+    [models addObject:item1];
+    
+    
     return models;
 }
 
@@ -88,10 +111,10 @@
 #pragma mark - tableView的delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.dataArray.count <= 0) {
-           [self.noDataView setHidden: false];
-       }else{
-           [self.noDataView setHidden: true];
-       }
+        [self.noDataView setHidden: false];
+    }else{
+        [self.noDataView setHidden: true];
+    }
     return _dataArray.count;
     
 }
@@ -104,7 +127,7 @@
         cell = [[ChatListTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ChatListTableViewCell"];
     }
     if (indexPath.row < _dataArray.count) {
-         [cell setUserModel:_dataArray[indexPath.row]];
+        [cell setUserModel:_dataArray[indexPath.row]];
     }
     return cell;
 }
@@ -113,7 +136,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     ChatListUserModel *model = _dataArray[indexPath.row];
     
     ChatViewController *chatVC  = [ChatViewController new];
@@ -134,7 +157,7 @@
      * 不加下面此句时，在二级栏目点击返回时，此行会由选中状态慢慢变成非选中状态。
      加上此句，返回时直接就是非选中状态。
      */
-   
+    
     
 }
 
@@ -160,7 +183,7 @@
 //这个方法就是可以自己添加一些侧滑出来的按钮，并执行一些命令和按钮设置
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-
+    
     //设置按钮(它默认第一个是修改系统的)
     UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         NSLog(@"取消关注操作第%@",@(indexPath.row));
@@ -177,7 +200,7 @@
 
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     return YES;
 }
 
