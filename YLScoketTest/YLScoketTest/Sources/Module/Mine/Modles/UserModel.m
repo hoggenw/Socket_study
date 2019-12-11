@@ -20,6 +20,7 @@
         _isEnabled = @"";
         _accessToken = @"";
         _phone = @"";
+        _codeName = @"";
     }
     return self;
 }
@@ -33,6 +34,7 @@
         _isEnabled = [NSString stringWithFormat:@"%@",dictionary[@"status"]] ;
         _accessToken =  [NSString stringWithFormat:@"%@",dictionary[@"accessToken"]];
         _phone =  [NSString stringWithFormat:@"%@",dictionary[@"mobile"]];
+        _codeName =  [NSString stringWithFormat:@"%@",dictionary[@"codeName"]];
     }
     return self;
 }
@@ -46,6 +48,7 @@
         _isEnabled = other.isEnabled;
         _accessToken = accessToken;
         _phone = other.phone;
+        _codeName = other.codeName;
         
     }
     return self;
@@ -61,6 +64,7 @@
     [aCoder encodeObject:self.isEnabled forKey:@"isEnabled"];
     [aCoder encodeObject:self.accessToken forKey:@"accessToken"];
     [aCoder encodeObject:self.phone forKey:@"phone"];
+     [aCoder encodeObject:self.codeName forKey:@"codeName"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -72,6 +76,7 @@
         self.isEnabled = [aDecoder decodeObjectForKey:@"isEnabled"] ;
         self.accessToken = [aDecoder decodeObjectForKey:@"accessToken"];
         self.phone = [aDecoder decodeObjectForKey:@"phone"];
+        self.codeName = [aDecoder decodeObjectForKey:@"codeName"];
     }
     return self;
 }

@@ -171,6 +171,14 @@ static const uint16_t port = 6969;
     fromModel.userId = user.userID;
     fromModel.name = user.name;
     fromModel.avatar = user.avatar;
+    
+    YLUserModel * toModel = [YLUserModel new];
+    toModel.userId = user.userID;
+    toModel.name = user.name;
+    toModel.avatar = user.avatar;
+    
+    pmessage.fromUser = fromModel;
+    pmessage.toUser = toModel;
     // 序列化为Data
     NSData *data = [pmessage data];
     

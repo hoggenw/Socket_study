@@ -23,7 +23,10 @@
 /***/
 @property (nonatomic, copy) NSString *phone;
 
-@property (nonatomic, copy) NSString *logintType;
+@property (nonatomic, copy) NSString *loginType;
+/*七聊号*/
+@property (nonatomic, copy) NSString *codeName;
+
 
 
 
