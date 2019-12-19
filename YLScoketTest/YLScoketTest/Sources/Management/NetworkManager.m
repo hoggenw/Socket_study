@@ -11,11 +11,20 @@
 
 #define NetworkTimeoutInterval 20.0
 
-
-
+#ifdef DEBUG
 //https
 NSString * const BaseUrl = @"http://192.168.0.167:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+NSString * const HOST = @"192.168.0.167";
+
+
+#else
+NSString * const BaseUrl = @"http://49.235.149.115:8099/";
+NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+NSString * const HOST = @"49.235.149.115";
+#endif
+
+
 
 #pragma mark- 接口
 
@@ -23,6 +32,11 @@ NSString * const RegistCodeAPI = @"api/login/getKaptchaImage";
 
 NSString * const LoginAPI = @"api/login/userLogin";
 NSString * const LoginQuitAPI = @"api/login/quit";
+
+#pragma mark- 用户关系接口
+NSString * const Friendships_List = @"/api/apply/friend/friedsList";
+
+
 
 NSString * const RegisterAPI = @"api/login/register";
 
@@ -165,14 +179,14 @@ static AFHTTPSessionManager *sessionManager = nil;
         NSDictionary *errorDic = @{@"errno":@"-1"};
                self.returnBlock = infoBlock;
                self.returnBlock(errorDic);
-               for (NSString * key in error.userInfo.allKeys) {
-                   NSLog(@"error key = %@, valeu = %@",key,error.userInfo[key]);
-                   if ([key isEqualToString:@"com.alamofire.serialization.response.error.data"]) {
-                       NSData * data = error.userInfo[key];
-                       NSLog(@"错误dat啊： %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                       
-                   }
-               }
+//               for (NSString * key in error.userInfo.allKeys) {
+//                   NSLog(@"error key = %@, valeu = %@",key,error.userInfo[key]);
+//                   if ([key isEqualToString:@"com.alamofire.serialization.response.error.data"]) {
+//                       NSData * data = error.userInfo[key];
+//                       NSLog(@"错误dat啊： %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//
+//                   }
+//               }
                NSLog(@"error ： %@",error);
               [self dealError: @"网络请求发生错误"];
     }];

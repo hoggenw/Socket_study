@@ -13,6 +13,8 @@ typedef void (^ReturnBlock)(NSDictionary *returnDict);
 
 extern NSString * const BaseUrl;              // 网络请求的BaseUrl
 extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
+
+extern NSString * const HOST;
 //注册验证码接口
 extern NSString * const RegistCodeAPI;
 //登录接口
@@ -21,6 +23,9 @@ extern NSString * const LoginAPI;
 extern NSString * const RegisterAPI;
 //退出登录
 extern NSString * const LoginQuitAPI;
+#pragma mark- 用户关系接口
+//获取朋友列表
+extern NSString * const Friendships_List;
 
 @interface NetworkManager : NSObject
 
@@ -40,6 +45,9 @@ extern NSString * const LoginQuitAPI;
 
 //放入请求体
 - (void)postWithURL:(NSString *)requestURL paramBody:(NSDictionary *)paramDic needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock;
+
+
+- (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock;
 
 
 @end

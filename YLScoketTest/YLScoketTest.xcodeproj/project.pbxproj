@@ -89,11 +89,15 @@
 		116B67B12011C980005AA5E0 /* ChatListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67B02011C980005AA5E0 /* ChatListTableViewCell.m */; };
 		116B67B42011CA1B005AA5E0 /* ChatListUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67B32011CA1B005AA5E0 /* ChatListUserModel.m */; };
 		116B67B72011D038005AA5E0 /* ChatUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67B62011D038005AA5E0 /* ChatUserModel.m */; };
-		116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 116B67B92011D4D1005AA5E0 /* send_head.jpg */; };
-		116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 116B67BA2011D4D2005AA5E0 /* receive_head.jpg */; };
 		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
 		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
 		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
+		8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778493E23AA194F00AE9947 /* FiendshipModel.m */; };
+		8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */; };
+		8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494623AA246F00AE9947 /* SelectContactCell.xib */; };
+		8778494A23AA246F00AE9947 /* SelectContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494823AA246F00AE9947 /* SelectContactCell.m */; };
+		8778494E23AA262700AE9947 /* SelectMemberCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494C23AA262700AE9947 /* SelectMemberCollectionCell.xib */; };
+		8778494F23AA262700AE9947 /* SelectMemberCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494D23AA262700AE9947 /* SelectMemberCollectionCell.m */; };
 		879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */; };
 		879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */; };
 		879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */; };
@@ -337,8 +341,6 @@
 		116B67B32011CA1B005AA5E0 /* ChatListUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListUserModel.m; sourceTree = "<group>"; };
 		116B67B52011D038005AA5E0 /* ChatUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatUserModel.h; sourceTree = "<group>"; };
 		116B67B62011D038005AA5E0 /* ChatUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatUserModel.m; sourceTree = "<group>"; };
-		116B67B92011D4D1005AA5E0 /* send_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = send_head.jpg; sourceTree = "<group>"; };
-		116B67BA2011D4D2005AA5E0 /* receive_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = receive_head.jpg; sourceTree = "<group>"; };
 		116B67BD2011F57C005AA5E0 /* ChatBoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatBoxViewController.h; sourceTree = "<group>"; };
 		116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatBoxViewController.m; sourceTree = "<group>"; };
 		116B67C02011F58E005AA5E0 /* ChatShowMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatShowMessageViewController.h; sourceTree = "<group>"; };
@@ -348,6 +350,16 @@
 		11849E191E52AFD0006D682D /* 7聊.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7聊.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
+		8778493D23AA194F00AE9947 /* FiendshipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiendshipModel.h; sourceTree = "<group>"; };
+		8778493E23AA194F00AE9947 /* FiendshipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiendshipModel.m; sourceTree = "<group>"; };
+		8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectMemberWithSearchView.h; sourceTree = "<group>"; };
+		8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectMemberWithSearchView.m; sourceTree = "<group>"; };
+		8778494623AA246F00AE9947 /* SelectContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectContactCell.xib; sourceTree = "<group>"; };
+		8778494723AA246F00AE9947 /* SelectContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectContactCell.h; sourceTree = "<group>"; };
+		8778494823AA246F00AE9947 /* SelectContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectContactCell.m; sourceTree = "<group>"; };
+		8778494B23AA262700AE9947 /* SelectMemberCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectMemberCollectionCell.h; sourceTree = "<group>"; };
+		8778494C23AA262700AE9947 /* SelectMemberCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectMemberCollectionCell.xib; sourceTree = "<group>"; };
+		8778494D23AA262700AE9947 /* SelectMemberCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectMemberCollectionCell.m; sourceTree = "<group>"; };
 		879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YlbaseMessageModel.pbobjc.m; sourceTree = "<group>"; };
 		879BF5042383C56600D1669E /* YlbaseMessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlbaseMessageModel.pbobjc.h; sourceTree = "<group>"; };
 		879BF5092383CB4300D1669E /* YlmessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlmessageModel.pbobjc.h; sourceTree = "<group>"; };
@@ -660,7 +672,6 @@
 		116B672820118FB6005AA5E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				116B67B82011D472005AA5E0 /* TemporaryPic */,
 				116B672920118FB6005AA5E0 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -1005,15 +1016,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		116B67B82011D472005AA5E0 /* TemporaryPic */ = {
-			isa = PBXGroup;
-			children = (
-				116B67BA2011D4D2005AA5E0 /* receive_head.jpg */,
-				116B67B92011D4D1005AA5E0 /* send_head.jpg */,
-			);
-			path = TemporaryPic;
-			sourceTree = "<group>";
-		};
 		11849E101E52AFCF006D682D = {
 			isa = PBXGroup;
 			children = (
@@ -1040,6 +1042,15 @@
 				116B677320118FB6005AA5E0 /* Supporting Files */,
 			);
 			path = YLScoketTest;
+			sourceTree = "<group>";
+		};
+		8778493C23AA193900AE9947 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8778493D23AA194F00AE9947 /* FiendshipModel.h */,
+				8778493E23AA194F00AE9947 /* FiendshipModel.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		879BF50C2383E1FF00D1669E /* ViewModel */ = {
@@ -1088,19 +1099,12 @@
 		A5852FAE2367E23E009E5CB3 /* AddressBok */ = {
 			isa = PBXGroup;
 			children = (
+				8778493C23AA193900AE9947 /* Models */,
 				879BF50C2383E1FF00D1669E /* ViewModel */,
-				A5852FAF2367E23E009E5CB3 /* Modles */,
 				A5852FB02367E23E009E5CB3 /* Controllers */,
 				A5852FB12367E23E009E5CB3 /* Views */,
 			);
 			path = AddressBok;
-			sourceTree = "<group>";
-		};
-		A5852FAF2367E23E009E5CB3 /* Modles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modles;
 			sourceTree = "<group>";
 		};
 		A5852FB02367E23E009E5CB3 /* Controllers */ = {
@@ -1115,6 +1119,14 @@
 		A5852FB12367E23E009E5CB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8778494B23AA262700AE9947 /* SelectMemberCollectionCell.h */,
+				8778494D23AA262700AE9947 /* SelectMemberCollectionCell.m */,
+				8778494C23AA262700AE9947 /* SelectMemberCollectionCell.xib */,
+				8778494723AA246F00AE9947 /* SelectContactCell.h */,
+				8778494823AA246F00AE9947 /* SelectContactCell.m */,
+				8778494623AA246F00AE9947 /* SelectContactCell.xib */,
+				8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */,
+				8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1268,10 +1280,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				116B67BB2011D4D2005AA5E0 /* send_head.jpg in Resources */,
+				8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */,
 				116B677620118FB6005AA5E0 /* Assets.xcassets in Resources */,
-				116B67BC2011D4D2005AA5E0 /* receive_head.jpg in Resources */,
 				11576171201F216400E0D94F /* normal_face.plist in Resources */,
+				8778494E23AA262700AE9947 /* SelectMemberCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1347,6 +1359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8778494F23AA262700AE9947 /* SelectMemberCollectionCell.m in Sources */,
 				111CB19920206F710035D245 /* UIResponder+Extension.m in Sources */,
 				11576162201889E200E0D94F /* GPBUtilities.m in Sources */,
 				A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */,
@@ -1385,10 +1398,12 @@
 				1157615D201889E200E0D94F /* Struct.pbobjc.m in Sources */,
 				116B678D20118FB6005AA5E0 /* YLLabel.m in Sources */,
 				1157614E201889E200E0D94F /* GPBWellKnownTypes.m in Sources */,
+				8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */,
 				116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */,
 				A5852F602367CDD1009E5CB3 /* LanguageUtil.m in Sources */,
 				87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */,
 				A5852F5E2367CDD1009E5CB3 /* FileManager.m in Sources */,
+				8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */,
 				879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */,
 				116B677720118FB6005AA5E0 /* YLUITabBarViewController.m in Sources */,
 				1157615A201889E200E0D94F /* Wrappers.pbobjc.m in Sources */,
@@ -1403,6 +1418,7 @@
 				11576153201889E200E0D94F /* GPBDictionary.m in Sources */,
 				A5852F6C2367CDF0009E5CB3 /* NSObject+JSONExtension.m in Sources */,
 				116B678A20118FB6005AA5E0 /* NetworkManager.m in Sources */,
+				8778494A23AA246F00AE9947 /* SelectContactCell.m in Sources */,
 				116B678120118FB6005AA5E0 /* NSString+Extension.m in Sources */,
 				11576157201889E200E0D94F /* SourceContext.pbobjc.m in Sources */,
 				116B678720118FB6005AA5E0 /* AccountManager.m in Sources */,

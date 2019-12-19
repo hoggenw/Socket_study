@@ -37,7 +37,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 @end
 
-static NSString * host = @"192.168.0.167";
 static const uint16_t port = 6969;
 
 
@@ -63,7 +62,7 @@ static const uint16_t port = 6969;
         return;
     }
     UserModel * model = manager.fetch;
-    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&%@&%@",host,port,model.accessToken,model.userID]] protocols:@[@"chat",@"superchat"]];
+    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&%@&%@",HOST,port,model.accessToken,model.userID]] protocols:@[@"chat",@"superchat"]];
     _webSocket.delegate = self;
     //设置代理线程Queue
     NSOperationQueue *queue = [NSOperationQueue new];

@@ -84,7 +84,7 @@
             ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
             item1.from = [NSString stringWithFormat:@"王八%@",@(i)];
             item1.message = @"帅哥你好！！";
-            item1.avatarURL = [NSURL URLWithString:@"send_head.jpg"];
+            item1.avatarURL = [NSURL URLWithString:@"other_header.jpg"];
             item1.messageCount = i;
             item1.date = [NSDate date];
             item1.needHint = i%2;
@@ -95,13 +95,11 @@
     ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
     item1.from = [NSString stringWithFormat:@"王八%@",@(100)];
     item1.message = @"帅哥你好！！";
-    item1.avatarURL = [NSURL URLWithString:@"send_head.jpg"];
+    item1.avatarURL = [NSURL URLWithString:@"other_header.jpg"];
     item1.messageCount = 100;
     item1.date = [NSDate date];
     item1.needHint = true;
     [models addObject:item1];
-    
-    
     return models;
 }
 

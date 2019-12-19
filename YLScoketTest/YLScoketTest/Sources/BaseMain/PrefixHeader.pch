@@ -75,6 +75,7 @@
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <SocketRocket/SocketRocket.h>
+#import "YlmessageModel.pbobjc.h"
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

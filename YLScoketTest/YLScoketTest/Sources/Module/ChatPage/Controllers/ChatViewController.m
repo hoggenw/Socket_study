@@ -150,11 +150,9 @@
     recMessage.date = [NSDate date];// 当前时间
     
     //recMessage.imagePath = message.imagePath;
-    //receive_head
     ChatUserModel * otherUser = [[ChatUserModel alloc] init];
     otherUser.username = @"";// 名字
     otherUser.userID = @"li-bokun";// ID
-    otherUser.avatarURL = @"receive_head.jpg";// 图片
     recMessage.from = otherUser;
     [self.chatMessageVC addNewMessage:recMessage];
     

@@ -39,7 +39,6 @@
         _user = [[ChatUserModel alloc] init];
         _user.username = @"Bay、栢";// 名字
         _user.userID = @"li-bokun";// ID
-        _user.avatarURL = @"send_head.jpg";// 图片
     }
     return _user;
 }

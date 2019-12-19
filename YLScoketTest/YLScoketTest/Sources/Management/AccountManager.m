@@ -138,7 +138,7 @@
     self.user.phone = @"";
     self.user.paySet = @"";
     self.user.name = @"";
-    self.user.logintType = @"";
+    self.user.loginType = @"";
     [self update];
 }
 
