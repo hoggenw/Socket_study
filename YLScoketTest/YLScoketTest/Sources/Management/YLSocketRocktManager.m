@@ -178,6 +178,9 @@ static const uint16_t port = 6969;
     
     pmessage.fromUser = fromModel;
     pmessage.toUser = toModel;
+    //token
+    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    
     // 序列化为Data
     NSData *data = [pmessage data];
     
@@ -229,8 +232,8 @@ static const uint16_t port = 6969;
         if (baseModel != NULL) {
             
             if (baseModel.command == 10086) {
-               
-                POST_SOCKETCONNET_NOTIFICATION;
+                [YLHintView showMessageOnThisPage:@"登录已过期"];
+                POST_LOGINQUIT_NOTIFICATION;
                 return;
             }
             
@@ -248,6 +251,7 @@ static const uint16_t port = 6969;
         if (baseModel != NULL) {
              [self disconnnet];
             if (baseModel.command == 10086) {
+                [YLHintView showMessageOnThisPage:@"登录已过期"];
                 POST_LOGINQUIT_NOTIFICATION;
                 return;
             }

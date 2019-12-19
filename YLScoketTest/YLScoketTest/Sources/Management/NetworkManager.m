@@ -19,7 +19,7 @@ NSString * const HOST = @"192.168.0.167";
 
 
 #else
-NSString * const BaseUrl = @"http://49.235.149.115:8099/";
+NSString * const BaseUrl = @"https://www.7chat.wang:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
 NSString * const HOST = @"49.235.149.115";
 #endif
@@ -107,7 +107,8 @@ static AFHTTPSessionManager *sessionManager = nil;
                   self.returnBlock(dict);
                   
               }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-             
+                  [YLHintView showMessageOnThisPage:@"登录已过期"];
+                  POST_LOGINQUIT_NOTIFICATION;
               }else {
                   [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
               }
@@ -138,7 +139,8 @@ static AFHTTPSessionManager *sessionManager = nil;
            
             
         }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-       
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
         }else {
             [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
         }
@@ -169,7 +171,8 @@ static AFHTTPSessionManager *sessionManager = nil;
                   
                   
               }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-             
+                  [YLHintView showMessageOnThisPage:@"登录已过期"];
+                  POST_LOGINQUIT_NOTIFICATION;
               }else {
                   [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
               }
@@ -206,7 +209,8 @@ static AFHTTPSessionManager *sessionManager = nil;
                  
                   
               }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-             
+                   [YLHintView showMessageOnThisPage:@"登录已过期"];
+                    POST_LOGINQUIT_NOTIFICATION;
               }else {
                   [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
               }
@@ -232,7 +236,8 @@ static AFHTTPSessionManager *sessionManager = nil;
                  
                   
               }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-             
+                  [YLHintView showMessageOnThisPage:@"登录已过期"];
+                  POST_LOGINQUIT_NOTIFICATION;
               }else {
                   [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
               }
@@ -256,7 +261,8 @@ static AFHTTPSessionManager *sessionManager = nil;
                  
                   
               }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-             
+                   [YLHintView showMessageOnThisPage:@"登录已过期"];
+                    POST_LOGINQUIT_NOTIFICATION;
               }else {
                   [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
               }
@@ -279,9 +285,9 @@ static AFHTTPSessionManager *sessionManager = nil;
 #pragma  mark - 头部文件设置
 - (AFHTTPSessionManager *)getSessionManager:(BOOL)needToken
 {
-    if (sessionManager != nil) {
-        return  sessionManager;
-    }
+//    if (sessionManager != nil) {
+//        return  sessionManager;
+//    }
     sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
     sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
