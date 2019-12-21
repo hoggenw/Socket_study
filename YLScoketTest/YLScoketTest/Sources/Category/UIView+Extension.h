@@ -79,4 +79,8 @@ typedef enum : NSInteger {
  */
 -(void)cornerRadius:(float)radius;
 
+
+- (void)showNoDataViewWithFrame:(CGRect)rect;
+- (void)removeNoDataView;
+
 @end

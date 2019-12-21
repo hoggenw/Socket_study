@@ -8,7 +8,54 @@
 
 #import "UIView+Extension.h"
 
+
+@interface UIView ()
+//暂无数据
+@property (nonatomic, strong) UIImageView * noDataView;
+@end
+
+static NSString *noDataViewKey = @"noDataViewKey";
+
 @implementation UIView (Extension)
+
+
+
+- (void)showNoDataViewWithFrame:(CGRect)rect
+{
+    
+    if (self.noDataView)
+    {
+        [self removeNoDataView];
+    }
+    self.noDataView = [UIImageView new];
+    self.noDataView .image = [UIImage imageNamed:@"common_nodata_icon"];
+    //417 × 382
+    CGRect frame = CGRectMake(self.centerX - 70, rect.origin.y + rect.size.height/2 - 64, 140, 128);
+    self.noDataView.frame = frame;
+    [self addSubview: self.noDataView];
+    [self bringSubviewToFront: self.noDataView];
+}
+
+
+- (void)removeNoDataView
+{
+    if (self.noDataView)
+    {
+        [self.noDataView removeFromSuperview];
+        self.noDataView = nil;
+    }
+}
+
+
+-(void)setNoDataView:(UIImageView *)noDataView {
+    objc_setAssociatedObject(self, &noDataViewKey, noDataView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIImageView *)noDataView {
+    return objc_getAssociatedObject(self, &noDataViewKey);
+}
+
+
 
 - (CGFloat)left {
     return self.frame.origin.x;

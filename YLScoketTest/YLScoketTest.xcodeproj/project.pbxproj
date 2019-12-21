@@ -98,6 +98,12 @@
 		8778494A23AA246F00AE9947 /* SelectContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494823AA246F00AE9947 /* SelectContactCell.m */; };
 		8778494E23AA262700AE9947 /* SelectMemberCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494C23AA262700AE9947 /* SelectMemberCollectionCell.xib */; };
 		8778494F23AA262700AE9947 /* SelectMemberCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494D23AA262700AE9947 /* SelectMemberCollectionCell.m */; };
+		8778495223AB59D800AE9947 /* SearchFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778495123AB59D800AE9947 /* SearchFriendView.m */; };
+		8778495523AB5B0B00AE9947 /* UITextField+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778495423AB5B0B00AE9947 /* UITextField+Extension.m */; };
+		8778495823AB6E3200AE9947 /* SelectFriendCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778495723AB6E3200AE9947 /* SelectFriendCellTableViewCell.m */; };
+		8778495B23AC774E00AE9947 /* IndexTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778495A23AC774E00AE9947 /* IndexTableViewCell.m */; };
+		8778495E23ACC24C00AE9947 /* YLPersonalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778495D23ACC24C00AE9947 /* YLPersonalHeaderView.m */; };
+		8778496123ACC48E00AE9947 /* YLPersonalCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778496023ACC48E00AE9947 /* YLPersonalCenterCell.m */; };
 		879BF5072383C56600D1669E /* YlbaseMessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */; };
 		879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */; };
 		879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */; };
@@ -360,6 +366,18 @@
 		8778494B23AA262700AE9947 /* SelectMemberCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectMemberCollectionCell.h; sourceTree = "<group>"; };
 		8778494C23AA262700AE9947 /* SelectMemberCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectMemberCollectionCell.xib; sourceTree = "<group>"; };
 		8778494D23AA262700AE9947 /* SelectMemberCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectMemberCollectionCell.m; sourceTree = "<group>"; };
+		8778495023AB59D800AE9947 /* SearchFriendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchFriendView.h; sourceTree = "<group>"; };
+		8778495123AB59D800AE9947 /* SearchFriendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchFriendView.m; sourceTree = "<group>"; };
+		8778495323AB5B0B00AE9947 /* UITextField+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extension.h"; sourceTree = "<group>"; };
+		8778495423AB5B0B00AE9947 /* UITextField+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extension.m"; sourceTree = "<group>"; };
+		8778495623AB6E3200AE9947 /* SelectFriendCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectFriendCellTableViewCell.h; sourceTree = "<group>"; };
+		8778495723AB6E3200AE9947 /* SelectFriendCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectFriendCellTableViewCell.m; sourceTree = "<group>"; };
+		8778495923AC774E00AE9947 /* IndexTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexTableViewCell.h; sourceTree = "<group>"; };
+		8778495A23AC774E00AE9947 /* IndexTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexTableViewCell.m; sourceTree = "<group>"; };
+		8778495C23ACC24C00AE9947 /* YLPersonalHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YLPersonalHeaderView.h; path = YLScoketTest/Sources/Module/AddressBok/Views/YLPersonalHeaderView.h; sourceTree = SOURCE_ROOT; };
+		8778495D23ACC24C00AE9947 /* YLPersonalHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = YLPersonalHeaderView.m; path = YLScoketTest/Sources/Module/AddressBok/Views/YLPersonalHeaderView.m; sourceTree = SOURCE_ROOT; };
+		8778495F23ACC48E00AE9947 /* YLPersonalCenterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YLPersonalCenterCell.h; path = YLScoketTest/Sources/Module/AddressBok/Views/YLPersonalCenterCell.h; sourceTree = SOURCE_ROOT; };
+		8778496023ACC48E00AE9947 /* YLPersonalCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = YLPersonalCenterCell.m; path = YLScoketTest/Sources/Module/AddressBok/Views/YLPersonalCenterCell.m; sourceTree = SOURCE_ROOT; };
 		879BF5032383C56500D1669E /* YlbaseMessageModel.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YlbaseMessageModel.pbobjc.m; sourceTree = "<group>"; };
 		879BF5042383C56600D1669E /* YlbaseMessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlbaseMessageModel.pbobjc.h; sourceTree = "<group>"; };
 		879BF5092383CB4300D1669E /* YlmessageModel.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YlmessageModel.pbobjc.h; sourceTree = "<group>"; };
@@ -738,6 +756,8 @@
 				116B673C20118FB6005AA5E0 /* UIImage+Extension.m */,
 				111CB19720206F710035D245 /* UIResponder+Extension.h */,
 				111CB19820206F710035D245 /* UIResponder+Extension.m */,
+				8778495323AB5B0B00AE9947 /* UITextField+Extension.h */,
+				8778495423AB5B0B00AE9947 /* UITextField+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1012,6 +1032,10 @@
 		116B67AA20119CBA005AA5E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8778495C23ACC24C00AE9947 /* YLPersonalHeaderView.h */,
+				8778495D23ACC24C00AE9947 /* YLPersonalHeaderView.m */,
+				8778495F23ACC48E00AE9947 /* YLPersonalCenterCell.h */,
+				8778496023ACC48E00AE9947 /* YLPersonalCenterCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1084,13 +1108,13 @@
 			isa = PBXGroup;
 			children = (
 				A5852F472367CDD1009E5CB3 /* UILabel+Factory.m */,
-				A5852F492367CDD1009E5CB3 /* UITableView+Factory.m */,
+				A5852F4E2367CDD1009E5CB3 /* UITextField+Factory.h */,
 				A5852F4A2367CDD1009E5CB3 /* UITextField+Factory.m */,
 				A5852F482367CDD1009E5CB3 /* UIButton+Factory.h */,
 				A5852F4B2367CDD1009E5CB3 /* UIButton+Factory.m */,
 				A5852F4C2367CDD1009E5CB3 /* UILabel+Factory.h */,
 				A5852F4D2367CDD1009E5CB3 /* UITableView+Factory.h */,
-				A5852F4E2367CDD1009E5CB3 /* UITextField+Factory.h */,
+				A5852F492367CDD1009E5CB3 /* UITableView+Factory.m */,
 				A5852F4F2367CDD1009E5CB3 /* Factory.h */,
 			);
 			path = Factory;
@@ -1127,6 +1151,12 @@
 				8778494623AA246F00AE9947 /* SelectContactCell.xib */,
 				8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */,
 				8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */,
+				8778495023AB59D800AE9947 /* SearchFriendView.h */,
+				8778495123AB59D800AE9947 /* SearchFriendView.m */,
+				8778495623AB6E3200AE9947 /* SelectFriendCellTableViewCell.h */,
+				8778495723AB6E3200AE9947 /* SelectFriendCellTableViewCell.m */,
+				8778495923AC774E00AE9947 /* IndexTableViewCell.h */,
+				8778495A23AC774E00AE9947 /* IndexTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1389,10 +1419,12 @@
 				1157614D201889E200E0D94F /* GPBExtensionInternals.m in Sources */,
 				1157616C2019E0DA00E0D94F /* YLChatFaceMenuVIew.m in Sources */,
 				A5852F7A2367CE04009E5CB3 /* DatePickerView.m in Sources */,
+				8778495B23AC774E00AE9947 /* IndexTableViewCell.m in Sources */,
 				A5852F5A2367CDD1009E5CB3 /* UITableView+Factory.m in Sources */,
 				A5852F6A2367CDF0009E5CB3 /* NSObject+Extension.m in Sources */,
 				11576101201820D900E0D94F /* YLChatFaceView.m in Sources */,
 				A5CBED4523699467004806B0 /* LoginViewModel.m in Sources */,
+				8778495223AB59D800AE9947 /* SearchFriendView.m in Sources */,
 				116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */,
 				111CB18C20205DAE0035D245 /* YLPhotoPreviewController.m in Sources */,
 				1157615D201889E200E0D94F /* Struct.pbobjc.m in Sources */,
@@ -1401,6 +1433,7 @@
 				8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */,
 				116B677820118FB6005AA5E0 /* YLNavigationController.m in Sources */,
 				A5852F602367CDD1009E5CB3 /* LanguageUtil.m in Sources */,
+				8778495E23ACC24C00AE9947 /* YLPersonalHeaderView.m in Sources */,
 				87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */,
 				A5852F5E2367CDD1009E5CB3 /* FileManager.m in Sources */,
 				8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */,
@@ -1442,8 +1475,10 @@
 				11576150201889E200E0D94F /* GPBWireFormat.m in Sources */,
 				116B67A420119AE7005AA5E0 /* ChatListViewController.m in Sources */,
 				11576156201889E200E0D94F /* Any.pbobjc.m in Sources */,
+				8778496123ACC48E00AE9947 /* YLPersonalCenterCell.m in Sources */,
 				116B677E20118FB6005AA5E0 /* NSDate+Extension.m in Sources */,
 				11576158201889E200E0D94F /* Api.pbobjc.m in Sources */,
+				8778495523AB5B0B00AE9947 /* UITextField+Extension.m in Sources */,
 				A5852F612367CDD1009E5CB3 /* UserDefUtils.m in Sources */,
 				116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */,
 				A5852FC223681F5F009E5CB3 /* GuidanceViewController.m in Sources */,
@@ -1462,6 +1497,7 @@
 				879BF5132384CB1000D1669E /* MIneViewModel.m in Sources */,
 				11576159201889E200E0D94F /* Duration.pbobjc.m in Sources */,
 				116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */,
+				8778495823AB6E3200AE9947 /* SelectFriendCellTableViewCell.m in Sources */,
 				1157615F201889E200E0D94F /* GPBUnknownFieldSet.m in Sources */,
 				111CB1E5202300380035D245 /* MicrophoneBottomView.m in Sources */,
 				A5852F5B2367CDD1009E5CB3 /* UITextField+Factory.m in Sources */,

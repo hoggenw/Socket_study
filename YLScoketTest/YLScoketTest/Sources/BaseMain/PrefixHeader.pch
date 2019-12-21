@@ -41,6 +41,7 @@
 
 #define Y_Notification_Account_Offline @"Y_Notification_Account_Offline"
 #define Y_Notification_Socket_Connet @"Y_Notification_Socket_Connet"
+#define Y_Notification_Reload_Friend_Group @"Y_Notification_Reload_Friend_Group"
 
 //发送登录请求
 #define POST_LOGINQUIT_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Account_Offline object:nil]
@@ -48,6 +49,34 @@
 #define POST_SOCKETCONNET_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Socket_Connet object:nil]
  //pop
  #define StirngWithDic(value) [NSString stringWithFormat:@"%@",value];
+
+//灰色背景色
+#define GRAY_BACKGROUND_COLOR [UIColor colorWithHex:0xF2F5F9]
+//分割线
+#define LINE_COLOR [UIColor colorWithHex:0xDFE1EA]
+//文本浅黑
+#define LIGHT_BLACK_COLOR [UIColor colorWithHex:0x4D535F]
+//文本黑
+#define TEXT_BLACK_COLOR [UIColor colorWithHex:0x383F47]
+//文本灰1
+#define TEXT_GRAY_COLOR_1 [UIColor colorWithHex:0xB4BDCA]
+//文本灰2
+#define TEXT_GRAY_COLOR_2 [UIColor colorWithHex:0x949CAC]
+#define RGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.f green:(g)/255.f blue:(b)/255.f alpha:a]
+//全屏约束
+#define FULL_SCREEN_CONSTRAINTS(v) [v mas_makeConstraints:^(MASConstraintMaker *make) {\
+make.top.equalTo(self.navBar.mas_bottom);\
+if (@available(iOS 11.0, *))\
+{\
+make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);\
+make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);\
+make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);\
+}\
+else\
+{\
+make.left.bottom.right.equalTo(self.view);\
+}\
+}];
 
 ///debug模式下,打印数据
 #ifdef DEBUG

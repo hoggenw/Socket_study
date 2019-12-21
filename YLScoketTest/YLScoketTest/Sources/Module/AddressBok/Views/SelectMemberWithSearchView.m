@@ -49,7 +49,7 @@
     
     SelectMemberCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SelectMemberCollectionCell class]) forIndexPath:indexPath];
     YLUserModel *model = _selectArray[indexPath.item];
-    [cell.memberHeadImg sd_setImageWithURL:model.avatar placeholderImage:[UIImage imageNamed:@"other_header"]];
+    [cell.memberHeadImg sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:IMAGE(@"other_header")];
     return cell;
 }
 

@@ -27,7 +27,6 @@
     @weakify(self)
     _friendscommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSString * input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-            @strongify(self)
             [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Friendships_List]  param:nil needToken:true returnBlock:^(NSDictionary *returnDict) {
                 
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {

@@ -16,6 +16,7 @@
     if (self)
     {
         [self initSource];
+        [self initData];
     }
     return self;
 }
@@ -30,10 +31,10 @@
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                     [subscriber sendNext: @(true)];
                     [subscriber sendCompleted];
-                   
+                    
                 }else {
-                   [subscriber sendNext: nil];
-                   [subscriber sendCompleted];
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
                 }
                 
             }];
@@ -42,6 +43,24 @@
             return nil;
         }];
     }];
+    
+}
+
+-(void)initData
+{
+    self.dataSource = @[ @{@"imageString":@"mine_push_icon",
+                           @"title":@"我的发布",
+                           @"pushController":@"KYServiceManagerController"},
+                         @{@"imageString":@"mine_blackName_icon",
+                           @"title":@"黑名单管理",
+                           @"pushController":@"KYOrderListViewController"},
+                         
+                         @{@"imageString":@"mine_help_icon",
+                           @"title":@"帮助与反馈",
+                           @"pushController":@"KYServiceManagerController"},
+                         @{@"imageString":@"mine_setting_icon",
+                           @"title":@"设置",
+                           @"pushController":@"KYSetViewController"}];
     
 }
 

@@ -34,7 +34,7 @@ NSString * const LoginAPI = @"api/login/userLogin";
 NSString * const LoginQuitAPI = @"api/login/quit";
 
 #pragma mark- 用户关系接口
-NSString * const Friendships_List = @"/api/apply/friend/friedsList";
+NSString * const Friendships_List = @"api/apply/friend/friedsList";
 
 
 
@@ -91,33 +91,33 @@ static AFHTTPSessionManager *sessionManager = nil;
 #pragma mark- 上传图片
 
 -(void)postImageUploadApiParam:(NSData *)data returnBlock:(ReturnBlock)infoBlock{
-     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true];
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true];
     [manager POST:[NSString stringWithFormat:@""] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data
-                                          name:@"file"
-                                      fileName:@"file.jpeg"
-                                      mimeType:@"image/jpeg"];
+                                    name:@"file"
+                                fileName:@"file.jpeg"
+                                mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-          NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
-              if([errnos isEqualToString:@"0"]){ //成功
-                  self.returnBlock = infoBlock;
-                  self.returnBlock(dict);
-                  
-              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-                  [YLHintView showMessageOnThisPage:@"登录已过期"];
-                  POST_LOGINQUIT_NOTIFICATION;
-              }else {
-                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
-              }
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+        NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        if([errnos isEqualToString:@"0"]){ //成功
+            self.returnBlock = infoBlock;
+            self.returnBlock(dict);
+            
+        }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+        }else {
+            [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+        }
         self.returnBlock = infoBlock;
-         self.returnBlock(dict);
+        self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
-            self.returnBlock = infoBlock;
-                  self.returnBlock(errorDic);
+        self.returnBlock = infoBlock;
+        self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
     }];
     
@@ -134,9 +134,9 @@ static AFHTTPSessionManager *sessionManager = nil;
     [manager POST:requestURL parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-         NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
         if([errnos isEqualToString:@"0"]){ //成功
-           
+            
             
         }else if ([errnos isEqualToString:@"10086"]){//被挤下线
             [YLHintView showMessageOnThisPage:@"登录已过期"];
@@ -144,15 +144,15 @@ static AFHTTPSessionManager *sessionManager = nil;
         }else {
             [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
         }
-            self.returnBlock = infoBlock;
-           self.returnBlock(dict);
-       
+        self.returnBlock = infoBlock;
+        self.returnBlock(dict);
+        
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
-         self.returnBlock = infoBlock;
-              self.returnBlock(errorDic);
+        self.returnBlock = infoBlock;
+        self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
     }];
 }
@@ -165,37 +165,37 @@ static AFHTTPSessionManager *sessionManager = nil;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-          NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
-              if([errnos isEqualToString:@"0"]){ //成功
-                  
-                  
-              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-                  [YLHintView showMessageOnThisPage:@"登录已过期"];
-                  POST_LOGINQUIT_NOTIFICATION;
-              }else {
-                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
-              }
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+        NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        if([errnos isEqualToString:@"0"]){ //成功
+            
+            
+        }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+        }else {
+            [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+        }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
-               self.returnBlock = infoBlock;
-               self.returnBlock(errorDic);
-//               for (NSString * key in error.userInfo.allKeys) {
-//                   NSLog(@"error key = %@, valeu = %@",key,error.userInfo[key]);
-//                   if ([key isEqualToString:@"com.alamofire.serialization.response.error.data"]) {
-//                       NSData * data = error.userInfo[key];
-//                       NSLog(@"错误dat啊： %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//
-//                   }
-//               }
-               NSLog(@"error ： %@",error);
-              [self dealError: @"网络请求发生错误"];
+        self.returnBlock = infoBlock;
+        self.returnBlock(errorDic);
+        //               for (NSString * key in error.userInfo.allKeys) {
+        //                   NSLog(@"error key = %@, valeu = %@",key,error.userInfo[key]);
+        //                   if ([key isEqualToString:@"com.alamofire.serialization.response.error.data"]) {
+        //                       NSData * data = error.userInfo[key];
+        //                       NSLog(@"错误dat啊： %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        //
+        //                   }
+        //               }
+        NSLog(@"error ： %@",error);
+        [self dealError: @"网络请求发生错误"];
     }];
-
-
-
+    
+    
+    
 }
 
 - (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
@@ -203,25 +203,25 @@ static AFHTTPSessionManager *sessionManager = nil;
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
     [manager GET:requestURL parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
-              if([errnos isEqualToString:@"0"]){ //成功
-                 
-                  
-              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-                   [YLHintView showMessageOnThisPage:@"登录已过期"];
-                    POST_LOGINQUIT_NOTIFICATION;
-              }else {
-                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
-              }
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+        NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        if([errnos isEqualToString:@"0"]){ //成功
+            
+            
+        }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+        }else {
+            [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+        }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         
-         self.returnBlock = infoBlock;
-              self.returnBlock(errorDic);
-       [self dealError: @"网络请求发生错误"];
+        self.returnBlock = infoBlock;
+        self.returnBlock(errorDic);
+        [self dealError: @"网络请求发生错误"];
         
     }];
 }
@@ -230,23 +230,23 @@ static AFHTTPSessionManager *sessionManager = nil;
     
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
     [manager DELETE:requestURL parameters:paramDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
-              if([errnos isEqualToString:@"0"]){ //成功
-                 
-                  
-              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-                  [YLHintView showMessageOnThisPage:@"登录已过期"];
-                  POST_LOGINQUIT_NOTIFICATION;
-              }else {
-                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
-              }
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+        NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        if([errnos isEqualToString:@"0"]){ //成功
+            
+            
+        }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+        }else {
+            [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+        }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
-          self.returnBlock = infoBlock;
-              self.returnBlock(errorDic);
+        self.returnBlock = infoBlock;
+        self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
     }];
 }
@@ -256,24 +256,24 @@ static AFHTTPSessionManager *sessionManager = nil;
     AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
     [manager PUT:requestURL parameters:paramDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
-               NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
-              if([errnos isEqualToString:@"0"]){ //成功
-                 
-                  
-              }else if ([errnos isEqualToString:@"10086"]){//被挤下线
-                   [YLHintView showMessageOnThisPage:@"登录已过期"];
-                    POST_LOGINQUIT_NOTIFICATION;
-              }else {
-                  [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
-              }
+        NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
+        if([errnos isEqualToString:@"0"]){ //成功
+            
+            
+        }else if ([errnos isEqualToString:@"10086"]){//被挤下线
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+        }else {
+            [self dealError: [NSString stringWithFormat:@"%@",[dict objectForKey:@"errmsg"]]];
+        }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-       
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
-              self.returnBlock(errorDic);
-       [self dealError: @"网络请求发生错误"];
+        self.returnBlock(errorDic);
+        [self dealError: @"网络请求发生错误"];
     }];
 }
 
@@ -285,9 +285,9 @@ static AFHTTPSessionManager *sessionManager = nil;
 #pragma  mark - 头部文件设置
 - (AFHTTPSessionManager *)getSessionManager:(BOOL)needToken
 {
-//    if (sessionManager != nil) {
-//        return  sessionManager;
-//    }
+    //    if (sessionManager != nil) {
+    //        return  sessionManager;
+    //    }
     sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
     sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];

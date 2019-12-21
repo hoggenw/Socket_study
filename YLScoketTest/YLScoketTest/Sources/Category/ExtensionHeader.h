@@ -21,5 +21,6 @@
 #import "UIResponder+Extension.h"
 #import "NSObject+YLKVO.h"
 #import "NSObject+JSONExtension.h"
+#import "UITextField+Extension.h"
 
 #endif /* ExtensionHeader_h */
