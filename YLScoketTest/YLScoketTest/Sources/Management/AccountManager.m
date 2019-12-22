@@ -103,6 +103,7 @@
             [userDefaults removeObjectForKey:phoneNumber];
         }
     }
+
 }
 
 - (void)update:(UserModel *)user {

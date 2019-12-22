@@ -20,7 +20,6 @@
 @end
 
 @implementation RegisterViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initialUserInterface];
