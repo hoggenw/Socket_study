@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MIneViewModel : NSObject
-@property (nonatomic, strong) RACCommand *quitLoginCommand;
 @property (nonatomic, copy) NSArray *dataSource;
 
 

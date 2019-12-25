@@ -114,11 +114,13 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
+        [YLHintView removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
+        [YLHintView removeLoadAnimation];
     }];
     
 }
@@ -147,13 +149,14 @@ static AFHTTPSessionManager *sessionManager = nil;
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
         
-        
+        [YLHintView removeLoadAnimation];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
+        [YLHintView removeLoadAnimation];
     }];
 }
 
@@ -178,6 +181,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
+        [YLHintView removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
@@ -192,6 +196,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         //               }
         NSLog(@"error ： %@",error);
         [self dealError: @"网络请求发生错误"];
+        [YLHintView removeLoadAnimation];
     }];
     
     
@@ -216,13 +221,14 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
+        [YLHintView removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
-        
+        [YLHintView removeLoadAnimation];
     }];
 }
 
@@ -243,11 +249,13 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
+        [YLHintView removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
+        [YLHintView removeLoadAnimation];
     }];
 }
 
@@ -268,12 +276,13 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-        
+        [YLHintView removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
+        [YLHintView removeLoadAnimation];
     }];
 }
 
@@ -288,6 +297,7 @@ static AFHTTPSessionManager *sessionManager = nil;
     //    if (sessionManager != nil) {
     //        return  sessionManager;
     //    }
+     [YLHintView loadAnimationShow];
     sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
     sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];

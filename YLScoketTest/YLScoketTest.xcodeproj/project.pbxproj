@@ -92,6 +92,10 @@
 		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
 		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
 		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
+		875400B723B349D800AACAA5 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400B623B349D800AACAA5 /* SettingViewController.m */; };
+		875400BB23B34AE400AACAA5 /* SetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BA23B34AE400AACAA5 /* SetView.m */; };
+		875400BE23B34B5000AACAA5 /* SetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BD23B34B5000AACAA5 /* SetTableViewCell.m */; };
+		875400C223B34CB000AACAA5 /* SetViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C123B34CB000AACAA5 /* SetViewModel.m */; };
 		8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778493E23AA194F00AE9947 /* FiendshipModel.m */; };
 		8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */; };
 		8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494623AA246F00AE9947 /* SelectContactCell.xib */; };
@@ -356,6 +360,14 @@
 		11849E191E52AFD0006D682D /* 7聊.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7聊.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
+		875400B523B349D800AACAA5 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		875400B623B349D800AACAA5 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		875400B923B34AE400AACAA5 /* SetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetView.h; sourceTree = "<group>"; };
+		875400BA23B34AE400AACAA5 /* SetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetView.m; sourceTree = "<group>"; };
+		875400BC23B34B5000AACAA5 /* SetTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTableViewCell.h; sourceTree = "<group>"; };
+		875400BD23B34B5000AACAA5 /* SetTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTableViewCell.m; sourceTree = "<group>"; };
+		875400C023B34CB000AACAA5 /* SetViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetViewModel.h; sourceTree = "<group>"; };
+		875400C123B34CB000AACAA5 /* SetViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetViewModel.m; sourceTree = "<group>"; };
 		8778493D23AA194F00AE9947 /* FiendshipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiendshipModel.h; sourceTree = "<group>"; };
 		8778493E23AA194F00AE9947 /* FiendshipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiendshipModel.m; sourceTree = "<group>"; };
 		8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectMemberWithSearchView.h; sourceTree = "<group>"; };
@@ -765,6 +777,7 @@
 		116B674720118FB6005AA5E0 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				875400B323B3497800AACAA5 /* Setting */,
 				A5852FC52368203C009E5CB3 /* Login */,
 				A5852FB823681F5F009E5CB3 /* Advertisement */,
 				A5852FAE2367E23E009E5CB3 /* AddressBok */,
@@ -1066,6 +1079,45 @@
 				116B677320118FB6005AA5E0 /* Supporting Files */,
 			);
 			path = YLScoketTest;
+			sourceTree = "<group>";
+		};
+		875400B323B3497800AACAA5 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				875400BF23B34C9700AACAA5 /* ViewModel */,
+				875400B823B34AD000AACAA5 /* View */,
+				875400B423B3498B00AACAA5 /* Controller */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		875400B423B3498B00AACAA5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				875400B523B349D800AACAA5 /* SettingViewController.h */,
+				875400B623B349D800AACAA5 /* SettingViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		875400B823B34AD000AACAA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				875400B923B34AE400AACAA5 /* SetView.h */,
+				875400BA23B34AE400AACAA5 /* SetView.m */,
+				875400BC23B34B5000AACAA5 /* SetTableViewCell.h */,
+				875400BD23B34B5000AACAA5 /* SetTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		875400BF23B34C9700AACAA5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				875400C023B34CB000AACAA5 /* SetViewModel.h */,
+				875400C123B34CB000AACAA5 /* SetViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8778493C23AA193900AE9947 /* Models */ = {
@@ -1390,6 +1442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8778494F23AA262700AE9947 /* SelectMemberCollectionCell.m in Sources */,
+				875400C223B34CB000AACAA5 /* SetViewModel.m in Sources */,
 				111CB19920206F710035D245 /* UIResponder+Extension.m in Sources */,
 				11576162201889E200E0D94F /* GPBUtilities.m in Sources */,
 				A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */,
@@ -1400,6 +1453,7 @@
 				A5852FCF2368203C009E5CB3 /* LoginView.m in Sources */,
 				116B677A20118FB6005AA5E0 /* UILabel+Extension.m in Sources */,
 				11576161201889E200E0D94F /* GPBUnknownField.m in Sources */,
+				875400BB23B34AE400AACAA5 /* SetView.m in Sources */,
 				116B677F20118FB6005AA5E0 /* NSTimer+Extension.m in Sources */,
 				111CB1E6202300380035D245 /* MicrophoneView.m in Sources */,
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
@@ -1468,6 +1522,7 @@
 				A5852FB72367E2CA009E5CB3 /* MIneViewController.m in Sources */,
 				A5852F7D2367CE04009E5CB3 /* YLThread.m in Sources */,
 				116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */,
+				875400B723B349D800AACAA5 /* SettingViewController.m in Sources */,
 				11576152201889E200E0D94F /* GPBCodedInputStream.m in Sources */,
 				115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */,
 				A5852F5F2367CDD1009E5CB3 /* YLConst.m in Sources */,
@@ -1515,6 +1570,7 @@
 				A5852F7B2367CE04009E5CB3 /* PopupView.m in Sources */,
 				116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */,
 				A5852FB42367E2B0009E5CB3 /* AddressBookViewController.m in Sources */,
+				875400BE23B34B5000AACAA5 /* SetTableViewCell.m in Sources */,
 				116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1617,6 +1673,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CURRENT_PROJECT_VERSION = 2019;
 				DEVELOPMENT_TEAM = KD59NK3467;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1633,6 +1690,7 @@
 					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor",
 					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor/Recorder&Player",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.7dc;
 				PRODUCT_NAME = "7聊";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1646,6 +1704,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CURRENT_PROJECT_VERSION = 2019;
 				DEVELOPMENT_TEAM = KD59NK3467;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1662,6 +1721,7 @@
 					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor",
 					"$(PROJECT_DIR)/YLScoketTest/Sources/Vendor/Recorder&Player",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.7dc;
 				PRODUCT_NAME = "7聊";
 				TARGETED_DEVICE_FAMILY = "1,2";

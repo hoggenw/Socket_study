@@ -25,6 +25,10 @@
 #define G 1024*1024*1024
 #define AdvertisementURLs @"AdvertisementURLs"
 #define USER_APPID           @"5b5a8028"
+///------ 应用程序版本号version ------
+#define kAppVersion ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
+//DocumentPath
+#define DOCUMENT_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
 //加载图片
 #define IMAGE(name) [UIImage imageNamed:name]

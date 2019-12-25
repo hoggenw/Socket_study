@@ -299,7 +299,7 @@
         
     });
     
-    // 2.地区选择 按钮
+    // 2.设置密码
     UIView *secretView = ({
         
         UIView *view = [[UIView alloc] init];
@@ -334,7 +334,7 @@
         
     });
     
-    // 3.详细地址 输入框
+    // 3.设置密码
     UIView *secondSecretView = ({
         UIView *view = [[UIView alloc] init];
         [infoView addSubview:view];
