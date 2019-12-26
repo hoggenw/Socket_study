@@ -55,7 +55,7 @@
     }
     folderSize += [SDImageCache sharedImageCache].totalDiskSize ;
     double cacheSize = folderSize / 1024.0 / 1024.0;
-    self.setData = @[@[@{@"title":@"修改密码",@"addInfo":@"",@"pushController":@"KYUpdatePasswordController"},
+    self.setData = @[@[@{@"title":@"修改密码",@"addInfo":@"",@"pushController":@"UpdatePasswordControllerViewController"},
                        @{@"title":@"清除缓存",@"addInfo":[NSString stringWithFormat:@"%.2f M", cacheSize]}],
                      @[@{@"title":@"关于我们",@"addInfo":@"",@"pushController":@"KYAboutUsController"},
                        @{@"title":@"当前版本",@"addInfo":kAppVersion}],

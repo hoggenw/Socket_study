@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger, YLMessageCMD) {
 
 @interface ChatMessageModel : NSObject
 
-@property (nonatomic, strong) ChatUserModel *from;                    // 发送者信息
+@property (nonatomic, strong) YLUserModel *from;                    // 发送者信息
 @property (nonatomic, strong) NSDate *date;                         // 发送时间
 @property (nonatomic, strong) NSString *dateString;                 // 格式化的发送时间
 @property (nonatomic, assign) YLMessageType messageType;            // 消息类型

@@ -96,6 +96,9 @@
 		875400BB23B34AE400AACAA5 /* SetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BA23B34AE400AACAA5 /* SetView.m */; };
 		875400BE23B34B5000AACAA5 /* SetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BD23B34B5000AACAA5 /* SetTableViewCell.m */; };
 		875400C223B34CB000AACAA5 /* SetViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C123B34CB000AACAA5 /* SetViewModel.m */; };
+		875400C523B441F500AACAA5 /* UpdatePasswordControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C423B441F500AACAA5 /* UpdatePasswordControllerViewController.m */; };
+		875400C823B4429F00AACAA5 /* UpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C723B4429F00AACAA5 /* UpdatePasswordView.m */; };
+		875400CB23B4439000AACAA5 /* UpdatePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */; };
 		8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778493E23AA194F00AE9947 /* FiendshipModel.m */; };
 		8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */; };
 		8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494623AA246F00AE9947 /* SelectContactCell.xib */; };
@@ -368,6 +371,12 @@
 		875400BD23B34B5000AACAA5 /* SetTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTableViewCell.m; sourceTree = "<group>"; };
 		875400C023B34CB000AACAA5 /* SetViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetViewModel.h; sourceTree = "<group>"; };
 		875400C123B34CB000AACAA5 /* SetViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetViewModel.m; sourceTree = "<group>"; };
+		875400C323B441F500AACAA5 /* UpdatePasswordControllerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordControllerViewController.h; sourceTree = "<group>"; };
+		875400C423B441F500AACAA5 /* UpdatePasswordControllerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordControllerViewController.m; sourceTree = "<group>"; };
+		875400C623B4429F00AACAA5 /* UpdatePasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordView.h; sourceTree = "<group>"; };
+		875400C723B4429F00AACAA5 /* UpdatePasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordView.m; sourceTree = "<group>"; };
+		875400C923B4439000AACAA5 /* UpdatePasswordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordViewModel.h; sourceTree = "<group>"; };
+		875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordViewModel.m; sourceTree = "<group>"; };
 		8778493D23AA194F00AE9947 /* FiendshipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiendshipModel.h; sourceTree = "<group>"; };
 		8778493E23AA194F00AE9947 /* FiendshipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiendshipModel.m; sourceTree = "<group>"; };
 		8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectMemberWithSearchView.h; sourceTree = "<group>"; };
@@ -1096,6 +1105,8 @@
 			children = (
 				875400B523B349D800AACAA5 /* SettingViewController.h */,
 				875400B623B349D800AACAA5 /* SettingViewController.m */,
+				875400C323B441F500AACAA5 /* UpdatePasswordControllerViewController.h */,
+				875400C423B441F500AACAA5 /* UpdatePasswordControllerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1107,6 +1118,8 @@
 				875400BA23B34AE400AACAA5 /* SetView.m */,
 				875400BC23B34B5000AACAA5 /* SetTableViewCell.h */,
 				875400BD23B34B5000AACAA5 /* SetTableViewCell.m */,
+				875400C623B4429F00AACAA5 /* UpdatePasswordView.h */,
+				875400C723B4429F00AACAA5 /* UpdatePasswordView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1116,6 +1129,8 @@
 			children = (
 				875400C023B34CB000AACAA5 /* SetViewModel.h */,
 				875400C123B34CB000AACAA5 /* SetViewModel.m */,
+				875400C923B4439000AACAA5 /* UpdatePasswordViewModel.h */,
+				875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1509,6 +1524,7 @@
 				116B678120118FB6005AA5E0 /* NSString+Extension.m in Sources */,
 				11576157201889E200E0D94F /* SourceContext.pbobjc.m in Sources */,
 				116B678720118FB6005AA5E0 /* AccountManager.m in Sources */,
+				875400C523B441F500AACAA5 /* UpdatePasswordControllerViewController.m in Sources */,
 				116B67AB20119CBB005AA5E0 /* UserModel.m in Sources */,
 				116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */,
 				115760FB2017225100E0D94F /* YLChatBoxView.m in Sources */,
@@ -1532,6 +1548,7 @@
 				11576156201889E200E0D94F /* Any.pbobjc.m in Sources */,
 				8778496123ACC48E00AE9947 /* YLPersonalCenterCell.m in Sources */,
 				116B677E20118FB6005AA5E0 /* NSDate+Extension.m in Sources */,
+				875400C823B4429F00AACAA5 /* UpdatePasswordView.m in Sources */,
 				11576158201889E200E0D94F /* Api.pbobjc.m in Sources */,
 				8778495523AB5B0B00AE9947 /* UITextField+Extension.m in Sources */,
 				A5852F612367CDD1009E5CB3 /* UserDefUtils.m in Sources */,
@@ -1571,6 +1588,7 @@
 				116B677920118FB6005AA5E0 /* AppDelegate.m in Sources */,
 				A5852FB42367E2B0009E5CB3 /* AddressBookViewController.m in Sources */,
 				875400BE23B34B5000AACAA5 /* SetTableViewCell.m in Sources */,
+				875400CB23B4439000AACAA5 /* UpdatePasswordViewModel.m in Sources */,
 				116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

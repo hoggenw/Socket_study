@@ -150,10 +150,10 @@
     recMessage.date = [NSDate date];// 当前时间
     
     //recMessage.imagePath = message.imagePath;
-    ChatUserModel * otherUser = [[ChatUserModel alloc] init];
-    otherUser.username = @"";// 名字
-    otherUser.userID = @"li-bokun";// ID
-    recMessage.from = otherUser;
+//    ChatUserModel * otherUser = [[ChatUserModel alloc] init];
+//    otherUser.username = @"";// 名字
+//    otherUser.userID = @"li-bokun";// ID
+    recMessage.from = recMessage.from;
     [self.chatMessageVC addNewMessage:recMessage];
     
 }
@@ -175,7 +175,12 @@
 - (void) chatBoxViewController:(ChatBoxViewController *)chatboxViewController
                    sendMessage:(ChatMessageModel *)message {
     // 发送的消息数据模型
-    message.from = [ChatOtherUserModel sharedOtherUser].user; //发送者
+    UserModel * model = [AccountManager sharedInstance].fetch;
+    YLUserModel * user = [YLUserModel new];
+    user.name = model.name;
+    user.avatar = model.avatar;
+    user.userId = model.userID;
+    message.from = user; //发送者
     [self.manager sendMassege:message];
     [self.chatMessageVC addNewMessage: message];
     
