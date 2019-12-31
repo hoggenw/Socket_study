@@ -37,9 +37,10 @@
         [self.viewModel.command.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
             @strongify(self)
             if (x) {
-                NSDictionary *result = (NSDictionary *)x;
-
+                [YLHintView showMessageOnThisPage:@"修改成功！"];
                 POP;
+            }else {
+              //  [YLHintView showMessageOnThisPage:@"修改密码失败"];
             }
         }];
     #pragma clang diagnostic push
@@ -56,8 +57,7 @@
                 {
                     RACTupleUnpack(UIButton *btn) = x;
                     btn.enabled = NO;
-//                    UserModel *userModel = [UserModel shareModel];
-//                    self.viewModel.parame = @{@"newPassword":self.mainView.nowPassword.text,@"oldPassword":self.mainView.oldPassword.text,@"username":userModel.userName};
+                    self.viewModel.parame = @{@"newPassword":self.mainView.nowPassword.text.md5String,@"oldPassword":self.mainView.oldPassword.text.md5String};
                 }
             }
             else

@@ -33,6 +33,9 @@ NSString * const RegistCodeAPI = @"api/login/getKaptchaImage";
 NSString * const LoginAPI = @"api/login/userLogin";
 NSString * const LoginQuitAPI = @"api/login/quit";
 
+NSString * const UpdatePasswordAPI = @"api/login/updatePassword";
+
+
 #pragma mark- 用户关系接口
 NSString * const Friendships_List = @"api/apply/friend/friedsList";
 

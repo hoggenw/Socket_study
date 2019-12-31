@@ -23,9 +23,12 @@ extern NSString * const LoginAPI;
 extern NSString * const RegisterAPI;
 //退出登录
 extern NSString * const LoginQuitAPI;
+//更新密码
+extern NSString * const UpdatePasswordAPI;
 #pragma mark- 用户关系接口
 //获取朋友列表
 extern NSString * const Friendships_List;
+
 
 @interface NetworkManager : NSObject
 

@@ -22,14 +22,19 @@
 -(void)initData{
     _command = [[RACCommand alloc]initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-//            [NetworkRequest requestWithUrl:[NSString stringWithFormat:@"%@%@",REQUEST_HOST,UPDATE_PASSWORD] method:REQUEST_POST parameters:[self.parame mutableCopy] hudShow:YES hudHidden:YES completion:^(id  _Nonnull response, NSError * _Nonnull error) {
-//                if (error) {
-//                    [subscriber sendNext:nil];
-//                }else{
-//                    [subscriber sendNext:response];
-//                }
-//                [subscriber sendCompleted];
-//            }];
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,UpdatePasswordAPI] paramBody:_parame needToken:true returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    [subscriber sendNext: @(true)];
+                    
+                }else {
+                    [subscriber sendNext: nil];
+                    
+                }
+                [subscriber sendCompleted];
+                
+            }];
+            
             return nil;
         }];
     }];

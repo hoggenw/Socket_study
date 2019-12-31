@@ -39,9 +39,9 @@
 //bold_font
 #define BOLD_FONT(x) [UIFont boldSystemFontOfSize:x]
 //push
-#define PUSH(v) [self.navigationController pushViewController:v animated:YES]
+#define PUSH(v) [self.navigationController pushViewController:v animated:false]
 //pop
-#define POP [self.navigationController popViewControllerAnimated:YES]
+#define POP [self.navigationController popViewControllerAnimated:false]
 
 #define Y_Notification_Account_Offline @"Y_Notification_Account_Offline"
 #define Y_Notification_Socket_Connet @"Y_Notification_Socket_Connet"

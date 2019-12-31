@@ -46,15 +46,16 @@
     self.oldPassword = [UITextField makeTextField:^(TextFieldMaker *make) {
         make.placeholder(@"请输入原密码").delegate(self).clearMode(UITextFieldViewModeWhileEditing).secureTextEntry(YES).addToSuperView(backView);
     }];
+    [self.oldPassword addLineWithSide:LineViewSideInBottom lineColor:[UIColor colorWithHexString:@"f3f4f5"] lineHeight:0.5 leftMargin:0 rightMargin:0];
     
     self.nowPassword = [UITextField makeTextField:^(TextFieldMaker *make) {
         make.placeholder(@"请输入新密码").delegate(self).clearMode(UITextFieldViewModeWhileEditing).secureTextEntry(YES).addToSuperView(backView);
     }];
-    
+    [self.nowPassword addLineWithSide:LineViewSideInBottom lineColor:[UIColor colorWithHexString:@"f3f4f5"] lineHeight:0.5 leftMargin:0 rightMargin:0];
     self.surePassword = [UITextField makeTextField:^(TextFieldMaker *make) {
         make.placeholder(@"请确认新密码").delegate(self).clearMode(UITextFieldViewModeWhileEditing).secureTextEntry(YES).addToSuperView(backView);
     }];
-    
+    [self.surePassword addLineWithSide:LineViewSideInBottom lineColor:[UIColor colorWithHexString:@"f3f4f5"] lineHeight:0.5 leftMargin:0 rightMargin:0];
     
     //layout
     [views mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:1 leadSpacing:0 tailSpacing:0];
