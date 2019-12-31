@@ -99,6 +99,8 @@
 		875400C523B441F500AACAA5 /* UpdatePasswordControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C423B441F500AACAA5 /* UpdatePasswordControllerViewController.m */; };
 		875400C823B4429F00AACAA5 /* UpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C723B4429F00AACAA5 /* UpdatePasswordView.m */; };
 		875400CB23B4439000AACAA5 /* UpdatePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */; };
+		8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC123BB17100028EE71 /* PersonalProfileController.m */; };
+		8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC423BB17B00028EE71 /* PersonInfoCell.m */; };
 		8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778493E23AA194F00AE9947 /* FiendshipModel.m */; };
 		8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */; };
 		8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494623AA246F00AE9947 /* SelectContactCell.xib */; };
@@ -377,6 +379,10 @@
 		875400C723B4429F00AACAA5 /* UpdatePasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordView.m; sourceTree = "<group>"; };
 		875400C923B4439000AACAA5 /* UpdatePasswordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordViewModel.h; sourceTree = "<group>"; };
 		875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordViewModel.m; sourceTree = "<group>"; };
+		8769CCC023BB17100028EE71 /* PersonalProfileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalProfileController.h; sourceTree = "<group>"; };
+		8769CCC123BB17100028EE71 /* PersonalProfileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalProfileController.m; sourceTree = "<group>"; };
+		8769CCC323BB17B00028EE71 /* PersonInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
+		8769CCC423BB17B00028EE71 /* PersonInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
 		8778493D23AA194F00AE9947 /* FiendshipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiendshipModel.h; sourceTree = "<group>"; };
 		8778493E23AA194F00AE9947 /* FiendshipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiendshipModel.m; sourceTree = "<group>"; };
 		8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectMemberWithSearchView.h; sourceTree = "<group>"; };
@@ -1047,6 +1053,8 @@
 			children = (
 				A5852FB52367E2CA009E5CB3 /* MIneViewController.h */,
 				A5852FB62367E2CA009E5CB3 /* MIneViewController.m */,
+				8769CCC023BB17100028EE71 /* PersonalProfileController.h */,
+				8769CCC123BB17100028EE71 /* PersonalProfileController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1058,6 +1066,8 @@
 				8778495D23ACC24C00AE9947 /* YLPersonalHeaderView.m */,
 				8778495F23ACC48E00AE9947 /* YLPersonalCenterCell.h */,
 				8778496023ACC48E00AE9947 /* YLPersonalCenterCell.m */,
+				8769CCC323BB17B00028EE71 /* PersonInfoCell.h */,
+				8769CCC423BB17B00028EE71 /* PersonInfoCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1495,6 +1505,7 @@
 				A5CBED4523699467004806B0 /* LoginViewModel.m in Sources */,
 				8778495223AB59D800AE9947 /* SearchFriendView.m in Sources */,
 				116B678B20118FB6005AA5E0 /* YLDeviceUtil.m in Sources */,
+				8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */,
 				111CB18C20205DAE0035D245 /* YLPhotoPreviewController.m in Sources */,
 				1157615D201889E200E0D94F /* Struct.pbobjc.m in Sources */,
 				116B678D20118FB6005AA5E0 /* YLLabel.m in Sources */,
@@ -1525,6 +1536,7 @@
 				11576157201889E200E0D94F /* SourceContext.pbobjc.m in Sources */,
 				116B678720118FB6005AA5E0 /* AccountManager.m in Sources */,
 				875400C523B441F500AACAA5 /* UpdatePasswordControllerViewController.m in Sources */,
+				8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */,
 				116B67AB20119CBB005AA5E0 /* UserModel.m in Sources */,
 				116B679020118FB6005AA5E0 /* CLLocation+Sino.m in Sources */,
 				115760FB2017225100E0D94F /* YLChatBoxView.m in Sources */,

@@ -49,7 +49,8 @@
         }];
         
     [[_headerView rac_signalForSelector:@selector(headerBtnClicked)] subscribeNext:^(RACTuple * _Nullable x) {
-        NSLog(@"进入个人中心");
+            //NSLog(@"进入个人中心");
+          PUSH([NSClassFromString(@"PersonalProfileController") new]);
      }];
     
 }
