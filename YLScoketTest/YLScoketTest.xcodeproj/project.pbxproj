@@ -101,6 +101,7 @@
 		875400CB23B4439000AACAA5 /* UpdatePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */; };
 		8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC123BB17100028EE71 /* PersonalProfileController.m */; };
 		8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC423BB17B00028EE71 /* PersonInfoCell.m */; };
+		8769CCC823BB2FF40028EE71 /* BlacklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */; };
 		8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778493E23AA194F00AE9947 /* FiendshipModel.m */; };
 		8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */; };
 		8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494623AA246F00AE9947 /* SelectContactCell.xib */; };
@@ -383,6 +384,8 @@
 		8769CCC123BB17100028EE71 /* PersonalProfileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalProfileController.m; sourceTree = "<group>"; };
 		8769CCC323BB17B00028EE71 /* PersonInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
 		8769CCC423BB17B00028EE71 /* PersonInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
+		8769CCC623BB2FF40028EE71 /* BlacklistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlacklistViewController.h; sourceTree = "<group>"; };
+		8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlacklistViewController.m; sourceTree = "<group>"; };
 		8778493D23AA194F00AE9947 /* FiendshipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiendshipModel.h; sourceTree = "<group>"; };
 		8778493E23AA194F00AE9947 /* FiendshipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiendshipModel.m; sourceTree = "<group>"; };
 		8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectMemberWithSearchView.h; sourceTree = "<group>"; };
@@ -1055,6 +1058,8 @@
 				A5852FB62367E2CA009E5CB3 /* MIneViewController.m */,
 				8769CCC023BB17100028EE71 /* PersonalProfileController.h */,
 				8769CCC123BB17100028EE71 /* PersonalProfileController.m */,
+				8769CCC623BB2FF40028EE71 /* BlacklistViewController.h */,
+				8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1533,6 +1538,7 @@
 				116B678A20118FB6005AA5E0 /* NetworkManager.m in Sources */,
 				8778494A23AA246F00AE9947 /* SelectContactCell.m in Sources */,
 				116B678120118FB6005AA5E0 /* NSString+Extension.m in Sources */,
+				8769CCC823BB2FF40028EE71 /* BlacklistViewController.m in Sources */,
 				11576157201889E200E0D94F /* SourceContext.pbobjc.m in Sources */,
 				116B678720118FB6005AA5E0 /* AccountManager.m in Sources */,
 				875400C523B441F500AACAA5 /* UpdatePasswordControllerViewController.m in Sources */,

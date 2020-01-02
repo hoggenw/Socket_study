@@ -14,6 +14,7 @@
 @interface YLUITabBarViewController ()<UITabBarControllerDelegate>
 
 @property (nonatomic, strong)NSArray<NSDictionary *> * childVCInfo;
+@property (nonatomic, assign) NSInteger tapCount;
 
 @end
 
@@ -31,6 +32,7 @@
         self.childVCInfo = @[childFrist,childSecond,childThird,childFourth];
          NSLog(@"childVCInfo count %@",@(_childVCInfo.count));
         [self initialUserInterface];
+        self.tapCount = 0;
     }
     return self;
 }
@@ -97,6 +99,23 @@
 }
 
 
+-(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+    NSUInteger index = [tabBar.items indexOfObject:item];
+    if ([self.viewControllers[index] isKindOfClass:[YLNavigationController class]]) {
+        YLNavigationController * navi = (YLNavigationController *) self.viewControllers[index];
+        if (navi.viewControllers.count > 0) {
+            if ([navi.viewControllers.firstObject isKindOfClass:[NSClassFromString(@"AddressBookViewController") class]]) {
+                self.tapCount += 1;
+                if (self.tapCount%3 == 0) {
+                   [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Reload_Friend_Group object:nil];
+                }
+               
+            }
+        }
+        
+    }
+    
+}
 
 // 版本更新提示 判断
 - (void)judgeAppVersionUpdate
