@@ -38,7 +38,8 @@ NSString * const UpdatePasswordAPI = @"api/login/updatePassword";
 
 #pragma mark- 用户关系接口
 NSString * const Friendships_List = @"api/apply/friend/friedsList";
-
+NSString * const Blackships_List = @"api/apply/friend/blackList";
+NSString * const Blackships_Delete = @"api/apply/friend/blackDelete";
 
 
 NSString * const RegisterAPI = @"api/login/register";

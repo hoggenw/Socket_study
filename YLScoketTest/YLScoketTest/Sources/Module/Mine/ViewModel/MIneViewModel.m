@@ -29,7 +29,7 @@
                            @"pushController":@"KYServiceManagerController"},
                          @{@"imageString":@"mine_blackName_icon",
                            @"title":@"黑名单管理",
-                           @"pushController":@"KYOrderListViewController"},
+                           @"pushController":@"BlacklistViewController"},
                          
                          @{@"imageString":@"mine_help_icon",
                            @"title":@"帮助与反馈",

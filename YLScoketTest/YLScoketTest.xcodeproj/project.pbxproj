@@ -119,6 +119,8 @@
 		879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */; };
 		879BF5132384CB1000D1669E /* MIneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5122384CB1000D1669E /* MIneViewModel.m */; };
 		87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */; };
+		87B504D523C5AC0A00A0FDC7 /* BlacklistViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B504D423C5AC0A00A0FDC7 /* BlacklistViewModel.m */; };
+		87B504D823C5AEAB00A0FDC7 /* BlackNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B504D723C5AEAB00A0FDC7 /* BlackNameTableViewCell.m */; };
 		87D0E2FB237CE224004ECC78 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FA237CE224004ECC78 /* RegisterViewController.m */; };
 		87D0E2FE237CE246004ECC78 /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D0E2FD237CE246004ECC78 /* RegisterView.m */; };
 		A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5852F442367CDD0009E5CB3 /* YLIFlyHelper.m */; };
@@ -418,6 +420,10 @@
 		879BF5122384CB1000D1669E /* MIneViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIneViewModel.m; sourceTree = "<group>"; };
 		87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewModel.h; sourceTree = "<group>"; };
 		87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewModel.m; sourceTree = "<group>"; };
+		87B504D323C5AC0A00A0FDC7 /* BlacklistViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlacklistViewModel.h; sourceTree = "<group>"; };
+		87B504D423C5AC0A00A0FDC7 /* BlacklistViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlacklistViewModel.m; sourceTree = "<group>"; };
+		87B504D623C5AEAB00A0FDC7 /* BlackNameTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackNameTableViewCell.h; sourceTree = "<group>"; };
+		87B504D723C5AEAB00A0FDC7 /* BlackNameTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlackNameTableViewCell.m; sourceTree = "<group>"; };
 		87D0E2F9237CE224004ECC78 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		87D0E2FA237CE224004ECC78 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		87D0E2FC237CE246004ECC78 /* RegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterView.h; sourceTree = "<group>"; };
@@ -1073,6 +1079,8 @@
 				8778496023ACC48E00AE9947 /* YLPersonalCenterCell.m */,
 				8769CCC323BB17B00028EE71 /* PersonInfoCell.h */,
 				8769CCC423BB17B00028EE71 /* PersonInfoCell.m */,
+				87B504D623C5AEAB00A0FDC7 /* BlackNameTableViewCell.h */,
+				87B504D723C5AEAB00A0FDC7 /* BlackNameTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1173,6 +1181,8 @@
 			children = (
 				879BF5112384CB1000D1669E /* MIneViewModel.h */,
 				879BF5122384CB1000D1669E /* MIneViewModel.m */,
+				87B504D323C5AC0A00A0FDC7 /* BlacklistViewModel.h */,
+				87B504D423C5AC0A00A0FDC7 /* BlacklistViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1557,6 +1567,7 @@
 				A5852F7D2367CE04009E5CB3 /* YLThread.m in Sources */,
 				116B67A120119ACB005AA5E0 /* FriendDiscoveredViewController.m in Sources */,
 				875400B723B349D800AACAA5 /* SettingViewController.m in Sources */,
+				87B504D823C5AEAB00A0FDC7 /* BlackNameTableViewCell.m in Sources */,
 				11576152201889E200E0D94F /* GPBCodedInputStream.m in Sources */,
 				115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */,
 				A5852F5F2367CDD1009E5CB3 /* YLConst.m in Sources */,
@@ -1589,6 +1600,7 @@
 				116B678020118FB6005AA5E0 /* UIColor+Extension.m in Sources */,
 				8778495823AB6E3200AE9947 /* SelectFriendCellTableViewCell.m in Sources */,
 				1157615F201889E200E0D94F /* GPBUnknownFieldSet.m in Sources */,
+				87B504D523C5AC0A00A0FDC7 /* BlacklistViewModel.m in Sources */,
 				111CB1E5202300380035D245 /* MicrophoneBottomView.m in Sources */,
 				A5852F5B2367CDD1009E5CB3 /* UITextField+Factory.m in Sources */,
 				A5852F592367CDD1009E5CB3 /* UILabel+Factory.m in Sources */,

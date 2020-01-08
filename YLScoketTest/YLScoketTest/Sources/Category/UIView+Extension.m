@@ -30,7 +30,7 @@ static NSString *noDataViewKey = @"noDataViewKey";
     self.noDataView = [UIImageView new];
     self.noDataView .image = [UIImage imageNamed:@"common_nodata_icon"];
     //417 × 382
-    CGRect frame = CGRectMake(self.centerX - 70, rect.origin.y + rect.size.height/2 - 64, 140, 128);
+    CGRect frame = CGRectMake(self.centerX - 88, rect.origin.y + rect.size.height/2 - 80, 175, 160);
     self.noDataView.frame = frame;
     [self addSubview: self.noDataView];
     [self bringSubviewToFront: self.noDataView];

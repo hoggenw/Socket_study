@@ -28,7 +28,8 @@ extern NSString * const UpdatePasswordAPI;
 #pragma mark- 用户关系接口
 //获取朋友列表
 extern NSString * const Friendships_List;
-
+extern NSString * const Blackships_List;
+extern NSString * const Blackships_Delete;
 
 @interface NetworkManager : NSObject
 

@@ -121,6 +121,7 @@
         if (x != nil)
         {
             self.friendsArray = x;
+            [_contactArray removeAllObjects];
             for (FiendshipModel  *model in self.friendsArray ) {
                 if ([model.friend.userId isEqualToString: [[AccountManager sharedInstance] fetch].userID]) {
                     [_contactArray addObject: model.user];
