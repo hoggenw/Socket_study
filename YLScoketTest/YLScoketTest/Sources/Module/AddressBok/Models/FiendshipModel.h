@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *friendId;
+@property (nonatomic, copy) NSString *firendCategoryName;
+@property (nonatomic, copy) NSString *userCategoryName;
 @property (nonatomic, copy) YLUserModel *user;
 @property (nonatomic, copy) YLUserModel *friend;
 

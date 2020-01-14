@@ -15,6 +15,7 @@
 
 
 @interface AddressBookViewController ()<UITableViewDelegate, UITableViewDataSource>
+
 @property (nonatomic, strong) AddressBookViewModel *viewModel;
 @property (nonatomic, strong) NSArray *rowArr;
 @property (nonatomic, strong) NSArray *sectionArr;
