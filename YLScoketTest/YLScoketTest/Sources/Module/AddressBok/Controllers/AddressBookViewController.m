@@ -12,7 +12,7 @@
 #import "SelectFriendCellTableViewCell.h"
 #import "SearchFriendView.h"
 #import "IndexTableViewCell.h"
-
+#import "ApplyFriendshipViewController.h"
 
 @interface AddressBookViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -84,6 +84,9 @@
         }
         else if ([button.titleLabel.text isEqualToString:@"好友申请"])
         {
+            ApplyFriendshipViewController * applyVC = [ApplyFriendshipViewController new];
+            applyVC.hidesBottomBarWhenPushed = true;
+            PUSH(applyVC);
             NSLog(@"好友申请");
         }
         else if ([button.titleLabel.text isEqualToString:@"添加好友"])

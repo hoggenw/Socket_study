@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong)MBProgressHUD *progressHUD;
 
+@property (nonatomic, strong)UIView * hudView;
+
 
 @end
 
@@ -227,13 +229,30 @@
 
 -(void)loadAnimationShow {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    self.hud = [MBProgressHUD showHUDAddedTo:window animated:YES];
+    float centerX = window.centerX;
+    float centerY = window.centerY;
+    UIView * hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 350)];
+    hudView.centerX = centerX;
+    hudView.centerY = centerY;
+    [window addSubview: hudView];
+    self.hudView = hudView;
+    self.hud = [MBProgressHUD showHUDAddedTo:self.hudView  animated:YES];
+    
 }
 
 -(void)removeLoadAnimation {
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    [MBProgressHUD hideHUDForView:window animated:YES];
+    if (self.hudView) {
+        [MBProgressHUD hideHUDForView:self.hudView animated:YES];
+    }
+    
+    if (self.hud) {
+        [self.hud removeFromSuperview];
+    }
+    if (self.hudView) {
+        [self.hudView removeFromSuperview];
+    }
     self.hud = nil;
+    self.hudView = nil;
     
 }
 

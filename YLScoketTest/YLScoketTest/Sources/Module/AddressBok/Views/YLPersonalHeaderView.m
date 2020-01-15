@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *position;
-@property (nonatomic, strong) UILabel *hospital;
+@property (nonatomic, strong) UILabel *chatLabel;
 @end
 
 @implementation YLPersonalHeaderView
@@ -92,10 +92,10 @@
         make.right.equalTo(self.informationView).mas_offset(-10);
     }];
 
-    _hospital = [UILabel makeLabel:^(LabelMaker *make) {
+    _chatLabel = [UILabel makeLabel:^(LabelMaker *make) {
         make.text([NSString stringWithFormat:@"7聊号： %@", userModel.codeName]).font(BOLD_FONT(14)).numberOfLines(0).textColor(UIColor.whiteColor).addToSuperView(self);
     }];
-    [_hospital mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_chatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.name.mas_bottom).mas_offset(10);
         make.left.equalTo(self.name);
         make.right.equalTo(self.informationView).mas_offset(-10);

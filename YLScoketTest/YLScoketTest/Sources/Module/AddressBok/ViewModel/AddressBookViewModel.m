@@ -51,10 +51,40 @@
         
     }];
     
+    _applyFriendscommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSString * input) {
+           return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+               [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,ApplyFriendships_List]  param:nil needToken:true returnBlock:^(NSDictionary *returnDict) {
+                   
+                   if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                       NSArray * users = returnDict[@"data"];
+                       NSMutableArray<FiendshipModel *> * friends = [NSMutableArray array];
+                       for (NSDictionary * temp in users) {
+                           FiendshipModel * model = [FiendshipModel yy_modelWithDictionary: temp];
+                          // NSLog(@"%@  ===   %@",model.user.name,model.user.userId);
+                           [friends addObject: model];
+                       }
+                       [subscriber sendNext: friends];
+                       [subscriber sendCompleted];
+                       //NSLog(@"朋友列表： %@",users);
+                   }else {
+                       [subscriber sendNext: nil];
+                       [subscriber sendCompleted];
+                   }
+                   
+               }];
+               return  nil;
+           }];
+           
+       }];
+    
 }
 
 -(void)getFriendscommand {
     [_friendscommand execute: nil];
+}
+
+-(void)getApplyFriendscommand {
+    [_applyFriendscommand execute: nil];
 }
 
 /**

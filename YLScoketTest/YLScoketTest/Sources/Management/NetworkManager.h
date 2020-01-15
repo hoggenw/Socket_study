@@ -30,6 +30,7 @@ extern NSString * const UpdatePasswordAPI;
 extern NSString * const Friendships_List;
 extern NSString * const Blackships_List;
 extern NSString * const Blackships_Delete;
+extern NSString * const ApplyFriendships_List;
 
 @interface NetworkManager : NSObject
 

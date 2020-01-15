@@ -13,8 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AddressBookViewModel : NSObject
 
 @property (nonatomic, strong) RACCommand *friendscommand;
+@property (nonatomic, strong) RACCommand *applyFriendscommand;
 
 -(void)getFriendscommand;
+
+-(void)getApplyFriendscommand;
 
 // 获取排序后的通讯录列表
 + (NSMutableArray *) getContactListDataBy:(NSMutableArray *)array;

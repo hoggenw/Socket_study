@@ -38,8 +38,10 @@ NSString * const UpdatePasswordAPI = @"api/login/updatePassword";
 
 #pragma mark- 用户关系接口
 NSString * const Friendships_List = @"api/apply/friend/friedsList";
+NSString * const ApplyFriendships_List = @"api/apply/friend/applyList";
 NSString * const Blackships_List = @"api/apply/friend/blackList";
 NSString * const Blackships_Delete = @"api/apply/friend/blackDelete";
+
 
 
 NSString * const RegisterAPI = @"api/login/register";
@@ -118,13 +120,13 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     }];
     
 }
@@ -153,14 +155,14 @@ static AFHTTPSessionManager *sessionManager = nil;
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
         
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     }];
 }
 
@@ -185,7 +187,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
@@ -200,7 +202,7 @@ static AFHTTPSessionManager *sessionManager = nil;
         //               }
         NSLog(@"error ： %@",error);
         [self dealError: @"网络请求发生错误"];
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     }];
     
     
@@ -225,14 +227,14 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     }];
 }
 
@@ -253,13 +255,13 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     }];
 }
 
@@ -280,13 +282,13 @@ static AFHTTPSessionManager *sessionManager = nil;
         }
         self.returnBlock = infoBlock;
         self.returnBlock(dict);
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSDictionary *errorDic = @{@"errno":@"-1"};
         self.returnBlock = infoBlock;
         self.returnBlock(errorDic);
         [self dealError: @"网络请求发生错误"];
-        [YLHintView removeLoadAnimation];
+        [[YLHintView shareHintView] removeLoadAnimation];
     }];
 }
 
@@ -301,7 +303,7 @@ static AFHTTPSessionManager *sessionManager = nil;
     //    if (sessionManager != nil) {
     //        return  sessionManager;
     //    }
-     [YLHintView loadAnimationShow];
+    [[YLHintView shareHintView] loadAnimationShow];
     sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
     sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];

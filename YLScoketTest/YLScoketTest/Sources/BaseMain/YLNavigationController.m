@@ -26,6 +26,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [[YLHintView shareHintView] removeLoadAnimation];
+    [super pushViewController:viewController animated:animated];
+}
+-(UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    [[YLHintView shareHintView] removeLoadAnimation];
+
+    return [super popViewControllerAnimated: animated];
+}
 
 #pragma mark - delegate <UIGestureRecognizerDelegate>
 

@@ -101,6 +101,7 @@
 
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
     NSUInteger index = [tabBar.items indexOfObject:item];
+    [[YLHintView shareHintView] removeLoadAnimation];
     if ([self.viewControllers[index] isKindOfClass:[YLNavigationController class]]) {
         YLNavigationController * navi = (YLNavigationController *) self.viewControllers[index];
         if (navi.viewControllers.count > 0) {

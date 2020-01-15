@@ -99,6 +99,9 @@
 		875400C523B441F500AACAA5 /* UpdatePasswordControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C423B441F500AACAA5 /* UpdatePasswordControllerViewController.m */; };
 		875400C823B4429F00AACAA5 /* UpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400C723B4429F00AACAA5 /* UpdatePasswordView.m */; };
 		875400CB23B4439000AACAA5 /* UpdatePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */; };
+		8754206123CD910D0008820A /* ApplyFriendshipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206023CD910D0008820A /* ApplyFriendshipViewController.m */; };
+		8754206423CD969F0008820A /* ApplyFriendshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */; };
+		8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206623CDACB90008820A /* ApplyDetailViewController.m */; };
 		8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC123BB17100028EE71 /* PersonalProfileController.m */; };
 		8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC423BB17B00028EE71 /* PersonInfoCell.m */; };
 		8769CCC823BB2FF40028EE71 /* BlacklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */; };
@@ -382,6 +385,12 @@
 		875400C723B4429F00AACAA5 /* UpdatePasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordView.m; sourceTree = "<group>"; };
 		875400C923B4439000AACAA5 /* UpdatePasswordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdatePasswordViewModel.h; sourceTree = "<group>"; };
 		875400CA23B4439000AACAA5 /* UpdatePasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdatePasswordViewModel.m; sourceTree = "<group>"; };
+		8754205F23CD910D0008820A /* ApplyFriendshipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyFriendshipViewController.h; sourceTree = "<group>"; };
+		8754206023CD910D0008820A /* ApplyFriendshipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyFriendshipViewController.m; sourceTree = "<group>"; };
+		8754206223CD969F0008820A /* ApplyFriendshipTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyFriendshipTableViewCell.h; sourceTree = "<group>"; };
+		8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyFriendshipTableViewCell.m; sourceTree = "<group>"; };
+		8754206523CDACB90008820A /* ApplyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyDetailViewController.h; sourceTree = "<group>"; };
+		8754206623CDACB90008820A /* ApplyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyDetailViewController.m; sourceTree = "<group>"; };
 		8769CCC023BB17100028EE71 /* PersonalProfileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalProfileController.h; sourceTree = "<group>"; };
 		8769CCC123BB17100028EE71 /* PersonalProfileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalProfileController.m; sourceTree = "<group>"; };
 		8769CCC323BB17B00028EE71 /* PersonInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
@@ -1228,6 +1237,10 @@
 			children = (
 				A5852FB22367E2B0009E5CB3 /* AddressBookViewController.h */,
 				A5852FB32367E2B0009E5CB3 /* AddressBookViewController.m */,
+				8754205F23CD910D0008820A /* ApplyFriendshipViewController.h */,
+				8754206023CD910D0008820A /* ApplyFriendshipViewController.m */,
+				8754206523CDACB90008820A /* ApplyDetailViewController.h */,
+				8754206623CDACB90008820A /* ApplyDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1249,6 +1262,8 @@
 				8778495723AB6E3200AE9947 /* SelectFriendCellTableViewCell.m */,
 				8778495923AC774E00AE9947 /* IndexTableViewCell.h */,
 				8778495A23AC774E00AE9947 /* IndexTableViewCell.m */,
+				8754206223CD969F0008820A /* ApplyFriendshipTableViewCell.h */,
+				8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1373,7 +1388,7 @@
 				TargetAttributes = {
 					11849E181E52AFD0006D682D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = KD59NK3467;
+						DevelopmentTeam = MFH447PL47;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1560,6 +1575,7 @@
 				A5852FC323681F5F009E5CB3 /* YLProgressView.m in Sources */,
 				116B678220118FB6005AA5E0 /* UIView+Extension.m in Sources */,
 				A5852F6B2367CDF0009E5CB3 /* UIScrollView+Extension.m in Sources */,
+				8754206123CD910D0008820A /* ApplyFriendshipViewController.m in Sources */,
 				116B679120118FB6005AA5E0 /* main.m in Sources */,
 				11576154201889E200E0D94F /* Type.pbobjc.m in Sources */,
 				111CB1E8202300380035D245 /* MicrophoneTopView.m in Sources */,
@@ -1581,6 +1597,7 @@
 				11576158201889E200E0D94F /* Api.pbobjc.m in Sources */,
 				8778495523AB5B0B00AE9947 /* UITextField+Extension.m in Sources */,
 				A5852F612367CDD1009E5CB3 /* UserDefUtils.m in Sources */,
+				8754206423CD969F0008820A /* ApplyFriendshipTableViewCell.m in Sources */,
 				116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */,
 				A5852FC223681F5F009E5CB3 /* GuidanceViewController.m in Sources */,
 				115760F020171D3C00E0D94F /* YLImageMessageCell.m in Sources */,
@@ -1607,6 +1624,7 @@
 				879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */,
 				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
 				11576163201889E200E0D94F /* GPBMessage.m in Sources */,
+				8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */,
 				115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */,
 				11576151201889E200E0D94F /* GPBExtensionRegistry.m in Sources */,
 				1157615C201889E200E0D94F /* FieldMask.pbobjc.m in Sources */,
@@ -1722,7 +1740,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CURRENT_PROJECT_VERSION = 2019;
-				DEVELOPMENT_TEAM = KD59NK3467;
+				DEVELOPMENT_TEAM = MFH447PL47;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1753,7 +1771,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CURRENT_PROJECT_VERSION = 2019;
-				DEVELOPMENT_TEAM = KD59NK3467;
+				DEVELOPMENT_TEAM = MFH447PL47;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
