@@ -77,6 +77,44 @@
            
        }];
     
+    _updateFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Update_Friendship_info] paramBody:input needToken:true returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    NSLog(@"%@",returnDict);
+                    [subscriber sendNext: @(true)];
+                    [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            return  nil;
+        }];
+      
+    }];
+    
+    _addFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Agree_Friendship] paramBody:input needToken:true returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    NSLog(@"%@",returnDict);
+                    [subscriber sendNext: @(true)];
+                    [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            return  nil;
+        }];
+      
+    }];
+    
 }
 
 -(void)getFriendscommand {
@@ -85,6 +123,13 @@
 
 -(void)getApplyFriendscommand {
     [_applyFriendscommand execute: nil];
+}
+
+-(void)updateFriendshipcommand:(NSMutableDictionary *)input {
+    [_updateFriendshipcommand execute:input];
+}
+-(void)addFriendshipcommand:(NSMutableDictionary *)input{
+        [_addFriendshipcommand execute:input];
 }
 
 /**

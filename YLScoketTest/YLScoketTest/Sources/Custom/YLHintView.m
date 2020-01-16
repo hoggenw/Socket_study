@@ -228,6 +228,7 @@
 }
 
 -(void)loadAnimationShow {
+    [self removeLoadAnimation];
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     float centerX = window.centerX;
     float centerY = window.centerY;

@@ -14,11 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACCommand *friendscommand;
 @property (nonatomic, strong) RACCommand *applyFriendscommand;
+@property (nonatomic, strong) RACCommand *updateFriendshipcommand;
+@property (nonatomic, strong) RACCommand *addFriendshipcommand;
 
 -(void)getFriendscommand;
 
 -(void)getApplyFriendscommand;
 
+-(void)updateFriendshipcommand:(NSMutableDictionary *)input;
+
+-(void)addFriendshipcommand:(NSMutableDictionary *)input;
 // 获取排序后的通讯录列表
 + (NSMutableArray *) getContactListDataBy:(NSMutableArray *)array;
 // 获取分区数(索引列表)

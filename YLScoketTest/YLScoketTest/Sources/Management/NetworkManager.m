@@ -41,6 +41,8 @@ NSString * const Friendships_List = @"api/apply/friend/friedsList";
 NSString * const ApplyFriendships_List = @"api/apply/friend/applyList";
 NSString * const Blackships_List = @"api/apply/friend/blackList";
 NSString * const Blackships_Delete = @"api/apply/friend/blackDelete";
+NSString * const Update_Friendship_info = @"api/apply/friend/updateFriendship";
+NSString * const Agree_Friendship = @"api/apply/friend/add";
 
 
 

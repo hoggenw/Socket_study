@@ -24,6 +24,27 @@
 
 @implementation ApplyFriendshipViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        @weakify(self)
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Reload_FriendShips object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+            @strongify(self)
+            if (self.viewModel) {
+                [self.viewModel getApplyFriendscommand];
+            }
+        }];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];

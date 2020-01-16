@@ -7,6 +7,7 @@
 //
 
 #import "ApplyDetailViewController.h"
+#import "AddressBookViewModel.h"
 
 @interface ApplyDetailViewController ()
 @property (nonatomic, strong) UIImageView *informationView;
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) UIButton *remarkButton ;
 @property (nonatomic, strong) UIButton *nameButton ;
 @property (nonatomic, strong) UIButton *applyButton;
+@property (nonatomic, strong) AddressBookViewModel *viewModel;
 
 @end
 
@@ -26,6 +28,39 @@
     self.title = @"操作";
     [super viewDidLoad];
     [self initUI];
+    [self initDataSource];
+    
+}
+
+- (void)initDataSource {
+    _viewModel = [AddressBookViewModel new];
+    @weakify(self)
+    [_viewModel.updateFriendshipcommand.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
+        
+        if (x != nil)
+        {
+            
+            //[YLHintView showMessageOnThisPage:@"设置成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Reload_FriendShips object:nil];
+            [YLHintView removeLoadAnimation];
+        }
+        
+        
+    }];
+    
+    [_viewModel.addFriendshipcommand.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
+          
+          if (x != nil)
+          {
+              //[YLHintView showMessageOnThisPage:@"添加成功"];
+               [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Reload_Friend_Group object:nil];
+              [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Reload_FriendShips object:nil];
+              [YLHintView removeLoadAnimation];
+              POP;
+          }
+          
+          
+      }];
     
 }
 - (void)initUI {
@@ -67,24 +102,24 @@
     }];
     
     self.categoryNameTextFeild = [UITextField makeTextField:^(TextFieldMaker *make) {
-          make.addToSuperView(self.informationView).font(FONT(15)).textColor([UIColor colorWithHexString:@"0x666666"]).placeholder(@"设置备注名");
-      }];
-      
+        make.addToSuperView(self.informationView).font(FONT(15)).textColor([UIColor colorWithHexString:@"0x666666"]).placeholder(@"设置备注名");
+    }];
+    
     [self.categoryNameTextFeild mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.left.equalTo(self.headerView.mas_right).mas_offset(16);
-          make.right.equalTo(self.view.mas_right).offset(-120);
-          make.bottom.equalTo(self.headerView.mas_bottom).offset(-3);
-      }];
+        make.left.equalTo(self.headerView.mas_right).mas_offset(16);
+        make.right.equalTo(self.view.mas_right).offset(-80);
+        make.bottom.equalTo(self.headerView.mas_bottom).offset(-3);
+    }];
     self.nameButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-      make.titleForState(@"修改",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).addAction(self, @selector(nameBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.informationView).titleFont(FONT(14));
-       }];
-       
-       
-       [self.nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.left.equalTo(self.informationView.mas_right).offset(-5);
-           make.centerY.equalTo(self.categoryNameTextFeild.mas_centerY).offset(0);
-           make.width.equalTo(@(45));
-       }];
+        make.titleForState(@"修改",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).addAction(self, @selector(nameBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.informationView).titleFont(FONT(14));
+    }];
+    
+    
+    [self.nameButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.informationView.mas_right).offset(-5);
+        make.centerY.equalTo(self.categoryNameTextFeild.mas_centerY).offset(0);
+        make.width.equalTo(@(45));
+    }];
     
     
     
@@ -108,7 +143,7 @@
     }];
     
     self.remarkButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-   make.titleForState(@"更新备注",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).addAction(self, @selector(remarkBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.view).titleFont(FONT(14));
+        make.titleForState(@"更新备注",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).addAction(self, @selector(remarkBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.view).titleFont(FONT(14));
     }];
     
     
@@ -122,18 +157,18 @@
     [remarkView addLineWithSide:LineViewSideInBottom lineColor:UIColor.lightGrayColor lineHeight:0.5 leftMargin:0 rightMargin:0];
     
     UIView * applyView = [UIView new];
-       applyView.backgroundColor = UIColor.whiteColor;
-       [self.view addSubview: applyView];
-       [applyView mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.top.equalTo(remarkView.mas_bottom).offset(10);
-           make.right.left.equalTo(self.view);
-           make.height.equalTo(@(50));
-       }];
+    applyView.backgroundColor = UIColor.whiteColor;
+    [self.view addSubview: applyView];
+    [applyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(remarkView.mas_bottom).offset(10);
+        make.right.left.equalTo(self.view);
+        make.height.equalTo(@(50));
+    }];
     [applyView addLineWithSide:LineViewSideInBottom lineColor:UIColor.lightGrayColor lineHeight:0.5 leftMargin:0 rightMargin:0];
-     [applyView addLineWithSide:LineViewSideInTop lineColor:UIColor.lightGrayColor lineHeight:0.5 leftMargin:0 rightMargin:0];
+    [applyView addLineWithSide:LineViewSideInTop lineColor:UIColor.lightGrayColor lineHeight:0.5 leftMargin:0 rightMargin:0];
     
     self.applyButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-//        make.backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateNormal).backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateHighlighted).backgroundImageForState([UIImage imageWithColor:UICOLOR(0x8EDEE9)], UIControlStateDisabled);
+        //        make.backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateNormal).backgroundImageForState([UIImage imageWithColor:UIColor.blueColor], UIControlStateHighlighted).backgroundImageForState([UIImage imageWithColor:UICOLOR(0x8EDEE9)], UIControlStateDisabled);
         make.titleColorForState(UIColor.greenColor, UIControlStateNormal).titleColorForState(UIColor.grayColor, UIControlStateDisabled).titleFont(BOLD_FONT(16)).addAction(self, @selector(confirmAction:), UIControlEventTouchUpInside).addToSuperView(applyView);
     }];
     
@@ -153,7 +188,6 @@
             self.remarkTextFeild.text = self.model.userRemark ?  self.model.userRemark : [NSString stringWithFormat:@"我是%@",self.model.user.name];
             self.remarkTextFeild.enabled = false;
             self.categoryNameTextFeild.text = self.model.userCategoryName;
-            self.categoryNameTextFeild.enabled = true;
             self.applyButton.enabled = true;
             [self.applyButton setTitle:@"同意添加" forState:UIControlStateNormal];
             self.nameButton.hidden = true;
@@ -162,12 +196,11 @@
             [_headerView sd_setImageWithURL:[NSURL URLWithString:self.model.friend.avatar] placeholderImage:IMAGE(@"self_header")];
             _name.text = self.model.friend.name;
             self.remarkButton.hidden = false;
-             self.remarkTextFeild.text = self.model.userRemark ?  self.model.userRemark : [NSString stringWithFormat:@"我是%@",self.model.user.name];
-             self.applyButton.enabled = false;
+            self.remarkTextFeild.text = self.model.userRemark ?  self.model.userRemark : [NSString stringWithFormat:@"我是%@",self.model.user.name];
+            self.applyButton.enabled = false;
             self.categoryNameTextFeild.text = self.model.firendCategoryName ? self.model.firendCategoryName : @"无备注名";
-            self.categoryNameTextFeild.enabled = false;
-             [self.applyButton setTitle:@"已经申请" forState:UIControlStateNormal];
-             self.remarkTextFeild.enabled = true;
+            [self.applyButton setTitle:@"已经申请" forState:UIControlStateNormal];
+            self.remarkTextFeild.enabled = true;
             self.nameButton.hidden = false;
         }
         
@@ -177,14 +210,51 @@
 }
 -(void)confirmAction:(UIButton *)sender {
     NSLog(@"同意添加");
+    if (self.categoryNameTextFeild.text.length > 10) {
+        [YLHintView showMessageOnThisPage:@"备注名长度不能大于10"];
+        return;
+    }
+    NSMutableDictionary * input = [NSMutableDictionary dictionary];
+    input[@"id"] = self.model.idStr;
+    input[@"userCategoryName"] = self.categoryNameTextFeild.text;
+    input[@"userId"] = self.model.user.userId;
+    input[@"friendId"] = self.model.friend.userId;
+    [self.viewModel addFriendshipcommand: input];
+    
 }
 
 -(void)remarkBtnClicked:(UIButton *)sender {
-     NSLog(@"更新备注");
+    NSLog(@"更新备注");
+    if (self.remarkTextFeild.text.length > 0 ) {
+        if (self.remarkTextFeild.text.length > 20) {
+            [YLHintView showMessageOnThisPage:@"备注名长度不能大于20"];
+            return;
+        }
+        NSMutableDictionary * input = [NSMutableDictionary dictionary];
+        input[@"id"] = self.model.idStr;
+        input[@"remark"] = self.remarkTextFeild.text;
+        [self.viewModel updateFriendshipcommand: input];
+        
+    }else{
+        [YLHintView showMessageOnThisPage:@"请输入你想修改的备注"];
+    }
 }
 
 -(void)nameBtnClicked:(UIButton *)sender {
-     NSLog(@"修改备注名");
+    NSLog(@"修改备注名");
+    if (self.categoryNameTextFeild.text.length > 0 && ![self.categoryNameTextFeild.text isEqualToString: @"无备注名"]) {
+        if (self.categoryNameTextFeild.text.length > 10) {
+            [YLHintView showMessageOnThisPage:@"备注名长度不能大于10"];
+            return;
+        }
+        NSMutableDictionary * input = [NSMutableDictionary dictionary];
+        input[@"id"] = self.model.idStr;
+        input[@"name"] = self.categoryNameTextFeild.text;
+        [self.viewModel updateFriendshipcommand: input];
+        
+    }else{
+        [YLHintView showMessageOnThisPage:@"请输入你想修改的备注名"];
+    }
 }
 
 @end
