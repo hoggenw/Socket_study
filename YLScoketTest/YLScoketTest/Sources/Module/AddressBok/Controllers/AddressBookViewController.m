@@ -85,7 +85,6 @@
         else if ([button.titleLabel.text isEqualToString:@"好友申请"])
         {
             ApplyFriendshipViewController * applyVC = [ApplyFriendshipViewController new];
-            applyVC.hidesBottomBarWhenPushed = true;
             PUSH(applyVC);
             NSLog(@"好友申请");
         }

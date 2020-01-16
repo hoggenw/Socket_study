@@ -24,8 +24,11 @@
     [super viewDidLoad];
     [self initUI];
 }
+
 -(void)initUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"0xf3f4f5"];
+  
+//    self.navigationController.navigationBar.backItem.title = @"";
     // 列表
     self.listTableView = [UITableView MakeTableView:^(TableViewMaker *make) {
         make.backgroundColor(GRAY_BACKGROUND_COLOR).rowHeight(52.0).separatorColor(LINE_COLOR).separatorInset(UIEdgeInsetsMake(0, 15, 0, 15)).tableFooter([UIView new]).dataSource(self).delegate(self).addToSuperView(self.view);

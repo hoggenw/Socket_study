@@ -30,6 +30,7 @@
 }
 
 -(void)initUI {
+    self.title = @"好友申请";
     self.view.backgroundColor = UIColor.whiteColor ;
     // 头部搜索view
     _searchTextField = [UITextField makeSearchTextFieldWithBackgroundColor:GRAY_BACKGROUND_COLOR font:FONT(14) textColor:TEXT_GRAY_COLOR_2 placeholder:@"请输入手机号或7聊号"];

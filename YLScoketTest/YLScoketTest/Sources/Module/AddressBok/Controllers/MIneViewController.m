@@ -51,7 +51,6 @@
     [[_headerView rac_signalForSelector:@selector(headerBtnClicked)] subscribeNext:^(RACTuple * _Nullable x) {
             //NSLog(@"进入个人中心");
         UIViewController *controller = [NSClassFromString(@"PersonalProfileController") new];
-        controller.hidesBottomBarWhenPushed = true;
           PUSH(controller);
      }];
     
@@ -88,7 +87,6 @@
     if (pushController&&[pushController length]>0&&[[[NSClassFromString(pushController) alloc]init] isKindOfClass:[UIViewController class]])
     {
         UIViewController *controller = [NSClassFromString(pushController) new];
-        controller.hidesBottomBarWhenPushed = true;
         controller.title = dataDict[@"title"];
         [self.navigationController pushViewController:controller animated:false];
     }

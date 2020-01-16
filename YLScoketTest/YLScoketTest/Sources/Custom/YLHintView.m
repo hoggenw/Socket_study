@@ -231,7 +231,7 @@
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     float centerX = window.centerX;
     float centerY = window.centerY;
-    UIView * hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 350)];
+    UIView * hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
     hudView.centerX = centerX;
     hudView.centerY = centerY;
     [window addSubview: hudView];

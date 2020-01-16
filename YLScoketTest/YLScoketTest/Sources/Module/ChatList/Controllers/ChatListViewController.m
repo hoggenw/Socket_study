@@ -149,7 +149,6 @@
     chatVC.user = user7;
     
     // 隐藏底部的buttomBar 当 push 的时候
-    chatVC.hidesBottomBarWhenPushed = true;
     [self.navigationController pushViewController:chatVC animated:YES];
     /**
      * 不加下面此句时，在二级栏目点击返回时，此行会由选中状态慢慢变成非选中状态。
