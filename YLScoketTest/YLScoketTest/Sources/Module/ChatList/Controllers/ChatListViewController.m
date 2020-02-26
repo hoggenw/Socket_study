@@ -24,7 +24,6 @@
 
 @implementation ChatListViewController
 
-
 #pragma mark - Override Methods
 
 
@@ -150,10 +149,6 @@
     
     // 隐藏底部的buttomBar 当 push 的时候
     [self.navigationController pushViewController:chatVC animated:YES];
-    /**
-     * 不加下面此句时，在二级栏目点击返回时，此行会由选中状态慢慢变成非选中状态。
-     加上此句，返回时直接就是非选中状态。
-     */
     
     
 }

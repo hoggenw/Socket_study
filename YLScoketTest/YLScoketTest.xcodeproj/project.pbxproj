@@ -121,6 +121,7 @@
 		879BF50B2383CB4400D1669E /* YlmessageModel.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50A2383CB4300D1669E /* YlmessageModel.pbobjc.m */; };
 		879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */; };
 		879BF5132384CB1000D1669E /* MIneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 879BF5122384CB1000D1669E /* MIneViewModel.m */; };
+		879D1C4C23D187320019C31D /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879D1C4B23D187320019C31D /* FriendInfoViewController.m */; };
 		87A7034F237E8AFA00D3B50B /* RegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */; };
 		87B504D523C5AC0A00A0FDC7 /* BlacklistViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B504D423C5AC0A00A0FDC7 /* BlacklistViewModel.m */; };
 		87B504D823C5AEAB00A0FDC7 /* BlackNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B504D723C5AEAB00A0FDC7 /* BlackNameTableViewCell.m */; };
@@ -427,6 +428,8 @@
 		879BF50E2383E9FD00D1669E /* AddressBookViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewModel.m; sourceTree = "<group>"; };
 		879BF5112384CB1000D1669E /* MIneViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIneViewModel.h; sourceTree = "<group>"; };
 		879BF5122384CB1000D1669E /* MIneViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MIneViewModel.m; sourceTree = "<group>"; };
+		879D1C4A23D187320019C31D /* FriendInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendInfoViewController.h; sourceTree = "<group>"; };
+		879D1C4B23D187320019C31D /* FriendInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
 		87A7034D237E8AFA00D3B50B /* RegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewModel.h; sourceTree = "<group>"; };
 		87A7034E237E8AFA00D3B50B /* RegisterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewModel.m; sourceTree = "<group>"; };
 		87B504D323C5AC0A00A0FDC7 /* BlacklistViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlacklistViewModel.h; sourceTree = "<group>"; };
@@ -1241,6 +1244,8 @@
 				8754206023CD910D0008820A /* ApplyFriendshipViewController.m */,
 				8754206523CDACB90008820A /* ApplyDetailViewController.h */,
 				8754206623CDACB90008820A /* ApplyDetailViewController.m */,
+				879D1C4A23D187320019C31D /* FriendInfoViewController.h */,
+				879D1C4B23D187320019C31D /* FriendInfoViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1519,6 +1524,7 @@
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
 				1157614C201889E200E0D94F /* GPBCodedOutputStream.m in Sources */,
 				116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */,
+				879D1C4C23D187320019C31D /* FriendInfoViewController.m in Sources */,
 				116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */,
 				111CB19020205F2C0035D245 /* YLPhotoPreviewCell.m in Sources */,
 				11576155201889E200E0D94F /* Timestamp.pbobjc.m in Sources */,

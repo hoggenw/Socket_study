@@ -28,7 +28,7 @@
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
    
-   // backButton.frame = CGRectMake(0, 0, 40, 16);
+    backButton.frame = CGRectMake(0, 0, 40, 16);
     
 //    UIImage *image = [UIImage imageCompressForWidth:[UIImage imageNamed:@"bracket_left_black"] targetWidth:18];
     

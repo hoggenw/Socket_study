@@ -20,7 +20,7 @@ static NSString *personInfoCell = @"personInfoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-      [self setSubviews];
+    [self setSubviews];
     // Do any additional setup after loading the view.
 }
 - (void)setSubviews
