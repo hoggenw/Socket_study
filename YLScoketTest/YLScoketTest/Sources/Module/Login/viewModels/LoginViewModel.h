@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginViewModel : NSObject
 @property (nonatomic, strong) RACCommand *loginCommand;
+@property (nonatomic, strong) RACCommand *userInfoCommand;
 @property (nonatomic, copy) NSDictionary *loginInfo;
-@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSDictionary *userInfo;
 
 @end
 

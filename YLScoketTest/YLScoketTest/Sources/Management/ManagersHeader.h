@@ -11,6 +11,6 @@
 
 #import "NetworkManager.h"
 #import "AccountManager.h"
-
+#import "LocalSQliteManager.h"
 
 #endif /* ManagersHeader_h */

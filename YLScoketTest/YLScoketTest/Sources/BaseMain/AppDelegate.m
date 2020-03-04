@@ -85,8 +85,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     
-    
-    
+    //初始化本地数据库
+    [LocalSQliteManager sharedInstance];
     AdvertisementViewController *tb = [AdvertisementViewController new];
     //先判断是否是首次登陆
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])

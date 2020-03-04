@@ -99,8 +99,8 @@
 - (void)setUserModel:(ChatListUserModel *)userModel
 {
     _userModel = userModel;
-    [_avatarImageView setImage:[UIImage imageNamed:[NSString stringWithFormat: @"%@", _userModel.avatarURL]]];
-    [_usernameLabel setText:_userModel.from];
+    [_avatarImageView setImage:[UIImage imageNamed:[NSString stringWithFormat: @"%@", _userModel.avatar]]];
+    [_usernameLabel setText:_userModel.name];
     [_dateLabel setText:@"11:01"];
     [_messageLabel setText:_userModel.message];
     

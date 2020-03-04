@@ -19,6 +19,8 @@ extern NSString * const HOST;
 extern NSString * const RegistCodeAPI;
 //登录接口
 extern NSString * const LoginAPI;
+//获取用户信息接口
+extern NSString * const UserInfoAPI;
 //注册接口
 extern NSString * const RegisterAPI;
 //退出登录

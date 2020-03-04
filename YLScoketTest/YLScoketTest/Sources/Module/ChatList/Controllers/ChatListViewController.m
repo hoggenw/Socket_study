@@ -33,6 +33,12 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.dataArray = [self getDataArray];
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -72,33 +78,11 @@
     }];
     //添加刷新View
     [self.view bringSubviewToFront: self.noDataView];
-    self.dataArray = [self getDataArray];
-    [self.tableView reloadData];
+    
 }
 
 -(NSMutableArray *)getDataArray {
-    NSMutableArray *models = [[NSMutableArray alloc] initWithCapacity:20];
-    for (int j  = 0; j < 2;  j ++) {
-        for (int i  = 0; i < 5;  i ++) {
-            ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
-            item1.from = [NSString stringWithFormat:@"王八%@",@(i)];
-            item1.message = @"帅哥你好！！";
-            item1.avatarURL = [NSURL URLWithString:@"other_header.jpg"];
-            item1.messageCount = i;
-            item1.date = [NSDate date];
-            item1.needHint = i%2;
-            [models addObject:item1];
-        }
-    }
-    
-    ChatListUserModel *item1 = [[ChatListUserModel alloc] init];
-    item1.from = [NSString stringWithFormat:@"王八%@",@(100)];
-    item1.message = @"帅哥你好！！";
-    item1.avatarURL = [NSURL URLWithString:@"other_header.jpg"];
-    item1.messageCount = 100;
-    item1.date = [NSDate date];
-    item1.needHint = true;
-    [models addObject:item1];
+    NSMutableArray *models =  [[[LocalSQliteManager sharedInstance] selectGetModelByDESC] mutableCopy];
     return models;
 }
 
@@ -141,10 +125,9 @@
      下面的这个 TLUser 就是具体到用户的一个数据 model
      */
     ChatUserModel *user7 = [[ChatUserModel alloc] init];
-    user7.username = model.from;
-    user7.userID = @"XB";
-    user7.nikename = @"小贝";
-    user7.avatarURL = @"10.jpeg";
+    user7.username = model.name;
+    user7.userID = model.userId;
+    user7.avatarURL = model.avatar;
     chatVC.user = user7;
     
     // 隐藏底部的buttomBar 当 push 的时候
@@ -152,7 +135,6 @@
     
     
 }
-
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

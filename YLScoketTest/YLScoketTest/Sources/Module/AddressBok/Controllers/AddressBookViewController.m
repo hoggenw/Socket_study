@@ -13,6 +13,7 @@
 #import "SearchFriendView.h"
 #import "IndexTableViewCell.h"
 #import "ApplyFriendshipViewController.h"
+#import "FriendInfoViewController.h"
 
 @interface AddressBookViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -216,7 +217,7 @@
             }
             cell.contactNameLabel.text = _sectionArr[indexPath.row];
         }
-         cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
     
@@ -227,7 +228,18 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == _listTableView) {
-        YLUserModel *model = _rowArr[indexPath.section][indexPath.row];
+        YLUserModel *userModel = _rowArr[indexPath.section][indexPath.row];
+        FiendshipModel *friendsshipModel = [FiendshipModel new];
+        for (FiendshipModel  *model in self.friendsArray ) {
+            if ([model.friend.userId isEqualToString: userModel.userId] || [model.user.userId isEqualToString: userModel.userId]) {
+                friendsshipModel = model;
+                break;
+            }
+        }
+        FriendInfoViewController * vc = [FriendInfoViewController new];
+        vc.friendsshipModel =friendsshipModel;
+        vc.userModel = userModel;
+        PUSH(vc);
         NSLog(@"选择朋友");
     }else {
         if (indexPath.row != 0) {
@@ -259,7 +271,7 @@
 }
 #pragma mark --------   --------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-
+    
     if (self.isScrollToShow) {
         // 获取当前屏幕可见范围的indexPath
         NSArray *visiblePaths = [_listTableView indexPathsForVisibleRows];
@@ -269,7 +281,7 @@
         }
         
         NSIndexPath *indexPath0 = visiblePaths[0];
-
+        
         // 判断是否已滑到最底部
         CGFloat height = scrollView.frame.size.height;
         CGFloat contentOffsetY = scrollView.contentOffset.y;

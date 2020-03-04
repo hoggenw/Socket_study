@@ -32,6 +32,9 @@ NSString * const RegistCodeAPI = @"api/login/getKaptchaImage";
 
 NSString * const LoginAPI = @"api/login/userLogin";
 NSString * const LoginQuitAPI = @"api/login/quit";
+//获取用户信息
+NSString * const UserInfoAPI = @"api/login/info";
+
 
 NSString * const UpdatePasswordAPI = @"api/login/updatePassword";
 

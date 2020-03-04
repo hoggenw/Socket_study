@@ -9,7 +9,7 @@
 #import "UserModel.h"
 
 @implementation UserModel
-
+//status
 
 - (instancetype)init {
     self = [super init];
