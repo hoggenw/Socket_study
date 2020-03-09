@@ -63,6 +63,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.separatorStyle=UITableViewCellEditingStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.bounces = YES;
     
@@ -82,7 +83,7 @@
 }
 
 -(NSMutableArray *)getDataArray {
-    NSMutableArray *models =  [[[LocalSQliteManager sharedInstance] selectGetModelByDESC] mutableCopy];
+    NSMutableArray *models =  [[[LocalSQliteManager sharedInstance] selectChatListUserModelModelByDESC] mutableCopy];
     return models;
 }
 

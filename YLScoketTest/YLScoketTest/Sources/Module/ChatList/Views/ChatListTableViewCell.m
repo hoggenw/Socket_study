@@ -92,6 +92,7 @@
         make.bottom.equalTo(_messageLabel.mas_bottom);
         make.width.equalTo(_messageLabel.mas_height);
     }];
+    [self.contentView addLineWithSide:LineViewSideInBottom lineColor:UICOLOR(0xaaaaaa) lineHeight:0.5 leftMargin:10 rightMargin:0];
     
 }
 
@@ -99,9 +100,9 @@
 - (void)setUserModel:(ChatListUserModel *)userModel
 {
     _userModel = userModel;
-    [_avatarImageView setImage:[UIImage imageNamed:[NSString stringWithFormat: @"%@", _userModel.avatar]]];
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_userModel.avatar] placeholderImage: IMAGE(@"other_header")] ;
     [_usernameLabel setText:_userModel.name];
-    [_dateLabel setText:@"11:01"];
+    [_dateLabel setText: [_userModel.date formatHHMM]];
     [_messageLabel setText:_userModel.message];
     
     if (_userModel.messageCount > 0) {

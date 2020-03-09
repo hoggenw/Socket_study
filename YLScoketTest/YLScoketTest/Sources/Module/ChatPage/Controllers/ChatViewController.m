@@ -52,12 +52,12 @@
 }
 -(void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
     //如果继续向super传值，则响应链被截断
-   // [super routerEventWithName:eventName userInfo: userInfo];
+    // [super routerEventWithName:eventName userInfo: userInfo];
     ChatMessageModel *model = [userInfo objectForKey:kChoiceCellMessageModelKey];
     if ([eventName isEqualToString:kRouterEventCellImageTapEventName]) {
         //点击图片
         if (model != nil) {
-           [self chatImageCellPressed:model];
+            [self chatImageCellPressed:model];
         }
         
     }
@@ -146,14 +146,14 @@
             break;
     }
     
-
+    
     recMessage.date = [NSDate date];// 当前时间
     
     //recMessage.imagePath = message.imagePath;
-//    ChatUserModel * otherUser = [[ChatUserModel alloc] init];
-//    otherUser.username = @"";// 名字
-//    otherUser.userID = @"li-bokun";// ID
-    recMessage.from = recMessage.from;
+    //    ChatUserModel * otherUser = [[ChatUserModel alloc] init];
+    //    otherUser.username = @"";// 名字
+    //    otherUser.userID = @"li-bokun";// ID
+    recMessage.from = message.fromUser;
     [self.chatMessageVC addNewMessage:recMessage];
     
 }
@@ -180,7 +180,16 @@
     user.name = model.name;
     user.avatar = model.avatar;
     user.userId = model.userID;
+    
+    
+    
+    YLUserModel * toModel = [YLUserModel new];
+    toModel.userId = self.user.userID;
+    toModel.name = self.user.username;
+    toModel.avatar = self.user.avatarURL;
+    
     message.from = user; //发送者
+    message.toUser = toModel;
     [self.manager sendMassege:message];
     [self.chatMessageVC addNewMessage: message];
     

@@ -84,7 +84,7 @@
             [[DPAudioPlayer sharedInstance] startPlayWithData: messageModel.voiceData];
         }else{
             //播放url
-            NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
+           // NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
             [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.voicePath];
         }
         

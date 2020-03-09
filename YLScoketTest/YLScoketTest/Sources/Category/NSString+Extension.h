@@ -84,4 +84,6 @@
 -(NSAttributedString *)attributedStringWith:(NSDictionary *)attributedStringDictionary;
 /** 字符串转字典 */
 - (NSDictionary *)dictionaryWithJsonString;
+
+
 @end

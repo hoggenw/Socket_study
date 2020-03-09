@@ -27,6 +27,7 @@
 - (NSString *)formatYYMMDDHHMMSS;
 - (NSString *)formatMMDDHHMM;
 - (NSString *)formatMMDD;
+- (NSString *)formatHHMM;
 - (NSString *)countDownBySecond;
 
 /**

@@ -10,6 +10,8 @@
 #import "AddressBookViewModel.h"
 #import "LoginViewModel.h"
 #import "ChatListUserModel.h"
+#import "ChatViewController.h"
+#import "ChatUserModel.h"
 
 @interface FriendInfoViewController ()<UITextFieldDelegate>
 
@@ -47,8 +49,12 @@
         
         if (x != nil)
         {
-            
-            [YLHintView showMessageOnThisPage:@"设置成功"];
+            ChatListUserModel *item1  = [ChatListUserModel new];
+            item1.userId = self.model.userID;
+            item1.name = self.remarkTextFeild.text;
+            if ([[LocalSQliteManager sharedInstance] isChatListUserModelExist: item1]) {
+                [[LocalSQliteManager sharedInstance]insertChatListUserModel: item1];
+            }
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Reload_Friend_Group object:nil];
             [YLHintView removeLoadAnimation];
         }
@@ -181,8 +187,8 @@
         make.width.equalTo(@(200));
     }];
     
-
-     [self refreshUI];
+    
+    [self refreshUI];
     
 }
 
@@ -193,25 +199,66 @@
         self.name.text = self.model.name;
         self.categoryNameTextFeild.text = self.model.codeName;
     }
-   
+    
     self.remarkButton.hidden = true;
     self.applyButton.enabled = true;
     [self.applyButton setTitle:@"发起聊天" forState:UIControlStateNormal];
     if(self.friendsshipModel){
         if ([self.friendsshipModel.friend.userId isEqualToString: [[AccountManager sharedInstance] fetch].userID]) {
             
-            self.remarkTextFeild.text = self.friendsshipModel.userCategoryName ?  self.friendsshipModel.userCategoryName : [NSString stringWithFormat:@"添加备注名"];
+            self.remarkTextFeild.text = self.friendsshipModel.userCategoryName.length > 0 ?  self.friendsshipModel.userCategoryName : [NSString stringWithFormat:@"添加备注名"];
             
         }else{
-            self.remarkTextFeild.text = self.friendsshipModel.firendCategoryName ?  self.friendsshipModel.firendCategoryName : [NSString stringWithFormat:@"添加备注名"];
+            self.remarkTextFeild.text = self.friendsshipModel.firendCategoryName.length > 0 ?  self.friendsshipModel.firendCategoryName : [NSString stringWithFormat:@"添加备注名"];
         }
         
     }
 }
 
 -(void)confirmAction:(UIButton *)sender {
-  //添加聊天
-    ChatListUserModel *userModel  = [ChatListUserModel new];
+    //添加聊天
+    ChatListUserModel *item1  = [ChatListUserModel new];
+    item1.userId = self.model.userID;
+    item1.name = self.model.name;
+    item1.avatar = self.model.avatar;
+    item1.date = [NSDate date];
+    item1.messageCount = 0;
+    
+    if(self.friendsshipModel){
+        if ([self.friendsshipModel.friend.userId isEqualToString: [[AccountManager sharedInstance] fetch].userID]) {
+            
+            item1.name = self.friendsshipModel.userCategoryName.length > 0 ?  self.friendsshipModel.userCategoryName : self.model.name;
+            
+        }else{
+            item1.name  = self.friendsshipModel.firendCategoryName.length > 0 ?  self.friendsshipModel.firendCategoryName : self.model.name;
+        }
+        
+    }
+    
+    
+    if ([[LocalSQliteManager sharedInstance] isChatListUserModelExist: item1]) {
+        ChatListUserModel *item2  = [ChatListUserModel new];
+        item2.userId = self.model.userID;
+        item2.name =  item1.name;
+        item2.date = [NSDate date];
+        item2.messageCount = 0;
+        [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
+    }else{
+        [[LocalSQliteManager sharedInstance] insertChatListUserModel:item1];
+    }
+    ChatViewController *chatVC  = [ChatViewController new];
+    /**
+     下面的这个 TLUser 就是具体到用户的一个数据 model
+     */
+    ChatUserModel *user7 = [[ChatUserModel alloc] init];
+    user7.username = item1.name;
+    user7.userID = item1.userId;
+    user7.avatarURL = item1.avatar;
+    chatVC.user = user7;
+    
+    // 隐藏底部的buttomBar 当 push 的时候
+    [self.navigationController pushViewController:chatVC animated:YES];
+    
     
 }
 
@@ -235,7 +282,7 @@
 
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-     self.remarkButton.hidden = false;
+    self.remarkButton.hidden = false;
     return true;
 }
 

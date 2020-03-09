@@ -14,7 +14,7 @@
  *  消息拥有者
  */
 typedef NS_ENUM(NSUInteger, YLMessageOwnerType){
-    YLMessageOwnerTypeUnknown,  // 未知的消息拥有者
+    YLMessageOwnerTypeUnknown = 0,  // 未知的消息拥有者
     YLMessageOwnerTypeSystem,   // 系统消息
     YLMessageOwnerTypeSelf,     // 自己发送的消息
     YLMessageOwnerTypeOther,    // 接收到的他人消息
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, YLMessageType){
  *  消息发送状态
  */
 typedef NS_ENUM(NSUInteger, YLMessageSendState){
-    YLMessageSendSuccess,       // 消息发送成功
+    YLMessageSendSuccess = 0,       // 消息发送成功
     YLMessageSendFail,          // 消息发送失败
 };
 
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, YLMessageSendState){
  */
 typedef NS_ENUM(NSUInteger, YLMessageReadState) {
     
-    YLMessageUnRead,            // 消息未读
+    YLMessageUnRead = 0,            // 消息未读
     YLMessageReaded,            // 消息已读
     
 };
@@ -76,6 +76,7 @@ typedef NS_ENUM(NSUInteger, YLMessageCMD) {
 @interface ChatMessageModel : NSObject
 
 @property (nonatomic, strong) YLUserModel *from;                    // 发送者信息
+@property (nonatomic, strong) YLUserModel *toUser;                  // 发送者信息
 @property (nonatomic, strong) NSDate *date;                         // 发送时间
 @property (nonatomic, strong) NSString *dateString;                 // 格式化的发送时间
 @property (nonatomic, assign) YLMessageType messageType;            // 消息类型

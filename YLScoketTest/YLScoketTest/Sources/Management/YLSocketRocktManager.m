@@ -164,20 +164,8 @@ static const uint16_t port = 6969;
         default:
             break;
     }
-    
-    YLUserModel * fromModel = [YLUserModel new];
-    UserModel * user = [AccountManager sharedInstance].fetch;
-    fromModel.userId = user.userID;
-    fromModel.name = user.name;
-    fromModel.avatar = user.avatar;
-    
-    YLUserModel * toModel = [YLUserModel new];
-    toModel.userId = user.userID;
-    toModel.name = user.name;
-    toModel.avatar = user.avatar;
-    
-    pmessage.fromUser = fromModel;
-    pmessage.toUser = toModel;
+    pmessage.fromUser = messageModel.from;
+    pmessage.toUser = messageModel.toUser;
     //token
     pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
     
