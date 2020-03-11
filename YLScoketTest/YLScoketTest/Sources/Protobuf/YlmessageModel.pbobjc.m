@@ -124,6 +124,7 @@ typedef struct YLUserModel__storage_ {
 @dynamic voiceLength;
 @dynamic voiceData;
 @dynamic token;
+@dynamic messageId;
 
 typedef struct YLMessageModel__storage_ {
   uint32_t _has_storage_[1];
@@ -135,6 +136,7 @@ typedef struct YLMessageModel__storage_ {
   NSString *messageSource;
   NSData *voiceData;
   NSString *token;
+  NSString *messageId;
 } YLMessageModel__storage_;
 
 // This method is threadsafe because it is initially called
@@ -215,6 +217,15 @@ typedef struct YLMessageModel__storage_ {
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
+      {
+        .name = "messageId",
+        .dataTypeSpecific.className = NULL,
+        .number = YLMessageModel_FieldNumber_MessageId,
+        .hasIndex = 8,
+        .offset = (uint32_t)offsetof(YLMessageModel__storage_, messageId),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeString,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[YLMessageModel class]
@@ -226,7 +237,7 @@ typedef struct YLMessageModel__storage_ {
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\007\001\010\000\002\006\000\003\013\000\004\n\000\005\r\000\006\013\000\007\t\000";
+        "\010\001\010\000\002\006\000\003\013\000\004\n\000\005\r\000\006\013\000\007\t\000\t\t\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     NSAssert(descriptor == nil, @"Startup recursed!");

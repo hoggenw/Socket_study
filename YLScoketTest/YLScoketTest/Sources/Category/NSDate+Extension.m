@@ -164,7 +164,9 @@
 - (NSString *)formatMMDD {
     return [self formatDate:@"MM-dd"];
 }
-
+- (NSString *)formatYYMMDDHHMMssSS{
+      return [self formatDate: @"YYYY/MM/dd hh:mm:ss SS"];
+}
 
 
 /**

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ChatUserModel.h"
 #import <MapKit/MapKit.h>
+#import "YlmessageModel.pbobjc.h"
 
 /**
  *  消息拥有者
@@ -39,7 +40,8 @@ typedef NS_ENUM(NSInteger, YLMessageType){
  *  消息发送状态
  */
 typedef NS_ENUM(NSUInteger, YLMessageSendState){
-    YLMessageSendSuccess = 0,       // 消息发送成功
+    YLMessageSending = 0,       // 消息发送中
+    YLMessageSendSuccess,          // 消息发送失败
     YLMessageSendFail,          // 消息发送失败
 };
 
@@ -75,8 +77,10 @@ typedef NS_ENUM(NSUInteger, YLMessageCMD) {
 
 @interface ChatMessageModel : NSObject
 
+
 @property (nonatomic, strong) YLUserModel *from;                    // 发送者信息
 @property (nonatomic, strong) YLUserModel *toUser;                  // 发送者信息
+@property(nonatomic, readwrite, copy) NSString *messageOtherUserId;
 @property (nonatomic, strong) NSDate *date;                         // 发送时间
 @property (nonatomic, strong) NSString *dateString;                 // 格式化的发送时间
 @property (nonatomic, assign) YLMessageType messageType;            // 消息类型
@@ -93,9 +97,9 @@ typedef NS_ENUM(NSUInteger, YLMessageCMD) {
 @property (nonatomic, strong) NSAttributedString *attrText;         // 格式化的文字信息
 
 #pragma mark - 图片消息
-@property (nonatomic, strong) NSString *imagePath;                  // 本地图片Path
+@property (nonatomic, strong) NSString *sourcePath;                  // 文件source
 @property (nonatomic, strong) UIImage *image;                       // 图片缓存
-@property (nonatomic, strong) NSString *imageURL;                   // 网络图片URL
+//@property (nonatomic, strong) NSString *imageURL;                   // 网络图片URL
 
 #pragma mark - 位置消息
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;    // 经纬度

@@ -11,7 +11,6 @@
 #import "ChatUserModel.h"
 #import "ChatShowMessageViewController.h"
 #import "ChatMessageModel.h"
-#import "ChatOtherUserModel.h"
 #import "YLSocketRocktManager.h"
 #import "YLPhotoPreviewController.h"
 
@@ -115,7 +114,7 @@
         case  YLMessageTypeImage:{ // 图片
             recMessage.messageType = YLMessageTypeImage;
             recMessage.ownerTyper = YLMessageOwnerTypeOther;
-            recMessage.imagePath = message.messageSource;
+            recMessage.sourcePath = message.messageSource;
             recMessage.image = [UIImage imageWithData:  message.voiceData];
             break;
         }

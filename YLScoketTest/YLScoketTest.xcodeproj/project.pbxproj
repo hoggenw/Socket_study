@@ -21,7 +21,6 @@
 		111CB230202447D80035D245 /* DPAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB229202447D70035D245 /* DPAudioPlayer.m */; };
 		111CB231202447D80035D245 /* DPAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB22B202447D70035D245 /* DPAudioRecorder.m */; };
 		111CB232202447D80035D245 /* JX_GCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 111CB22C202447D70035D245 /* JX_GCDTimerManager.m */; };
-		115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760E320170D3300E0D94F /* ChatOtherUserModel.m */; };
 		115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760E92017148300E0D94F /* YLMessageTableViewCell.m */; };
 		115760ED2017175300E0D94F /* YLTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760EC2017175300E0D94F /* YLTextTableViewCell.m */; };
 		115760F020171D3C00E0D94F /* YLImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115760EF20171D3C00E0D94F /* YLImageMessageCell.m */; };
@@ -105,6 +104,7 @@
 		8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC123BB17100028EE71 /* PersonalProfileController.m */; };
 		8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC423BB17B00028EE71 /* PersonInfoCell.m */; };
 		8769CCC823BB2FF40028EE71 /* BlacklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */; };
+		8772F3F12416241400D92867 /* LocalChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8772F3F02416241400D92867 /* LocalChatMessageModel.m */; };
 		8778493F23AA194F00AE9947 /* FiendshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778493E23AA194F00AE9947 /* FiendshipModel.m */; };
 		8778494523AA223400AE9947 /* SelectMemberWithSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8778494423AA223400AE9947 /* SelectMemberWithSearchView.m */; };
 		8778494923AA246F00AE9947 /* SelectContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8778494623AA246F00AE9947 /* SelectContactCell.xib */; };
@@ -209,8 +209,6 @@
 		111CB22D202447D70035D245 /* DPAudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAudioRecorder.h; sourceTree = "<group>"; };
 		111CB22E202447D80035D245 /* JX_GCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JX_GCDTimerManager.h; sourceTree = "<group>"; };
 		111CB22F202447D80035D245 /* DPAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPAudioPlayer.h; sourceTree = "<group>"; };
-		115760E220170D3300E0D94F /* ChatOtherUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatOtherUserModel.h; sourceTree = "<group>"; };
-		115760E320170D3300E0D94F /* ChatOtherUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatOtherUserModel.m; sourceTree = "<group>"; };
 		115760E82017148300E0D94F /* YLMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLMessageTableViewCell.h; sourceTree = "<group>"; };
 		115760E92017148300E0D94F /* YLMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLMessageTableViewCell.m; sourceTree = "<group>"; };
 		115760EB2017175300E0D94F /* YLTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLTextTableViewCell.h; sourceTree = "<group>"; };
@@ -398,6 +396,8 @@
 		8769CCC423BB17B00028EE71 /* PersonInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonInfoCell.m; sourceTree = "<group>"; };
 		8769CCC623BB2FF40028EE71 /* BlacklistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlacklistViewController.h; sourceTree = "<group>"; };
 		8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlacklistViewController.m; sourceTree = "<group>"; };
+		8772F3EF2416241400D92867 /* LocalChatMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalChatMessageModel.h; sourceTree = "<group>"; };
+		8772F3F02416241400D92867 /* LocalChatMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalChatMessageModel.m; sourceTree = "<group>"; };
 		8778493D23AA194F00AE9947 /* FiendshipModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FiendshipModel.h; sourceTree = "<group>"; };
 		8778493E23AA194F00AE9947 /* FiendshipModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FiendshipModel.m; sourceTree = "<group>"; };
 		8778494323AA223400AE9947 /* SelectMemberWithSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectMemberWithSearchView.h; sourceTree = "<group>"; };
@@ -1003,8 +1003,8 @@
 			children = (
 				116B67C320157D71005AA5E0 /* ChatMessageModel.h */,
 				116B67C420157D71005AA5E0 /* ChatMessageModel.m */,
-				115760E220170D3300E0D94F /* ChatOtherUserModel.h */,
-				115760E320170D3300E0D94F /* ChatOtherUserModel.m */,
+				8772F3EF2416241400D92867 /* LocalChatMessageModel.h */,
+				8772F3F02416241400D92867 /* LocalChatMessageModel.m */,
 			);
 			path = Modles;
 			sourceTree = "<group>";
@@ -1504,6 +1504,7 @@
 				8778494F23AA262700AE9947 /* SelectMemberCollectionCell.m in Sources */,
 				875400C223B34CB000AACAA5 /* SetViewModel.m in Sources */,
 				111CB19920206F710035D245 /* UIResponder+Extension.m in Sources */,
+				8772F3F12416241400D92867 /* LocalChatMessageModel.m in Sources */,
 				11576162201889E200E0D94F /* GPBUtilities.m in Sources */,
 				A5852F582367CDD1009E5CB3 /* YLIFlyHelper.m in Sources */,
 				A5852FC123681F5F009E5CB3 /* BannerScrollView.m in Sources */,
@@ -1631,7 +1632,6 @@
 				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
 				11576163201889E200E0D94F /* GPBMessage.m in Sources */,
 				8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */,
-				115760E420170D3300E0D94F /* ChatOtherUserModel.m in Sources */,
 				11576151201889E200E0D94F /* GPBExtensionRegistry.m in Sources */,
 				1157615C201889E200E0D94F /* FieldMask.pbobjc.m in Sources */,
 				A5852FC423681F5F009E5CB3 /* AdvertisementViewController.m in Sources */,

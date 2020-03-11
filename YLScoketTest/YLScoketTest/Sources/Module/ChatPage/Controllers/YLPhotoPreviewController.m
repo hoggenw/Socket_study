@@ -92,10 +92,8 @@
     
     YLPhotoPreviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YLPhotoPreviewCell" forIndexPath:indexPath];
     ChatMessageModel * model = _models[indexPath.row];
-    if (model.imagePath != nil) {
-        cell.imageUrl = model.imagePath;
-    }else if(model.imageURL != nil) {
-        cell.imageUrl = model.imageURL;
+    if (model.sourcePath != nil) {
+        cell.imageUrl = model.sourcePath;
     }
     
     __weak typeof(self) weakSelf = self;

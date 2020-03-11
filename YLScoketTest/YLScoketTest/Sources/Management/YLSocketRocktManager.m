@@ -12,7 +12,7 @@
 #import "YlbaseMessageModel.pbobjc.h"
 #import "GPBProtocolBuffers_RuntimeSupport.h"
 #import "ChatMessageModel.h"
-#import "ChatOtherUserModel.h"
+#import "LocalChatMessageModel.h"
 
 typedef NS_ENUM(NSInteger,DisConnectType) {
     disConnectByUser = 1000,
@@ -82,11 +82,7 @@ static const uint16_t port = 6969;
             __weak typeof(self) weakSelf = self;
             self->_heartBeat = [NSTimer scheduledTimerWithTimeInterval: 3*9 repeats:YES block:^(NSTimer * _Nonnull timer) {
                 NSLog(@"heart beat");
-                //             ChatMessageModel * message = [ChatMessageModel new];
-                //            message.from = [ChatOtherUserModel sharedOtherUser].user;
-                //            message.messageType = YLMessageTypeText;
-                //            message.text = @"heart";
-                //            [weakSelf sendMassege: message];
+    
                 
                 [weakSelf ping];
             }];
@@ -136,7 +132,7 @@ static const uint16_t port = 6969;
         case  YLMessageTypeImage:{ // 图片
             pmessage.textString = @"这是图片";
             pmessage.messageType = YLMessageTypeImage;
-            pmessage.messageSource = messageModel.imagePath;
+            pmessage.messageSource = messageModel.sourcePath;
             pmessage.voiceData = messageModel.voiceData;
             break;
         }
@@ -152,7 +148,8 @@ static const uint16_t port = 6969;
             break;
         }
         case  YLMessageTypeVideo:{ // 视频
-            NSLog(@"视频暂时不处理");
+            pmessage.textString = @"这是视频";
+            
             break;
         }
         case  YLMessageTypeFile:{ // 文件
@@ -164,10 +161,23 @@ static const uint16_t port = 6969;
         default:
             break;
     }
-    pmessage.fromUser = messageModel.from;
+    pmessage.fromUser = messageModel.from ;
     pmessage.toUser = messageModel.toUser;
     //token
     pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
+    pmessage.messageId = [NSString stringWithFormat:@"%@&%@&%@",messageModel.from.userId,messageModel.toUser.userId,dateString];
+    
+    LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
+    locaModel.sendState =  YLMessageSending;
+    locaModel.readState =  YLMessageReaded;
+    locaModel.ownerTyper = YLMessageOwnerTypeSelf;
+    locaModel.dateString = dateString;
+    locaModel.messageOtherUserId = pmessage.toUser.userId;
+    
+    //存入本地，然后发送通知；
+    
+    
     
     // 序列化为Data
     NSData *data = [pmessage data];
@@ -237,12 +247,22 @@ static const uint16_t port = 6969;
         NSError *error;
         YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
         if (baseModel != NULL) {
-             [self disconnnet];
+            [self disconnnet];
             if (baseModel.command == 10086) {
                 [YLHintView showMessageOnThisPage:@"登录已过期"];
                 POST_LOGINQUIT_NOTIFICATION;
                 return;
             }
+            YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
+            LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
+            locaModel.sendState =  YLMessageSendSuccess;
+            locaModel.readState =  YLMessageUnRead;
+            locaModel.ownerTyper = YLMessageOwnerTypeOther;
+            NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
+            locaModel.dateString = dateString;
+            locaModel.messageOtherUserId = pmessage.fromUser.userId;
+            //存入本地
+           
             
         }
     }
@@ -292,38 +312,6 @@ static const uint16_t port = 6969;
 //    return NO;
 //}
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

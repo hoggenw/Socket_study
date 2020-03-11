@@ -79,6 +79,7 @@ typedef GPB_ENUM(YLMessageModel_FieldNumber) {
   YLMessageModel_FieldNumber_VoiceLength = 6,
   YLMessageModel_FieldNumber_VoiceData = 7,
   YLMessageModel_FieldNumber_Token = 8,
+  YLMessageModel_FieldNumber_MessageId = 9,
 };
 
 /**
@@ -113,6 +114,9 @@ typedef GPB_ENUM(YLMessageModel_FieldNumber) {
 
 /** token */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *token;
+
+/** token */
+@property(nonatomic, readwrite, copy, null_resettable) NSString *messageId;
 
 @end
 

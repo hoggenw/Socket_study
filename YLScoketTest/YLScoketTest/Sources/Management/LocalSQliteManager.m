@@ -10,6 +10,7 @@
 #import <FMDB/FMDB.h>
 #import "ChatListUserModel.h"
 
+
 @implementation LocalSQliteManager{
     FMDatabase *fmdb;
 }
@@ -50,10 +51,97 @@
         //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
         [fmdb executeUpdate:@"create table if not exists ChatListTabel(userId primary key not null,name not null,avatar, message ,date not null,messageCount INTEGER,needHint INTEGER);"];
         //消息列表
-        //       [fmdb executeUpdate:@"CREATE TABLE IF NOT EXISTS newOrderTabel (stockId TEXT PRIMARY KEY NOT NULL,stockCount INTEGER,count INTEGER,itemId TEXT NOT NULL,sellPrice TEXT NOT NULL,originPrice TEXT NOT NULL,name TEXT NOT NULL,categoryId TEXT NOT NULL,dockId TEXT,dockName TEXT,phone not null,purchaseNum not null)"];
+        [fmdb executeUpdate:@"CREATE TABLE IF NOT EXISTS MessagesTabel (messageId TEXT PRIMARY KEY NOT NULL,messageOtherUserId TEXT NOT NULL,fromUserId TEXT NOT NULL,fromName TEXT NOT NULL,fromAvatar TEXT ,toUserUserId TEXT NOT NULL,toUserName TEXT NOT NULL,toUserAvatar TEXT,dateString TEXT , messageType INTEGER,ownerTyper INTEGER,readState INTEGER,sendState INTEGER,textString TEXT,messageSource TEXT,address TEXT,voiceSeconds INTEGER)"];
         
     }
 }
+
+//判断聊天消息是否存在
+-(BOOL)isLoaclMessageModelExist:(LocalChatMessageModel *)model{
+    FMResultSet *rs=[fmdb executeQuery:@"SELECT *FROM MessagesTabel WHERE messageId=?",model.messageId];
+    if ([rs next]) {
+        return YES;
+    }
+    return NO;
+}
+-(BOOL)insertLoaclMessageModel:(LocalChatMessageModel *)model{
+    if (![self isLoaclMessageModelExist:model]) {
+        BOOL success=[fmdb executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,model.messageType,model.ownerTyper,model.readState,model.sendState,model.textString,model.messageSource,model.address,model.voiceSeconds];
+        return success;
+    }
+    return YES;
+}
+/**删除聊天数据*/
+-(BOOL)deletLoaclMessageModel:(LocalChatMessageModel *)model{
+    if ([self isLoaclMessageModelExist:model]) {
+        BOOL success=[fmdb executeUpdate:@"delete from MessagesTabel where messageId=?",model.messageId];
+        return success;
+    }
+    return true;
+}
+/*将消息置为已读*/
+- (BOOL )setLocalChatMessageModelReadedByUserId:(NSString *)userId{
+        BOOL success=[fmdb executeUpdate:@"update MessagesTabel SET readState = 1 WHERE  messageOtherUserId=? ",userId];
+        return success;
+}
+
+/*更新消息发送状态*/
+- (BOOL )setLocalChatMessageModelSendStateByMessageId:(NSString *)messageId sendState:(YLMessageSendState) sendState{
+        BOOL success=[fmdb executeUpdate:@"update MessagesTabel SET sendState = ? WHERE  messageId=? ",sendState,messageId];
+        return success;
+}
+
+/**获取某个聊天未读的条数*/
+- (NSInteger )selectLocalChatMessageModelByUserId:(NSString *)userId{
+    //从表中获取所要的数据
+         FMResultSet *rs=[fmdb executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? and readState = 0",userId];
+         NSMutableArray<LocalChatMessageModel *> *models=[NSMutableArray array];
+         while ([rs next]) {
+             //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
+             LocalChatMessageModel *model=[[LocalChatMessageModel alloc]init];
+             [models addObject:model];
+         }
+         return [models count];
+}
+
+/**数据库聊天列表数据按时间降序排列*/
+-(NSArray<LocalChatMessageModel *> *)selectLocalChatMessageModelByDESC:(NSInteger)page userId:(NSString *)userId{
+    NSInteger startIndex = (page -1 > 0?page:0) * 20;
+    NSInteger limit = 20;
+    //从表中获取所要的数据
+      FMResultSet *rs=[fmdb executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date DESC LIMIT ?,?",userId,startIndex,limit];
+      NSMutableArray<LocalChatMessageModel *> *models=[NSMutableArray array];
+      while ([rs next]) {
+          //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
+          LocalChatMessageModel *model=[[LocalChatMessageModel alloc]init];
+          model.messageId= [rs stringForColumn: @"messageId"];
+          model.messageOtherUserId= [rs stringForColumn: @"messageId"];
+          model.fromUserId= [rs stringForColumn: @"messageId"];
+          model.fromName= [rs stringForColumn: @"messageId"];
+          model.fromAvatar= [rs stringForColumn: @"messageId"];
+          model.toUserUserId= [rs stringForColumn: @"messageId"];
+          model.toUserName= [rs stringForColumn: @"messageId"];
+          model.toUserAvatar= [rs stringForColumn: @"messageId"];
+          model.dateString= [rs stringForColumn: @"messageId"];
+          model.messageType= [rs intForColumn: @"messageId"];
+          model.ownerTyper= [rs intForColumn: @"messageId"];
+          model.readState= [rs intForColumn: @"messageId"];
+          model.sendState= [rs intForColumn: @"messageId"];
+          model.textString= [rs stringForColumn: @"messageId"];
+          model.messageSource = [rs stringForColumn: @"messageId"];
+          model.address = [rs stringForColumn: @"messageId"];
+          model.voiceSeconds = [rs intForColumn: @"messageId"];
+          [models addObject:model];
+      }
+      return [[[models reverseObjectEnumerator] allObjects] copy];
+    
+}
+
+
+
+
+
+
 
 
 //判断聊天对应的数据是否存在
@@ -108,9 +196,6 @@
                 return success;
             }
         }
-        
-        
-        
     }
     return YES;
 }

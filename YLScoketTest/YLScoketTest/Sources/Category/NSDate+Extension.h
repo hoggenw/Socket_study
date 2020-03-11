@@ -29,7 +29,7 @@
 - (NSString *)formatMMDD;
 - (NSString *)formatHHMM;
 - (NSString *)countDownBySecond;
-
+- (NSString *)formatYYMMDDHHMMssSS;
 /**
  *  格式化输出时间  使用UTC时区表示时间
  *  如：yyyy-MM-dd HH:mm:ss

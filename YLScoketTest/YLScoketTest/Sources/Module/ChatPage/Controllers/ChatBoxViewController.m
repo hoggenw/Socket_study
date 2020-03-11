@@ -344,7 +344,7 @@
         message.messageType = YLMessageTypeImage;
         message.ownerTyper = YLMessageOwnerTypeSelf;
         message.image = [image compressImageWithSice:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38)];
-        message.imagePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+        message.sourcePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
         message.date = [NSDate  date];
         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
             
@@ -374,7 +374,7 @@
                         message.messageType = YLMessageTypeImage;
                         message.ownerTyper = YLMessageOwnerTypeSelf;
                         message.image = result;
-                        message.imagePath = @"file:"; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
+                        message.sourcePath = @"file:"; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
                         message.voiceData = UIImagePNGRepresentation(result);
                         message.date = [NSDate  date];
                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
