@@ -123,7 +123,7 @@
     
     ChatViewController *chatVC  = [ChatViewController new];
     /**
-     下面的这个 TLUser 就是具体到用户的一个数据 model
+     下面的这个  就是具体到用户的一个数据 model
      */
     ChatUserModel *user7 = [[ChatUserModel alloc] init];
     user7.username = model.name;
@@ -160,17 +160,23 @@
 {
     
     //设置按钮(它默认第一个是修改系统的)
-    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"取消关注操作第%@",@(indexPath.row));
-    }];
+//    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//        NSLog(@"取消关注操作第%@",@(indexPath.row));
+//    }];
     //设置按钮(它默认第一个是修改系统的)
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        ChatListUserModel *model = _dataArray[indexPath.row];
+        if ([[LocalSQliteManager sharedInstance] deletChatListUserModel:model ]) {
+            [self.dataArray removeObject: model];
+            [self.tableView reloadData];
+        }
+        
         NSLog(@"删除操作第%@",@(indexPath.row));
     }];
     
-    action.backgroundColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
+//    action.backgroundColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
     action1.backgroundColor = [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f];
-    return @[action1,action];
+    return @[action1];
 }
 
 

@@ -105,6 +105,12 @@
 # pragma mark -  receiveMessageDelegate
 
 -(void)receiveMessage:(YLMessageModel *)message {
+    
+    if (message == NULL) {
+        [self.chatMessageVC addNewMessage:NULL];
+        return;
+    }
+    
     /**
      *   TLMessage 是一条消息的数据模型。纪录消息的各种属性
      就因为又有下面的这个，所以就有了你发一条，又会多一条的显示效果！！

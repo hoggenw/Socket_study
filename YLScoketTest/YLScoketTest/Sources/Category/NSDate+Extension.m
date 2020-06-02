@@ -153,6 +153,10 @@
     return [self formatDate:@"yyyy-MM-dd HH:mm:ss"];
 }
 
+- (NSString *)formatYYMMDD{
+    return [self formatDate:@"yyyy-MM-dd"];
+}
+
 - (NSString *)formatMMDDHHMM {
     return [self formatDate:@"MM-dd HH:mm"];
 }
@@ -168,6 +172,17 @@
       return [self formatDate: @"YYYY/MM/dd hh:mm:ss SS"];
 }
 
++ (BOOL)ifToday:(NSDate *)otherDay{
+    NSString *dayStr = [[NSDate date] toStringWithFormat:@"yyyy-MM-dd"];
+    NSString *otherDayStr = [otherDay toStringWithFormat:@"yyyy-MM-dd"];
+    return [dayStr isEqualToString:otherDayStr];
+}
+
++(BOOL)ifYesterday:(NSDate *)otherDay{
+    NSString *dayStr = [[[NSDate date] yesterday] toStringWithFormat:@"yyyy-MM-dd"];
+    NSString *otherDayStr = [otherDay toStringWithFormat:@"yyyy-MM-dd"];
+    return [dayStr isEqualToString:otherDayStr];
+}
 
 /**
  *  按照yyyy-MM-dd进行格式化后，是否是同一天

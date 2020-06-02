@@ -66,9 +66,19 @@
 }
 -(BOOL)insertLoaclMessageModel:(LocalChatMessageModel *)model{
     if (![self isLoaclMessageModelExist:model]) {
-        BOOL success=[fmdb executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,model.messageType,model.ownerTyper,model.readState,model.sendState,model.textString,model.messageSource,model.address,model.voiceSeconds];
+        BOOL success=[fmdb executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,@(model.messageType),@(model.ownerTyper),@(model.readState),@(model.sendState),model.textString,model.messageSource,model.address,model.voiceSeconds];
         return success;
+    }else{
+        BOOL success = true;
+           if (model.sendState != 0) {
+               success =[fmdb executeUpdate:@"update MessagesTabel SET sendState = ? WHERE  messageId=? ",@(model.sendState),model.messageId];
+               if (!success) {
+                   return success;
+               }
+           }
+  
     }
+   
     return YES;
 }
 /**删除聊天数据*/
@@ -185,13 +195,13 @@
             }
         }
         if (model.needHint == 0 || model.needHint == 1) {
-            success =[fmdb executeUpdate:@"update ChatListTabel SET needHint = ? WHERE  userId=? ",model.needHint,model.userId];
+            success =[fmdb executeUpdate:@"update ChatListTabel SET needHint = ? WHERE  userId=? ",@(model.needHint),model.userId];
             if (!success) {
                 return success;
             }
         }
         if (model.messageCount >= 0) {
-            success =[fmdb executeUpdate:@"update ChatListTabel SET messageCount = ? WHERE  userId=? ",model.messageCount,model.userId];
+            success =[fmdb executeUpdate:@"update ChatListTabel SET messageCount = ? WHERE  userId=? ",@(model.messageCount),model.userId];
             if (!success) {
                 return success;
             }

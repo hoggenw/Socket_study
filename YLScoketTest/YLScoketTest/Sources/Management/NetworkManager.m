@@ -13,11 +13,13 @@
 
 #ifdef DEBUG
 //https
-NSString * const BaseUrl = @"http://192.168.0.167:8099/";
+NSString * const BaseUrl = @"http://192.168.1.15:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const HOST = @"192.168.0.167";
-
-
+NSString * const HOST = @"192.168.1.15";
+//
+//NSString * const BaseUrl = @"http://49.235.149.115:8099/";
+//NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+//NSString * const HOST = @"49.235.149.115";
 #else
 NSString * const BaseUrl = @"https://www.7chat.wang:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";

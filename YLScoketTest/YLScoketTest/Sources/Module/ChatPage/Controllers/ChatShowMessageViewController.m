@@ -67,17 +67,27 @@
 
 - (void) addNewMessage:(ChatMessageModel *)message
 {
-    /**
-     *  数据源添加一条消息，刷新数据
-     */
-    [self.dataArray addObject:message];
-    if (message.messageType == YLMessageTypeImage) {
-        [self.imageMessageModels addObject: message];
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
     
+    if (message == NULL) {
+         dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+       
+    }else{
+        
+         /**
+          *  数据源添加一条消息，刷新数据
+          */
+         [self.dataArray addObject:message];
+         if (message.messageType == YLMessageTypeImage) {
+             [self.imageMessageModels addObject: message];
+         }
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [self.tableView reloadData];
+         });
+         
+    }
+ 
     
     [self scrollToBottom];
     

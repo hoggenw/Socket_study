@@ -13,6 +13,7 @@
 #import "GPBProtocolBuffers_RuntimeSupport.h"
 #import "ChatMessageModel.h"
 #import "LocalChatMessageModel.h"
+#import "ChatListUserModel.h"
 
 typedef NS_ENUM(NSInteger,DisConnectType) {
     disConnectByUser = 1000,
@@ -169,27 +170,32 @@ static const uint16_t port = 6969;
     pmessage.messageId = [NSString stringWithFormat:@"%@&%@&%@",messageModel.from.userId,messageModel.toUser.userId,dateString];
     
     LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
-    locaModel.sendState =  YLMessageSending;
+    locaModel.sendState =   YLMessageSending;
     locaModel.readState =  YLMessageReaded;
     locaModel.ownerTyper = YLMessageOwnerTypeSelf;
     locaModel.dateString = dateString;
     locaModel.messageOtherUserId = pmessage.toUser.userId;
     
     //存入本地，然后发送通知；
+    if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
+        
+         // 序列化为Data
+         NSData *data = [pmessage data];
+         
+         YLBaseMessageModel * base = [YLBaseMessageModel new];
+         base.title = SokectTile;
+         base.command = YLMessageCMDPersontoPerson;
+         base.module = YLMessageCommonModule;
+         base.data_p = data;
+         //NSLog(@"%@",data);
+         [_webSocket send: [base data]];
+         
+    }else{
+        [YLHintView showMessageOnThisPage:@"消息存储失败"];
+    }
     
     
-    
-    // 序列化为Data
-    NSData *data = [pmessage data];
-    
-    YLBaseMessageModel * base = [YLBaseMessageModel new];
-    base.title = SokectTile;
-    base.command = YLMessageCMDPersontoPerson;
-    base.module = YLMessageCommonModule;
-    base.data_p = data;
-    //NSLog(@"%@",data);
-    [_webSocket send: [base data]];
-    
+ 
     
 }
 //重连机制
@@ -224,9 +230,71 @@ static const uint16_t port = 6969;
 #pragma mark - SRWebSocketDelegate
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+    
+    NSError *error;
+    YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
+    
+    if (baseModel.module == 201) {//发送消息返回状态
+        if (baseModel.command == 10086) {
+                       [YLHintView showMessageOnThisPage:@"登录已过期"];
+                       POST_LOGINQUIT_NOTIFICATION;
+                       return;
+        }
+                   
+        YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
+        //todo
+        //更新本地数据库消息发送记录
+        LocalChatMessageModel * locaModel = [LocalChatMessageModel new];
+        locaModel.messageId = pmessage.messageId;
+        locaModel.sendState =  YLMessageSendSuccess;
+         if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
+             NSLog(@"更新消息状态成功");
+           }
+        //更新该聊天对像列表的最新消息
+            ChatListUserModel *item2  = [ChatListUserModel new];
+            item2.userId = pmessage.toUser.userId;
+            item2.name = pmessage.toUser.name;
+            item2.date = [NSDate date];
+            item2.message = pmessage.textString;
+            [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
+        return;
+    }else  if (baseModel.module == 101) {//普通消息接收
+        if (baseModel.command == 10086) {
+                      [YLHintView showMessageOnThisPage:@"登录已过期"];
+                      POST_LOGINQUIT_NOTIFICATION;
+                      return;
+        }
+                  
+        YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
+        //todo
+        //新增本地数据库消息接收记录
+        NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
+        LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
+        locaModel.sendState =  YLMessageSendSuccess;
+        locaModel.readState =  YLMessageUnRead;
+        locaModel.ownerTyper = YLMessageOwnerTypeOther;
+        locaModel.dateString = dateString;
+        locaModel.messageOtherUserId = pmessage.fromUser.userId;
+        if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
+            NSLog(@"接收消息状态成功");
+            //下一步将消息
+            NSInteger unread = [[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByUserId:pmessage.fromUser.userId];
+            //更新该聊天对像列表的最新消息
+            ChatListUserModel *item2  = [ChatListUserModel new];
+            item2.userId = pmessage.fromUser.userId;
+            item2.name = pmessage.fromUser.name;
+            item2.date = [NSDate date];
+            item2.message = pmessage.textString;
+            item2.messageCount = (int)unread;
+            [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
+        }
+        
+        
+    }
+    
+    
+    
     if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-        NSError *error;
-        YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
         if (baseModel != NULL) {
             
             if (baseModel.command == 10086) {
@@ -244,8 +312,7 @@ static const uint16_t port = 6969;
         
         return;
     }else{
-        NSError *error;
-        YLBaseMessageModel * baseModel = [[YLBaseMessageModel alloc] initWithData:message error: &error];
+
         if (baseModel != NULL) {
             [self disconnnet];
             if (baseModel.command == 10086) {
@@ -312,6 +379,8 @@ static const uint16_t port = 6969;
 //    return NO;
 //}
 @end
+
+
 
 
 

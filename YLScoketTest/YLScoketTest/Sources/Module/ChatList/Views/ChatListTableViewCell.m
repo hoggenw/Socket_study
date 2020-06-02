@@ -102,7 +102,14 @@
     _userModel = userModel;
     [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_userModel.avatar] placeholderImage: IMAGE(@"other_header")] ;
     [_usernameLabel setText:_userModel.name];
-    [_dateLabel setText: [_userModel.date formatHHMM]];
+    if ([NSDate ifToday:_userModel.date]) {
+          [_dateLabel setText: [_userModel.date formatHHMM]];
+    }else if([NSDate ifYesterday:_userModel.date]) {
+            [_dateLabel setText: @"昨天"];
+    }else{
+        [_dateLabel setText: [_userModel.date formatYYMMDD]];
+    }
+  
     [_messageLabel setText:_userModel.message];
     
     if (_userModel.messageCount > 0) {

@@ -30,6 +30,10 @@
 - (NSString *)formatHHMM;
 - (NSString *)countDownBySecond;
 - (NSString *)formatYYMMDDHHMMssSS;
+- (NSString *)formatYYMMDD;
+
++ (BOOL)ifToday:(NSDate *)otherDay;
++ (BOOL)ifYesterday:(NSDate *)otherDay;
 /**
  *  格式化输出时间  使用UTC时区表示时间
  *  如：yyyy-MM-dd HH:mm:ss
