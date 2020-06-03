@@ -42,6 +42,8 @@
     
     [self.view  addSubview:self.chatBoxVC.view];
     [self addChildViewController:self.chatBoxVC];
+    
+     NSArray<LocalChatMessageModel *> * models = [[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID];
     // Do any additional setup after loading the view.
 }
 

@@ -44,6 +44,6 @@
 /**删除聊天数据*/
 -(BOOL)deletLoaclMessageModel:(LocalChatMessageModel *)model;
 /**数据库聊天列表数据按时间降序排列*/
--(NSArray<LocalChatMessageModel *> *)selectChatListUserModelModelByDESC;
+-(NSArray<ChatListUserModel *> *)selectChatListUserModelModelByDESC:(NSString *)selfId;
 
 @end

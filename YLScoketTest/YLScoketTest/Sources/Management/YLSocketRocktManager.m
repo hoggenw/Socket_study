@@ -257,6 +257,7 @@ static const uint16_t port = 6969;
             item2.name = pmessage.toUser.name;
             item2.date = [NSDate date];
             item2.message = pmessage.textString;
+            item2.selfId = [[AccountManager sharedInstance] fetch].userID;
             [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
         return;
     }else  if (baseModel.module == 101) {//普通消息接收
@@ -290,6 +291,7 @@ static const uint16_t port = 6969;
             item2.date = [NSDate date];
             item2.message = pmessage.textString;
             item2.messageCount = (int)unread;
+            item2.selfId = [[AccountManager sharedInstance] fetch].userID;
             [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatList object:nil];
         }

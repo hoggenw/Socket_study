@@ -93,7 +93,7 @@
 }
 
 -(NSMutableArray *)getDataArray {
-    NSMutableArray *models =  [[[LocalSQliteManager sharedInstance] selectChatListUserModelModelByDESC] mutableCopy];
+    NSMutableArray *models =  [[[LocalSQliteManager sharedInstance] selectChatListUserModelModelByDESC:[[AccountManager sharedInstance] fetch].userID] mutableCopy];
     return models;
 }
 

@@ -49,9 +49,9 @@
     }
     if ([fmdb open]) {
         //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
-        [fmdb executeUpdate:@"create table if not exists ChatListTabel(userId primary key not null,name not null,avatar, message ,date not null,messageCount INTEGER,needHint INTEGER);"];
+        [fmdb executeUpdate:@"create table if not exists ChatListTabel(userId primary key not null,name not null,avatar, message ,date not null,messageCount INTEGER,needHint INTEGER,selfId);"];
         //消息列表
-        [fmdb executeUpdate:@"CREATE TABLE IF NOT EXISTS MessagesTabel (messageId TEXT PRIMARY KEY NOT NULL,messageOtherUserId TEXT NOT NULL,fromUserId TEXT NOT NULL,fromName TEXT NOT NULL,fromAvatar TEXT ,toUserUserId TEXT NOT NULL,toUserName TEXT NOT NULL,toUserAvatar TEXT,dateString TEXT , messageType INTEGER,ownerTyper INTEGER,readState INTEGER,sendState INTEGER,textString TEXT,messageSource TEXT,address TEXT,voiceSeconds INTEGER)"];
+        [fmdb executeUpdate:@"CREATE TABLE IF NOT EXISTS MessagesTabel (messageId TEXT PRIMARY KEY NOT NULL,messageOtherUserId TEXT NOT NULL,fromUserId TEXT NOT NULL,fromName TEXT NOT NULL,fromAvatar TEXT ,toUserUserId TEXT NOT NULL,toUserName TEXT NOT NULL,toUserAvatar TEXT,dateString TEXT , messageType INTEGER,ownerTyper INTEGER,readState INTEGER,sendState INTEGER,textString TEXT,messageSource TEXT,address TEXT,voiceSeconds INTEGER,date not null)"];
         
     }
 }
@@ -108,12 +108,18 @@
          return count;
 }
 
+- (BOOL )deleteAll:(NSString *)userId{
+        BOOL success=[fmdb executeUpdate:@"delete from MessagesTabel WHERE  messageOtherUserId=? ",userId];
+    return success;
+}
+
 /**数据库聊天列表数据按时间降序排列*/
 -(NSArray<LocalChatMessageModel *> *)selectLocalChatMessageModelByDESC:(NSInteger)page userId:(NSString *)userId{
+//    BOOL success = [self deleteAll:userId];
     NSInteger startIndex = (page -1 > 0?page:0) * 20;
     NSInteger limit = 20;
     //从表中获取所要的数据
-      FMResultSet *rs=[fmdb executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date DESC LIMIT ?,?",userId,startIndex,limit];
+      FMResultSet *rs=[fmdb executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date DESC",userId];
       NSMutableArray<LocalChatMessageModel *> *models=[NSMutableArray array];
       while ([rs next]) {
           //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
@@ -150,7 +156,7 @@
 
 //判断聊天对应的数据是否存在
 -(BOOL)isChatListUserModelExist:(ChatListUserModel *)model{
-    FMResultSet *rs=[fmdb executeQuery:@"SELECT *FROM ChatListTabel WHERE userId=?",model.userId];
+    FMResultSet *rs=[fmdb executeQuery:@"SELECT *FROM ChatListTabel WHERE userId=? and selfId=?",model.userId,model.selfId];
     if ([rs next]) {
         return YES;
     }
@@ -160,7 +166,7 @@
 /**添加聊天数据*/
 -(BOOL)insertChatListUserModel:(ChatListUserModel *)model{
     if (![self isChatListUserModelExist:model]) {
-        BOOL success=[fmdb executeUpdate:@"INSERT into ChatListTabel values(?,?,?,?,?,?,?)",model.userId,model.name,model.avatar,model.message,model.date,@(model.messageCount),model.needHint];
+        BOOL success=[fmdb executeUpdate:@"INSERT into ChatListTabel values(?,?,?,?,?,?,?,?)",model.userId,model.name,model.avatar,model.message,model.date,@(model.messageCount),model.needHint,model.selfId];
         return success;
     }else{
         BOOL success = true;
@@ -207,7 +213,7 @@
 /**删除聊天数据*/
 -(BOOL)deletChatListUserModel:(ChatListUserModel *)model{
     if ([self isChatListUserModelExist:model]) {
-        BOOL success=[fmdb executeUpdate:@"delete from ChatListTabel where userId=?",model.userId];
+        BOOL success=[fmdb executeUpdate:@"delete from ChatListTabel where userId=? and selfId=?",model.userId,model.selfId];
         BOOL success2=[fmdb executeUpdate:@"delete from MessagesTabel where messageOtherUserId=?",model.userId];
         return (success && success2);
     }
@@ -215,9 +221,9 @@
 }
 
 /**数据库聊天列表数据按时间降序排列*/
--(NSArray<ChatListUserModel *> *)selectChatListUserModelModelByDESC{
+-(NSArray<ChatListUserModel *> *)selectChatListUserModelModelByDESC:(NSString *)selfId{
     //从表中获取所要的数据
-    FMResultSet *rs=[fmdb executeQuery:@"select * from ChatListTabel ORDER BY date DESC"];
+    FMResultSet *rs=[fmdb executeQuery:@"select * from ChatListTabel where  selfId=? ORDER BY date DESC",selfId];
     NSMutableArray<ChatListUserModel *> *models=[NSMutableArray array];
     while ([rs next]) {
         //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒

@@ -52,6 +52,7 @@
             ChatListUserModel *item1  = [ChatListUserModel new];
             item1.userId = self.model.userID;
             item1.name = self.remarkTextFeild.text;
+            item1.selfId = [[AccountManager sharedInstance] fetch].userID;
             if ([[LocalSQliteManager sharedInstance] isChatListUserModelExist: item1]) {
                 [[LocalSQliteManager sharedInstance]insertChatListUserModel: item1];
             }
@@ -223,7 +224,7 @@
     item1.avatar = self.model.avatar;
     item1.date = [NSDate date];
     item1.messageCount = 0;
-    
+    item1.selfId = [[AccountManager sharedInstance] fetch].userID;
     if(self.friendsshipModel){
         if ([self.friendsshipModel.friend.userId isEqualToString: [[AccountManager sharedInstance] fetch].userID]) {
             

@@ -11,6 +11,8 @@
 @interface ChatListUserModel : NSObject
 //聊天对象的id
 @property (nonatomic, strong) NSString *userId;
+//自己的id
+@property (nonatomic, strong) NSString *selfId;
 //e聊天对象的昵称或者备注名
 @property (nonatomic, strong) NSString *name;
 //e聊天的时间
