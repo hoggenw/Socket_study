@@ -15,6 +15,7 @@
 //#import "YLUMengHelper.h"
 #import "FileManager.h"
 #import "LanguageUtil.h"
+#import "ChatDealUtils.h"
 
 @protocol ActionSelcetControlDelegate <NSObject>
 

@@ -66,7 +66,7 @@
 }
 -(BOOL)insertLoaclMessageModel:(LocalChatMessageModel *)model{
     if (![self isLoaclMessageModelExist:model]) {
-        BOOL success=[fmdb executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,@(model.messageType),@(model.ownerTyper),@(model.readState),@(model.sendState),model.textString,model.messageSource,model.address,model.voiceSeconds];
+        BOOL success=[fmdb executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,@(model.messageType),@(model.ownerTyper),@(model.readState),@(model.sendState),model.textString,model.messageSource,model.address,model.voiceSeconds,model.date];
         return success;
     }else{
         BOOL success = true;
@@ -119,22 +119,22 @@
           //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
           LocalChatMessageModel *model=[[LocalChatMessageModel alloc]init];
           model.messageId= [rs stringForColumn: @"messageId"];
-          model.messageOtherUserId= [rs stringForColumn: @"messageId"];
-          model.fromUserId= [rs stringForColumn: @"messageId"];
-          model.fromName= [rs stringForColumn: @"messageId"];
-          model.fromAvatar= [rs stringForColumn: @"messageId"];
-          model.toUserUserId= [rs stringForColumn: @"messageId"];
-          model.toUserName= [rs stringForColumn: @"messageId"];
-          model.toUserAvatar= [rs stringForColumn: @"messageId"];
-          model.dateString= [rs stringForColumn: @"messageId"];
-          model.messageType= [rs intForColumn: @"messageId"];
-          model.ownerTyper= [rs intForColumn: @"messageId"];
-          model.readState= [rs intForColumn: @"messageId"];
-          model.sendState= [rs intForColumn: @"messageId"];
-          model.textString= [rs stringForColumn: @"messageId"];
-          model.messageSource = [rs stringForColumn: @"messageId"];
-          model.address = [rs stringForColumn: @"messageId"];
-          model.voiceSeconds = [rs intForColumn: @"messageId"];
+          model.messageOtherUserId= [rs stringForColumn: @"messageOtherUserId"];
+          model.fromUserId= [rs stringForColumn: @"fromUserId"];
+          model.fromName= [rs stringForColumn: @"fromName"];
+          model.fromAvatar= [rs stringForColumn: @"fromAvatar"];
+          model.toUserUserId= [rs stringForColumn: @"toUserUserId"];
+          model.toUserName= [rs stringForColumn: @"toUserName"];
+          model.toUserAvatar= [rs stringForColumn: @"toUserAvatar"];
+          model.dateString= [rs stringForColumn: @"dateString"];
+          model.messageType= [rs intForColumn: @"messageType"];
+          model.ownerTyper= [rs intForColumn: @"ownerTyper"];
+          model.readState= [rs intForColumn: @"readState"];
+          model.sendState= [rs intForColumn: @"sendState"];
+          model.textString= [rs stringForColumn: @"textString"];
+          model.messageSource = [rs stringForColumn: @"messageSource"];
+          model.address = [rs stringForColumn: @"address"];
+          model.voiceSeconds = [rs intForColumn: @"voiceSeconds"];
           [models addObject:model];
       }
       return [[[models reverseObjectEnumerator] allObjects] copy];

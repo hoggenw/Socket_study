@@ -22,6 +22,7 @@
 
 @property (nonatomic,weak) id<ChatShowMessageViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray<ChatMessageModel *> * imageMessageModels;
+@property(nonatomic,strong) ChatUserModel * user;
 
 
 - (void)scrollToBottom ;

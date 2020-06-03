@@ -51,10 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 语音消息
 @property (nonatomic, assign) NSUInteger voiceSeconds;              // 语音时间
 
-
-
-
-
+@property (nonatomic, strong) NSDate *date;    //消息时间
 
 
 

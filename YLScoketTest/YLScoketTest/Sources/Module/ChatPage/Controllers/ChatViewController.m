@@ -13,7 +13,7 @@
 #import "ChatMessageModel.h"
 #import "YLSocketRocktManager.h"
 #import "YLPhotoPreviewController.h"
-
+#import "ChatListUserModel.h"
 #import "YlmessageModel.pbobjc.h"
 
 
@@ -43,6 +43,11 @@
     [self.view  addSubview:self.chatBoxVC.view];
     [self addChildViewController:self.chatBoxVC];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [ChatDealUtils setMessageStateReaded: self.user.userID];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +97,7 @@
         _chatMessageVC = [[ChatShowMessageViewController  alloc] init];
         _chatMessageVC.view.frame = CGRectMake(0, HEIGHT_STATUSBAR + HEIGHT_NAVBAR, ScreenWidth, ScreenHeight - HEIGHT_TABBAR - HEIGHT_STATUSBAR - HEIGHT_NAVBAR);// 0  状态 + 导航 宽 viweH - tabbarH
         _chatMessageVC.delegate = self;// 代理
+        _chatMessageVC.user = _user;
     }
     
     return _chatMessageVC;
@@ -185,7 +191,6 @@
     user.name = model.name;
     user.avatar = model.avatar;
     user.userId = model.userID;
-    
     
     
     YLUserModel * toModel = [YLUserModel new];

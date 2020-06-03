@@ -101,6 +101,7 @@
 		8754206123CD910D0008820A /* ApplyFriendshipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206023CD910D0008820A /* ApplyFriendshipViewController.m */; };
 		8754206423CD969F0008820A /* ApplyFriendshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */; };
 		8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206623CDACB90008820A /* ApplyDetailViewController.m */; };
+		875FECD4248772CB00D9DD98 /* ChatDealUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 875FECD3248772CB00D9DD98 /* ChatDealUtils.m */; };
 		8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC123BB17100028EE71 /* PersonalProfileController.m */; };
 		8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC423BB17B00028EE71 /* PersonInfoCell.m */; };
 		8769CCC823BB2FF40028EE71 /* BlacklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC723BB2FF40028EE71 /* BlacklistViewController.m */; };
@@ -390,6 +391,8 @@
 		8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyFriendshipTableViewCell.m; sourceTree = "<group>"; };
 		8754206523CDACB90008820A /* ApplyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyDetailViewController.h; sourceTree = "<group>"; };
 		8754206623CDACB90008820A /* ApplyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyDetailViewController.m; sourceTree = "<group>"; };
+		875FECD2248772CB00D9DD98 /* ChatDealUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatDealUtils.h; sourceTree = "<group>"; };
+		875FECD3248772CB00D9DD98 /* ChatDealUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatDealUtils.m; sourceTree = "<group>"; };
 		8769CCC023BB17100028EE71 /* PersonalProfileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalProfileController.h; sourceTree = "<group>"; };
 		8769CCC123BB17100028EE71 /* PersonalProfileController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalProfileController.m; sourceTree = "<group>"; };
 		8769CCC323BB17B00028EE71 /* PersonInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonInfoCell.h; sourceTree = "<group>"; };
@@ -858,6 +861,8 @@
 				A5852F442367CDD0009E5CB3 /* YLIFlyHelper.m */,
 				116B676020118FB6005AA5E0 /* YLDeviceUtil.h */,
 				116B676220118FB6005AA5E0 /* YLDeviceUtil.m */,
+				875FECD2248772CB00D9DD98 /* ChatDealUtils.h */,
+				875FECD3248772CB00D9DD98 /* ChatDealUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1630,6 +1635,7 @@
 				A5852F592367CDD1009E5CB3 /* UILabel+Factory.m in Sources */,
 				879BF50F2383E9FD00D1669E /* AddressBookViewModel.m in Sources */,
 				116B677B20118FB6005AA5E0 /* UIViewController+Extension.m in Sources */,
+				875FECD4248772CB00D9DD98 /* ChatDealUtils.m in Sources */,
 				11576163201889E200E0D94F /* GPBMessage.m in Sources */,
 				8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */,
 				11576151201889E200E0D94F /* GPBExtensionRegistry.m in Sources */,

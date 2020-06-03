@@ -35,7 +35,6 @@
          @strongify(self)
            self.dataArray = [self getDataArray];
          dispatch_async(dispatch_get_main_queue(), ^{
-             
                 [self.tableView reloadData];
          });
         
@@ -47,6 +46,7 @@
     [super viewDidAppear:animated];
     self.dataArray = [self getDataArray];
     [self.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {

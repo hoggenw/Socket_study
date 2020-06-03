@@ -166,6 +166,7 @@ static const uint16_t port = 6969;
     pmessage.toUser = messageModel.toUser;
     //token
     pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    
     NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
     pmessage.messageId = [NSString stringWithFormat:@"%@&%@&%@",messageModel.from.userId,messageModel.toUser.userId,dateString];
     
@@ -175,7 +176,7 @@ static const uint16_t port = 6969;
     locaModel.ownerTyper = YLMessageOwnerTypeSelf;
     locaModel.dateString = dateString;
     locaModel.messageOtherUserId = pmessage.toUser.userId;
-    
+    locaModel.date = [NSDate date];
     //存入本地，然后发送通知；
     if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
         
@@ -268,13 +269,16 @@ static const uint16_t port = 6969;
         YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
         //todo
         //新增本地数据库消息接收记录
-        NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
+       
         LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
         locaModel.sendState =  YLMessageSendSuccess;
         locaModel.readState =  YLMessageUnRead;
         locaModel.ownerTyper = YLMessageOwnerTypeOther;
-        locaModel.dateString = dateString;
         locaModel.messageOtherUserId = pmessage.fromUser.userId;
+        locaModel.date = [NSDate date];
+        NSString *dateString = [ locaModel.date  formatYYMMDDHHMMssSS];
+        locaModel.dateString = dateString;
+        
         if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
             NSLog(@"接收消息状态成功");
             //下一步将消息
