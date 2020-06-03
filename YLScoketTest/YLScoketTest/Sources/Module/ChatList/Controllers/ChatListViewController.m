@@ -30,6 +30,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initialUI];
+    @weakify(self)
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Refresh_ChatList object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+         @strongify(self)
+           self.dataArray = [self getDataArray];
+         dispatch_async(dispatch_get_main_queue(), ^{
+             
+                [self.tableView reloadData];
+         });
+        
+    }];
     
 }
 

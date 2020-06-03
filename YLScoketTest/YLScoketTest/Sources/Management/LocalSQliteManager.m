@@ -104,14 +104,8 @@
 /**获取某个聊天未读的条数*/
 - (NSInteger )selectLocalChatMessageModelByUserId:(NSString *)userId{
     //从表中获取所要的数据
-         FMResultSet *rs=[fmdb executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? and readState = 0",userId];
-         NSMutableArray<LocalChatMessageModel *> *models=[NSMutableArray array];
-         while ([rs next]) {
-             //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
-             LocalChatMessageModel *model=[[LocalChatMessageModel alloc]init];
-             [models addObject:model];
-         }
-         return [models count];
+         NSUInteger count=[fmdb intForQuery:@"select Count(*) from MessagesTabel  where messageOtherUserId=? and readState = 0",userId];
+         return count;
 }
 
 /**数据库聊天列表数据按时间降序排列*/
@@ -166,7 +160,7 @@
 /**添加聊天数据*/
 -(BOOL)insertChatListUserModel:(ChatListUserModel *)model{
     if (![self isChatListUserModelExist:model]) {
-        BOOL success=[fmdb executeUpdate:@"INSERT into ChatListTabel values(?,?,?,?,?,?,?)",model.userId,model.name,model.avatar,model.message,model.date,model.messageCount,model.needHint];
+        BOOL success=[fmdb executeUpdate:@"INSERT into ChatListTabel values(?,?,?,?,?,?,?)",model.userId,model.name,model.avatar,model.message,model.date,@(model.messageCount),model.needHint];
         return success;
     }else{
         BOOL success = true;
@@ -214,7 +208,8 @@
 -(BOOL)deletChatListUserModel:(ChatListUserModel *)model{
     if ([self isChatListUserModelExist:model]) {
         BOOL success=[fmdb executeUpdate:@"delete from ChatListTabel where userId=?",model.userId];
-        return success;
+        BOOL success2=[fmdb executeUpdate:@"delete from MessagesTabel where messageOtherUserId=?",model.userId];
+        return (success && success2);
     }
     return true;
 }

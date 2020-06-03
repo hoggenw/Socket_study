@@ -59,7 +59,7 @@
     returnModel.toUserAvatar =  pMessage.toUser.avatar;
     returnModel.toUserUserId =  pMessage.toUser.userId;
     returnModel.messageId =  pMessage.messageId;
-    
+    //NSLog(@"%@,",pMessage.messageId);
     
     return returnModel;
     
