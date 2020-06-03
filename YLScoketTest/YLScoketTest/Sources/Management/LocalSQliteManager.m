@@ -116,8 +116,8 @@
 /**数据库聊天列表数据按时间降序排列*/
 -(NSArray<LocalChatMessageModel *> *)selectLocalChatMessageModelByDESC:(NSInteger)page userId:(NSString *)userId{
 //    BOOL success = [self deleteAll:userId];
-    NSInteger startIndex = (page -1 > 0?page:0) * 20;
-    NSInteger limit = 20;
+    NSInteger startIndex = (page -1 > 0?page:0) * 40;
+    NSInteger limit = 40;
     //从表中获取所要的数据
       FMResultSet *rs=[fmdb executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date DESC",userId];
       NSMutableArray<LocalChatMessageModel *> *models=[NSMutableArray array];

@@ -294,53 +294,17 @@ static const uint16_t port = 6969;
             item2.selfId = [[AccountManager sharedInstance] fetch].userID;
             [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatList object:nil];
+            
+            if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
+                  if (pmessage != NULL) {
+                       [_delegate receiveMessage: pmessage];
+                   }
+                   return;
+            }
         }
         
         
     }
-    
-    
-//
-//    if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-//        if (baseModel != NULL) {
-//
-//            if (baseModel.command == 10086) {
-//                [YLHintView showMessageOnThisPage:@"登录已过期"];
-//                POST_LOGINQUIT_NOTIFICATION;
-//                return;
-//            }
-//
-//            YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
-//            NSLog(@"%@",pmessage.description);
-//            if (pmessage != NULL) {
-//                [_delegate receiveMessage: pmessage];
-//            }
-//        }
-//
-//        return;
-//    }else{
-//
-//        if (baseModel != NULL) {
-//            [self disconnnet];
-//            if (baseModel.command == 10086) {
-//                [YLHintView showMessageOnThisPage:@"登录已过期"];
-//                POST_LOGINQUIT_NOTIFICATION;
-//                return;
-//            }
-//            YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
-//            LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
-//            locaModel.sendState =  YLMessageSendSuccess;
-//            locaModel.readState =  YLMessageUnRead;
-//            locaModel.ownerTyper = YLMessageOwnerTypeOther;
-//            NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
-//            locaModel.dateString = dateString;
-//            locaModel.messageOtherUserId = pmessage.fromUser.userId;
-//            //存入本地
-//
-//
-//        }
-//    }
-//
     
     
     NSLog(@"服务器返回消息：%@",message);

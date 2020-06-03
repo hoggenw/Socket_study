@@ -39,29 +39,7 @@
     [self.tableView registerClass:[YLVoiceMessageCell class] forCellReuseIdentifier:@"YLVoiceMessageCell"];
     [self.tableView registerClass:[YLSystemMessageCell class] forCellReuseIdentifier:@"YLSystemMessageCell"];
     
-//    接收或者刷新消息通知
-      //    接收或者刷新消息通知
-//     @weakify(self)
-//     [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Refresh_ChatMessage object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-//         @strongify(self)
-//         /**
-//          //                            *  数据源添加一条消息，刷新数据
-//          //                            */
-//         //                           [self.dataArray addObject:message];
-//         //                           if (message.messageType == YLMessageTypeImage) {
-//         //                               [self.imageMessageModels addObject: message];
-//         //                           }
-//         NSArray<LocalChatMessageModel *> * models = [[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID];
-//      
-//         dispatch_async(dispatch_get_main_queue(), ^{
-//             [self.tableView reloadData];
-//             [self scrollToBottom];
-//         });
-//         
-//         [ChatDealUtils setMessageStateReaded: self.user.userID];
-//         
-//         
-//     }];
+
     
 }
 
@@ -110,7 +88,7 @@
          dispatch_async(dispatch_get_main_queue(), ^{
              [self.tableView reloadData];
          });
-         
+         [ChatDealUtils setMessageStateReaded: self.user.userID];
     }
  
     

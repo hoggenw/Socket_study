@@ -17,6 +17,7 @@
        ChatListUserModel *item2  = [ChatListUserModel new];
        item2.userId = userId;
        item2.messageCount = 0;
+        item2.selfId = [[AccountManager sharedInstance] fetch].userID;
        [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
 }
 
