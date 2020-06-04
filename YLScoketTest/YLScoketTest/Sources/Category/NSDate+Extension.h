@@ -55,5 +55,7 @@
  */
 - (BOOL)isEqualToDay:(NSDate *)otherDay;
 
++ (int)compareDate:(NSDate *)startDate withDate:(NSDate *)endDate;
+
 
 @end

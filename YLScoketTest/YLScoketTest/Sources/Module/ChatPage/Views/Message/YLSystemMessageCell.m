@@ -20,5 +20,38 @@
 
     // Configure the view for the selected state
 }
+- (void) layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.messageTextLabel setFrame:CGRectMake(0, 0, self.width, 20)];
+   
+    
+}
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self addSubview:self.messageTextLabel];
+    }
+    return self;
+}
 
+-(void)setMessageModel:(ChatMessageModel *)messageModel {
+    [super setMessageModel: messageModel];
+    _messageTextLabel.size = messageModel.messageSize;
+    [_messageTextLabel setAttributedText:messageModel.attrText];
+}
+
+
+- (UILabel *) messageTextLabel
+{
+    if (_messageTextLabel == nil) {
+        _messageTextLabel = [[UILabel alloc] init];
+        [_messageTextLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [_messageTextLabel setNumberOfLines:1];
+        _messageTextLabel.textColor = [UIColor colorWithHexString:@"0x999999"];
+        _messageTextLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _messageTextLabel;
+}
 @end

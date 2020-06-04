@@ -10,4 +10,6 @@
 
 @interface YLSystemMessageCell : YLMessageTableViewCell
 
+@property (nonatomic, strong) UILabel *messageTextLabel;
+
 @end

@@ -247,4 +247,29 @@
     return date;
 }
 
++ (int)compareDate:(NSDate *)startDate withDate:(NSDate *)endDate{
+    int comparisonResult;
+    NSComparisonResult result = [startDate compare:endDate];
+       NSLog(@"result==%ld",(long)result);
+       switch (result)
+       {
+               //endDate比startDate大
+           case NSOrderedAscending:
+               comparisonResult = 1;
+               break;
+               //endDate比startDate小
+           case NSOrderedDescending:
+               comparisonResult = -1;
+               break;
+               //endDate=startDate
+           case NSOrderedSame:
+               comparisonResult = 0;
+               break;
+           default:
+               NSLog(@"erorr dates %@, %@", startDate, endDate);
+               break;
+       }
+       return comparisonResult;
+}
+
 @end

@@ -124,7 +124,7 @@
     }else{
          returnModel.ownerTyper = YLMessageOwnerTypeOther;
     }
-    
+    returnModel.date = pMessage.date;
    
     
     return returnModel;

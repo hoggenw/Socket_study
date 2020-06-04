@@ -141,6 +141,7 @@
           model.messageSource = [rs stringForColumn: @"messageSource"];
           model.address = [rs stringForColumn: @"address"];
           model.voiceSeconds = [rs intForColumn: @"voiceSeconds"];
+          model.date = [rs dateForColumn: @"date"];
           [models addObject: [LocalChatMessageModel chatMessageModelChangeWith:model] ];
       }
      // return [[[models reverseObjectEnumerator] allObjects] copy];

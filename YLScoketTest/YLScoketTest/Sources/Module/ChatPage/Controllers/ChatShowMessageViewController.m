@@ -44,7 +44,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID] mutableCopy];
-
+    self.dataArray = [self addSystemModel: self.dataArray];
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -91,6 +91,7 @@
           *  数据源添加一条消息，刷新数据
           */
          [self.dataArray addObject:message];
+        self.dataArray = [self addSystemModel: self.dataArray];
          if (message.messageType == YLMessageTypeImage) {
              [self.imageMessageModels addObject: message];
          }
@@ -169,15 +170,59 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (NSMutableArray<ChatMessageModel *>  *)addSystemModel:(NSMutableArray<ChatMessageModel *> *)sourceData{
+    
+    NSMutableArray<ChatMessageModel *>  * cleanArray = [NSMutableArray array];
+    for (ChatMessageModel * temp in sourceData) {
+        if (temp.ownerTyper != YLMessageOwnerTypeSystem) {
+            [cleanArray addObject: temp];
+        }
+    }
+    
+    NSMutableArray<ChatMessageModel *>  * midArray = [NSMutableArray array];
+    NSDate * midDate = [NSDate date];
+    for (int i = 0; i < cleanArray.count; i ++) {
+        ChatMessageModel * temp = sourceData[i];
+        if (i == 0) {
+            midDate = temp.date;
+            ChatMessageModel * systemModel =[ChatMessageModel new];
+            systemModel.ownerTyper = YLMessageOwnerTypeSystem;
+            systemModel.messageType = YLMessageTypeSystem;
+            systemModel.text = [self dateToString: midDate];
+            [midArray addObject: systemModel];
+        }else{
+            //设置时间间隔（秒）5261（这个我是计算出来的，不知道4102有没有简便的1653方法 )
+            NSTimeInterval time = 10 * 60;//10分钟
+            //得到一年之前的当前时间（-：表回示答向前的时间间隔（即去年），如果没有，则表示向后的时间间隔（即明年））
+            NSDate * tenMinutesLater = [midDate dateByAddingTimeInterval: time];
+            int result = [NSDate compareDate:tenMinutesLater withDate: temp.date];
+            if (result == 1) {
+                midDate = temp.date;
+                ChatMessageModel * systemModel =[ChatMessageModel new];
+                systemModel.ownerTyper = YLMessageOwnerTypeSystem;
+                  systemModel.messageType = YLMessageTypeSystem;
+                systemModel.text = [self dateToString: midDate];
+                [midArray addObject: systemModel];
+            }
+        }
+        [midArray addObject: temp];
+        
+    }
+    return  midArray;
+    
+}
+
+-(NSString *)dateToString:(NSDate *)date {
+    NSString *timeString = @"";
+    if ([NSDate ifToday: date]) {
+        timeString = [date formatHHMM];
+    }else if([NSDate ifYesterday:date]) {
+     timeString = [NSString stringWithFormat:@"昨天   %@",[date formatHHMM]] ;
+    }else{
+       timeString =   [date formatYYMMDDHHMMSS];
+    }
+     return timeString;
+}
 
 @end
 

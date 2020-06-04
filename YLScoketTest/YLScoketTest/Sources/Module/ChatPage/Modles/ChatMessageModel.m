@@ -252,6 +252,9 @@ static UILabel *label = nil;
             return 35 + 20;
             break;
             
+        case YLMessageTypeSystem:
+             return 20;
+            break;
         default:
             
             break;
