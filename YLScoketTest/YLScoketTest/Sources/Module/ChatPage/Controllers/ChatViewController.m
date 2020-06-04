@@ -111,61 +111,13 @@
 
 # pragma mark -  receiveMessageDelegate
 
--(void)receiveMessage:(YLMessageModel *)message {
+-(void)receiveMessage:(LocalChatMessageModel *)message {
     
     if (message == NULL) {
         [self.chatMessageVC addNewMessage:NULL];
         return;
     }
-    
-    /**
-     *   TLMessage 是一条消息的数据模型。纪录消息的各种属性
-     就因为又有下面的这个，所以就有了你发一条，又会多一条的显示效果！！
-     */
-    ChatMessageModel *recMessage = [[ChatMessageModel alloc] init];
-    switch (message.messageType) {
-        case  YLMessageTypeImage:{ // 图片
-            recMessage.messageType = YLMessageTypeImage;
-            recMessage.ownerTyper = YLMessageOwnerTypeOther;
-            recMessage.sourcePath = message.messageSource;
-            recMessage.image = [UIImage imageWithData:  message.voiceData];
-            break;
-        }
-        case  YLMessageTypeText:{ // 文字
-            recMessage.text = message.textString;
-            recMessage.messageType = YLMessageTypeText;
-            recMessage.ownerTyper = YLMessageOwnerTypeOther;
-            break;
-        }
-        case  YLMessageTypeVoice:{ // 语音
-            recMessage.voiceData = message.voiceData;
-            recMessage.messageType = YLMessageTypeVoice;
-            recMessage.ownerTyper = YLMessageOwnerTypeOther;
-            recMessage.voiceSeconds = message.voiceLength;
-            break;
-        }
-        case  YLMessageTypeVideo:{ // 视频
-            NSLog(@"视频暂时不处理");
-            break;
-        }
-        case  YLMessageTypeFile:{ // 文件
-            break;
-        }
-        case  YLMessageTypeLocation:{ // 位置
-            break;
-        }
-        default:
-            break;
-    }
-    
-    
-    recMessage.date = [NSDate date];// 当前时间
-    
-    //recMessage.imagePath = message.imagePath;
-    //    ChatUserModel * otherUser = [[ChatUserModel alloc] init];
-    //    otherUser.username = @"";// 名字
-    //    otherUser.userID = @"li-bokun";// ID
-    recMessage.from = message.fromUser;
+    ChatMessageModel *recMessage = [LocalChatMessageModel chatMessageModelChangeWith:message];
     [self.chatMessageVC addNewMessage:recMessage];
     
 }
@@ -202,7 +154,7 @@
     message.from = user; //发送者
     message.toUser = toModel;
     [self.manager sendMassege:message];
-    [self.chatMessageVC addNewMessage: message];
+   
     
 }
 

@@ -14,7 +14,7 @@
 
 @protocol receiveMessageDelegate<NSObject>
 
-- (void)receiveMessage:(YLMessageModel *)message;
+- (void)receiveMessage:(LocalChatMessageModel *)message;
 
 @end
 

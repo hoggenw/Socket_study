@@ -190,6 +190,13 @@ static const uint16_t port = 6969;
          base.data_p = data;
          //NSLog(@"%@",data);
          [_webSocket send: [base data]];
+        if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
+           if (pmessage != NULL) {
+                 [_delegate receiveMessage: locaModel];
+            }
+           return;
+        }
+
          
     }else{
         [YLHintView showMessageOnThisPage:@"消息存储失败"];
@@ -297,7 +304,7 @@ static const uint16_t port = 6969;
             
             if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
                   if (pmessage != NULL) {
-                       [_delegate receiveMessage: pmessage];
+                       [_delegate receiveMessage: locaModel];
                    }
                    return;
             }

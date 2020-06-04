@@ -90,7 +90,7 @@
          /**
           *  数据源添加一条消息，刷新数据
           */
-         [self.dataArray addObject:message];
+        [self.dataArray addObject:message];
         self.dataArray = [self addSystemModel: self.dataArray];
          if (message.messageType == YLMessageTypeImage) {
              [self.imageMessageModels addObject: message];
@@ -182,7 +182,7 @@
     NSMutableArray<ChatMessageModel *>  * midArray = [NSMutableArray array];
     NSDate * midDate = [NSDate date];
     for (int i = 0; i < cleanArray.count; i ++) {
-        ChatMessageModel * temp = sourceData[i];
+        ChatMessageModel * temp = cleanArray[i];
         if (i == 0) {
             midDate = temp.date;
             ChatMessageModel * systemModel =[ChatMessageModel new];

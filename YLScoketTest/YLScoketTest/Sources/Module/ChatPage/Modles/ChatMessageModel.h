@@ -81,6 +81,7 @@ typedef NS_ENUM(NSUInteger, YLMessageCMD) {
 @property (nonatomic, strong) YLUserModel *from;                    // 发送者信息
 @property (nonatomic, strong) YLUserModel *toUser;                  // 发送者信息
 @property(nonatomic, readwrite, copy) NSString *messageOtherUserId;
+@property (nonatomic, strong) NSString *messageId;                    // 消息id
 @property (nonatomic, strong) NSDate *date;                         // 发送时间
 @property (nonatomic, strong) NSString *dateString;                 // 格式化的发送时间
 @property (nonatomic, assign) YLMessageType messageType;            // 消息类型
