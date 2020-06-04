@@ -38,9 +38,18 @@
     [self.tableView registerClass:[YLImageMessageCell class] forCellReuseIdentifier:@"YLImageMessageCell"];
     [self.tableView registerClass:[YLVoiceMessageCell class] forCellReuseIdentifier:@"YLVoiceMessageCell"];
     [self.tableView registerClass:[YLSystemMessageCell class] forCellReuseIdentifier:@"YLSystemMessageCell"];
-    
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID] mutableCopy];
 
     
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +83,7 @@
     
     if (message == NULL) {
          dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
+                [self.tableView reloadData];
         });
        
     }else{
