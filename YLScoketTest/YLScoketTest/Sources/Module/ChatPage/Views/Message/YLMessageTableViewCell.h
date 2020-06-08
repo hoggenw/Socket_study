@@ -20,6 +20,7 @@
  */
 @property (nonatomic, strong) YLImageView *avatarImageView;                 // 头像
 @property (nonatomic, strong) YLImageView *messageBackgroundImageView;      // 消息背景
-@property (nonatomic, strong) UIImageView *messageSendStatusImageView;      // 消息发送状态
+@property (nonatomic, strong) YLImageView *messageSendStatusImageView;      // 消息发送状态
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicator;
 
 @end

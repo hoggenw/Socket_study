@@ -74,7 +74,7 @@
         if ([rs next]) {
             result = YES;
         }
-        result = NO;
+       
     }];
     
     return result;
@@ -92,12 +92,10 @@
         
     }else{
         [self.queue inDatabase:^(FMDatabase *db) {
-            BOOL success = true;
+    
             if (model.sendState != 0) {
-                success =[db executeUpdate:@"update MessagesTabel SET sendState = ? WHERE  messageId=? ",@(model.sendState),model.messageId];
-                if (!success) {
-                    result = success;
-                }
+                result =[db executeUpdate:@"update MessagesTabel SET sendState = ? WHERE  messageId=? ",@(model.sendState),model.messageId];
+                NSLog(@"更新信息状态 %@",@(result));
             }
             
         }];
@@ -106,7 +104,7 @@
         
     }
     
-    
+     NSLog(@"更新信息状态2 %@",@(result));
     return result;
 }
 /**删除聊天数据*/

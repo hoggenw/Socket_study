@@ -18,7 +18,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -31,6 +31,7 @@
         self.backgroundColor = [UIColor clearColor];
         [self addSubview:self.messageBackgroundImageView];
         [self addSubview:self.avatarImageView];
+        [self addSubview:self.messageSendStatusImageView];
         
     }
     
@@ -68,16 +69,45 @@
             [self.messageBackgroundImageView setHidden:NO];
             [self.messageBackgroundImageView setImage:[[UIImage imageNamed:@"message_receiver_background_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch]];
             self.messageBackgroundImageView.highlightedImage = [[UIImage imageNamed:@"message_receiver_background_highlight"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
-            
             break;
             
         case YLMessageOwnerTypeSystem:
-            
             [self.avatarImageView setHidden:YES];
             [self.messageBackgroundImageView setHidden:YES];
-            
+            [self.messageSendStatusImageView setHidden: YES];
             break;
             
+        default:
+            break;
+    }
+    
+    [self.messageSendStatusImageView removeAllSubViews];
+    self.messageSendStatusImageView.image = nil;
+    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+    switch (messageModel.sendState) {
+        case YLMessageSending:
+            
+            [self.messageSendStatusImageView addSubview: activityIndicator];
+            //设置小菊花的frame
+            activityIndicator.frame= CGRectMake(0, 0, 40, 40);
+            //设置小菊花颜色
+            activityIndicator.color = [UIColor whiteColor];
+            //设置背景颜色
+            activityIndicator.backgroundColor = [UIColor clearColor];
+            //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
+            activityIndicator.hidesWhenStopped = NO;
+            
+            [activityIndicator startAnimating];
+            
+            break;
+        case YLMessageSendSuccess:
+             [self.messageSendStatusImageView removeAllSubViews];
+            self.messageSendStatusImageView.image = nil;
+            break;
+        case YLMessageSendFail:
+             [self.messageSendStatusImageView removeAllSubViews];
+            self.messageSendStatusImageView.image  = [UIImage imageNamed:@"message_send_failed"];
+            break;
         default:
             break;
     }
@@ -94,10 +124,8 @@
     if (_messageModel.ownerTyper == YLMessageOwnerTypeSelf) {
         // 屏幕宽 - 10 - 头像宽
         [self.avatarImageView setOrigin:CGPointMake(self.width - 10 - self.avatarImageView.width, 10)];
-        
     }
     else if (_messageModel.ownerTyper == YLMessageOwnerTypeOther) {
-        
         [self.avatarImageView setOrigin:CGPointMake(10, 10)];
         
     }
@@ -122,6 +150,16 @@
         _messageBackgroundImageView.userInteractionEnabled = true;
     }
     return _messageBackgroundImageView;
+}
+
+- (YLImageView *) messageSendStatusImageView
+{
+    if (_messageSendStatusImageView == nil) {
+        _messageSendStatusImageView = [[YLImageView alloc] init];
+        [_messageSendStatusImageView setHidden:false];
+        _messageSendStatusImageView.userInteractionEnabled = true;
+    }
+    return _messageSendStatusImageView;
 }
 
 @end
