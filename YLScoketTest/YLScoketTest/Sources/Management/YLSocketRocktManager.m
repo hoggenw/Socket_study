@@ -159,10 +159,7 @@ static const uint16_t port = 6969;
 #pragma mark- 消息发送
 -(void)sendMassege:(ChatMessageModel *)messageModel {
     
-    if (!(_webSocket.readyState == SR_OPEN)) {
-        NSLog(@"程序未连接");
-        return;
-    }
+
     
     YLMessageModel * pmessage = [YLMessageModel new];
     switch (messageModel.messageType) {
@@ -216,6 +213,13 @@ static const uint16_t port = 6969;
     //存入本地，然后发送通知；
     if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
         
+        [self initMessageBeat];
+        if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
+            if (pmessage != NULL) {
+                [_delegate receiveMessage: locaModel];
+            }
+            return;
+        }
         // 序列化为Data
         NSData *data = [pmessage data];
         
@@ -226,19 +230,16 @@ static const uint16_t port = 6969;
         base.data_p = data;
         //NSLog(@"%@",data);
         [_webSocket send: [base data]];
-        [self initMessageBeat];
-        if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-            if (pmessage != NULL) {
-                [_delegate receiveMessage: locaModel];
-            }
-            return;
-        }
+        
         
         
     }else{
-        [YLHintView showMessageOnThisPage:@"消息存储失败"];
+       
     }
-    
+    if (!(_webSocket.readyState == SR_OPEN)) {
+         [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+        return;
+    }
     
     
     
