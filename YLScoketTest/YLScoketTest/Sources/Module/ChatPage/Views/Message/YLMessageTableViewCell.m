@@ -105,7 +105,7 @@
             self.messageSendStatusImageView.image = nil;
             break;
         case YLMessageSendFail:
-             [self.messageSendStatusImageView removeAllSubViews];
+            [self.messageSendStatusImageView removeAllSubViews];
             self.messageSendStatusImageView.image  = [UIImage imageNamed:@"message_send_failed"];
             break;
         default:

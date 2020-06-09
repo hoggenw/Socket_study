@@ -250,7 +250,7 @@
 + (int)compareDate:(NSDate *)startDate withDate:(NSDate *)endDate{
     int comparisonResult;
     NSComparisonResult result = [startDate compare:endDate];
-       NSLog(@"result==%ld",(long)result);
+      // NSLog(@"result==%ld",(long)result);
        switch (result)
        {
                //endDate比startDate大

@@ -34,6 +34,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 @property (nonatomic, strong)SRWebSocket * webSocket;
 @property (nonatomic, strong)NSTimer * heartBeat;
+@property (nonatomic, strong)NSTimer * messageBeat;
 @property (nonatomic, assign)NSTimeInterval reConnectTime;
 
 @end
@@ -77,23 +78,30 @@ static const uint16_t port = 6969;
 //初始化心跳
 - (void)initHeartBeat {
     
-    if (@available(iOS 10.0, *)) {
-        self_dispatch_main_async_safe(^{
-            [self destoryHeartBeat];
-            __weak typeof(self) weakSelf = self;
-            self->_heartBeat = [NSTimer scheduledTimerWithTimeInterval: 3*9 repeats:YES block:^(NSTimer * _Nonnull timer) {
-                NSLog(@"heart beat");
-                
-                
-                [weakSelf ping];
-            }];
-            [[NSRunLoop currentRunLoop]addTimer:self->_heartBeat forMode:NSRunLoopCommonModes];
-        });
-    } else {
-        // Fallback on earlier versions
-    }
+    self_dispatch_main_async_safe(^{
+        [self destoryHeartBeat];
+        __weak typeof(self) weakSelf = self;
+        self->_heartBeat = [NSTimer scheduledTimerWithTimeInterval: 3*9 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"heart beat");
+            
+            [weakSelf ping];
+        }];
+        [[NSRunLoop currentRunLoop]addTimer:self->_heartBeat forMode:NSRunLoopCommonModes];
+    });
     
     
+}
+
+- (void)initMessageBeat{
+    self_dispatch_main_async_safe(^{
+        [self destoryMessageBeat];
+        __weak typeof(self) weakSelf = self;
+        self->_messageBeat = [NSTimer scheduledTimerWithTimeInterval: 5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"更新消息状态");
+            [weakSelf updateSqlMessageData];
+        }];
+        [[NSRunLoop currentRunLoop]addTimer:self->_messageBeat forMode:NSRunLoopCommonModes];
+    });
 }
 
 //取消心跳
@@ -104,6 +112,34 @@ static const uint16_t port = 6969;
             self->_heartBeat = nil;
         }
     });
+}
+//取消消息定时器
+- (void)destoryMessageBeat {
+    self_dispatch_main_async_safe(^{
+        if (self->_messageBeat) {
+            [self->_messageBeat invalidate];
+            self->_messageBeat = nil;
+        }
+    });
+}
+
+-(void)updateSqlMessageData {
+   NSArray<LocalChatMessageModel *>* models = [[LocalSQliteManager sharedInstance] selectAllLocalChatMessageModels];
+    if (models.count <= 0) {
+        [self destoryMessageBeat];
+    }else{
+        for (LocalChatMessageModel *model in models) {
+            
+            NSTimeInterval time = 10 ;//10分钟
+            NSDate * tenMinutesLater = [model.date dateByAddingTimeInterval: time];
+            int result = [NSDate compareDate:tenMinutesLater withDate: [NSDate date]];
+            if (result == 1) {
+             NSLog(@"消息发送失败状态更新 %@", @([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:model.messageId sendState:YLMessageSendFail]))  ;
+            }
+            
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
+    }
 }
 
 #pragma mark - 其他接口
@@ -190,6 +226,7 @@ static const uint16_t port = 6969;
         base.data_p = data;
         //NSLog(@"%@",data);
         [_webSocket send: [base data]];
+        [self initMessageBeat];
         if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
             if (pmessage != NULL) {
                 [_delegate receiveMessage: locaModel];
@@ -252,10 +289,7 @@ static const uint16_t port = 6969;
         YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
         //todo
         //更新本地数据库消息发送记录
-        LocalChatMessageModel * locaModel = [LocalChatMessageModel new];
-        locaModel.messageId = pmessage.messageId;
-        locaModel.sendState =  YLMessageSendSuccess;
-        if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
+        if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSendSuccess]) {
             NSLog(@"更新消息状态成功");
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
         }
@@ -324,6 +358,7 @@ static const uint16_t port = 6969;
     NSLog(@"连接成功");
     _reConnectTime = 0;
     [self initHeartBeat];
+    [self initMessageBeat];
 }
 
 //open失败的时候调用

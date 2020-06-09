@@ -32,8 +32,8 @@
 - (BOOL )setLocalChatMessageModelReadedByUserId:(NSString *)userId;
 /*更新消息发送状态*/
 - (BOOL )setLocalChatMessageModelSendStateByMessageId:(NSString *)messageId sendState:(YLMessageSendState) sendState;
-
-
+/**获取所有消息状态未发送*/
+-(NSArray<LocalChatMessageModel *> *)selectAllLocalChatMessageModels;
 
 
 
