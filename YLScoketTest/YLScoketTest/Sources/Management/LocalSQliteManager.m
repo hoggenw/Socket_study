@@ -26,6 +26,7 @@
 
 -(instancetype)initPrivate {
     if (self = [super init]) {
+        
         [self creatDataBase];
     }
     return  self;
@@ -74,6 +75,7 @@
         if ([rs next]) {
             result = YES;
         }
+         [rs close];
        
     }];
     
@@ -201,6 +203,7 @@
             model.date = [rs dateForColumn: @"date"];
             [models addObject: [LocalChatMessageModel chatMessageModelChangeWith:model] ];
         }
+          [rs close];
     }];
     NSInteger startIndex = (page -1 > 0?page:0) * 40;
     NSInteger limit = 40;
@@ -224,6 +227,7 @@
         if ([rs next]) {
             result = YES;
         }
+          [rs close];
     }];
     
     return result;
@@ -319,6 +323,7 @@
             model.needHint = ![rs boolForColumn: @"needHint"];
             [models addObject:model];
         }
+          [rs close];
     }];
     
     return [models copy];

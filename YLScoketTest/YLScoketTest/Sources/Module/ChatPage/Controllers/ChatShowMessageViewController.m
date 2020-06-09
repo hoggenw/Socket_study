@@ -38,6 +38,17 @@
     [self.tableView registerClass:[YLImageMessageCell class] forCellReuseIdentifier:@"YLImageMessageCell"];
     [self.tableView registerClass:[YLVoiceMessageCell class] forCellReuseIdentifier:@"YLVoiceMessageCell"];
     [self.tableView registerClass:[YLSystemMessageCell class] forCellReuseIdentifier:@"YLSystemMessageCell"];
+    
+    @weakify(self)
+       [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Refresh_ChatMessage_State object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+            @strongify(self)
+             self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID] mutableCopy];
+            self.dataArray = [self addSystemModel: self.dataArray];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                   [self.tableView reloadData];
+            });
+           
+    }];
 
 }
 

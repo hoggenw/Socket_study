@@ -43,7 +43,7 @@
 //pop
 #define POP [self.navigationController popViewControllerAnimated:false]
 
-
+#define Y_Notification_Refresh_ChatMessage_State @"Y_Notification_Refresh_ChatMessage_State"
 #define Y_Notification_Refresh_ChatList @"Y_Notification_Refresh_ChatList"
 #define Y_Notification_Account_Offline @"Y_Notification_Account_Offline"
 #define Y_Notification_Socket_Connet @"Y_Notification_Socket_Connet"

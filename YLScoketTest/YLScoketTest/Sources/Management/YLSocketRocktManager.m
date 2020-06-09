@@ -83,7 +83,7 @@ static const uint16_t port = 6969;
             __weak typeof(self) weakSelf = self;
             self->_heartBeat = [NSTimer scheduledTimerWithTimeInterval: 3*9 repeats:YES block:^(NSTimer * _Nonnull timer) {
                 NSLog(@"heart beat");
-    
+                
                 
                 [weakSelf ping];
             }];
@@ -180,30 +180,30 @@ static const uint16_t port = 6969;
     //存入本地，然后发送通知；
     if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
         
-         // 序列化为Data
-         NSData *data = [pmessage data];
-         
-         YLBaseMessageModel * base = [YLBaseMessageModel new];
-         base.title = SokectTile;
-         base.command = YLMessageCMDPersontoPerson;
-         base.module = YLMessageCommonModule;
-         base.data_p = data;
-         //NSLog(@"%@",data);
-         [_webSocket send: [base data]];
+        // 序列化为Data
+        NSData *data = [pmessage data];
+        
+        YLBaseMessageModel * base = [YLBaseMessageModel new];
+        base.title = SokectTile;
+        base.command = YLMessageCMDPersontoPerson;
+        base.module = YLMessageCommonModule;
+        base.data_p = data;
+        //NSLog(@"%@",data);
+        [_webSocket send: [base data]];
         if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-           if (pmessage != NULL) {
-                 [_delegate receiveMessage: locaModel];
+            if (pmessage != NULL) {
+                [_delegate receiveMessage: locaModel];
             }
-           return;
+            return;
         }
-
-         
+        
+        
     }else{
         [YLHintView showMessageOnThisPage:@"消息存储失败"];
     }
     
     
- 
+    
     
 }
 //重连机制
@@ -244,41 +244,42 @@ static const uint16_t port = 6969;
     
     if (baseModel.module == 201) {//发送消息返回状态
         if (baseModel.command == 10086) {
-                       [YLHintView showMessageOnThisPage:@"登录已过期"];
-                       POST_LOGINQUIT_NOTIFICATION;
-                       return;
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+            return;
         }
-                   
+        
         YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
         //todo
         //更新本地数据库消息发送记录
         LocalChatMessageModel * locaModel = [LocalChatMessageModel new];
         locaModel.messageId = pmessage.messageId;
         locaModel.sendState =  YLMessageSendSuccess;
-         if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
-             NSLog(@"更新消息状态成功");
+        if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
+            NSLog(@"更新消息状态成功");
+            [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
         }
         //更新该聊天对像列表的最新消息
-            ChatListUserModel *item2  = [ChatListUserModel new];
-            item2.userId = pmessage.toUser.userId;
-            item2.name = pmessage.toUser.name;
-            item2.date = [NSDate date];
-            item2.message = pmessage.textString;
-            item2.selfId = [[AccountManager sharedInstance] fetch].userID;
-            [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
+        ChatListUserModel *item2  = [ChatListUserModel new];
+        item2.userId = pmessage.toUser.userId;
+        item2.name = pmessage.toUser.name;
+        item2.date = [NSDate date];
+        item2.message = pmessage.textString;
+        item2.selfId = [[AccountManager sharedInstance] fetch].userID;
+        [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
         
         return;
     }else  if (baseModel.module == 101) {//普通消息接收
         if (baseModel.command == 10086) {
-                      [YLHintView showMessageOnThisPage:@"登录已过期"];
-                      POST_LOGINQUIT_NOTIFICATION;
-                      return;
+            [YLHintView showMessageOnThisPage:@"登录已过期"];
+            POST_LOGINQUIT_NOTIFICATION;
+            return;
         }
-                  
+        
         YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
         //todo
         //新增本地数据库消息接收记录
-       
+        
         LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
         locaModel.sendState =  YLMessageSendSuccess;
         locaModel.readState =  YLMessageUnRead;
@@ -302,13 +303,13 @@ static const uint16_t port = 6969;
             item2.selfId = [[AccountManager sharedInstance] fetch].userID;
             [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatList object:nil];
-          
-                    if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-                          if (pmessage != NULL) {
-                               [_delegate receiveMessage: locaModel];
-                           }
-                        return;
-                    }
+            if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
+                if (pmessage != NULL) {
+                    [_delegate receiveMessage: locaModel];
+                }
+                return;
+            }
+            
         }
         
         

@@ -18,54 +18,38 @@
             endingLineNumber = "384"
             landmarkName = "-multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:error:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F000B19C-B69C-42D1-855B-E63ADD79B485"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/AFNetworking/AFNetworking/AFHTTPSessionManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "-POST:parameters:constructingBodyWithBlock:progress:success:failure:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "47D16329-8AB9-4858-8FDD-0A5A3CE6FE40"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "YLScoketTest/Sources/Module/ChatPage/Views/Message/YLMessageTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-setMessageModel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E7F36B7D-84C7-42E9-9BBA-8D7171B1341C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "YLScoketTest/Sources/Module/ChatPage/Views/Message/YLMessageTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-setMessageModel:"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5BCA7CEF-AB75-479F-8CBD-5C013EE19205 - b0d471be3f09d420"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AFHTTPRequestSerializer multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:error:]"
+                  moduleName = "AFNetworking"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hoggen/Desktop/SelfProject/Socket_study/YLScoketTest/Pods/AFNetworking/AFNetworking/AFURLRequestSerialization.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "387"
+                  endingLineNumber = "387"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "5BCA7CEF-AB75-479F-8CBD-5C013EE19205 - b0d471be3f09d420"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AFHTTPRequestSerializer multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:error:]"
+                  moduleName = "AFNetworking"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hoggen/Desktop/SelfProject/Socket_study/YLScoketTest/Pods/AFNetworking/AFNetworking/AFURLRequestSerialization.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "387"
+                  endingLineNumber = "387"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -120,6 +120,9 @@
     returnModel.dateString =  pMessage.dateString;
     returnModel.messageOtherUserId = pMessage.messageOtherUserId;
     returnModel.messageId = pMessage.messageId;
+    
+    returnModel.sendState =  pMessage.sendState;
+    returnModel.readState =  pMessage.readState;
     if ([from.userId isEqualToString: [[AccountManager sharedInstance] fetch].userID ]) {
          returnModel.ownerTyper = YLMessageOwnerTypeSelf;
     }else{

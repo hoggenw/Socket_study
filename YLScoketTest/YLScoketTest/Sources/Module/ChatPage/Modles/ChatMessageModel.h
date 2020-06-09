@@ -16,9 +16,9 @@
  */
 typedef NS_ENUM(NSUInteger, YLMessageOwnerType){
     YLMessageOwnerTypeUnknown = 0,  // 未知的消息拥有者
-    YLMessageOwnerTypeSystem,   // 系统消息
-    YLMessageOwnerTypeSelf,     // 自己发送的消息
-    YLMessageOwnerTypeOther,    // 接收到的他人消息
+    YLMessageOwnerTypeSystem = 1,   // 系统消息
+    YLMessageOwnerTypeSelf = 2,     // 自己发送的消息
+    YLMessageOwnerTypeOther = 3,    // 接收到的他人消息
 };
 
 /**
@@ -26,14 +26,14 @@ typedef NS_ENUM(NSUInteger, YLMessageOwnerType){
  */
 typedef NS_ENUM(NSInteger, YLMessageType){
     YLMessageTypeUnknown = 0,       // 未知
-    YLMessageTypeSystem,        // 系统
-    YLMessageTypeText,          // 文字
-    YLMessageTypeImage,         // 图片
-    YLMessageTypeVoice,         // 语音
-    YLMessageTypeVideo,         // 视频
-    YLMessageTypeFile,          // 文件
-    YLMessageTypeLocation,      // 位置
-    YLMessageTypeShake,         // 抖动
+    YLMessageTypeSystem = 1,        // 系统
+    YLMessageTypeText = 2,          // 文字
+    YLMessageTypeImage = 3,         // 图片
+    YLMessageTypeVoice = 4,         // 语音
+    YLMessageTypeVideo = 5,         // 视频
+    YLMessageTypeFile = 6,          // 文件
+    YLMessageTypeLocation = 7,      // 位置
+    YLMessageTypeShake = 8,         // 抖动
 };
 
 /**
@@ -41,8 +41,8 @@ typedef NS_ENUM(NSInteger, YLMessageType){
  */
 typedef NS_ENUM(NSUInteger, YLMessageSendState){
     YLMessageSending = 0,       // 消息发送中
-    YLMessageSendSuccess,          // 消息发送失败
-    YLMessageSendFail,          // 消息发送失败
+    YLMessageSendSuccess = 1,          // 消息发送失败
+    YLMessageSendFail = 2,          // 消息发送失败
 };
 
 /**
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSUInteger, YLMessageSendState){
 typedef NS_ENUM(NSUInteger, YLMessageReadState) {
     
     YLMessageUnRead = 0,            // 消息未读
-    YLMessageReaded,            // 消息已读
+    YLMessageReaded = 1,            // 消息已读
     
 };
 
