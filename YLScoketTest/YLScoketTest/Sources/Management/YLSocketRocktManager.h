@@ -30,6 +30,8 @@
 - (void)disconnnet;
 
 -(void)sendMassege:(ChatMessageModel *)messageModel ;
+#pragma mark- 消息重发
+-(void)resendMassege:(ChatMessageModel *)messageModel;
 
 - (void)ping;
 

@@ -156,10 +156,81 @@ static const uint16_t port = 6969;
         _webSocket = nil;
     }
 }
-#pragma mark- 消息发送
--(void)sendMassege:(ChatMessageModel *)messageModel {
+
+#pragma mark- 消息重发
+-(void)resendMassege:(ChatMessageModel *)messageModel {
     
 
+    
+    YLMessageModel * pmessage = [YLMessageModel new];
+    switch (messageModel.messageType) {
+        case  YLMessageTypeImage:{ // 图片
+            pmessage.textString = @"这是图片";
+            pmessage.messageType = YLMessageTypeImage;
+            pmessage.messageSource = messageModel.sourcePath;
+            pmessage.voiceData = messageModel.voiceData;
+            break;
+        }
+        case  YLMessageTypeText:{ // 文字
+            pmessage.textString = messageModel.text;
+            pmessage.messageType = YLMessageTypeText;
+            break;
+        }
+        case  YLMessageTypeVoice:{ // 语音
+            pmessage.voiceData = messageModel.voiceData;
+            pmessage.messageType = YLMessageTypeVoice;
+            pmessage.voiceLength = (uint32_t) messageModel.voiceSeconds;
+            break;
+        }
+        case  YLMessageTypeVideo:{ // 视频
+            pmessage.textString = @"这是视频";
+            
+            break;
+        }
+        case  YLMessageTypeFile:{ // 文件
+            break;
+        }
+        case  YLMessageTypeLocation:{ // 位置
+            break;
+        }
+        default:
+            break;
+    }
+    pmessage.fromUser = messageModel.from ;
+    pmessage.toUser = messageModel.toUser;
+    //token
+    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    
+ 
+    pmessage.messageId = messageModel.messageId;
+    //存入本地，然后发送通知；
+    if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSending]) {
+        
+        [self initMessageBeat];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
+        // 序列化为Data
+        NSData *data = [pmessage data];
+        
+        YLBaseMessageModel * base = [YLBaseMessageModel new];
+        base.title = SokectTile;
+        base.command = YLMessageCMDPersontoPerson;
+        base.module = YLMessageCommonModule;
+        base.data_p = data;
+        //NSLog(@"%@",data);
+        if (!(_webSocket.readyState == SR_OPEN)) {
+                [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+               return;
+        }else{
+            [_webSocket send: [base data]];
+        }
+       
+    }else{
+       [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
+    }
+
+}
+#pragma mark- 消息发送
+-(void)sendMassege:(ChatMessageModel *)messageModel {
     
     YLMessageModel * pmessage = [YLMessageModel new];
     switch (messageModel.messageType) {
@@ -218,7 +289,6 @@ static const uint16_t port = 6969;
             if (pmessage != NULL) {
                 [_delegate receiveMessage: locaModel];
             }
-            return;
         }
         // 序列化为Data
         NSData *data = [pmessage data];
@@ -229,17 +299,17 @@ static const uint16_t port = 6969;
         base.module = YLMessageCommonModule;
         base.data_p = data;
         //NSLog(@"%@",data);
-        [_webSocket send: [base data]];
-        
-        
-        
-    }else{
+        if (!(_webSocket.readyState == SR_OPEN)) {
+                [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+               return;
+        }else{
+            [_webSocket send: [base data]];
+        }
        
+    }else{
+       [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
     }
-    if (!(_webSocket.readyState == SR_OPEN)) {
-         [YLHintView showMessageOnThisPage:@"请查看网络连接"];
-        return;
-    }
+   
     
     
     

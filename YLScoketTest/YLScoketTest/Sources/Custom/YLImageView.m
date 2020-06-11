@@ -13,6 +13,9 @@
 @property (nonatomic,copy) NSString * kDTActionHandlerTapGestureKey;
 @property (nonatomic,copy) NSString * kDTActionHandlerTapBlockKey;
 
+@property (nonatomic,copy) NSString * kDTActionHandlerLongTapGestureKey;
+@property (nonatomic,copy) NSString * kDTActionHandlerLongTapBlockKey;
+
 @end
 
 @implementation YLImageView
@@ -24,11 +27,41 @@
         self.userInteractionEnabled = true;
         self.kDTActionHandlerTapGestureKey = @"kDTActionHandlerTapGestureKey";
         self.kDTActionHandlerTapBlockKey = @"kDTActionHandlerTapBlockKey";
+        
+        self.kDTActionHandlerLongTapGestureKey = @"kDTActionHandlerLongTapGestureKey";
+        self.kDTActionHandlerLongTapBlockKey = @"kDTActionHandlerLongTapBlockKey";
     }
     
     
     return  self;
 }
+
+-(void)setLongTapActionWithBlock:(void (^)(void))block {
+    UILongPressGestureRecognizer *gesture = objc_getAssociatedObject(self, &_kDTActionHandlerLongTapGestureKey);
+       if (!gesture) {
+           gesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(__handleActionForTapLongGesture:)];
+           gesture.minimumPressDuration = 2;
+           [self addGestureRecognizer:gesture];
+           objc_setAssociatedObject(self, &_kDTActionHandlerLongTapBlockKey, gesture, OBJC_ASSOCIATION_RETAIN);
+       }
+       objc_setAssociatedObject(self, &_kDTActionHandlerLongTapBlockKey, block, OBJC_ASSOCIATION_RETAIN);
+       // 移除关联对象
+       void objc_removeAssociatedObjects ( id object );
+}
+
+- (void)__handleActionForTapLongGesture:(UILongPressGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        void(^action)(void) = objc_getAssociatedObject(self, &_kDTActionHandlerLongTapBlockKey);
+        
+        if (action)
+        {
+            action();
+        }
+    }
+}
+
 
 -(void)setTapActionWithBlock:(void (^)(void))block {
     UITapGestureRecognizer *gesture = objc_getAssociatedObject(self, &_kDTActionHandlerTapGestureKey);

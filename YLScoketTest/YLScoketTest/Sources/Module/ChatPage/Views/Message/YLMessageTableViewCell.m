@@ -8,6 +8,7 @@
 
 #import "YLMessageTableViewCell.h"
 #import "ChatMessageModel.h"
+#import "YLSocketRocktManager.h"
 
 @implementation YLMessageTableViewCell
 
@@ -40,6 +41,11 @@
 
 - (void)setMessageModel:(ChatMessageModel *)messageModel {
     _messageModel = messageModel;
+    __weak typeof(self) weakSelf = self;
+    [self.messageBackgroundImageView setLongTapActionWithBlock:^{
+        NSLog(@"长按手势响应");
+    }];
+    
     switch (_messageModel.ownerTyper) {
         case YLMessageOwnerTypeSelf:
             /**
@@ -84,17 +90,14 @@
     [self.messageSendStatusImageView removeAllSubViews];
     self.messageSendStatusImageView.image = nil;
     UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
+    self.messageSendStatusImageView.userInteractionEnabled = false;
     switch (messageModel.sendState) {
         case YLMessageSending:
             
             [self.messageSendStatusImageView addSubview: activityIndicator];
-            //设置小菊花的frame
-            activityIndicator.frame= CGRectMake(0, 0, 40, 40);
-            //设置小菊花颜色
+            activityIndicator.frame= CGRectMake(0, 0, 30, 30);
             activityIndicator.color = [UIColor whiteColor];
-            //设置背景颜色
             activityIndicator.backgroundColor = [UIColor clearColor];
-            //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
             activityIndicator.hidesWhenStopped = NO;
             
             [activityIndicator startAnimating];
@@ -104,10 +107,16 @@
              [self.messageSendStatusImageView removeAllSubViews];
             self.messageSendStatusImageView.image = nil;
             break;
-        case YLMessageSendFail:
+        case YLMessageSendFail:{
+              
+            self.messageSendStatusImageView.userInteractionEnabled = true;
             [self.messageSendStatusImageView removeAllSubViews];
             self.messageSendStatusImageView.image  = [UIImage imageNamed:@"message_send_failed"];
+            [self.messageSendStatusImageView setTapActionWithBlock:^{
+                [[YLSocketRocktManager shareManger] resendMassege: messageModel];
+              }];
             break;
+        }
         default:
             break;
     }

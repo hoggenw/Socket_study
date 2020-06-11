@@ -5,12 +5,11 @@
       "scale" : "1x"
     },
     {
-      "filename" : "iphone-40x40@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iphone-40x40@3x.png",
+      "filename" : "popup_shape@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

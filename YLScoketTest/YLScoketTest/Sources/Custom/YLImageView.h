@@ -12,4 +12,6 @@
 
 -(void)setTapActionWithBlock:(void (^)(void))block;
 
+-(void)setLongTapActionWithBlock:(void (^)(void))block;
+
 @end

@@ -48,10 +48,10 @@
     [self.messageBackgroundImageView setFrame:CGRectMake(x, y, self.messageTextLabel.width + 40, h)];
     
     if (self.messageModel.ownerTyper == YLMessageOwnerTypeSelf) {
-        [self.messageSendStatusImageView setFrame:CGRectMake(x - 45, y + h/2 - 20, 40, 40)];
+        [self.messageSendStatusImageView setFrame:CGRectMake(x - 35, y + h/2 - 15, 30, 30)];
     }
     else if (self.messageModel.ownerTyper == YLMessageOwnerTypeOther) {
-       [self.messageSendStatusImageView setFrame:CGRectMake(x + self.messageTextLabel.width + 45, y + h/2 - 20, 40, 40)];
+       [self.messageSendStatusImageView setFrame:CGRectMake(x + self.messageTextLabel.width + 35, y + h/2 - 15, 30, 30)];
     }
     
 }

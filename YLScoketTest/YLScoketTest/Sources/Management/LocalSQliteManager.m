@@ -75,8 +75,8 @@
         if ([rs next]) {
             result = YES;
         }
-         [rs close];
-       
+        [rs close];
+        
     }];
     
     return result;
@@ -94,9 +94,18 @@
         
     }else{
         [self.queue inDatabase:^(FMDatabase *db) {
-    
+            
             if (model.sendState != 0) {
                 result =[db executeUpdate:@"update MessagesTabel SET sendState = ? WHERE  messageId=? ",@(model.sendState),model.messageId];
+                NSLog(@"更新信息状态 %@",@(result));
+            }
+            if (model.date != NULL) {
+                result =[db executeUpdate:@"update MessagesTabel SET date = ? WHERE  messageId=? ",model.date,model.messageId];
+                NSLog(@"更新信息状态 %@",@(result));
+            }
+            
+            if (model.dateString.length > 0) {
+                result =[db executeUpdate:@"update MessagesTabel SET dateString = ? WHERE  messageId=? ",model.dateString,model.messageId];
                 NSLog(@"更新信息状态 %@",@(result));
             }
             
@@ -106,7 +115,7 @@
         
     }
     
-     NSLog(@"更新信息状态2 %@",@(result));
+    NSLog(@"更新信息状态2 %@",@(result));
     return result;
 }
 /**删除聊天数据*/
@@ -135,6 +144,8 @@
     return result;
     
 }
+
+
 
 /*更新消息发送状态*/
 - (BOOL )setLocalChatMessageModelSendStateByMessageId:(NSString *)messageId sendState:(YLMessageSendState) sendState{
@@ -203,7 +214,7 @@
             model.date = [rs dateForColumn: @"date"];
             [models addObject: model];
         }
-          [rs close];
+        [rs close];
     }];
     
     // return [[[models reverseObjectEnumerator] allObjects] copy];
@@ -242,7 +253,7 @@
             model.date = [rs dateForColumn: @"date"];
             [models addObject: [LocalChatMessageModel chatMessageModelChangeWith:model] ];
         }
-          [rs close];
+        [rs close];
     }];
     NSInteger startIndex = (page -1 > 0?page:0) * 40;
     NSInteger limit = 40;
@@ -266,7 +277,7 @@
         if ([rs next]) {
             result = YES;
         }
-          [rs close];
+        [rs close];
     }];
     
     return result;
@@ -362,7 +373,7 @@
             model.needHint = ![rs boolForColumn: @"needHint"];
             [models addObject:model];
         }
-          [rs close];
+        [rs close];
     }];
     
     return [models copy];
