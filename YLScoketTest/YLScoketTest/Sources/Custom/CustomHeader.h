@@ -11,5 +11,6 @@
 
 #import "YLHintView.h"
 #import "YLImageView.h"
+#import "PopupView.h"
 
 #endif /* CustomHeader_h */

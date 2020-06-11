@@ -43,7 +43,21 @@
     _messageModel = messageModel;
     __weak typeof(self) weakSelf = self;
     [self.messageBackgroundImageView setLongTapActionWithBlock:^{
-        NSLog(@"长按手势响应");
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            if ([[LocalSQliteManager sharedInstance] deletLoaclMessageModelByMessageId: messageModel.messageId]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
+            }else{
+                [YLHintView showMessageOnThisPage: @"删除失败"];
+            }
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:deleteAction];
+        UITableView *tableView = (UITableView *) weakSelf.superview;
+        UIViewController *vc = (UIViewController *) tableView.dataSource;
+        [vc presentViewController:alertController animated:YES completion:nil];
     }];
     
     switch (_messageModel.ownerTyper) {
@@ -104,17 +118,17 @@
             
             break;
         case YLMessageSendSuccess:
-             [self.messageSendStatusImageView removeAllSubViews];
+            [self.messageSendStatusImageView removeAllSubViews];
             self.messageSendStatusImageView.image = nil;
             break;
         case YLMessageSendFail:{
-              
+            
             self.messageSendStatusImageView.userInteractionEnabled = true;
             [self.messageSendStatusImageView removeAllSubViews];
             self.messageSendStatusImageView.image  = [UIImage imageNamed:@"message_send_failed"];
             [self.messageSendStatusImageView setTapActionWithBlock:^{
                 [[YLSocketRocktManager shareManger] resendMassege: messageModel];
-              }];
+            }];
             break;
         }
         default:

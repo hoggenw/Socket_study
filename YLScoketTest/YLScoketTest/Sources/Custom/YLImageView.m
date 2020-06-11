@@ -40,7 +40,7 @@
     UILongPressGestureRecognizer *gesture = objc_getAssociatedObject(self, &_kDTActionHandlerLongTapGestureKey);
        if (!gesture) {
            gesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(__handleActionForTapLongGesture:)];
-           gesture.minimumPressDuration = 2;
+           gesture.minimumPressDuration = 1.2;
            [self addGestureRecognizer:gesture];
            objc_setAssociatedObject(self, &_kDTActionHandlerLongTapBlockKey, gesture, OBJC_ASSOCIATION_RETAIN);
        }

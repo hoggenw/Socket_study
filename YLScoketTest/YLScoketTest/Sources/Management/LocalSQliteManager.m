@@ -119,14 +119,12 @@
     return result;
 }
 /**删除聊天数据*/
--(BOOL)deletLoaclMessageModel:(LocalChatMessageModel *)model{
+-(BOOL)deletLoaclMessageModelByMessageId:(NSString *)messageId{
     __block  BOOL result = NO;
     
     [self.queue inDatabase:^(FMDatabase *db) {
-        if ([self isLoaclMessageModelExist:model]) {
-            BOOL success=[db executeUpdate:@"delete from MessagesTabel where messageId=?",model.messageId];
-            result = success;
-        }
+          BOOL success=[db executeUpdate:@"delete from MessagesTabel where messageId=?",messageId];
+                 result = success;
     }];
     
     

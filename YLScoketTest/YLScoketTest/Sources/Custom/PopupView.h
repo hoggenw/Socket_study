@@ -10,11 +10,8 @@
 
 @interface PopupView : UIView
 
-@property (nonatomic, weak) id<NormalActionWithInfoDelegate> delegate;
-@property (nonatomic, assign) PopupViewType type;
 
-- (instancetype)initWithNoneView;
-- (instancetype)initWithChicoeProject;
+- (instancetype)initMessageDeletePopupView;
 - (void)selfViewHidden;
 
 @end

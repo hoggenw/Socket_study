@@ -42,7 +42,7 @@
 -(BOOL)isLoaclMessageModelExist:(LocalChatMessageModel *)model;
 -(BOOL)insertLoaclMessageModel:(LocalChatMessageModel *)model;
 /**删除聊天数据*/
--(BOOL)deletLoaclMessageModel:(LocalChatMessageModel *)model;
+-(BOOL)deletLoaclMessageModelByMessageId:(NSString *)messageId;
 /**数据库聊天列表数据按时间降序排列*/
 -(NSArray<ChatListUserModel *> *)selectChatListUserModelModelByDESC:(NSString *)selfId;
 
