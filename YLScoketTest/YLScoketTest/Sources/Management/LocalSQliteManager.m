@@ -224,10 +224,12 @@
 -(NSArray<ChatMessageModel *> *)selectLocalChatMessageModelByDESC:(NSInteger)page userId:(NSString *)userId{
     //    BOOL success = [self deleteAll:userId];
     __block  NSMutableArray<ChatMessageModel *> *models=[NSMutableArray array];
+    NSInteger startIndex = (page -1 > 0?page:0) * 20;
+     NSInteger limit = 20;
     
     [self.queue inDatabase:^(FMDatabase *db) {
         //从表中获取所要的数据
-        FMResultSet *rs=[db executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date ASC",userId];
+        FMResultSet *rs=[db executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date DESC LIMIT ?,?",userId,@(startIndex),@(limit)];
         while ([rs next]) {
             //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
             LocalChatMessageModel *model=[[LocalChatMessageModel alloc]init];
@@ -253,13 +255,52 @@
         }
         [rs close];
     }];
-    NSInteger startIndex = (page -1 > 0?page:0) * 40;
-    NSInteger limit = 40;
+ 
     
     // return [[[models reverseObjectEnumerator] allObjects] copy];
     return [models copy];
 }
 
+/**数据库聊天列表数据按时间降序排列*/
+-(NSArray<ChatMessageModel *> *)selectLocalChatMessageModelBeforePageByDESC:(NSInteger)page userId:(NSString *)userId{
+    //    BOOL success = [self deleteAll:userId];
+    __block  NSMutableArray<ChatMessageModel *> *models=[NSMutableArray array];
+    NSInteger startIndex = 0;
+     NSInteger limit = 20 * page;
+    
+    [self.queue inDatabase:^(FMDatabase *db) {
+        //从表中获取所要的数据
+        FMResultSet *rs=[db executeQuery:@"select * from MessagesTabel  where messageOtherUserId=? ORDER BY date DESC LIMIT ?,?",userId,@(startIndex),@(limit)];
+        while ([rs next]) {
+            //创建聊天列表 userId 聊天对象的id； name聊天对象的昵称或者备注名； avatar聊天对象头像的连接；message聊天的最后一条消息；date聊天的时间；messageCount需要提醒的消息条数；needHint是否需要提醒
+            LocalChatMessageModel *model=[[LocalChatMessageModel alloc]init];
+            model.messageId= [rs stringForColumn: @"messageId"];
+            model.messageOtherUserId= [rs stringForColumn: @"messageOtherUserId"];
+            model.fromUserId= [rs stringForColumn: @"fromUserId"];
+            model.fromName= [rs stringForColumn: @"fromName"];
+            model.fromAvatar= [rs stringForColumn: @"fromAvatar"];
+            model.toUserUserId= [rs stringForColumn: @"toUserUserId"];
+            model.toUserName= [rs stringForColumn: @"toUserName"];
+            model.toUserAvatar= [rs stringForColumn: @"toUserAvatar"];
+            model.dateString= [rs stringForColumn: @"dateString"];
+            model.messageType= [rs intForColumn: @"messageType"];
+            model.ownerTyper= [rs intForColumn: @"ownerTyper"];
+            model.readState= [rs intForColumn: @"readState"];
+            model.sendState= [rs intForColumn: @"sendState"];
+            model.textString= [rs stringForColumn: @"textString"];
+            model.messageSource = [rs stringForColumn: @"messageSource"];
+            model.address = [rs stringForColumn: @"address"];
+            model.voiceSeconds = [rs intForColumn: @"voiceSeconds"];
+            model.date = [rs dateForColumn: @"date"];
+            [models addObject: [LocalChatMessageModel chatMessageModelChangeWith:model] ];
+        }
+        [rs close];
+    }];
+ 
+    
+    // return [[[models reverseObjectEnumerator] allObjects] copy];
+    return [models copy];
+}
 
 
 

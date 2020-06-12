@@ -16,7 +16,7 @@
 @interface ChatShowMessageViewController ()
 
 @property (nonatomic, strong) NSMutableArray <ChatMessageModel *> *dataArray;
-
+@property (nonatomic, assign) int page;
 
 
 @end
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page = 1;
     self.view.backgroundColor = [UIColor myColorWithRed:235 green:235 blue:235 alpha:1];
     [self.tableView setTableFooterView:[UIView new]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -39,22 +40,51 @@
     [self.tableView registerClass:[YLVoiceMessageCell class] forCellReuseIdentifier:@"YLVoiceMessageCell"];
     [self.tableView registerClass:[YLSystemMessageCell class] forCellReuseIdentifier:@"YLSystemMessageCell"];
     
+    
+    /**
+     *  通知更新
+     */
     @weakify(self)
-       [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Refresh_ChatMessage_State object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-            @strongify(self)
-             self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID] mutableCopy];
-                self.dataArray = [self addSystemModel: self.dataArray];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                   [self.tableView reloadData];
-            });
-           
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Refresh_ChatMessage_State object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self)
+        self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelBeforePageByDESC:self.page userId:self.user.userID] mutableCopy];
+        self.dataArray = [self addSystemModel: self.dataArray];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
     }];
-
+    
+    /**
+     *  下拉加载更多数据
+     */
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self)
+        self.page +=1;
+        [self pushData];
+    }];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    
 }
+
+-(void)pushData {
+    NSMutableArray <ChatMessageModel *> *addArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:self.page userId:self.user.userID] mutableCopy];
+    for (ChatMessageModel *model in  self.dataArray) {
+        [addArray addObject: model];
+    }
+    
+    self.dataArray = [self addSystemModel:addArray];
+    [self.tableView.mj_header endRefreshing];
+    dispatch_async(dispatch_get_main_queue(), ^{
+               [self.tableView reloadData];
+    });
+}
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:1 userId:self.user.userID] mutableCopy];
+    self.dataArray = [[[LocalSQliteManager sharedInstance] selectLocalChatMessageModelByDESC:self.page userId:self.user.userID] mutableCopy];
     self.dataArray = [self addSystemModel: self.dataArray];
     
 }
@@ -94,25 +124,25 @@
     
     
     if (message == NULL) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
         });
-       
+        
     }else{
-         /**
-          *  数据源添加一条消息，刷新数据
-          */
+        /**
+         *  数据源添加一条消息，刷新数据
+         */
         [self.dataArray addObject:message];
         self.dataArray = [self addSystemModel: self.dataArray];
-         if (message.messageType == YLMessageTypeImage) {
-             [self.imageMessageModels addObject: message];
-         }
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [self.tableView reloadData];
-         });
-         [ChatDealUtils setMessageStateReaded: self.user.userID];
+        if (message.messageType == YLMessageTypeImage) {
+            [self.imageMessageModels addObject: message];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        [ChatDealUtils setMessageStateReaded: self.user.userID];
     }
- 
+    
     
     [self scrollToBottom];
     
@@ -151,7 +181,7 @@
 {
     ChatMessageModel *message = [_dataArray objectAtIndex:indexPath.row];
     
-   // NSLog(@"message.cellHeight: %@",@(message.cellHeight));
+    // NSLog(@"message.cellHeight: %@",@(message.cellHeight));
     return message.cellHeight;
 }
 
@@ -212,7 +242,7 @@
                 midDate = temp.date;
                 ChatMessageModel * systemModel =[ChatMessageModel new];
                 systemModel.ownerTyper = YLMessageOwnerTypeSystem;
-                  systemModel.messageType = YLMessageTypeSystem;
+                systemModel.messageType = YLMessageTypeSystem;
                 systemModel.text = [self dateToString: midDate];
                 [midArray addObject: systemModel];
             }
@@ -229,11 +259,11 @@
     if ([NSDate ifToday: date]) {
         timeString = [date formatHHMM];
     }else if([NSDate ifYesterday:date]) {
-     timeString = [NSString stringWithFormat:@"昨天   %@",[date formatHHMM]] ;
+        timeString = [NSString stringWithFormat:@"昨天   %@",[date formatHHMM]] ;
     }else{
-       timeString =   [date formatYYMMDDHHMMSS];
+        timeString =   [date formatYYMMDDHHMMSS];
     }
-     return timeString;
+    return timeString;
 }
 
 @end

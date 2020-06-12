@@ -26,6 +26,10 @@
 
 /**数据库聊天列表数据按时间降序排列*/
 -(NSArray<ChatMessageModel *> *)selectLocalChatMessageModelByDESC:(NSInteger)page userId:(NSString *)userId;
+
+/**数据库聊天数据按时间降序排列*/
+-(NSArray<ChatMessageModel *> *)selectLocalChatMessageModelBeforePageByDESC:(NSInteger)page userId:(NSString *)userId;
+
 /**获取某个聊天未读的条数*/
 - (NSInteger )selectLocalChatMessageModelByUserId:(NSString *)userId;
 /*将消息置为已读*/
