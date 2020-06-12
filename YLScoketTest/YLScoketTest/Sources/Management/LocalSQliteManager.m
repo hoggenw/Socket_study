@@ -224,8 +224,8 @@
 -(NSArray<ChatMessageModel *> *)selectLocalChatMessageModelByDESC:(NSInteger)page userId:(NSString *)userId{
     //    BOOL success = [self deleteAll:userId];
     __block  NSMutableArray<ChatMessageModel *> *models=[NSMutableArray array];
-    NSInteger startIndex = (page -1 > 0?page:0) * 20;
-     NSInteger limit = 20;
+    NSInteger startIndex = (page -1 > 0?page:0) * 10;
+     NSInteger limit = 10;
     
     [self.queue inDatabase:^(FMDatabase *db) {
         //从表中获取所要的数据
@@ -257,8 +257,8 @@
     }];
  
     
-    // return [[[models reverseObjectEnumerator] allObjects] copy];
-    return [models copy];
+    return [[[models reverseObjectEnumerator] allObjects] copy];
+    //return [models copy];
 }
 
 /**数据库聊天列表数据按时间降序排列*/
@@ -266,7 +266,7 @@
     //    BOOL success = [self deleteAll:userId];
     __block  NSMutableArray<ChatMessageModel *> *models=[NSMutableArray array];
     NSInteger startIndex = 0;
-     NSInteger limit = 20 * page;
+     NSInteger limit = 10 * page;
     
     [self.queue inDatabase:^(FMDatabase *db) {
         //从表中获取所要的数据
@@ -298,8 +298,8 @@
     }];
  
     
-    // return [[[models reverseObjectEnumerator] allObjects] copy];
-    return [models copy];
+     return [[[models reverseObjectEnumerator] allObjects] copy];
+    //return [models copy];
 }
 
 
