@@ -14,7 +14,11 @@ typedef void (^ReturnBlock)(NSDictionary *returnDict);
 extern NSString * const BaseUrl;              // 网络请求的BaseUrl
 extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
 
-extern NSString * const HOST;
+extern NSString * const SOCKETHOST;
+
+extern uint16_t const SOCKETHOSTPORT;
+
+
 //注册验证码接口
 extern NSString * const RegistCodeAPI;
 //登录接口

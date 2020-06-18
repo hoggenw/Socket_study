@@ -39,7 +39,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 @end
 
-static const uint16_t port = 6969;
 
 
 
@@ -63,8 +62,9 @@ static const uint16_t port = 6969;
     if(!manager.isLogin){
         return;
     }
+    [self initMessageBeat];
     UserModel * model = manager.fetch;
-    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&%@&%@",HOST,port,model.accessToken,model.userID]] protocols:@[@"chat",@"superchat"]];
+    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&%@&%@",SOCKETHOST,SOCKETHOSTPORT,model.accessToken,model.userID]] protocols:@[@"chat",@"superchat"]];
     _webSocket.delegate = self;
     //设置代理线程Queue
     NSOperationQueue *queue = [NSOperationQueue new];
@@ -429,7 +429,7 @@ static const uint16_t port = 6969;
     NSLog(@"连接成功");
     _reConnectTime = 0;
     [self initHeartBeat];
-    [self initMessageBeat];
+    
 }
 
 //open失败的时候调用

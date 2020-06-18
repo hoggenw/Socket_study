@@ -13,17 +13,27 @@
 
 #ifdef DEBUG
 //https
-NSString * const BaseUrl = @"http://192.168.1.15:8099/";
-NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const HOST = @"192.168.1.15";
-//
-//NSString * const BaseUrl = @"http://49.235.149.115:8099/";
+//NSString * const BaseUrl = @"http://192.168.1.16:8099/";
 //NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-//NSString * const HOST = @"49.235.149.115";
-#else
-NSString * const BaseUrl = @"https://www.7chat.wang:8099/";
+//NSString * const SOCKETHOST = @"192.168.1.16";
+//uint16_t const SOCKETHOSTPORT = 6969;
+//
+NSString * const BaseUrl = @"http://49.235.149.115:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const HOST = @"49.235.149.115";
+NSString * const SOCKETHOST = @"49.235.149.115";
+uint16_t const SOCKETHOSTPORT = 9696;
+
+
+//NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
+//NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+//NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
+//uint16_t const SOCKETHOSTPORT = 9001;
+
+#else
+NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
+NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
+uint16_t const SOCKETHOSTPORT = 9001;
 #endif
 
 
