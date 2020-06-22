@@ -390,8 +390,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
         locaModel.readState =  YLMessageUnRead;
         locaModel.ownerTyper = YLMessageOwnerTypeOther;
         locaModel.messageOtherUserId = pmessage.fromUser.userId;
-        locaModel.date = [NSDate date];
-        NSString *dateString = [ locaModel.date  formatYYMMDDHHMMssSS];
+        NSString * dateString = [locaModel.messageId componentsSeparatedByString:@"&"].lastObject;
+        locaModel.date = [ NSDate date];
         locaModel.dateString = dateString;
         
         if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {

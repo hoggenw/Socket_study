@@ -164,6 +164,9 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (indexPath.row >= _dataArray.count) {
+        return nil;
+    }
     
     ChatMessageModel  * messageModel = _dataArray[indexPath.row];
     /**
@@ -179,6 +182,9 @@
 #pragma mark - UITableViewCellDelegate
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row >= _dataArray.count) {
+        return 0;
+    }
     ChatMessageModel *message = [_dataArray objectAtIndex:indexPath.row];
     
     // NSLog(@"message.cellHeight: %@",@(message.cellHeight));
