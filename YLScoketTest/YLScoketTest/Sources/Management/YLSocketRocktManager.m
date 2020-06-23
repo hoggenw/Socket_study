@@ -147,7 +147,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 - (void)connect {
     [self initSocket];
     //    //每次正常连接的时候清零重连时间
-    //    _reConnectTime = 0;
+//        _reConnectTime = 0;
 }
 
 -(void)disconnnet {
@@ -219,6 +219,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         //NSLog(@"%@",data);
         if (!(_webSocket.readyState == SR_OPEN)) {
                 [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+            [self connect];
                return;
         }else{
             [_webSocket send: [base data]];
@@ -300,7 +301,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
         base.data_p = data;
         //NSLog(@"%@",data);
         if (!(_webSocket.readyState == SR_OPEN)) {
-                [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+            [self connect];
+            [YLHintView showMessageOnThisPage:@"请查看网络连接"];
                return;
         }else{
             [_webSocket send: [base data]];

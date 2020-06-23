@@ -266,6 +266,10 @@
  */
 - (void)chatBox:(YLChatBoxView *)chatBox sendTextMessage:(ChatMessageModel *)textMessage {
     
+    if (textMessage.text.length > 100) {
+        [YLHintView showMessageOnThisPage:@"发送文字内容字数不能大于100"];
+        return;
+    }
     
     if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
         
