@@ -60,9 +60,9 @@ typedef NS_ENUM(NSUInteger, YLMessageReadState) {
  */
 typedef NS_ENUM(NSUInteger, YLMessageModule) {
     
-    YLMessageCommonModule = 101           // 一般消息
+    YLMessageCommonModule = 101,           // 一般消息
   
-    
+    YLMessageUnsendMessgeGet = 102, //获取未收到的信息
 };
 
 /**
@@ -70,9 +70,9 @@ typedef NS_ENUM(NSUInteger, YLMessageModule) {
  */
 typedef NS_ENUM(NSUInteger, YLMessageCMD) {
     
-    YLMessageCMDPersontoPerson = 1          // 一般消息commandMessage
-  
-    
+    YLMessageCMDPersontoPerson = 1,          // 一般消息commandMessage
+    YLMessageCMDMessageSuccess=2,  //消息发送成功
+    YLMessageCMDMessageGet =3,  //获取未接收消息
 };
 
 @interface ChatMessageModel : NSObject

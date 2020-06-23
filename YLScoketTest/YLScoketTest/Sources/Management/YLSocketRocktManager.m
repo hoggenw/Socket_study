@@ -124,7 +124,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 -(void)updateSqlMessageData {
-   NSArray<LocalChatMessageModel *>* models = [[LocalSQliteManager sharedInstance] selectAllLocalChatMessageModels];
+    NSArray<LocalChatMessageModel *>* models = [[LocalSQliteManager sharedInstance] selectAllLocalChatMessageModels];
     if (models.count <= 0) {
         [self destoryMessageBeat];
     }else{
@@ -134,7 +134,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             NSDate * tenMinutesLater = [model.date dateByAddingTimeInterval: time];
             int result = [NSDate compareDate:tenMinutesLater withDate: [NSDate date]];
             if (result == 1) {
-             NSLog(@"消息发送失败状态更新 %@", @([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:model.messageId sendState:YLMessageSendFail]))  ;
+                NSLog(@"消息发送失败状态更新 %@", @([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:model.messageId sendState:YLMessageSendFail]))  ;
             }
             
         }
@@ -147,7 +147,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 - (void)connect {
     [self initSocket];
     //    //每次正常连接的时候清零重连时间
-//        _reConnectTime = 0;
+    //        _reConnectTime = 0;
 }
 
 -(void)disconnnet {
@@ -160,7 +160,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 #pragma mark- 消息重发
 -(void)resendMassege:(ChatMessageModel *)messageModel {
     
-
+    
     
     YLMessageModel * pmessage = [YLMessageModel new];
     switch (messageModel.messageType) {
@@ -201,7 +201,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     //token
     pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
     
- 
+    
     pmessage.messageId = messageModel.messageId;
     //存入本地，然后发送通知；
     if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSending]) {
@@ -218,17 +218,17 @@ dispatch_async(dispatch_get_main_queue(), block);\
         base.data_p = data;
         //NSLog(@"%@",data);
         if (!(_webSocket.readyState == SR_OPEN)) {
-                [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+            [YLHintView showMessageOnThisPage:@"请查看网络连接"];
             [self connect];
-               return;
+            return;
         }else{
             [_webSocket send: [base data]];
         }
-       
+        
     }else{
-       [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
+        [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
     }
-
+    
 }
 #pragma mark- 消息发送
 -(void)sendMassege:(ChatMessageModel *)messageModel {
@@ -303,19 +303,45 @@ dispatch_async(dispatch_get_main_queue(), block);\
         if (!(_webSocket.readyState == SR_OPEN)) {
             [self connect];
             [YLHintView showMessageOnThisPage:@"请查看网络连接"];
-               return;
+            return;
         }else{
             [_webSocket send: [base data]];
         }
-       
+        
     }else{
-       [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
+        [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
     }
-   
+    
     
     
     
 }
+//组装获取未获取消息请求
+- (void)getUnrecivedMessage{
+    YLMessageModel * pmessage = [YLMessageModel new];
+    UserModel * model = [AccountManager sharedInstance].fetch;
+    YLUserModel * user = [YLUserModel new];
+    user.name = model.name;
+    user.avatar = model.avatar;
+    user.userId = model.userID;
+    pmessage.fromUser = user ;
+    //token
+    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    
+    YLBaseMessageModel * base = [YLBaseMessageModel new];
+    base.title = SokectTile;
+    base.command = YLMessageCMDMessageGet;
+    base.module = YLMessageUnsendMessgeGet;
+    base.data_p = [pmessage data];;
+    if (!(_webSocket.readyState == SR_OPEN)) {
+        [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+        [self connect];
+        return;
+    }else{
+        [_webSocket send: [base data]];
+    }
+}
+
 //重连机制
 - (void)reConnect {
     [self disconnnet];
@@ -424,13 +450,15 @@ dispatch_async(dispatch_get_main_queue(), block);\
     
     
     
-    NSLog(@"服务器返回消息：%@",message);
+   // NSLog(@"服务器返回消息：%@",message);
 }
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"连接成功");
+    NSLog(@"连接成功,拉取未接收信息");
     _reConnectTime = 0;
     [self initHeartBeat];
+    [self getUnrecivedMessage];
+    
     
 }
 
@@ -458,6 +486,10 @@ dispatch_async(dispatch_get_main_queue(), block);\
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
     NSLog(@"收到PONG回调: %@",[[NSString alloc] initWithData:pongPayload encoding: NSUTF8StringEncoding]);
 }
+
+
+
+
 
 
 //将收到的消息，是否需要把data转换为NSString，每次收到消息都会被调用，默认YES
