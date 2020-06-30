@@ -66,6 +66,7 @@
              *  自己发的消息
              */
             [self.avatarImageView setHidden:NO];
+            NSLog(@"%@",_messageModel.from.avatar);
             [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:_messageModel.from.avatar] placeholderImage:[UIImage imageNamed:@"self_header"]];
             [self.messageBackgroundImageView setHidden:NO];
             /**

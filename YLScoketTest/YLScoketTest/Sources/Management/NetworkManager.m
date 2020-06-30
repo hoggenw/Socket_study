@@ -13,15 +13,15 @@
 
 #ifdef DEBUG
 //https
-NSString * const BaseUrl = @"http://192.168.1.16:8099/";
-NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const SOCKETHOST = @"192.168.1.16";
-uint16_t const SOCKETHOSTPORT = 9696;
-//
-//NSString * const BaseUrl = @"http://49.235.149.115:8099/";
+//NSString * const BaseUrl = @"http://192.168.1.16:8099/";
 //NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-//NSString * const SOCKETHOST = @"49.235.149.115";
+//NSString * const SOCKETHOST = @"192.168.1.16";
 //uint16_t const SOCKETHOSTPORT = 9696;
+
+NSString * const BaseUrl = @"http://49.235.149.115:8099/";
+NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+NSString * const SOCKETHOST = @"49.235.149.115";
+uint16_t const SOCKETHOSTPORT = 9696;
 
 
 //NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";

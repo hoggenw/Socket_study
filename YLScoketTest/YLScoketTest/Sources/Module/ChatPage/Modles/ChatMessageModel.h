@@ -73,6 +73,7 @@ typedef NS_ENUM(NSUInteger, YLMessageCMD) {
     YLMessageCMDPersontoPerson = 1,          // 一般消息commandMessage
     YLMessageCMDMessageSuccess=2,  //消息发送成功
     YLMessageCMDMessageGet =3,  //获取未接收消息
+    YLMessageCMDNowIpGet =4,  //获取未接收消息
 };
 
 @interface ChatMessageModel : NSObject

@@ -50,6 +50,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     dispatch_once(&onceToken, ^{
         manager = [[YLSocketRocktManager alloc] init];
         [manager initSocket];
+        [manager initMessageBeat];
     });
     return manager;
 }
@@ -62,7 +63,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
     if(!manager.isLogin){
         return;
     }
-    [self initMessageBeat];
     UserModel * model = manager.fetch;
     _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%d/hoggen&%@&%@",SOCKETHOST,SOCKETHOSTPORT,model.accessToken,model.userID]] protocols:@[@"chat",@"superchat"]];
     _webSocket.delegate = self;
@@ -219,6 +219,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         //NSLog(@"%@",data);
         if (!(_webSocket.readyState == SR_OPEN)) {
             [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+            [self disconnnet];
             [self connect];
             return;
         }else{
@@ -301,6 +302,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         base.data_p = data;
         //NSLog(@"%@",data);
         if (!(_webSocket.readyState == SR_OPEN)) {
+             [self disconnnet];
             [self connect];
             [YLHintView showMessageOnThisPage:@"请查看网络连接"];
             return;
@@ -335,6 +337,35 @@ dispatch_async(dispatch_get_main_queue(), block);\
     base.data_p = [pmessage data];;
     if (!(_webSocket.readyState == SR_OPEN)) {
         [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+        [self connect];
+        return;
+    }else{
+        [_webSocket send: [base data]];
+    }
+}
+
+//连接成功，获取当前连接服务器的ip
+- (void)getNowIp{
+    NSLog(@"获取当前ip");
+    YLMessageModel * pmessage = [YLMessageModel new];
+    UserModel * model = [AccountManager sharedInstance].fetch;
+    YLUserModel * user = [YLUserModel new];
+    user.name = model.name;
+    user.avatar = model.avatar;
+    user.userId = model.userID;
+    pmessage.fromUser = user ;
+    //token
+    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    
+    YLBaseMessageModel * base = [YLBaseMessageModel new];
+    base.title = SokectTile;
+    base.command = YLMessageCMDNowIpGet;
+    base.module = YLMessageUnsendMessgeGet;
+    base.data_p = [pmessage data];;
+    
+    if (!(_webSocket.readyState == SR_OPEN)) {
+        [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+        [self disconnnet];
         [self connect];
         return;
     }else{
@@ -458,6 +489,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     _reConnectTime = 0;
     [self initHeartBeat];
     [self getUnrecivedMessage];
+    [self getNowIp];
     
     
 }
