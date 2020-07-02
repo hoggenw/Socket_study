@@ -450,7 +450,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         locaModel.ownerTyper = YLMessageOwnerTypeOther;
         locaModel.messageOtherUserId = pmessage.fromUser.userId;
         NSString * dateString = [locaModel.messageId componentsSeparatedByString:@"&"].lastObject;
-        locaModel.date = [ NSDate date];
+        locaModel.date = [ NSDate dateWithString:dateString formatString: @"YYYY/MM/dd hh:mm:ss SS"];
         locaModel.dateString = dateString;
         
         if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
@@ -464,6 +464,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             item2.date = [NSDate date];
             item2.message = pmessage.textString;
             item2.messageCount = (int)unread;
+            item2.avatar = pmessage.fromUser.avatar;
             item2.selfId = [[AccountManager sharedInstance] fetch].userID;
             [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatList object:nil];

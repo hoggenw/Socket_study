@@ -106,6 +106,7 @@
                 YLUITabBarViewController * tabarVC = [[YLUITabBarViewController alloc] initWithChildVCInfoArray:  nil];
                 self.window.rootViewController = tabarVC;
                 POST_SOCKETCONNET_NOTIFICATION;
+                
             }else{
                 POST_LOGINQUIT_NOTIFICATION;
             }
@@ -118,12 +119,12 @@
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Account_Offline object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         @strongify(self)
         [[AccountManager sharedInstance] remove];
-         [ [YLSocketRocktManager shareManger] disconnnet] ;
+        [ [YLSocketRocktManager shareManger] disconnnet] ;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.window.rootViewController=  [[YLNavigationController alloc] initWithRootViewController:[LoginViewController new]];
-             
+            
         });
-       
+        
     }];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Socket_Connet object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         [[YLSocketRocktManager shareManger] connect] ;
@@ -160,15 +161,51 @@
     //                          stringByReplacingOccurrencesOfString: @">" withString: @""]
     //                         stringByReplacingOccurrencesOfString: @" " withString: @""];
     
-    if (![deviceToken isKindOfClass:[NSData class]]) return;
-    const unsigned *tokenBytes = [deviceToken bytes];
-    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
-                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
-                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
-                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
     
-    NSLog(@"%@", hexToken);
-    [YLHintView showAlertMessage:hexToken title:@"获取deviceToken"];
+    NSString * tokenPush = [NSString string];
+    //Xcode11打的包，iOS13获取Token有变化
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 13) {
+        if (![deviceToken isKindOfClass:[NSData class]]) {
+            //记录获取token失败的描述
+            return;
+        }
+        const unsigned *tokenBytes = (const unsigned *)[deviceToken bytes];
+        NSString *strToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                              ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                              ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                              ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+        NSLog(@"deviceToken1:%@", strToken);
+        tokenPush = strToken;
+        
+    } else {
+        NSString *token = [NSString
+                           stringWithFormat:@"%@",deviceToken];
+        token = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
+        token = [token stringByReplacingOccurrencesOfString:@">" withString:@""];
+        token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"deviceToken2 is: %@", token);
+        tokenPush = token;
+    }
+    
+    if ([AccountManager sharedInstance].isLogin) {
+        //上传更新pushtoken
+        UserModel * user = [AccountManager sharedInstance].fetch;
+        NSDictionary * info = @{@"userId":user.userID,@"iphonePushToken":tokenPush};
+        [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,UserPushTokenAPI] paramBody:info needToken:false returnBlock:^(NSDictionary *returnDict) {
+            if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                NSLog(@"更新iphonePushToken 成功");
+            }else {
+                NSLog(@"更新iphonePushToken 失败： %@", [NSString stringWithFormat:@"%@", returnDict[@"errmsg"]]);
+            }
+            
+        }];
+        
+    }else{
+        NSLog(@"用户未登录");
+
+    }
+    
+    
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -209,7 +246,7 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-      [[YLSocketRocktManager shareManger] connect] ;
+    [[YLSocketRocktManager shareManger] connect] ;
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
 

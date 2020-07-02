@@ -391,6 +391,7 @@
 		8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyFriendshipTableViewCell.m; sourceTree = "<group>"; };
 		8754206523CDACB90008820A /* ApplyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyDetailViewController.h; sourceTree = "<group>"; };
 		8754206623CDACB90008820A /* ApplyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyDetailViewController.m; sourceTree = "<group>"; };
+		875BEB3E24AC2B79006E62A5 /* 7聊.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "7聊.entitlements"; sourceTree = "<group>"; };
 		875FECD2248772CB00D9DD98 /* ChatDealUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatDealUtils.h; sourceTree = "<group>"; };
 		875FECD3248772CB00D9DD98 /* ChatDealUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatDealUtils.m; sourceTree = "<group>"; };
 		8769CCC023BB17100028EE71 /* PersonalProfileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalProfileController.h; sourceTree = "<group>"; };
@@ -1123,6 +1124,7 @@
 		11849E1B1E52AFD0006D682D /* YLScoketTest */ = {
 			isa = PBXGroup;
 			children = (
+				875BEB3E24AC2B79006E62A5 /* 7聊.entitlements */,
 				116B672A20118FB6005AA5E0 /* Sources */,
 				116B672820118FB6005AA5E0 /* Resources */,
 				116B677320118FB6005AA5E0 /* Supporting Files */,
@@ -1751,6 +1753,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "YLScoketTest/7聊.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2019;
 				DEVELOPMENT_TEAM = MFH447PL47;
 				ENABLE_BITCODE = NO;
@@ -1771,6 +1776,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.7dc;
 				PRODUCT_NAME = "7聊";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1782,6 +1788,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "YLScoketTest/7聊.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2019;
 				DEVELOPMENT_TEAM = MFH447PL47;
 				ENABLE_BITCODE = NO;
@@ -1802,6 +1811,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangliugen.7dc;
 				PRODUCT_NAME = "7聊";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

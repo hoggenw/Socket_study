@@ -23,6 +23,8 @@ extern uint16_t const SOCKETHOSTPORT;
 extern NSString * const RegistCodeAPI;
 //登录接口
 extern NSString * const LoginAPI;
+//用户推送PushToken
+extern NSString * const UserPushTokenAPI;
 //获取用户信息接口
 extern NSString * const UserInfoAPI;
 //注册接口
