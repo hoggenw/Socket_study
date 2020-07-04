@@ -191,7 +191,7 @@
         //上传更新pushtoken
         UserModel * user = [AccountManager sharedInstance].fetch;
         NSDictionary * info = @{@"userId":user.userID,@"iphonePushToken":tokenPush};
-        [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,UserPushTokenAPI] paramBody:info needToken:false returnBlock:^(NSDictionary *returnDict) {
+        [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,UserPushTokenAPI] paramBody:info needToken:true returnBlock:^(NSDictionary *returnDict) {
             if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                 NSLog(@"更新iphonePushToken 成功");
             }else {
