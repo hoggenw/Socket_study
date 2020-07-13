@@ -169,7 +169,7 @@
     return [self formatDate:@"MM-dd"];
 }
 - (NSString *)formatYYMMDDHHMMssSS{
-      return [self formatDate: @"YYYY/MM/dd hh:mm:ss SS"];
+      return [self formatDate: @"YYYY/MM/dd HH:mm:ss SS"];
 }
 
 + (BOOL)ifToday:(NSDate *)otherDay{

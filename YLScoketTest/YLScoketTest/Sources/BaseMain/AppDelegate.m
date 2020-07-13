@@ -138,7 +138,7 @@
     [application registerForRemoteNotifications];
     
     [self netWorkChangeEvent];
-    
+    application.applicationIconBadgeNumber = 0;
     //远程通知调用，未启动app时候需要在此做相关调用
     // 取到url scheme跳转信息 未启动时走这一步
     NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
@@ -234,8 +234,10 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+      [[YLSocketRocktManager shareManger] disconnnet] ;
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+     NSLog(@"程序将要进入后台");
 }
 
 
@@ -247,6 +249,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[YLSocketRocktManager shareManger] connect] ;
+    application.applicationIconBadgeNumber = 0;
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
 

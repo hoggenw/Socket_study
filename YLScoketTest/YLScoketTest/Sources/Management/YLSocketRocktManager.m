@@ -450,7 +450,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         locaModel.ownerTyper = YLMessageOwnerTypeOther;
         locaModel.messageOtherUserId = pmessage.fromUser.userId;
         NSString * dateString = [locaModel.messageId componentsSeparatedByString:@"&"].lastObject;
-        locaModel.date = [ NSDate dateWithString:dateString formatString: @"YYYY/MM/dd hh:mm:ss SS"];
+        locaModel.date = [ NSDate dateWithString:dateString formatString: @"YYYY/MM/dd HH:mm:ss SS"];
         locaModel.dateString = dateString;
         
         if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
