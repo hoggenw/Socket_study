@@ -8,7 +8,7 @@
 
 #import "AddressBookViewModel.h"
 #import "FiendshipModel.h"
-
+#import "SearchUserModel.h"
 
 
 @implementation AddressBookViewModel
@@ -27,14 +27,14 @@
     @weakify(self)
     _friendscommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSString * input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-            [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Friendships_List]  param:nil needToken:true returnBlock:^(NSDictionary *returnDict) {
+            [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Friendships_List]  param:nil needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
                 
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                     NSArray * users = returnDict[@"data"];
                     NSMutableArray<FiendshipModel *> * friends = [NSMutableArray array];
                     for (NSDictionary * temp in users) {
                         FiendshipModel * model = [FiendshipModel yy_modelWithDictionary: temp];
-                       // NSLog(@"%@  ===   %@",model.user.name,model.user.userId);
+                        // NSLog(@"%@  ===   %@",model.user.name,model.user.userId);
                         [friends addObject: model];
                     }
                     [subscriber sendNext: friends];
@@ -52,35 +52,35 @@
     }];
     
     _applyFriendscommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSString * input) {
-           return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-               [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,ApplyFriendships_List]  param:nil needToken:true returnBlock:^(NSDictionary *returnDict) {
-                   
-                   if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
-                       NSArray * users = returnDict[@"data"];
-                       NSMutableArray<FiendshipModel *> * friends = [NSMutableArray array];
-                       for (NSDictionary * temp in users) {
-                           FiendshipModel * model = [FiendshipModel yy_modelWithDictionary: temp];
-                          // NSLog(@"%@  ===   %@",model.user.name,model.user.userId);
-                           [friends addObject: model];
-                       }
-                       [subscriber sendNext: friends];
-                       [subscriber sendCompleted];
-                       //NSLog(@"朋友列表： %@",users);
-                   }else {
-                       [subscriber sendNext: nil];
-                       [subscriber sendCompleted];
-                   }
-                   
-               }];
-               return  nil;
-           }];
-           
-       }];
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,ApplyFriendships_List]  param:nil needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
+                
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    NSArray * users = returnDict[@"data"];
+                    NSMutableArray<FiendshipModel *> * friends = [NSMutableArray array];
+                    for (NSDictionary * temp in users) {
+                        FiendshipModel * model = [FiendshipModel yy_modelWithDictionary: temp];
+                        // NSLog(@"%@  ===   %@",model.user.name,model.user.userId);
+                        [friends addObject: model];
+                    }
+                    [subscriber sendNext: friends];
+                    [subscriber sendCompleted];
+                    //NSLog(@"朋友列表： %@",users);
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            return  nil;
+        }];
+        
+    }];
     
     _updateFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
             
-            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Update_Friendship_info] paramBody:input needToken:true returnBlock:^(NSDictionary *returnDict) {
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Update_Friendship_info] paramBody:input needToken:true showToast:true  returnBlock:^(NSDictionary *returnDict) {
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                     NSLog(@"%@",returnDict);
                     [subscriber sendNext: @(true)];
@@ -93,13 +93,13 @@
             }];
             return  nil;
         }];
-      
+        
     }];
     
     _addFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
             
-            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Agree_Friendship] paramBody:input needToken:true returnBlock:^(NSDictionary *returnDict) {
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Agree_Friendship] paramBody:input needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                     NSLog(@"%@",returnDict);
                     [subscriber sendNext: @(true)];
@@ -112,7 +112,33 @@
             }];
             return  nil;
         }];
-      
+        
+    }];
+    
+    _searchFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Search_Friends] paramBody:input needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    NSLog(@"%@",returnDict);
+                    NSArray * users = returnDict[@"data"];
+                    NSMutableArray<SearchUserModel *> * friends = [NSMutableArray array];
+                    for (NSDictionary * temp in users) {
+                        SearchUserModel * model = [SearchUserModel yy_modelWithDictionary: temp];
+                        // NSLog(@"%@  ===   %@",model.user.name,model.user.userId);
+                        [friends addObject: model];
+                    }
+                    [subscriber sendNext: friends];
+                    [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            return  nil;
+        }];
+        
     }];
     
 }
@@ -129,7 +155,11 @@
     [_updateFriendshipcommand execute:input];
 }
 -(void)addFriendshipcommand:(NSMutableDictionary *)input{
-        [_addFriendshipcommand execute:input];
+    [_addFriendshipcommand execute:input];
+}
+
+-(void)searchFriendshipcommand:(NSMutableDictionary *)input{
+    [_searchFriendshipcommand execute:input];
 }
 
 /**
@@ -199,7 +229,7 @@
 
 /**
  获取分区数(姓氏首字母)
-
+ 
  @param array 排序后的联系人数组
  @return [A,B,C,D.....]
  */

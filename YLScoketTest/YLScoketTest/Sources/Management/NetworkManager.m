@@ -13,10 +13,10 @@
 
 #ifdef DEBUG
 //https
-NSString * const BaseUrl = @"http://192.168.1.40:8099/";
-NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const SOCKETHOST = @"192.168.1.40";
-uint16_t const SOCKETHOSTPORT = 9696;
+//NSString * const BaseUrl = @"http://192.168.1.40:8099/";
+//NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+//NSString * const SOCKETHOST = @"192.168.1.40";
+//uint16_t const SOCKETHOSTPORT = 9696;
 
 //NSString * const BaseUrl = @"http://49.235.149.115:8099/";
 //NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
@@ -24,10 +24,10 @@ uint16_t const SOCKETHOSTPORT = 9696;
 //uint16_t const SOCKETHOSTPORT = 9696;
 
 
-//NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
-//NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-//NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
-//uint16_t const SOCKETHOSTPORT = 9001;
+NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
+NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
+uint16_t const SOCKETHOSTPORT = 9001;
 
 #else
 NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
@@ -59,8 +59,7 @@ NSString * const Blackships_List = @"api/apply/friend/blackList";
 NSString * const Blackships_Delete = @"api/apply/friend/blackDelete";
 NSString * const Update_Friendship_info = @"api/apply/friend/updateFriendship";
 NSString * const Agree_Friendship = @"api/apply/friend/add";
-
-
+NSString * const Search_Friends = @"/api/people/search";
 
 NSString * const RegisterAPI = @"api/login/register";
 
@@ -101,7 +100,7 @@ static AFHTTPSessionManager *sessionManager = nil;
 #pragma mark - 业务请求方法
 //一般get请求
 - (void)generalGetWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic returnBlock:(ReturnBlock)infoBlock; {
-    [self.netManager getWithURL:requestURL param:paramDic needToken: false returnBlock:infoBlock];
+    [self.netManager getWithURL:requestURL param:paramDic needToken: false showToast: true returnBlock:infoBlock];
 }
 
 
@@ -115,7 +114,7 @@ static AFHTTPSessionManager *sessionManager = nil;
 #pragma mark- 上传图片
 
 -(void)postImageUploadApiParam:(NSData *)data returnBlock:(ReturnBlock)infoBlock{
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true];
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true showToast: true];
     [manager POST:[NSString stringWithFormat:@""] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data
                                     name:@"file"
@@ -154,8 +153,8 @@ static AFHTTPSessionManager *sessionManager = nil;
 
 #pragma mark - 基础请求方法
 //放入请求头
-- (void)postWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
+- (void)postWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic showToast:(BOOL)showToast needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken showToast: showToast];
     
     [manager POST:requestURL parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -185,8 +184,8 @@ static AFHTTPSessionManager *sessionManager = nil;
 }
 
 //放入请求体
-- (void)postWithURL:(NSString *)requestURL paramBody:(NSDictionary *)paramDic needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
+- (void)postWithURL:(NSString *)requestURL paramBody:(NSDictionary *)paramDic  needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock {
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken showToast: showToast];
     
     [manager POST:requestURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -227,9 +226,9 @@ static AFHTTPSessionManager *sessionManager = nil;
     
 }
 
-- (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
+- (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock {
     
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken showToast: showToast];
     [manager GET:requestURL parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
@@ -256,9 +255,9 @@ static AFHTTPSessionManager *sessionManager = nil;
     }];
 }
 
-- (void)deleteWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
+- (void)deleteWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken  showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock {
     
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken showToast: showToast];
     [manager DELETE:requestURL parameters:paramDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
         NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
@@ -284,8 +283,8 @@ static AFHTTPSessionManager *sessionManager = nil;
 }
 
 
-- (void)putWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock {
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken];
+- (void)putWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock {
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: needToken showToast:showToast];
     [manager PUT:requestURL parameters:paramDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
         NSString *errnos = [NSString stringWithFormat:@"%@",[dict objectForKey:@"errno"]];
@@ -316,12 +315,15 @@ static AFHTTPSessionManager *sessionManager = nil;
 }
 
 #pragma  mark - 头部文件设置
-- (AFHTTPSessionManager *)getSessionManager:(BOOL)needToken
+- (AFHTTPSessionManager *)getSessionManager:(BOOL)needToken showToast:(BOOL)showToast
 {
     //    if (sessionManager != nil) {
     //        return  sessionManager;
     //    }
-    [[YLHintView shareHintView] loadAnimationShow];
+    if (showToast) {
+         [[YLHintView shareHintView] loadAnimationShow];
+    }
+   
     sessionManager = [AFHTTPSessionManager manager];
     sessionManager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
     sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];

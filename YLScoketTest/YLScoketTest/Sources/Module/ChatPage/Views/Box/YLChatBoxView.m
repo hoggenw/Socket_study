@@ -12,7 +12,7 @@
 #import "DPAudioRecorder.h"
 
 #define     CHATBOX_BUTTON_WIDTH        37
-#define     HEIGHT_TEXTVIEW             HEIGHT_TABBAR * 0.74
+#define     HEIGHT_TEXTVIEW             49 * 0.74
 #define     MAX_TEXTVIEW_HEIGHT         104
 
 @interface YLChatBoxView()<UITextViewDelegate>
@@ -54,7 +54,8 @@
     self.topLine.width = self.width;
     //  y=  49 -  ( CHATBOX_BUTTON_WIDTH )  37 - (View 的H - Button的H )/2
     //  Voice 的高度和宽度初始化的时候都是 37
-    float y = self.height - self.voiceButton.height - (HEIGHT_TABBAR - CHATBOX_BUTTON_WIDTH) / 2;
+   // float y = self.height - self.voiceButton.height - (49 - CHATBOX_BUTTON_WIDTH) / 2;
+    float y =  (49 - CHATBOX_BUTTON_WIDTH) / 2 + 3;
     if (self.voiceButton.top != y) {
         [UIView animateWithDuration:0.1 animations:^{
             
@@ -159,7 +160,7 @@
     
     height = height < MAX_TEXTVIEW_HEIGHT ? height : textView.height;  // height 小于 textView 的最大高度 104 就取出 height 不然就取出  textView.frameHeight
     
-    _curHeight = height + HEIGHT_TABBAR - HEIGHT_TEXTVIEW;
+    _curHeight = height + 49 - HEIGHT_TEXTVIEW;
     if (_curHeight != self.height) {
         
         [UIView animateWithDuration:0.05 animations:^{
@@ -244,7 +245,7 @@
     }
     else {
         // 显示talkButton
-        self.curHeight = HEIGHT_TABBAR;
+        self.curHeight = 49;
         self.height = self.curHeight;
         self.status = YLChatBoxStatusShowVoice;// 如果不是显示讲话的Button，就显示讲话的Button，状态也改变为 shouvoice
         [self.textView resignFirstResponder];
@@ -462,7 +463,7 @@
 - (UIButton *) voiceButton
 {
     if (_voiceButton == nil) {
-        _voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(0, (HEIGHT_TABBAR - CHATBOX_BUTTON_WIDTH) / 2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
+        _voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(0, (49 - CHATBOX_BUTTON_WIDTH) / 2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
         [_voiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoice"] forState:UIControlStateNormal];
         [_voiceButton setImage:[UIImage imageNamed:@"ToolViewInputVoiceHL"] forState:UIControlStateHighlighted];
         [_voiceButton addTarget:self action:@selector(voiceButtonDown:) forControlEvents:UIControlEventTouchUpInside];
@@ -492,7 +493,7 @@
 - (UIButton *) faceButton
 {
     if (_faceButton == nil) {
-        _faceButton = [[UIButton alloc] initWithFrame:CGRectMake(self.moreButton.left - CHATBOX_BUTTON_WIDTH, (HEIGHT_TABBAR - CHATBOX_BUTTON_WIDTH) / 2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
+        _faceButton = [[UIButton alloc] initWithFrame:CGRectMake(self.moreButton.left - CHATBOX_BUTTON_WIDTH, (49 - CHATBOX_BUTTON_WIDTH) / 2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
         [_faceButton setImage:[UIImage imageNamed:@"ToolViewEmotion"] forState:UIControlStateNormal];
         [_faceButton setImage:[UIImage imageNamed:@"ToolViewEmotionHL"] forState:UIControlStateHighlighted];
         [_faceButton addTarget:self action:@selector(faceButtonDown:) forControlEvents:UIControlEventTouchUpInside];
@@ -503,7 +504,7 @@
 - (UIButton *) moreButton
 {
     if (_moreButton == nil) {
-        _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - CHATBOX_BUTTON_WIDTH, (HEIGHT_TABBAR - CHATBOX_BUTTON_WIDTH) / 2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
+        _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - CHATBOX_BUTTON_WIDTH, (49 - CHATBOX_BUTTON_WIDTH) / 2, CHATBOX_BUTTON_WIDTH, CHATBOX_BUTTON_WIDTH)];
         [_moreButton setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black"] forState:UIControlStateNormal];
         [_moreButton setImage:[UIImage imageNamed:@"TypeSelectorBtnHL_Black"] forState:UIControlStateHighlighted];
         [_moreButton addTarget:self action:@selector(moreButtonDown:) forControlEvents:UIControlEventTouchUpInside];

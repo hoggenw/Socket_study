@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchUserModel : NSObject
 
+@property (nonatomic, assign) NSInteger status;
+@property (nonatomic, copy) NSString *avatar;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *codeName;
+@property (nonatomic, copy) NSString *userName;
+
 @end
 
 NS_ASSUME_NONNULL_END

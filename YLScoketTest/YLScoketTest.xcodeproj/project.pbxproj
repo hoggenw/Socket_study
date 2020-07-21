@@ -91,6 +91,9 @@
 		116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67BE2011F57C005AA5E0 /* ChatBoxViewController.m */; };
 		116B67C22011F58E005AA5E0 /* ChatShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C12011F58E005AA5E0 /* ChatShowMessageViewController.m */; };
 		116B67C520157D71005AA5E0 /* ChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B67C420157D71005AA5E0 /* ChatMessageModel.m */; };
+		8702DAFE24C56D290083E277 /* SearchAndAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DAFD24C56D290083E277 /* SearchAndAddFriendsViewController.m */; };
+		8702DB0424C57C450083E277 /* SearchUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DB0324C57C450083E277 /* SearchUserModel.m */; };
+		8702DB0724C57F470083E277 /* SearchUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DB0624C57F470083E277 /* SearchUserTableViewCell.m */; };
 		875400B723B349D800AACAA5 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400B623B349D800AACAA5 /* SettingViewController.m */; };
 		875400BB23B34AE400AACAA5 /* SetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BA23B34AE400AACAA5 /* SetView.m */; };
 		875400BE23B34B5000AACAA5 /* SetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BD23B34B5000AACAA5 /* SetTableViewCell.m */; };
@@ -371,6 +374,12 @@
 		11849E191E52AFD0006D682D /* 7聊.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7聊.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		700689304885D897F973ACF7 /* Pods-YLScoketTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.release.xcconfig"; sourceTree = "<group>"; };
 		7993257C23A147CA81023F1D /* Pods-YLScoketTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YLScoketTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YLScoketTest/Pods-YLScoketTest.debug.xcconfig"; sourceTree = "<group>"; };
+		8702DAFC24C56D290083E277 /* SearchAndAddFriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchAndAddFriendsViewController.h; sourceTree = "<group>"; };
+		8702DAFD24C56D290083E277 /* SearchAndAddFriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchAndAddFriendsViewController.m; sourceTree = "<group>"; };
+		8702DB0224C57C450083E277 /* SearchUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchUserModel.h; sourceTree = "<group>"; };
+		8702DB0324C57C450083E277 /* SearchUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchUserModel.m; sourceTree = "<group>"; };
+		8702DB0524C57F470083E277 /* SearchUserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchUserTableViewCell.h; sourceTree = "<group>"; };
+		8702DB0624C57F470083E277 /* SearchUserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchUserTableViewCell.m; sourceTree = "<group>"; };
 		875400B523B349D800AACAA5 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		875400B623B349D800AACAA5 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		875400B923B34AE400AACAA5 /* SetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetView.h; sourceTree = "<group>"; };
@@ -1182,6 +1191,8 @@
 			children = (
 				8778493D23AA194F00AE9947 /* FiendshipModel.h */,
 				8778493E23AA194F00AE9947 /* FiendshipModel.m */,
+				8702DB0224C57C450083E277 /* SearchUserModel.h */,
+				8702DB0324C57C450083E277 /* SearchUserModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1253,6 +1264,8 @@
 				8754206623CDACB90008820A /* ApplyDetailViewController.m */,
 				879D1C4A23D187320019C31D /* FriendInfoViewController.h */,
 				879D1C4B23D187320019C31D /* FriendInfoViewController.m */,
+				8702DAFC24C56D290083E277 /* SearchAndAddFriendsViewController.h */,
+				8702DAFD24C56D290083E277 /* SearchAndAddFriendsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1276,6 +1289,8 @@
 				8778495A23AC774E00AE9947 /* IndexTableViewCell.m */,
 				8754206223CD969F0008820A /* ApplyFriendshipTableViewCell.h */,
 				8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */,
+				8702DB0524C57F470083E277 /* SearchUserTableViewCell.h */,
+				8702DB0624C57F470083E277 /* SearchUserTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1542,6 +1557,7 @@
 				1157614D201889E200E0D94F /* GPBExtensionInternals.m in Sources */,
 				1157616C2019E0DA00E0D94F /* YLChatFaceMenuVIew.m in Sources */,
 				A5852F7A2367CE04009E5CB3 /* DatePickerView.m in Sources */,
+				8702DB0424C57C450083E277 /* SearchUserModel.m in Sources */,
 				8778495B23AC774E00AE9947 /* IndexTableViewCell.m in Sources */,
 				A5852F5A2367CDD1009E5CB3 /* UITableView+Factory.m in Sources */,
 				A5852F6A2367CDF0009E5CB3 /* NSObject+Extension.m in Sources */,
@@ -1591,6 +1607,7 @@
 				A5852F6B2367CDF0009E5CB3 /* UIScrollView+Extension.m in Sources */,
 				8754206123CD910D0008820A /* ApplyFriendshipViewController.m in Sources */,
 				116B679120118FB6005AA5E0 /* main.m in Sources */,
+				8702DB0724C57F470083E277 /* SearchUserTableViewCell.m in Sources */,
 				11576154201889E200E0D94F /* Type.pbobjc.m in Sources */,
 				111CB1E8202300380035D245 /* MicrophoneTopView.m in Sources */,
 				A5852FB72367E2CA009E5CB3 /* MIneViewController.m in Sources */,
@@ -1641,6 +1658,7 @@
 				11576163201889E200E0D94F /* GPBMessage.m in Sources */,
 				8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */,
 				11576151201889E200E0D94F /* GPBExtensionRegistry.m in Sources */,
+				8702DAFE24C56D290083E277 /* SearchAndAddFriendsViewController.m in Sources */,
 				1157615C201889E200E0D94F /* FieldMask.pbobjc.m in Sources */,
 				A5852FC423681F5F009E5CB3 /* AdvertisementViewController.m in Sources */,
 				A5852F7F2367CE04009E5CB3 /* YLSliderSelectView.m in Sources */,

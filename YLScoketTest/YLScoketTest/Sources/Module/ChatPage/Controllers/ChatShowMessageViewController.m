@@ -51,6 +51,7 @@
         self.dataArray = [self addSystemModel: self.dataArray];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+             [self scrollToBottom];
         });
         
     }];
@@ -77,8 +78,10 @@
     self.dataArray = [self addSystemModel:addArray];
     [self.tableView.mj_header endRefreshing];
     dispatch_async(dispatch_get_main_queue(), ^{
-               [self.tableView reloadData];
+        [self.tableView reloadData];
+         [self scrollToBottom];
     });
+    
 }
 
 
@@ -126,6 +129,7 @@
     if (message == NULL) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+             [self scrollToBottom];
         });
         
     }else{
@@ -139,6 +143,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+             [self scrollToBottom];
         });
         [ChatDealUtils setMessageStateReaded: self.user.userID];
     }

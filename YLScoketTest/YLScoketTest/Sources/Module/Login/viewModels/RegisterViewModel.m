@@ -24,7 +24,7 @@
     _registerCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
             
-            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,RegisterAPI] paramBody:_registerInfo needToken:false returnBlock:^(NSDictionary *returnDict) {
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,RegisterAPI] paramBody:_registerInfo needToken:false showToast:true returnBlock:^(NSDictionary *returnDict) {
                 
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
 //                   NSDictionary * userDic = returnDict[@"data"];

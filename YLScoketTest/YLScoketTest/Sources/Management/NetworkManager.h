@@ -46,6 +46,8 @@ extern NSString * const ApplyFriendships_List;
 extern NSString * const Update_Friendship_info;
 //同意好友关系
 extern NSString * const Agree_Friendship;
+//查询朋友
+extern NSString * const Search_Friends;
 
 @interface NetworkManager : NSObject
 
@@ -61,13 +63,11 @@ extern NSString * const Agree_Friendship;
 
 
 //放入请求头
-- (void)postWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock;
+- (void)postWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock;
 
 //放入请求体
-- (void)postWithURL:(NSString *)requestURL paramBody:(NSDictionary *)paramDic needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock;
+- (void)postWithURL:(NSString *)requestURL paramBody:(NSDictionary *)paramDic needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock;
 
 
-- (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken returnBlock:(ReturnBlock)infoBlock;
-
-
+- (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock;
 @end

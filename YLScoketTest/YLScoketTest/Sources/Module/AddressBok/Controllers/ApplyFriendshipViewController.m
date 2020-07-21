@@ -12,6 +12,7 @@
 #import "FiendshipModel.h"
 #import "ApplyFriendshipTableViewCell.h"
 #import "ApplyDetailViewController.h"
+#import "SearchAndAddFriendsViewController.h"
 
 @interface ApplyFriendshipViewController ()<UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>
 
@@ -107,6 +108,8 @@
 
 #pragma mark- TextField delegate
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
+       PUSH(searchVC);
     NSLog(@"搜索");
     return false;
 }

@@ -35,9 +35,9 @@
     
     [self initUI];
     [self initDataSource];
-    NSLog(@"%@",self.userModel.userId);
-    NSLog(@"%@",self.friendsshipModel.friend.userId);
-    NSLog(@"%@",self.friendsshipModel.user.userId);
+//    NSLog(@"%@",self.userModel.userId);
+//    NSLog(@"%@",self.friendsshipModel.friend.userId);
+//    NSLog(@"%@",self.friendsshipModel.user.userId);
     // Do any additional setup after loading the view.
 }
 - (void)initDataSource {

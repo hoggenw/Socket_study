@@ -26,7 +26,7 @@
     @weakify(self)
       _blackListCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSString * input) {
           return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-              [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Blackships_List]  param:nil needToken:true returnBlock:^(NSDictionary *returnDict) {
+              [[NetworkManager sharedInstance] getWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Blackships_List]  param:nil needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
                   
                   if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                       NSArray * users = returnDict[@"data"];
@@ -51,7 +51,7 @@
       }];
     _deleteBlackshipCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(NSMutableDictionary * input) {
              return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-                 [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Blackships_Delete]  param:input needToken:true returnBlock:^(NSDictionary *returnDict) {
+                 [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Blackships_Delete]  param:input needToken:true  showToast:true returnBlock:^(NSDictionary *returnDict) {
                      
                      if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                          [subscriber sendNext: @(true)];

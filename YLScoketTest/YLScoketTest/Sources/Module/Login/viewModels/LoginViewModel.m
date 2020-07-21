@@ -24,7 +24,7 @@
     _loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
             
-            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,LoginAPI] paramBody:_loginInfo needToken:false returnBlock:^(NSDictionary *returnDict) {
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,LoginAPI] paramBody:_loginInfo needToken:false showToast:true returnBlock:^(NSDictionary *returnDict) {
                 if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                     NSDictionary * userDic = returnDict[@"data"];
                     UserModel * user = [UserModel yy_modelWithDictionary:userDic[@"user"]];
@@ -47,7 +47,7 @@
     
     _userInfoCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
            return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-               [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,UserInfoAPI] paramBody:_userInfo needToken:true returnBlock:^(NSDictionary *returnDict) {
+               [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,UserInfoAPI] paramBody:_userInfo needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
                    if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                        
                        NSDictionary * userDic = returnDict[@"data"];

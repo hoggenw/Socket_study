@@ -14,6 +14,7 @@
 #import "IndexTableViewCell.h"
 #import "ApplyFriendshipViewController.h"
 #import "FriendInfoViewController.h"
+#import "SearchAndAddFriendsViewController.h"
 
 @interface AddressBookViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -91,6 +92,8 @@
         }
         else if ([button.titleLabel.text isEqualToString:@"添加好友"])
         {
+            SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
+            PUSH(searchVC);
             NSLog(@"添加好友");
         }
         
@@ -156,13 +159,14 @@
 
 - (void)searchAction
 {
+    SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
+    PUSH(searchVC);
     NSLog(@"网络用户搜索");
 }
 #pragma mark -------- tableview --------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([_contactArray count] > 0) {
         [self.view  removeNoDataView];
-        
     }else {
         [self.view showNoDataViewWithFrame:CGRectMake(0, kNavigationHeight+140, self.view.width, self.view.height-140-kNavigationHeight)];
     }
@@ -209,7 +213,6 @@
         if (indexPath.row == 0) {
             [cell showImage];
         }else {
-            
             if (self.selectIndex == indexPath.row) {
                 [cell selected];
             }else {
@@ -220,7 +223,6 @@
         cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
-    
     return nil;
 }
 

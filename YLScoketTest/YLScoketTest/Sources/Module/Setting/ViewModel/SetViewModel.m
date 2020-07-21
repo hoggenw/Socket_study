@@ -25,7 +25,7 @@
           return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
               UserModel * user = [AccountManager sharedInstance].fetch;
               NSDictionary * quitLoginInfo = @{@"userId":user.userID};
-              [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,LoginQuitAPI] paramBody:quitLoginInfo needToken:true returnBlock:^(NSDictionary *returnDict) {
+              [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,LoginQuitAPI] paramBody:quitLoginInfo needToken:true showToast:true  returnBlock:^(NSDictionary *returnDict) {
                   if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
                       [subscriber sendNext: @(true)];
                       [subscriber sendCompleted];
