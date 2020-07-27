@@ -52,11 +52,18 @@
 -(void)setModel:(SearchUserModel *)model {
     _model = model;
     
+    if (model.isFriend) {
+         self.detailButton.hidden = true;
+           self.applyLabel.text = @"已添加";
+    }else{
+          self.applyLabel.text = @"";
+         self.detailButton.hidden = false;
+    }
     [self.contactAvatarImg sd_setImageWithURL:[NSURL URLWithString:model.avatar]  placeholderImage: IMAGE(@"other_header")];
     self.contactNameLabel.text = model.userName;
     self.remarkLabel.text =[NSString stringWithFormat:@"七聊号： %@",model.codeName] ;
-    self.detailButton.hidden = false;
-    self.applyLabel.text = @"";
+   
+
 }
 
 
@@ -127,7 +134,7 @@
 - (UIButton *)detailButton {
     if (_detailButton == nil) {
         _detailButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-            make.titleForState(@"查看",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).backgroundColor([UIColor colorWithHex:0xf3f4f5]).addAction(self, @selector(detailBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self).titleFont(FONT(13));
+            make.titleForState(@"查看",UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9),UIControlStateNormal).backgroundColor([UIColor colorWithHex:0xf3f4f5]).addAction(self, @selector(detailBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self).titleFont(FONT(13));
         }];
         [self.contentView addSubview:_detailButton];
         _detailButton.layer.cornerRadius = 2;

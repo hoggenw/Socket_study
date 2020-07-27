@@ -94,6 +94,7 @@
 		8702DAFE24C56D290083E277 /* SearchAndAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DAFD24C56D290083E277 /* SearchAndAddFriendsViewController.m */; };
 		8702DB0424C57C450083E277 /* SearchUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DB0324C57C450083E277 /* SearchUserModel.m */; };
 		8702DB0724C57F470083E277 /* SearchUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DB0624C57F470083E277 /* SearchUserTableViewCell.m */; };
+		8702DB0A24C6D0670083E277 /* SearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8702DB0924C6D0670083E277 /* SearchDetailViewController.m */; };
 		875400B723B349D800AACAA5 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400B623B349D800AACAA5 /* SettingViewController.m */; };
 		875400BB23B34AE400AACAA5 /* SetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BA23B34AE400AACAA5 /* SetView.m */; };
 		875400BE23B34B5000AACAA5 /* SetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 875400BD23B34B5000AACAA5 /* SetTableViewCell.m */; };
@@ -380,6 +381,8 @@
 		8702DB0324C57C450083E277 /* SearchUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchUserModel.m; sourceTree = "<group>"; };
 		8702DB0524C57F470083E277 /* SearchUserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchUserTableViewCell.h; sourceTree = "<group>"; };
 		8702DB0624C57F470083E277 /* SearchUserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchUserTableViewCell.m; sourceTree = "<group>"; };
+		8702DB0824C6D0670083E277 /* SearchDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchDetailViewController.h; sourceTree = "<group>"; };
+		8702DB0924C6D0670083E277 /* SearchDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchDetailViewController.m; sourceTree = "<group>"; };
 		875400B523B349D800AACAA5 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		875400B623B349D800AACAA5 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		875400B923B34AE400AACAA5 /* SetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetView.h; sourceTree = "<group>"; };
@@ -1266,6 +1269,8 @@
 				879D1C4B23D187320019C31D /* FriendInfoViewController.m */,
 				8702DAFC24C56D290083E277 /* SearchAndAddFriendsViewController.h */,
 				8702DAFD24C56D290083E277 /* SearchAndAddFriendsViewController.m */,
+				8702DB0824C6D0670083E277 /* SearchDetailViewController.h */,
+				8702DB0924C6D0670083E277 /* SearchDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1542,6 +1547,7 @@
 				1157615B201889E200E0D94F /* Empty.pbobjc.m in Sources */,
 				A5852F5C2367CDD1009E5CB3 /* UIButton+Factory.m in Sources */,
 				115760EA2017148300E0D94F /* YLMessageTableViewCell.m in Sources */,
+				8702DB0A24C6D0670083E277 /* SearchDetailViewController.m in Sources */,
 				A5852FCD2368203C009E5CB3 /* LoginViewController.m in Sources */,
 				115761692019D19E00E0D94F /* YLChatBoxItemView.m in Sources */,
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,

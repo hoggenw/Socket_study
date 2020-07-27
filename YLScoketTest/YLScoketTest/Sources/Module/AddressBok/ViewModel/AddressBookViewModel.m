@@ -141,6 +141,26 @@
         
     }];
     
+    _createFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Create_Friendship] paramBody:input needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    NSLog(@"%@",returnDict);
+                    [subscriber sendNext: @(true)];
+                    [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            return  nil;
+        }];
+        
+    }];
+    
+    
 }
 
 -(void)getFriendscommand {
@@ -160,6 +180,10 @@
 
 -(void)searchFriendshipcommand:(NSMutableDictionary *)input{
     [_searchFriendshipcommand execute:input];
+}
+
+-(void)createFriendshipcommand:(NSMutableDictionary *)input{
+    [_createFriendshipcommand execute:input];
 }
 
 /**

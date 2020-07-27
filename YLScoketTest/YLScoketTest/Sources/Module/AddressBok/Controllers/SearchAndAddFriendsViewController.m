@@ -13,6 +13,9 @@
 #import "SearchUserTableViewCell.h"
 #import "ApplyDetailViewController.h"
 #import "SearchUserModel.h"
+#import "SearchDetailViewController.h"
+#import "ChatListUserModel.h"
+#import "ChatViewController.h"
 
 @interface SearchAndAddFriendsViewController ()<UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>
 
@@ -32,13 +35,13 @@
     self = [super init];
     if (self)
     {
-//        @weakify(self)
-//        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Reload_FriendShips object:nil] subscribeNext:^(NSNotification * _Nullable x) {
-//            @strongify(self)
-//            if (self.viewModel) {
-//                [self.viewModel getApplyFriendscommand];
-//            }
-//        }];
+        //        @weakify(self)
+        //        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:Y_Notification_Reload_FriendShips object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        //            @strongify(self)
+        //            if (self.viewModel) {
+        //                [self.viewModel getApplyFriendscommand];
+        //            }
+        //        }];
     }
     return self;
 }
@@ -89,16 +92,38 @@
         @strongify(self)
         if (x != nil)
         {
-               NSLog(@"%@",x);
-      
+            NSLog(@"%@",x);
+            
+            SearchUserModel * selfModel = nil;
             self.friendsArray = x;
-     
+            if (self.friendsArray.count <= 0) {
+                [YLHintView showMessageOnThisPage:@"未有查询到相关账号信息"];
+            }
+            for (SearchUserModel * model in self.friendsArray) {
+                BOOL isFriend = false;
+                for (YLUserModel * temModel in self.contactArray) {
+                    if ([model.userId isEqualToString: temModel.userId]) {
+                        isFriend = true;
+                        break;
+                    }
+                }
+                model.isFriend = isFriend;
+                
+                if ([model.userId isEqualToString: [AccountManager sharedInstance].fetch.userID]) {
+                    selfModel = model;
+                }
+            }
+            if (selfModel != nil) {
+                [self.friendsArray removeObject: selfModel];
+            }
+            
+            
             [self.listTableView reloadData];
         }
         
         
     }];
-   
+    
 }
 
 
@@ -112,10 +137,10 @@
 
 #pragma mark- TextField delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-        NSLog(@"开始搜索");
+    NSLog(@"开始搜索");
     NSString * name = textField.text;
     name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
+    
     if (name.length <= 0) {
         [YLHintView showMessageOnThisPage:@"请输入搜索内容"];
         return true;
@@ -167,23 +192,77 @@
     [[cell rac_signalForSelector:@selector(detailBtnClicked:)] subscribeNext:^(RACTuple * _Nullable x) {
         @strongify(self)
         RACTupleUnpack(UIButton *button) = x;
-//        FiendshipModel *temp = self.friendsArray[button.tag - 500];
-//        [self toDetailController:temp];
+        SearchUserModel *temp = self.friendsArray[button.tag - 500];
+        if (temp.isFriend) {
+             [self toChatController:temp];
+        }else{
+           [self toDetailController:temp];
+        }
+       
     }];
     return cell;
     
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    FiendshipModel *model = self.friendsArray[indexPath.row];
-//    [self toDetailController:model];
+    SearchUserModel *model = self.friendsArray[indexPath.row];
+    [self toDetailController:model];
 }
 
--(void)toDetailController:(FiendshipModel *)model {
-    ApplyDetailViewController * vc = [ApplyDetailViewController new];
+-(void)toDetailController:(SearchUserModel *)model {
+    SearchDetailViewController * vc = [SearchDetailViewController new];
     vc.model = model;
     PUSH(vc);
+    
+}
+
+
+
+-(void)toChatController:(SearchUserModel *)model {
+    //添加聊天
+    ChatListUserModel *item1  = [ChatListUserModel new];
+    item1.userId = model.userId;
+    item1.name = model.userName;
+    item1.avatar = model.avatar;
+    item1.date = [NSDate date];
+    item1.messageCount = 0;
+    item1.selfId = [[AccountManager sharedInstance] fetch].userID;
+//    if(self.friendsshipModel){
+//        if ([self.friendsshipModel.friend.userId isEqualToString: [[AccountManager sharedInstance] fetch].userID]) {
+//
+//            item1.name = self.friendsshipModel.userCategoryName.length > 0 ?  self.friendsshipModel.userCategoryName : self.model.name;
+//
+//        }else{
+//            item1.name  = self.friendsshipModel.firendCategoryName.length > 0 ?  self.friendsshipModel.firendCategoryName : self.model.name;
+//        }
+//
+//    }
+//
+    
+    if ([[LocalSQliteManager sharedInstance] isChatListUserModelExist: item1]) {
+        ChatListUserModel *item2  = [ChatListUserModel new];
+        item2.userId = model.userId;
+        item2.name =  item1.name;
+        item2.date = [NSDate date];
+        item2.messageCount = 0;
+        [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
+    }else{
+        [[LocalSQliteManager sharedInstance] insertChatListUserModel:item1];
+    }
+    ChatViewController *chatVC  = [ChatViewController new];
+    /**
+     下面的这个 TLUser 就是具体到用户的一个数据 model
+     */
+    ChatUserModel *user7 = [[ChatUserModel alloc] init];
+    user7.username = item1.name;
+    user7.userID = item1.userId;
+    user7.avatarURL = item1.avatar;
+    chatVC.user = user7;
+    
+    // 隐藏底部的buttomBar 当 push 的时候
+    [self.navigationController pushViewController:chatVC animated:YES];
     
 }
 @end

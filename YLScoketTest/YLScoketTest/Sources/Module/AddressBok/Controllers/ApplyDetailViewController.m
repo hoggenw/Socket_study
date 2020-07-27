@@ -111,7 +111,7 @@
         make.bottom.equalTo(self.headerView.mas_bottom).offset(-3);
     }];
     self.nameButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-        make.titleForState(@"修改",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).addAction(self, @selector(nameBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.informationView).titleFont(FONT(14));
+        make.titleForState(@"修改",UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9),UIControlStateNormal).addAction(self, @selector(nameBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.informationView).titleFont(FONT(14));
     }];
     
     
@@ -143,7 +143,7 @@
     }];
     
     self.remarkButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-        make.titleForState(@"更新备注",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).addAction(self, @selector(remarkBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.view).titleFont(FONT(14));
+        make.titleForState(@"更新备注",UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9),UIControlStateNormal).addAction(self, @selector(remarkBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self.view).titleFont(FONT(14));
     }];
     
     

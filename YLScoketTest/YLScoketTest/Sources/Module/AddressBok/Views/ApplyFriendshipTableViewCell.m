@@ -140,7 +140,7 @@
 - (UIButton *)detailButton {
     if (_detailButton == nil) {
         _detailButton = [UIButton makeButton:^(ButtonMaker * _Nonnull make) {
-            make.titleForState(@"查看",UIControlStateNormal).titleColorForState(UIColor.greenColor,UIControlStateNormal).backgroundColor([UIColor colorWithHex:0xf3f4f5]).addAction(self, @selector(detailBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self).titleFont(FONT(13));
+            make.titleForState(@"查看",UIControlStateNormal).titleColorForState(UICOLOR(0x8EDEE9),UIControlStateNormal).backgroundColor([UIColor colorWithHex:0xf3f4f5]).addAction(self, @selector(detailBtnClicked:), UIControlEventTouchUpInside).addToSuperView(self).titleFont(FONT(13));
         }];
         [self.contentView addSubview:_detailButton];
         _detailButton.layer.cornerRadius = 2;

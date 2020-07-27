@@ -46,6 +46,8 @@ extern NSString * const ApplyFriendships_List;
 extern NSString * const Update_Friendship_info;
 //同意好友关系
 extern NSString * const Agree_Friendship;
+//申请好友
+extern NSString * const Create_Friendship;
 //查询朋友
 extern NSString * const Search_Friends;
 

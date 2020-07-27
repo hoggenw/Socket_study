@@ -13,10 +13,10 @@
 
 #ifdef DEBUG
 //https
-//NSString * const BaseUrl = @"http://192.168.1.40:8099/";
-//NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-//NSString * const SOCKETHOST = @"192.168.1.40";
-//uint16_t const SOCKETHOSTPORT = 9696;
+NSString * const BaseUrl = @"http://192.168.1.40:8099/";
+NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+NSString * const SOCKETHOST = @"192.168.1.40";
+uint16_t const SOCKETHOSTPORT = 9696;
 
 //NSString * const BaseUrl = @"http://49.235.149.115:8099/";
 //NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
@@ -24,10 +24,10 @@
 //uint16_t const SOCKETHOSTPORT = 9696;
 
 
-NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
-NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
-uint16_t const SOCKETHOSTPORT = 9001;
+//NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
+//NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
+//NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
+//uint16_t const SOCKETHOSTPORT = 9001;
 
 #else
 NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
@@ -59,6 +59,9 @@ NSString * const Blackships_List = @"api/apply/friend/blackList";
 NSString * const Blackships_Delete = @"api/apply/friend/blackDelete";
 NSString * const Update_Friendship_info = @"api/apply/friend/updateFriendship";
 NSString * const Agree_Friendship = @"api/apply/friend/add";
+NSString * const Create_Friendship = @"api/apply/friend/creat";
+
+
 NSString * const Search_Friends = @"/api/people/search";
 
 NSString * const RegisterAPI = @"api/login/register";

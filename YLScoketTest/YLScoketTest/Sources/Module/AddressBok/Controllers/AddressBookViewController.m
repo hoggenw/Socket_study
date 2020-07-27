@@ -87,12 +87,14 @@
         else if ([button.titleLabel.text isEqualToString:@"好友申请"])
         {
             ApplyFriendshipViewController * applyVC = [ApplyFriendshipViewController new];
+              applyVC.contactArray = self.contactArray;
             PUSH(applyVC);
             NSLog(@"好友申请");
         }
         else if ([button.titleLabel.text isEqualToString:@"添加好友"])
         {
             SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
+            searchVC.contactArray = self.contactArray;
             PUSH(searchVC);
             NSLog(@"添加好友");
         }
@@ -160,6 +162,7 @@
 - (void)searchAction
 {
     SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
+      searchVC.contactArray = self.contactArray;
     PUSH(searchVC);
     NSLog(@"网络用户搜索");
 }

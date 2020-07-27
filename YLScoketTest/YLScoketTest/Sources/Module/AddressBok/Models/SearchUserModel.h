@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *codeName;
 @property (nonatomic, copy) NSString *userName;
+@property (nonatomic, assign) BOOL isFriend;
 
 @end
 

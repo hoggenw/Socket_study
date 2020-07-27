@@ -14,6 +14,7 @@
 #import "ApplyDetailViewController.h"
 #import "SearchAndAddFriendsViewController.h"
 
+
 @interface ApplyFriendshipViewController ()<UITextFieldDelegate,UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITextField *searchTextField;
@@ -109,6 +110,7 @@
 #pragma mark- TextField delegate
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
+      searchVC.contactArray = self.contactArray;
        PUSH(searchVC);
     NSLog(@"搜索");
     return false;
@@ -174,5 +176,6 @@
     PUSH(vc);
     
 }
+
 
 @end
