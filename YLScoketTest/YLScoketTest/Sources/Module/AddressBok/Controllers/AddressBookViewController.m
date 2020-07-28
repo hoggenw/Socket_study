@@ -15,6 +15,7 @@
 #import "ApplyFriendshipViewController.h"
 #import "FriendInfoViewController.h"
 #import "SearchAndAddFriendsViewController.h"
+#import "ChatListUserModel.h"
 
 @interface AddressBookViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -87,7 +88,7 @@
         else if ([button.titleLabel.text isEqualToString:@"好友申请"])
         {
             ApplyFriendshipViewController * applyVC = [ApplyFriendshipViewController new];
-              applyVC.contactArray = self.contactArray;
+            applyVC.contactArray = self.contactArray;
             PUSH(applyVC);
             NSLog(@"好友申请");
         }
@@ -143,7 +144,22 @@
         
         
     }];
+    
+    [_viewModel.deleteFriendshipcommand.executionSignals.switchToLatest subscribeNext:^(id  _Nullable x) {
+        
+        @strongify(self)
+        if (x != nil)
+        {
+            [self.viewModel getFriendscommand];
+            [YLHintView showMessageOnThisPage:@"删除成功"];
+            
+        }
+        
+        
+    }];
     [_viewModel getFriendscommand];
+    
+    
 }
 
 - (void)friendsDataDeal {
@@ -162,7 +178,7 @@
 - (void)searchAction
 {
     SearchAndAddFriendsViewController * searchVC = [SearchAndAddFriendsViewController new];
-      searchVC.contactArray = self.contactArray;
+    searchVC.contactArray = self.contactArray;
     PUSH(searchVC);
     NSLog(@"网络用户搜索");
 }
@@ -201,6 +217,60 @@
     }
     
     return nil;
+}
+
+//侧滑
+//实现了这个方法就有滑动的删除按钮了
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+}
+//这个方法就是可以自己添加一些侧滑出来的按钮，并执行一些命令和按钮设置
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    
+    //设置按钮(它默认第一个是修改系统的)
+    //    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消关注" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    //        NSLog(@"取消关注操作第%@",@(indexPath.row));
+    //    }];
+    //设置按钮(它默认第一个是修改系统的)
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        ChatListUserModel *model = [ChatListUserModel new];
+        model.selfId = [AccountManager sharedInstance].fetch.userID;
+        YLUserModel *model2 = _rowArr[indexPath.section][indexPath.row];
+        model.userId =model2.userId;
+        FiendshipModel * friendship = nil;
+        for (FiendshipModel * temp in self.friendsArray) {
+            if (temp.friend == model2  || temp.user == model2) {
+                friendship = temp;
+                break;
+            }
+        }
+        if (friendship == nil) {
+            [YLHintView showMessageOnThisPage:@"删除失败"];
+            return;
+        }
+        if ([[LocalSQliteManager sharedInstance] deletChatListUserModel:model ]) {
+            NSMutableDictionary * input = [NSMutableDictionary dictionary];
+            input[@"id"] = friendship.idStr;
+            input[@"userId"] = [AccountManager sharedInstance].fetch.userID;
+            input[@"friendId"] = model2.userId;
+            
+            [_viewModel deleteFriendshipcommand: input];
+        }
+        NSLog(@"删除操作第%@",@(indexPath.row));
+    }];
+    
+    //    action.backgroundColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];
+    action1.backgroundColor = [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f];
+    return @[action1];
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return YES;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

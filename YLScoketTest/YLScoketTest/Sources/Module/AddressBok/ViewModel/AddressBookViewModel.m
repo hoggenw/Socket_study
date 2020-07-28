@@ -160,6 +160,25 @@
         
     }];
     
+    _deleteFriendshipcommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+            
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Delete_Friendship] paramBody:input needToken:true showToast:true returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    NSLog(@"%@",returnDict);
+                    [subscriber sendNext: @(true)];
+                    [subscriber sendCompleted];
+                }else {
+                    [subscriber sendNext: nil];
+                    [subscriber sendCompleted];
+                }
+                
+            }];
+            return  nil;
+        }];
+        
+    }];
+    
     
 }
 
@@ -185,7 +204,9 @@
 -(void)createFriendshipcommand:(NSMutableDictionary *)input{
     [_createFriendshipcommand execute:input];
 }
-
+-(void)deleteFriendshipcommand:(NSMutableDictionary *)input{
+     [_deleteFriendshipcommand execute:input];
+}
 /**
  联系人数组排序
  

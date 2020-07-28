@@ -302,7 +302,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         base.data_p = data;
         //NSLog(@"%@",data);
         if (!(_webSocket.readyState == SR_OPEN)) {
-             [self disconnnet];
+            [self disconnnet];
             [self connect];
             [YLHintView showMessageOnThisPage:@"请查看网络连接"];
             return;
@@ -416,6 +416,11 @@ dispatch_async(dispatch_get_main_queue(), block);\
             return;
         }
         
+        if (baseModel.command == 5) {
+            [YLHintView showMessageOnThisPage:@"你们还不是朋友关系，不能发送消息"];
+            return;
+        }
+        
         YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
         //todo
         //更新本地数据库消息发送记录
@@ -431,7 +436,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
         item2.message = pmessage.textString;
         item2.selfId = [[AccountManager sharedInstance] fetch].userID;
         [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
-        
         return;
     }else  if (baseModel.module == 101) {//普通消息接收
         if (baseModel.command == 10086) {
@@ -482,7 +486,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     
     
     
-   // NSLog(@"服务器返回消息：%@",message);
+    // NSLog(@"服务器返回消息：%@",message);
 }
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {

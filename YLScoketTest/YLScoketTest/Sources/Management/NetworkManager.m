@@ -60,7 +60,7 @@ NSString * const Blackships_Delete = @"api/apply/friend/blackDelete";
 NSString * const Update_Friendship_info = @"api/apply/friend/updateFriendship";
 NSString * const Agree_Friendship = @"api/apply/friend/add";
 NSString * const Create_Friendship = @"api/apply/friend/creat";
-
+NSString * const Delete_Friendship = @"api/apply/friend/delete";
 
 NSString * const Search_Friends = @"/api/people/search";
 
