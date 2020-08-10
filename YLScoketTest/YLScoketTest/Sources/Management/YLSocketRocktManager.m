@@ -237,10 +237,10 @@ dispatch_async(dispatch_get_main_queue(), block);\
     YLMessageModel * pmessage = [YLMessageModel new];
     switch (messageModel.messageType) {
         case  YLMessageTypeImage:{ // 图片
-            pmessage.textString = @"这是图片";
+            pmessage.textString = messageModel.text;
             pmessage.messageType = YLMessageTypeImage;
             pmessage.messageSource = messageModel.sourcePath;
-            pmessage.voiceData = messageModel.voiceData;
+            //pmessage.voiceData = messageModel.voiceData;
             break;
         }
         case  YLMessageTypeText:{ // 文字
@@ -287,10 +287,29 @@ dispatch_async(dispatch_get_main_queue(), block);\
     if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
         
         [self initMessageBeat];
+        
         if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
             if (pmessage != NULL) {
                 [_delegate receiveMessage: locaModel];
             }
+        }
+        
+        if (pmessage.messageType == YLMessageTypeImage) {
+            //            NSData * imageData = messageModel.voiceData;
+            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Upload_TokenAPI] paramBody:nil needToken:true showToast:false  returnBlock:^(NSDictionary *returnDict) {
+                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                    
+                    NSDictionary * tokenDic = returnDict[@"data"];
+                    NSString * uploadtoken = [NSString stringWithFormat:@"%@",tokenDic[@"uploadToken"]];
+                    NSLog(@"上传token%@",uploadtoken);
+                    
+                }else {
+                      NSLog(@"获取上传token失败");
+                    return;
+                }
+                
+            }];
+            
         }
         // 序列化为Data
         NSData *data = [pmessage data];
@@ -433,7 +452,13 @@ dispatch_async(dispatch_get_main_queue(), block);\
         item2.userId = pmessage.toUser.userId;
         item2.name = pmessage.toUser.name;
         item2.date = [NSDate date];
-        item2.message = pmessage.textString;
+        if (pmessage.messageType == YLMessageTypeImage) {
+            item2.message = @"【图片】";
+        }else {
+            item2.message = pmessage.textString;
+        }
+        
+        
         item2.selfId = [[AccountManager sharedInstance] fetch].userID;
         [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
         return;
@@ -466,7 +491,11 @@ dispatch_async(dispatch_get_main_queue(), block);\
             item2.userId = pmessage.fromUser.userId;
             item2.name = pmessage.fromUser.name;
             item2.date = [NSDate date];
-            item2.message = pmessage.textString;
+            if (pmessage.messageType == YLMessageTypeImage) {
+                item2.message = @"【图片】";
+            }else {
+                item2.message = pmessage.textString;
+            }
             item2.messageCount = (int)unread;
             item2.avatar = pmessage.fromUser.avatar;
             item2.selfId = [[AccountManager sharedInstance] fetch].userID;

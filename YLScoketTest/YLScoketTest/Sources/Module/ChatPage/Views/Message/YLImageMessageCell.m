@@ -65,22 +65,28 @@
             [self.messageImageView setImage: [UIImage imageWithData: messageModel.voiceData]];
             
         }else if(messageModel.sourcePath.length > 0) {
-            NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString: messageModel.sourcePath]];
-            [self.messageImageView setImage: [UIImage imageWithData: data]];
+             // network Image
+           // NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString: messageModel.sourcePath]];
+//            [self.messageImageView sd_setImageWithURL:<#(nullable NSURL *)#>]
+            [self.messageImageView sd_setImageWithURL:[NSURL URLWithString: messageModel.sourcePath]];
             
         }else {
-            // network Image
+            NSLog(@"无效文件");
         }
         
         [self.messageImageView setSize:CGSizeMake(messageModel.messageSize.width + 10, messageModel.messageSize.height + 10)];
+        [self bringSubviewToFront:self.messageImageView];
     }
     
     switch (self.messageModel.ownerTyper) {
         case YLMessageOwnerTypeSelf:
             self.messageBackgroundImageView.image = [[UIImage imageNamed:@"message_sender_background_reversed"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch];
+            self.messageBackgroundImageView.userInteractionEnabled = true;
             break;
         case YLMessageOwnerTypeOther:
             [self.messageBackgroundImageView setImage:[[UIImage imageNamed:@"message_receiver_background_reversed"] resizableImageWithCapInsets:UIEdgeInsetsMake(28, 20, 15, 20) resizingMode:UIImageResizingModeStretch]];
+            self.messageBackgroundImageView.userInteractionEnabled = true;
+         
             break;
         default:
             break;

@@ -11,6 +11,7 @@
 //返回block
 typedef void (^ReturnBlock)(NSDictionary *returnDict);
 
+
 extern NSString * const BaseUrl;              // 网络请求的BaseUrl
 extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
 
@@ -52,6 +53,12 @@ extern NSString * const Create_Friendship;
 extern NSString * const Delete_Friendship;
 //查询朋友
 extern NSString * const Search_Friends;
+//上传文件
+extern NSString * const UploadFileAPI;
+//上传文件token
+extern NSString * const Upload_TokenAPI;
+
+
 
 @interface NetworkManager : NSObject
 
@@ -63,7 +70,7 @@ extern NSString * const Search_Friends;
 
 
 // 上传图片接口
--(void)postImageUploadApiParam:(NSData *)data returnBlock:(ReturnBlock)infoBlock;
+-(void)postImageUploadApiParam:(NSData *)data fileName:(NSString *)fileName  mimeType:(NSString *)mimeType returnBlock:(ReturnBlock)infoBlock  progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress;
 
 
 //放入请求头
@@ -74,4 +81,5 @@ extern NSString * const Search_Friends;
 
 
 - (void)getWithURL:(NSString *)requestURL param:(NSDictionary *)paramDic  needToken:(BOOL)needToken showToast:(BOOL)showToast returnBlock:(ReturnBlock)infoBlock;
+
 @end

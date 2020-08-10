@@ -40,6 +40,9 @@
         
     }];
     
+//    NSString *languageCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"][0];
+//    NSLog(@"语音环境：%@",languageCode);
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -176,12 +179,14 @@
     //设置按钮(它默认第一个是修改系统的)
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         ChatListUserModel *model = _dataArray[indexPath.row];
+        model.selfId = [AccountManager sharedInstance].fetch.userID;
         if ([[LocalSQliteManager sharedInstance] deletChatListUserModel:model ]) {
             [self.dataArray removeObject: model];
             [self.tableView reloadData];
+              NSLog(@"聊天列表删除操作第%@",@(indexPath.row));
         }
         
-        NSLog(@"删除操作第%@",@(indexPath.row));
+      
     }];
     
 //    action.backgroundColor = [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0];

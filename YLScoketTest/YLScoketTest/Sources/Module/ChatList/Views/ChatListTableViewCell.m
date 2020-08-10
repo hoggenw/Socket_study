@@ -110,6 +110,7 @@
         [_dateLabel setText: [_userModel.date formatYYMMDD]];
     }
   
+ 
     [_messageLabel setText:_userModel.message];
     
     if (_userModel.messageCount > 0) {

@@ -203,11 +203,9 @@ static UILabel *label = nil;
             //NSLog(@"path：%@   获取路径的image： %@",path,_image);
             if (_image != nil) {
                 _messageSize = (_image.size.width > ScreenWidth * 0.5 ? CGSizeMake(ScreenWidth * 0.5, ScreenWidth * 0.5 / _image.size.width * _image.size.height) : _image.size);
-                _messageSize = (_messageSize.height > 60 ? (_messageSize.height < 200 ? _messageSize : CGSizeMake(_messageSize.width, 200)) : CGSizeMake(60.0 / _messageSize.height * _messageSize.width, 60));
+//                _messageSize = (_messageSize.height > 60 ? (_messageSize.height < 200 ? _messageSize : CGSizeMake(_messageSize.width, 200)) : CGSizeMake(60.0 / _messageSize.height * _messageSize.width, 60));
             }
-            else {
-                _messageSize = CGSizeMake(0, 0);
-            }
+            
             break;
         }
         case YLMessageTypeVoice:{

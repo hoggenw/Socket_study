@@ -18,16 +18,19 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - HappyDNS (0.3.17)
   - IQKeyboardManager (6.5.5)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.4.3)
   - MQTTKit (0.1.0)
   - QBImagePickerController (3.4.0)
+  - Qiniu (7.4.3):
+    - HappyDNS (~> 0.3.17)
   - ReactiveObjC (3.1.1)
-  - SDWebImage (5.8.0):
-    - SDWebImage/Core (= 5.8.0)
-  - SDWebImage/Core (5.8.0)
+  - SDWebImage (5.8.4):
+    - SDWebImage/Core (= 5.8.4)
+  - SDWebImage/Core (5.8.4)
   - SocketRocket (0.5.1)
   - SSKeychain (1.4.1)
   - YYModel (1.0.4)
@@ -42,6 +45,7 @@ DEPENDENCIES:
   - MJRefresh
   - MQTTKit
   - QBImagePickerController
+  - Qiniu (~> 7.4)
   - ReactiveObjC
   - SDWebImage
   - SocketRocket
@@ -50,16 +54,17 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - FMDB
-  trunk:
     - AFNetworking
     - CocoaAsyncSocket
+    - FMDB
+    - HappyDNS
     - IQKeyboardManager
     - Masonry
     - MBProgressHUD
     - MJRefresh
     - MQTTKit
     - QBImagePickerController
+    - Qiniu
     - ReactiveObjC
     - SDWebImage
     - SocketRocket
@@ -70,18 +75,20 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  HappyDNS: 848ef73e24f2b0e2752064223ce2dc0dd88900ea
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   MQTTKit: a4e6b8aa92db1aeae917d2b773fd72a7749937c4
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  Qiniu: 81bbc90dc6c387ea32a244f9070bc7cf08638ab5
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
+  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: f5c7b47b51611deb341031d647416dd4392254b0
+PODFILE CHECKSUM: 513d5400c9311e513ed287c1d22d4751e9f4a743
 
 COCOAPODS: 1.9.0

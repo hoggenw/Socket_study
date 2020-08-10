@@ -64,7 +64,11 @@ NSString * const Delete_Friendship = @"api/apply/friend/delete";
 
 NSString * const Search_Friends = @"/api/people/search";
 
+NSString * const Upload_TokenAPI = @"/api/file/uploadToken";
+
 NSString * const RegisterAPI = @"api/login/register";
+
+NSString * const UploadFileAPI = @"/api/file/upload";
 
 @interface NetworkManager()
 @property (nonatomic, strong) NetworkManager * netManager;
@@ -116,13 +120,13 @@ static AFHTTPSessionManager *sessionManager = nil;
 
 #pragma mark- 上传图片
 
--(void)postImageUploadApiParam:(NSData *)data returnBlock:(ReturnBlock)infoBlock{
-    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true showToast: true];
+-(void)postImageUploadApiParam:(NSData *)data fileName:(NSString *)fileName  mimeType:(NSString *)mimeType returnBlock:(ReturnBlock)infoBlock {
+    AFHTTPSessionManager *manager = [[NetworkManager sharedInstance] getSessionManager: true showToast: false];
     [manager POST:[NSString stringWithFormat:@""] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data
                                     name:@"file"
-                                fileName:@"file.jpeg"
-                                mimeType:@"image/jpeg"];
+                                fileName:fileName
+                                mimeType:mimeType];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

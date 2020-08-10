@@ -24,5 +24,7 @@ target ‘YLScoketTest’ do
   #pod 'ChatKit'
   pod 'ReactiveObjC'
   pod 'IQKeyboardManager'
+  #七牛云
+  pod "Qiniu", "~> 7.4"
     
 end

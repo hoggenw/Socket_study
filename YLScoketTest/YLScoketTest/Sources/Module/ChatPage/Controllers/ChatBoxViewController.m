@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
     [self.view addSubview:self.chatBox];
     /**
      *  添加两个键盘回收通知
@@ -59,7 +59,7 @@
 
 /**
  *  回收键盘方法
- *  
+ *
  */
 - (BOOL) resignFirstResponder
 {
@@ -298,7 +298,7 @@
     [self.chatBox deleteButtonDown];
 }
 - (void) chatBoxFaceViewSendButtonDown{
-     [self.chatBox sendCurrentMessage];
+    [self.chatBox sendCurrentMessage];
 }
 
 
@@ -314,15 +314,15 @@
             imagePickerController.allowsMultipleSelection = YES;
             imagePickerController.maximumNumberOfSelection = 8;//设置选择图像数量上限
             imagePickerController.assetCollectionSubtypes = @[
-                                                              @(PHAssetCollectionSubtypeSmartAlbumUserLibrary), //相机胶卷
-                                                              @(PHAssetCollectionSubtypeAlbumMyPhotoStream), //我的照片流
-                                                              @(PHAssetCollectionSubtypeSmartAlbumPanoramas), //全景图
-                                                              @(PHAssetCollectionSubtypeSmartAlbumVideos), //视频
-                                                              //@(PHAssetCollectionSubtypeSmartAlbumBursts) //连拍模式拍摄的照片
-                                                              ];
+                @(PHAssetCollectionSubtypeSmartAlbumUserLibrary), //相机胶卷
+                @(PHAssetCollectionSubtypeAlbumMyPhotoStream), //我的照片流
+                @(PHAssetCollectionSubtypeSmartAlbumPanoramas), //全景图
+                @(PHAssetCollectionSubtypeSmartAlbumVideos), //视频
+                //@(PHAssetCollectionSubtypeSmartAlbumBursts) //连拍模式拍摄的照片
+            ];
             imagePickerController.mediaType = QBImagePickerMediaTypeAny;//图片和视频
             imagePickerController.showsNumberOfSelectedAssets = YES;//在界面下方显示已经选择图像的数量
-            [self presentViewController:imagePickerController animated:YES completion:nil];  
+            [self presentViewController:imagePickerController animated:YES completion:nil];
             //NSLog(@"相册");
             break;
         }
@@ -338,24 +338,108 @@
 }
 #pragma mark - Image Picker Controller Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
     UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
     if (!image) {
         image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
     }
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        ChatMessageModel * message = [[ChatMessageModel alloc] init];
-        message.messageType = YLMessageTypeImage;
-        message.ownerTyper = YLMessageOwnerTypeSelf;
-        message.image = [image compressImageWithSice:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38)];
-        message.sourcePath = [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
-        message.date = [NSDate  date];
-        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
+    NSMutableArray *imageIds = [NSMutableArray array];
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        
+        //写入图片到相册
+        PHAssetChangeRequest *req = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+        //记录本地标识，等待完成后取到相册中的图片对象
+        [imageIds addObject:req.placeholderForCreatedAsset.localIdentifier];
+        
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        
+        NSLog(@"success = %d, error = %@", success, error);
+        
+        if (success)
+        {
+            //成功后取相册中的图片对象
+            __block PHAsset *imageAsset = nil;
+            PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:imageIds options:nil];
+            [result enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                imageAsset = obj;
+                *stop = YES;
+                
+            }];
             
-            [_delegate chatBoxViewController:self sendMessage:message];
-            
+            if (imageAsset)
+            {
+                if (imageAsset.mediaType == PHAssetMediaTypeImage) {
+/**
+ 如果出现异常info[@"PHImageFileURLKey"]无法获取图片路径地址，可以采用以下办法：
+ （1）通过PHAssetResource获取
+ NSArray *resources = [PHAssetResource assetResourcesForAsset:model.asset];
+ NSString *path = [(PHAssetResource*)resources[0] valueForKey:@"privateFileURL"];
+ NSURL *pathURL = (NSURL *)path;
+ //还可以获取文件的名称
+ NSString *imageFilename = ((PHAssetResource*)resources[0]).originalFilename;
+ （2）直接拼接
+ //相册路径前缀为：file:///var/mobile/Media
+ PHAsset *asset;
+ NSString *filename = [asset valueForKey:@"filename"];
+ NSString *directory = [asset valueForKey:@"directory"];
+ 获取绝对路径和文件名，进行拼接即可
+ NSString *path  = file:///var/mobile/Media/directory/filename
+ NSURL *pathURL = (NSURL *)path;
+ */
+                    
+                    PHImageRequestOptions * imageRequestOptions = [[PHImageRequestOptions alloc] init];
+                    imageRequestOptions.networkAccessAllowed = YES;
+                    [[PHImageManager defaultManager]
+                     requestImageDataForAsset:imageAsset
+                     options:imageRequestOptions
+                     resultHandler:^(NSData *imageData, NSString *dataUTI,
+                                     UIImageOrientation orientation,
+                                     NSDictionary *info)
+                     {
+                        NSURL *path;
+                        if ([info objectForKey:@"PHImageFileURLKey"]) {
+                            
+                            path = [info objectForKey:@"PHImageFileURLKey"];
+                            // NSLog(@"info = %@",info);
+                            
+                            
+                        }else{
+                            NSArray *resources = [PHAssetResource assetResourcesForAsset:imageAsset];
+                            NSString *path2 = [(PHAssetResource*)resources[0] valueForKey:@"privateFileURL"];
+                            path= (NSURL *)path2;
+                        }
+                        ChatMessageModel * message = [[ChatMessageModel alloc] init];
+                        message.messageType = YLMessageTypeImage;
+                        message.ownerTyper = YLMessageOwnerTypeSelf;
+                        message.image = [UIImage imageWithData:imageData];
+                        message.text = [NSString stringWithFormat:@"%@&%@",@(message.image.size.width),@(message.image.size.height)];
+                        message.voiceData = imageData;
+                        message.sourcePath = path.absoluteString; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileSandboxExtensionTokenKey "]] substringFromIndex: 8];e
+                        
+                        message.date = [NSDate  date];
+                        
+                        if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
+                            
+                            [_delegate chatBoxViewController:self sendMessage:message];
+                            
+                        }
+                    }];
+                    
+                    
+                    
+                }else {
+                    [YLHintView showMessageOnThisPage:@"类型错误"];
+                }
+            }else{
+                
+                [YLHintView showMessageOnThisPage:@"拍照发生错误"];
+            }
+        }else{
+            [YLHintView showMessageOnThisPage:@"拍照发生错误"];
         }
-        //NSLog(@"info = %@, image: %@",info,message.image);
+    }];
+    [self dismissViewControllerAnimated:YES completion:^{
     }];
 }
 
@@ -368,28 +452,52 @@
         for (PHAsset * asset in assets) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(index * 0.5 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 if (asset.mediaType == PHAssetMediaTypeImage) {
-                    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-                    options.version = PHImageRequestOptionsVersionCurrent;
-                    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-                    options.synchronous = YES;
-                    [[PHImageManager defaultManager]requestImageForAsset:asset targetSize:CGSizeMake(ScreenWidth * 0.38,ScreenHeight * 0.38) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-
+                    
+                    
+                    PHImageRequestOptions * imageRequestOptions = [[PHImageRequestOptions alloc] init];
+                    imageRequestOptions.networkAccessAllowed = YES;
+                
+                    
+                    [[PHImageManager defaultManager]
+                     requestImageDataForAsset:asset
+                     options:imageRequestOptions
+                     resultHandler:^(NSData *imageData, NSString *dataUTI,
+                                     UIImageOrientation orientation,
+                                     NSDictionary *info)
+                     {
+                        // NSLog(@"info = %@", info);
+                        NSURL *path;
+                        if ([info objectForKey:@"PHImageFileURLKey"]) {
+                            
+                            path = [info objectForKey:@"PHImageFileURLKey"];
+                            // NSLog(@"info = %@",info);
+                            
+                            
+                        }else{
+                            NSArray *resources = [PHAssetResource assetResourcesForAsset:asset];
+                            NSString *path2 = [(PHAssetResource*)resources[0] valueForKey:@"privateFileURL"];
+                            path= (NSURL *)path2;
+                        }
                         ChatMessageModel * message = [[ChatMessageModel alloc] init];
                         message.messageType = YLMessageTypeImage;
                         message.ownerTyper = YLMessageOwnerTypeSelf;
-                        message.image = result;
-                        message.sourcePath = @"file:"; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileURLKey"]] substringFromIndex: 8];
-                        message.voiceData = UIImagePNGRepresentation(result);
+                        message.image = [UIImage imageWithData:imageData];
+                        message.text = [NSString stringWithFormat:@"%@&%@",@(message.image.size.width),@(message.image.size.height)];
+                        message.sourcePath = path.absoluteString; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileSandboxExtensionTokenKey "]] substringFromIndex: 8];e
+                        message.voiceData = imageData;
                         message.date = [NSDate  date];
+                        
                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {
-
+                            
                             [_delegate chatBoxViewController:self sendMessage:message];
-
+                            
                         }
-                       // NSLog(@"info = %@, message.imagePath: %@",info,message.imagePath);
                     }];
-
-
+                    
+                    
+                    
+                    
+                    
                 }else if (asset.mediaType == PHAssetMediaTypeVideo){
                     NSLog(@"视频Type");
                 }
@@ -448,7 +556,7 @@
                                                                                imageName:@"sharemore_voiceinput"];
         YLChatBoxItemView *cardsItem = [YLChatBoxItemView createChatBoxMoreItemWithTitle:@"卡券"
                                                                                imageName:@"sharemore_wallet"];
-//        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
+        //        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem, videoCallItem, giftItem, transferItem, positionItem, favoriteItem, businessCardItem, interphoneItem, voiceItem, cardsItem, nil]];
         [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem,positionItem, voiceItem, nil]];
         _chatBoxMoreView.delegate = self;
     }
