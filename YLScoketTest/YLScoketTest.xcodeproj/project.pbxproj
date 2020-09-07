@@ -105,6 +105,7 @@
 		8754206123CD910D0008820A /* ApplyFriendshipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206023CD910D0008820A /* ApplyFriendshipViewController.m */; };
 		8754206423CD969F0008820A /* ApplyFriendshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206323CD969F0008820A /* ApplyFriendshipTableViewCell.m */; };
 		8754206723CDACB90008820A /* ApplyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8754206623CDACB90008820A /* ApplyDetailViewController.m */; };
+		875D637C25060AB6006027BD /* JudgeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 875D637B25060AB6006027BD /* JudgeUtil.m */; };
 		875FECD4248772CB00D9DD98 /* ChatDealUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 875FECD3248772CB00D9DD98 /* ChatDealUtils.m */; };
 		8769CCC223BB17100028EE71 /* PersonalProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC123BB17100028EE71 /* PersonalProfileController.m */; };
 		8769CCC523BB17B00028EE71 /* PersonInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769CCC423BB17B00028EE71 /* PersonInfoCell.m */; };
@@ -404,6 +405,8 @@
 		8754206523CDACB90008820A /* ApplyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyDetailViewController.h; sourceTree = "<group>"; };
 		8754206623CDACB90008820A /* ApplyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyDetailViewController.m; sourceTree = "<group>"; };
 		875BEB3E24AC2B79006E62A5 /* 7聊.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "7聊.entitlements"; sourceTree = "<group>"; };
+		875D637A25060AB6006027BD /* JudgeUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JudgeUtil.h; sourceTree = "<group>"; };
+		875D637B25060AB6006027BD /* JudgeUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JudgeUtil.m; sourceTree = "<group>"; };
 		875FECD2248772CB00D9DD98 /* ChatDealUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatDealUtils.h; sourceTree = "<group>"; };
 		875FECD3248772CB00D9DD98 /* ChatDealUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatDealUtils.m; sourceTree = "<group>"; };
 		8769CCC023BB17100028EE71 /* PersonalProfileController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalProfileController.h; sourceTree = "<group>"; };
@@ -876,6 +879,8 @@
 				116B676220118FB6005AA5E0 /* YLDeviceUtil.m */,
 				875FECD2248772CB00D9DD98 /* ChatDealUtils.h */,
 				875FECD3248772CB00D9DD98 /* ChatDealUtils.m */,
+				875D637A25060AB6006027BD /* JudgeUtil.h */,
+				875D637B25060AB6006027BD /* JudgeUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1557,6 +1562,7 @@
 				116B67AE2011C5E6005AA5E0 /* ChatViewController.m in Sources */,
 				1157614C201889E200E0D94F /* GPBCodedOutputStream.m in Sources */,
 				116B678F20118FB6005AA5E0 /* NSData+Base64.m in Sources */,
+				875D637C25060AB6006027BD /* JudgeUtil.m in Sources */,
 				879D1C4C23D187320019C31D /* FriendInfoViewController.m in Sources */,
 				116B67BF2011F57C005AA5E0 /* ChatBoxViewController.m in Sources */,
 				111CB19020205F2C0035D245 /* YLPhotoPreviewCell.m in Sources */,

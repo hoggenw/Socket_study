@@ -128,6 +128,9 @@
             [self.messageSendStatusImageView removeAllSubViews];
             self.messageSendStatusImageView.image  = [UIImage imageNamed:@"message_send_failed"];
             [self.messageSendStatusImageView setTapActionWithBlock:^{
+                if (messageModel.messageType == YLMessageTypeImage) {
+                    messageModel.voiceData = [UIImage compressImageQuality:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: messageModel.sourcePath]]] toByte:-1];
+                }
                 [[YLSocketRocktManager shareManger] resendMassege: messageModel];
             }];
             break;

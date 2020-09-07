@@ -13,9 +13,9 @@
 
 #ifdef DEBUG
 //https
-NSString * const BaseUrl = @"http://192.168.1.40:8099/";
+NSString * const BaseUrl = @"http://192.168.1.11:8099/";
 NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
-NSString * const SOCKETHOST = @"192.168.1.40";
+NSString * const SOCKETHOST = @"192.168.1.11";
 uint16_t const SOCKETHOSTPORT = 9696;
 
 //NSString * const BaseUrl = @"http://49.235.149.115:8099/";
@@ -62,13 +62,13 @@ NSString * const Agree_Friendship = @"api/apply/friend/add";
 NSString * const Create_Friendship = @"api/apply/friend/creat";
 NSString * const Delete_Friendship = @"api/apply/friend/delete";
 
-NSString * const Search_Friends = @"/api/people/search";
+NSString * const Search_Friends = @"api/people/search";
 
-NSString * const Upload_TokenAPI = @"/api/file/uploadToken";
+NSString * const Upload_TokenAPI = @"api/file/uploadToken";
 
 NSString * const RegisterAPI = @"api/login/register";
 
-NSString * const UploadFileAPI = @"/api/file/upload";
+NSString * const UploadFileAPI = @"api/file/upload";
 
 @interface NetworkManager()
 @property (nonatomic, strong) NetworkManager * netManager;

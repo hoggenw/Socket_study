@@ -266,7 +266,7 @@
  */
 - (void)chatBox:(YLChatBoxView *)chatBox sendTextMessage:(ChatMessageModel *)textMessage {
     
-    if (textMessage.text.length > 100) {
+    if (textMessage.messageType == YLMessageTypeText && textMessage.text.length > 100) {
         [YLHintView showMessageOnThisPage:@"发送文字内容字数不能大于100"];
         return;
     }
@@ -414,7 +414,7 @@
                         message.ownerTyper = YLMessageOwnerTypeSelf;
                         message.image = [UIImage imageWithData:imageData];
                         message.text = [NSString stringWithFormat:@"%@&%@",@(message.image.size.width),@(message.image.size.height)];
-                        message.voiceData = imageData;
+                        message.voiceData = [UIImage compressImageQuality:[UIImage imageWithData:imageData] toByte:-1];
                         message.sourcePath = path.absoluteString; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileSandboxExtensionTokenKey "]] substringFromIndex: 8];e
                         
                         message.date = [NSDate  date];
@@ -484,7 +484,7 @@
                         message.image = [UIImage imageWithData:imageData];
                         message.text = [NSString stringWithFormat:@"%@&%@",@(message.image.size.width),@(message.image.size.height)];
                         message.sourcePath = path.absoluteString; // [[NSString stringWithFormat:@"%@",info[@"PHImageFileSandboxExtensionTokenKey "]] substringFromIndex: 8];e
-                        message.voiceData = imageData;
+                        message.voiceData = [UIImage compressImageQuality:[UIImage imageWithData:imageData] toByte:-1];
                         message.date = [NSDate  date];
                         
                         if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController: sendMessage:)]) {

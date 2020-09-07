@@ -8,7 +8,8 @@
 
 #import "YLImageMessageCell.h"
 #import "ChatMessageModel.h"
-
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 
 
 @implementation YLImageMessageCell
@@ -51,12 +52,29 @@
         [self.messageImageView setOrigin:CGPointMake(x, y)];
         [self.messageBackgroundImageView setFrame:CGRectMake(x, y, self.messageModel.messageSize.width+ 10, self.messageModel.messageSize.height + 10)];
     }
+    
+    float h = MAX(self.messageImageView.height + 30, self.avatarImageView.height + 10);
+    if (self.messageModel.ownerTyper == YLMessageOwnerTypeSelf) {
+        float x = self.avatarImageView.left - self.messageImageView.width - 5;
+        [self.messageSendStatusImageView setFrame:CGRectMake(x - 35, y + h/2 - 15, 30, 30)];
+    }
+      
 }
 
 #pragma mark - Getter and Setter
 -(void)setMessageModel:(ChatMessageModel *)messageModel
 {
     [super setMessageModel:messageModel];
+    PHAuthorizationStatus status =  [PHPhotoLibrary authorizationStatus];
+       if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
+//           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请您先去设置允许APP访问您的相册 设置>隐私>相册" preferredStyle:(UIAlertControllerStyleAlert)];
+//           UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//
+//           }];
+//           [alertController addAction:action];
+//           [self presentViewController:alertController animated:YES completion:nil];
+           NSLog(@"有相册权限");
+       }
     if(messageModel.sourcePath != nil) {
         if (messageModel.image !=  nil) {
             [self.messageImageView setImage:messageModel.image];

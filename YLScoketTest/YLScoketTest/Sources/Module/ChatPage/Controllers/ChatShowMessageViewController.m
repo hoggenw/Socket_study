@@ -138,9 +138,7 @@
          */
         [self.dataArray addObject:message];
         self.dataArray = [self addSystemModel: self.dataArray];
-        if (message.messageType == YLMessageTypeImage) {
-            [self.imageMessageModels addObject: message];
-        }
+       
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
              [self scrollToBottom];
@@ -225,12 +223,14 @@
 
 - (NSMutableArray<ChatMessageModel *>  *)addSystemModel:(NSMutableArray<ChatMessageModel *> *)sourceData{
     
+    self.imageMessageModels = [NSMutableArray array];
     NSMutableArray<ChatMessageModel *>  * cleanArray = [NSMutableArray array];
     for (ChatMessageModel * temp in sourceData) {
         if (temp.ownerTyper != YLMessageOwnerTypeSystem) {
             [cleanArray addObject: temp];
         }
     }
+
     
     NSMutableArray<ChatMessageModel *>  * midArray = [NSMutableArray array];
     NSDate * midDate = [NSDate date];
@@ -259,6 +259,9 @@
             }
         }
         [midArray addObject: temp];
+        if (temp.messageType == YLMessageTypeImage) {
+              [self.imageMessageModels addObject: temp];
+        }
         
     }
     return  midArray;

@@ -44,6 +44,10 @@ typedef NS_ENUM(NSUInteger, YLImageType) {
 
 //压缩图片到指定大小()
 - (UIImage *)compressImageWithSice:(CGSize )rectSize;
+//压缩图片质量
++ (NSData *)compressImageQuality:(UIImage *)image toByte:(NSInteger)maxLength;
+
+
 //渐变色的图片
 +(UIImage *)gradientImageStartColor:(UIColor *)startColor endColor:(UIColor *) endColor bounds:(CGRect) bounds;
 

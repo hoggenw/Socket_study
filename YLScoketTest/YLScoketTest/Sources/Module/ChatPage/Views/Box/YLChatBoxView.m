@@ -304,21 +304,23 @@
         NSInteger count = 0;
         switch ((int)(power*10)) {
             case 1:
-            case 2:
                 count = 1;
-                break;
+                               break;
+            case 2:
+               count = 2;
+                               break;
             case 3:
+               count = 3;
+               break;
             case 4:
-                count = 2;
-                break;
+               count = 4;
+               break;
             case 5:
             case 6:
-                count = 3;
-                break;
+                
             case 7:
             case 8:
-                count = 4;
-                break;
+                
             case 9:
             case 10:
                 count = 5;

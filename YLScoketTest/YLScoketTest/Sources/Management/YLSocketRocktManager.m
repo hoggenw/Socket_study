@@ -14,6 +14,8 @@
 #import "ChatMessageModel.h"
 #import "LocalChatMessageModel.h"
 #import "ChatListUserModel.h"
+#import <Qiniu/QiniuSDK.h>
+
 
 typedef NS_ENUM(NSInteger,DisConnectType) {
     disConnectByUser = 1000,
@@ -130,8 +132,13 @@ dispatch_async(dispatch_get_main_queue(), block);\
     }else{
         for (LocalChatMessageModel *model in models) {
             
-            NSTimeInterval time = 10 ;//10分钟
-            NSDate * tenMinutesLater = [model.date dateByAddingTimeInterval: time];
+            NSTimeInterval time = 10 ;//10
+            NSDate * tenMinutesLater;
+            if (model.messageType == YLMessageTypeImage) {
+                tenMinutesLater  = [model.date dateByAddingTimeInterval: 20];//图片二十秒
+            }else{
+                tenMinutesLater = [model.date dateByAddingTimeInterval: time];
+            }
             int result = [NSDate compareDate:tenMinutesLater withDate: [NSDate date]];
             if (result == 1) {
                 NSLog(@"消息发送失败状态更新 %@", @([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:model.messageId sendState:YLMessageSendFail]))  ;
@@ -159,72 +166,26 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 #pragma mark- 消息重发
 -(void)resendMassege:(ChatMessageModel *)messageModel {
-    
-    
-    
-    YLMessageModel * pmessage = [YLMessageModel new];
-    switch (messageModel.messageType) {
-        case  YLMessageTypeImage:{ // 图片
-            pmessage.textString = @"这是图片";
-            pmessage.messageType = YLMessageTypeImage;
-            pmessage.messageSource = messageModel.sourcePath;
-            pmessage.voiceData = messageModel.voiceData;
-            break;
-        }
-        case  YLMessageTypeText:{ // 文字
-            pmessage.textString = messageModel.text;
-            pmessage.messageType = YLMessageTypeText;
-            break;
-        }
-        case  YLMessageTypeVoice:{ // 语音
-            pmessage.voiceData = messageModel.voiceData;
-            pmessage.messageType = YLMessageTypeVoice;
-            pmessage.voiceLength = (uint32_t) messageModel.voiceSeconds;
-            break;
-        }
-        case  YLMessageTypeVideo:{ // 视频
-            pmessage.textString = @"这是视频";
-            
-            break;
-        }
-        case  YLMessageTypeFile:{ // 文件
-            break;
-        }
-        case  YLMessageTypeLocation:{ // 位置
-            break;
-        }
-        default:
-            break;
-    }
-    pmessage.fromUser = messageModel.from ;
-    pmessage.toUser = messageModel.toUser;
-    //token
-    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
-    
-    
+    YLMessageModel * pmessage  = [self messageModelMesaagModel:messageModel];
     pmessage.messageId = messageModel.messageId;
     //存入本地，然后发送通知；
     if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSending]) {
         
-        [self initMessageBeat];
+       
         [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
         // 序列化为Data
-        NSData *data = [pmessage data];
-        
-        YLBaseMessageModel * base = [YLBaseMessageModel new];
-        base.title = SokectTile;
-        base.command = YLMessageCMDPersontoPerson;
-        base.module = YLMessageCommonModule;
-        base.data_p = data;
-        //NSLog(@"%@",data);
-        if (!(_webSocket.readyState == SR_OPEN)) {
-            [YLHintView showMessageOnThisPage:@"请查看网络连接"];
-            [self disconnnet];
-            [self connect];
-            return;
-        }else{
-            [_webSocket send: [base data]];
+        if (pmessage.messageType == YLMessageTypeImage) {
+            [self sendPictureMesaageBefore:pmessage messageModel:messageModel];
+        }else {
+            // 序列化为Data
+            YLBaseMessageModel * base = [YLBaseMessageModel new];
+            base.title = SokectTile;
+            base.command = YLMessageCMDPersontoPerson;
+            base.module = YLMessageCommonModule;
+            base.data_p =  [pmessage data];
+            [self sendMesaageWith:[base data]];
         }
+         [self initMessageBeat];
         
     }else{
         [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
@@ -234,6 +195,164 @@ dispatch_async(dispatch_get_main_queue(), block);\
 #pragma mark- 消息发送
 -(void)sendMassege:(ChatMessageModel *)messageModel {
     
+    
+    YLMessageModel * pmessage  = [self messageModelMesaagModel:messageModel];
+    NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
+    pmessage.messageId = [NSString stringWithFormat:@"%@&%@&%@",messageModel.from.userId,messageModel.toUser.userId,dateString];
+    
+    LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
+    locaModel.sendState =   YLMessageSending;
+    locaModel.readState =  YLMessageReaded;
+    locaModel.ownerTyper = YLMessageOwnerTypeSelf;
+    locaModel.dateString = dateString;
+    locaModel.messageOtherUserId = pmessage.toUser.userId;
+    locaModel.date = [NSDate date];
+    //存入本地，然后发送通知；
+    if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
+        
+        
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
+            if (pmessage != NULL) {
+                [_delegate receiveMessage: locaModel];
+            }
+        }
+        
+        if (pmessage.messageType == YLMessageTypeImage) {
+            [self sendPictureMesaageBefore:pmessage messageModel:messageModel];
+        }else {
+            // 序列化为Data
+            YLBaseMessageModel * base = [YLBaseMessageModel new];
+            base.title = SokectTile;
+            base.command = YLMessageCMDPersontoPerson;
+            base.module = YLMessageCommonModule;
+            base.data_p =  [pmessage data];
+            [self sendMesaageWith:[base data]];
+        }
+        [self initMessageBeat];
+    }else{
+        [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
+    }
+}
+
+//组装获取未获取消息请求
+- (void)getUnrecivedMessage{
+    YLMessageModel * pmessage = [YLMessageModel new];
+    UserModel * model = [AccountManager sharedInstance].fetch;
+    YLUserModel * user = [YLUserModel new];
+    user.name = model.name;
+    user.avatar = model.avatar;
+    user.userId = model.userID;
+    pmessage.fromUser = user ;
+    //token
+    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    YLBaseMessageModel * base = [YLBaseMessageModel new];
+    base.title = SokectTile;
+    base.command = YLMessageCMDMessageGet;
+    base.module = YLMessageUnsendMessgeGet;
+    base.data_p =  [pmessage data];
+    [self sendMesaageWith:[base data]];
+}
+
+//连接成功，获取当前连接服务器的ip
+- (void)getNowIp{
+    NSLog(@"获取当前ip");
+    YLMessageModel * pmessage = [YLMessageModel new];
+    UserModel * model = [AccountManager sharedInstance].fetch;
+    YLUserModel * user = [YLUserModel new];
+    user.name = model.name;
+    user.avatar = model.avatar;
+    user.userId = model.userID;
+    pmessage.fromUser = user ;
+    //token
+    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
+    YLBaseMessageModel * base = [YLBaseMessageModel new];
+    base.title = SokectTile;
+    base.command = YLMessageCMDNowIpGet;
+    base.module = YLMessageUnsendMessgeGet;
+    base.data_p =  [pmessage data];
+    [self sendMesaageWith:[base data]];
+    
+}
+
+#pragma 消息发送方法  图片消息发送前处理
+-(void)sendPictureMesaageBefore:(YLMessageModel *) pmessage messageModel:(ChatMessageModel *)messageModel{
+    
+    //uploadtoken过期时间1天
+     NSString * uploadtoken = [UserDefUtils getStringForKey:@"qiniuTokenString"];
+    if ([JudgeUtil isQiNiuTokenExpire] || uploadtoken.length <= 0) {
+        [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Upload_TokenAPI] paramBody:nil needToken:true showToast:false  returnBlock:^(NSDictionary *returnDict) {
+            if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+                
+                NSDictionary * tokenDic = returnDict[@"data"];
+                NSString * uploadtoken = [NSString stringWithFormat:@"%@",tokenDic[@"uploadToken"]];
+                NSLog(@"上传token%@",uploadtoken);
+                [UserDefUtils saveString:[[NSDate date] toStringWithFormat:@"YYYY-MM-dd HH:mm:ss"] forKey:@"qiniuTokenTimeString"];
+                [UserDefUtils saveString:uploadtoken forKey:@"qiniuTokenString"];
+                [self sendPictureMesaage: pmessage messageModel: messageModel uploadtoken: uploadtoken];
+            }else {
+                NSLog(@"获取上传token失败");
+                return;
+            }
+            
+        }];
+    }else{
+       
+        [self sendPictureMesaage: pmessage messageModel: messageModel uploadtoken: uploadtoken];
+    }
+    
+}
+
+-(void)sendPictureMesaage:(YLMessageModel *) pmessage messageModel:(ChatMessageModel *)messageModel uploadtoken:(NSString *)uploadtoken{
+    //图片数据
+    NSData * imageData = messageModel.voiceData;
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.useHttps = YES;
+    }];
+    //重用uploadManager。一般地，只需要创建一个uploadManager对
+    NSString * key = [NSString stringWithFormat:@"ihosdev/chat/%@.JPG",[[NSUUID UUID] UUIDString]] ;
+    QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];
+    [upManager putData:imageData key:key token:uploadtoken complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+        
+        if(info.ok)
+        {
+            NSLog(@"请求成功");
+            //                           NSLog(@"info==  %@",info);
+            //                            NSLog(@"resp==  %@",resp);
+            //http://qnfilesdev.schlwyy.com/ihosdev/chat/B5E10EB1-69AC-41AB-8745-ECA61A1078DE.JPG
+            NSString * imageUrl =[NSString stringWithFormat:@"http://qnfilesdev.schlwyy.com/%@",key];
+            pmessage.messageSource = imageUrl;
+            // 序列化为Data
+            YLBaseMessageModel * base = [YLBaseMessageModel new];
+            base.title = SokectTile;
+            base.command = YLMessageCMDPersontoPerson;
+            base.module = YLMessageCommonModule;
+            base.data_p =  [pmessage data];
+            [self sendMesaageWith:[base data]];
+            
+        }
+        else{
+            NSLog(@"失败");
+        }
+    } option:nil];
+}
+
+#pragma 消息发送方法  最后消息发送
+-(void)sendMesaageWith:(NSData *)data {
+    
+    
+    if (!(_webSocket.readyState == SR_OPEN)) {
+        [YLHintView showMessageOnThisPage:@"请查看网络连接"];
+        [self disconnnet];
+        [self connect];
+        return;
+    }else{
+        [_webSocket send: data];
+    }
+}
+
+#pragma 消息发送 通用消息发送前处理
+-(YLMessageModel *)messageModelMesaagModel:(ChatMessageModel *)messageModel{
     YLMessageModel * pmessage = [YLMessageModel new];
     switch (messageModel.messageType) {
         case  YLMessageTypeImage:{ // 图片
@@ -272,124 +391,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     pmessage.toUser = messageModel.toUser;
     //token
     pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
-    
-    NSString *dateString = [[NSDate date] formatYYMMDDHHMMssSS];
-    pmessage.messageId = [NSString stringWithFormat:@"%@&%@&%@",messageModel.from.userId,messageModel.toUser.userId,dateString];
-    
-    LocalChatMessageModel * locaModel = [LocalChatMessageModel localChatMessageModelchangeWith: pmessage];
-    locaModel.sendState =   YLMessageSending;
-    locaModel.readState =  YLMessageReaded;
-    locaModel.ownerTyper = YLMessageOwnerTypeSelf;
-    locaModel.dateString = dateString;
-    locaModel.messageOtherUserId = pmessage.toUser.userId;
-    locaModel.date = [NSDate date];
-    //存入本地，然后发送通知；
-    if ([[LocalSQliteManager sharedInstance] insertLoaclMessageModel:locaModel]) {
-        
-        [self initMessageBeat];
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(receiveMessage:)]) {
-            if (pmessage != NULL) {
-                [_delegate receiveMessage: locaModel];
-            }
-        }
-        
-        if (pmessage.messageType == YLMessageTypeImage) {
-            //            NSData * imageData = messageModel.voiceData;
-            [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Upload_TokenAPI] paramBody:nil needToken:true showToast:false  returnBlock:^(NSDictionary *returnDict) {
-                if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
-                    
-                    NSDictionary * tokenDic = returnDict[@"data"];
-                    NSString * uploadtoken = [NSString stringWithFormat:@"%@",tokenDic[@"uploadToken"]];
-                    NSLog(@"上传token%@",uploadtoken);
-                    
-                }else {
-                      NSLog(@"获取上传token失败");
-                    return;
-                }
-                
-            }];
-            
-        }
-        // 序列化为Data
-        NSData *data = [pmessage data];
-        
-        YLBaseMessageModel * base = [YLBaseMessageModel new];
-        base.title = SokectTile;
-        base.command = YLMessageCMDPersontoPerson;
-        base.module = YLMessageCommonModule;
-        base.data_p = data;
-        //NSLog(@"%@",data);
-        if (!(_webSocket.readyState == SR_OPEN)) {
-            [self disconnnet];
-            [self connect];
-            [YLHintView showMessageOnThisPage:@"请查看网络连接"];
-            return;
-        }else{
-            [_webSocket send: [base data]];
-        }
-        
-    }else{
-        [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
-    }
-    
-    
-    
-    
-}
-//组装获取未获取消息请求
-- (void)getUnrecivedMessage{
-    YLMessageModel * pmessage = [YLMessageModel new];
-    UserModel * model = [AccountManager sharedInstance].fetch;
-    YLUserModel * user = [YLUserModel new];
-    user.name = model.name;
-    user.avatar = model.avatar;
-    user.userId = model.userID;
-    pmessage.fromUser = user ;
-    //token
-    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
-    
-    YLBaseMessageModel * base = [YLBaseMessageModel new];
-    base.title = SokectTile;
-    base.command = YLMessageCMDMessageGet;
-    base.module = YLMessageUnsendMessgeGet;
-    base.data_p = [pmessage data];;
-    if (!(_webSocket.readyState == SR_OPEN)) {
-        [YLHintView showMessageOnThisPage:@"请查看网络连接"];
-        [self connect];
-        return;
-    }else{
-        [_webSocket send: [base data]];
-    }
-}
-
-//连接成功，获取当前连接服务器的ip
-- (void)getNowIp{
-    NSLog(@"获取当前ip");
-    YLMessageModel * pmessage = [YLMessageModel new];
-    UserModel * model = [AccountManager sharedInstance].fetch;
-    YLUserModel * user = [YLUserModel new];
-    user.name = model.name;
-    user.avatar = model.avatar;
-    user.userId = model.userID;
-    pmessage.fromUser = user ;
-    //token
-    pmessage.token = [AccountManager sharedInstance].fetch.accessToken;
-    
-    YLBaseMessageModel * base = [YLBaseMessageModel new];
-    base.title = SokectTile;
-    base.command = YLMessageCMDNowIpGet;
-    base.module = YLMessageUnsendMessgeGet;
-    base.data_p = [pmessage data];;
-    
-    if (!(_webSocket.readyState == SR_OPEN)) {
-        [YLHintView showMessageOnThisPage:@"请查看网络连接"];
-        [self disconnnet];
-        [self connect];
-        return;
-    }else{
-        [_webSocket send: [base data]];
-    }
+    return pmessage;
 }
 
 //重连机制
@@ -458,7 +460,6 @@ dispatch_async(dispatch_get_main_queue(), block);\
             item2.message = pmessage.textString;
         }
         
-        
         item2.selfId = [[AccountManager sharedInstance] fetch].userID;
         [[LocalSQliteManager sharedInstance] insertChatListUserModel:item2];
         return;
@@ -510,10 +511,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             
         }
         
-        
     }
-    
-    
     
     // NSLog(@"服务器返回消息：%@",message);
 }
@@ -553,24 +551,5 @@ dispatch_async(dispatch_get_main_queue(), block);\
     NSLog(@"收到PONG回调: %@",[[NSString alloc] initWithData:pongPayload encoding: NSUTF8StringEncoding]);
 }
 
-
-
-
-
-
-//将收到的消息，是否需要把data转换为NSString，每次收到消息都会被调用，默认YES
-//- (BOOL)webSocketShouldConvertTextFrameToString:(SRWebSocket *)webSocket
-//{
-//    NSLog(@"webSocketShouldConvertTextFrameToString");
-//
-//    return NO;
-//}
 @end
-
-
-
-
-
-
-
 

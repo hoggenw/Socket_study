@@ -16,6 +16,7 @@
 #import "FileManager.h"
 #import "LanguageUtil.h"
 #import "ChatDealUtils.h"
+#import "JudgeUtil.h"
 
 @protocol ActionSelcetControlDelegate <NSObject>
 

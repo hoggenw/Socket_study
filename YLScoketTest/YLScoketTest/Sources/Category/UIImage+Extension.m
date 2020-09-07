@@ -11,7 +11,10 @@
 
 
 
+static NSInteger MAXLENGTH=3*1024*1024;
 @implementation UIImage (Extension)
+
+
 
 //set方法
 - (void)setUrlString:(NSString *)urlString{
@@ -82,6 +85,29 @@
     UIImage * image = [self resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
     
     return image;
+}
+//压缩图片质量
++ (NSData *)compressImageQuality:(UIImage *)image toByte:(NSInteger)maxLength {
+    if ( maxLength <=0 ) {
+        maxLength = MAXLENGTH;
+    }
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(image, compression);
+    if (data.length < maxLength) return data;
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(image, compression);
+        if (data.length < maxLength * 0.9) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    return data;
 }
 
 //压缩图片大小(长宽同时乘以ratio)
