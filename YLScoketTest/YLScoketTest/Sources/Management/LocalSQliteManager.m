@@ -86,7 +86,7 @@
     __block  BOOL result = NO;
     if (![self isLoaclMessageModelExist:model]) {
         [self.queue inDatabase:^(FMDatabase *db) {
-            BOOL success=[db executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,@(model.messageType),@(model.ownerTyper),@(model.readState),@(model.sendState),model.textString,model.messageSource,model.address,model.voiceSeconds,model.date];
+            BOOL success=[db executeUpdate:@"INSERT into MessagesTabel values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.messageId,model.messageOtherUserId,model.fromUserId,model.fromName,model.fromAvatar,model.toUserUserId,model.toUserName,model.toUserAvatar,model.dateString,@(model.messageType),@(model.ownerTyper),@(model.readState),@(model.sendState),model.textString,model.messageSource,model.address,@(model.voiceSeconds),model.date];
             result = success;
             
         }];

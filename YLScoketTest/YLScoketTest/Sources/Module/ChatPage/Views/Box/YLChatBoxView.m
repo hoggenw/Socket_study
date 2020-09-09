@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UIButton *faceButton;  // 表情按钮
 @property (nonatomic, strong) UIButton *moreButton;  // 更多按钮
 @property (nonatomic, strong) UIButton *talkButton;  // 聊天键盘按钮
+@property (nonatomic, strong) DPAudioRecorder  * audioRecorder;//
 
 @end
 
@@ -251,6 +252,7 @@
         [self.textView resignFirstResponder];
         [self.textView setHidden:YES];
         [self.talkButton setHidden:NO];
+       
         [_voiceButton setImage:[UIImage imageNamed:@"ToolViewKeyboard"] forState:UIControlStateNormal];
         [_voiceButton setImage:[UIImage imageNamed:@"ToolViewKeyboardHL"] forState:UIControlStateHighlighted];
         if (lastStatus == YLChatBoxStatusShowFace) {
@@ -267,71 +269,77 @@
             
         }
     }
+   
+}
+
+- (void)dealVocie {
+     self.audioRecorder = [[DPAudioRecorder alloc] init];
     __weak typeof(self) weakSelf = self;
-    //录音完成回调
-    [DPAudioRecorder sharedInstance].audioRecorderFinishRecording = ^(NSData *data, NSUInteger audioTimeLength,NSString * localPath) {
-        NSLog(@"录音完成回调: 时长：%@, localPath: %@",@(audioTimeLength),localPath);
-        if (_delegate && [_delegate respondsToSelector:@selector(chatBox:sendTextMessage:)]) {
-            ChatMessageModel * message = [[ChatMessageModel alloc] init];
-            message.messageType = YLMessageTypeVoice;
-            message.ownerTyper = YLMessageOwnerTypeSelf;
-            message.voiceSeconds = audioTimeLength;
-            message.voicePath = localPath;
-            message.voiceData = data;
-            message.date = [NSDate  date];
-            [_delegate chatBox:self sendTextMessage: message];
-        }
-        [weakSelf.voiceView stopArcAnimation];
-        [weakSelf.voiceView removeFromSuperview];
-        weakSelf.voiceView = nil;
-    };
-    
-    //录音开始回调
-    [DPAudioRecorder sharedInstance].audioStartRecording = ^(BOOL isRecording) {
-        NSLog(@"录音开始回调");
-    };
-    
-    //录音失败回调
-    [DPAudioRecorder sharedInstance].audioRecordingFail = ^(NSString *reason) {
-        [weakSelf.voiceView stopArcAnimation];
-        [weakSelf.voiceView removeFromSuperview];
-        weakSelf.voiceView = nil;
-        [YLHintView showMessageOnThisPage: reason];
-    };
-    
-    //音频值测量回调
-    [DPAudioRecorder sharedInstance].audioSpeakPower = ^(float power) {
-        NSInteger count = 0;
-        switch ((int)(power*10)) {
-            case 1:
-                count = 1;
-                               break;
-            case 2:
-               count = 2;
-                               break;
-            case 3:
-               count = 3;
-               break;
-            case 4:
-               count = 4;
-               break;
-            case 5:
-            case 6:
-                
-            case 7:
-            case 8:
-                
-            case 9:
-            case 10:
-                count = 5;
-                break;
-            default:
-                break;
-        }
-        //录音响应
-        [weakSelf.voiceView startARCTopAnimation:count];
-       // NSLog(@"音频值测量回调 : %@",@(count));
-    };
+       //录音完成回调
+       _audioRecorder.audioRecorderFinishRecording = ^(NSData *data, NSUInteger audioTimeLength,NSString * localPath) {
+          // NSLog(@"录音完成回调: 时长：%@, localPath: %@",@(audioTimeLength),localPath);
+           if (_delegate && [_delegate respondsToSelector:@selector(chatBox:sendTextMessage:)]) {
+               ChatMessageModel * message = [[ChatMessageModel alloc] init];
+               message.messageType = YLMessageTypeVoice;
+               message.ownerTyper = YLMessageOwnerTypeSelf;
+               message.voiceSeconds = audioTimeLength;
+               message.voicePath = localPath;
+               message.voiceData = data;
+               message.text = @"【语音】";
+               message.date = [NSDate  date];
+               [weakSelf.delegate chatBox:weakSelf sendTextMessage: message];
+           }
+           [weakSelf.voiceView stopArcAnimation];
+           [weakSelf.voiceView removeFromSuperview];
+           weakSelf.voiceView = nil;
+       };
+       
+       //录音开始回调
+       _audioRecorder.audioStartRecording = ^(BOOL isRecording) {
+          // NSLog(@"录音开始回调");
+       };
+       
+       //录音失败回调
+       _audioRecorder.audioRecordingFail = ^(NSString *reason) {
+           [weakSelf.voiceView stopArcAnimation];
+           [weakSelf.voiceView removeFromSuperview];
+           weakSelf.voiceView = nil;
+           [YLHintView showMessageOnThisPage: reason];
+       };
+       
+       //音频值测量回调
+       _audioRecorder.audioSpeakPower = ^(float power) {
+           NSInteger count = 0;
+           switch ((int)(power*10)) {
+               case 1:
+                   count = 1;
+                                  break;
+               case 2:
+                  count = 2;
+                                  break;
+               case 3:
+                  count = 3;
+                  break;
+               case 4:
+                  count = 4;
+                  break;
+               case 5:
+               case 6:
+                   
+               case 7:
+               case 8:
+                   
+               case 9:
+               case 10:
+                   count = 5;
+                   break;
+               default:
+                   break;
+           }
+           //录音响应
+           [weakSelf.voiceView startARCTopAnimation:count];
+          // NSLog(@"音频值测量回调 : %@",@(count));
+       };
 }
 
 /**
@@ -428,8 +436,9 @@
 - (void) talkButtonDown:(UIButton *)sender
 {
     [_talkButton setTitle:@"松开 结束" forState:UIControlStateNormal];
+    [self dealVocie];
     //开始录音
-    [[DPAudioRecorder sharedInstance] startRecording];
+    [self.audioRecorder startRecording];
     
     [_talkButton setBackgroundColor: [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.5]];
     
@@ -440,7 +449,7 @@
 {
     [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
     //结束录音
-    [[DPAudioRecorder sharedInstance] stopRecording];
+    [self.audioRecorder stopRecording];
     [_talkButton setBackgroundColor: [UIColor clearColor]];
 }
 
@@ -449,7 +458,7 @@
     [_talkButton setTitle:@"按住 说话" forState:UIControlStateNormal];
     [_talkButton setBackgroundColor: [UIColor clearColor]];
     //结束录音
-    [[DPAudioRecorder sharedInstance] stopRecording];
+    [self.audioRecorder stopRecording];
 }
 
 #pragma mark - Getter

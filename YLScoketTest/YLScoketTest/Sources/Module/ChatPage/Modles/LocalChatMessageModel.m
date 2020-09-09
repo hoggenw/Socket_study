@@ -30,6 +30,7 @@
             returnModel.messageSource = pMessage.messageSource;
             returnModel.messageType = YLMessageTypeVoice;
             returnModel.voiceSeconds = pMessage.voiceLength;
+            returnModel.messageSource = pMessage.messageSource;
             break;
         }
         case  YLMessageTypeVideo:{ // 视频

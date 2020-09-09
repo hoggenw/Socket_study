@@ -9,6 +9,7 @@
 #import "YLVoiceMessageCell.h"
 #import "ChatMessageModel.h"
 #import "DPAudioPlayer.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation YLVoiceMessageCell
 
@@ -76,8 +77,34 @@
 }
 -(void)setMessageModel:(ChatMessageModel *)messageModel
 {
+    
     [super setMessageModel:messageModel];
     __weak typeof(self) weakSelf = self;
+    AVAuthorizationStatus microPhoneStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+//      switch (microPhoneStatus) {
+//          case AVAuthorizationStatusDenied:
+//          case AVAuthorizationStatusRestricted:
+//          {
+//              NSLog(@"被拒绝");
+//          }
+//              break;
+//          case AVAuthorizationStatusNotDetermined:
+//          {
+//              // 没弹窗
+//               NSLog(@"没弹窗");
+//          }
+//              break;
+//          case AVAuthorizationStatusAuthorized:
+//          {
+//              // 有授权
+//               NSLog(@"有授权");
+//          }
+//              break;
+//
+//          default:
+//              break;
+//      }
+    
     [self.messageBackgroundImageView setTapActionWithBlock:^{
         [weakSelf.voiceImageView startAnimating];
         if (messageModel.voiceData .length > 20) {
@@ -85,7 +112,7 @@
         }else{
             //播放url
            // NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
-            [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.voicePath];
+            [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.sourcePath];
         }
         
         

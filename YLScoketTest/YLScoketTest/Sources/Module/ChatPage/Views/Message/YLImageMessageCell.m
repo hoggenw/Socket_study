@@ -67,12 +67,6 @@
     [super setMessageModel:messageModel];
     PHAuthorizationStatus status =  [PHPhotoLibrary authorizationStatus];
        if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
-//           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请您先去设置允许APP访问您的相册 设置>隐私>相册" preferredStyle:(UIAlertControllerStyleAlert)];
-//           UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-//
-//           }];
-//           [alertController addAction:action];
-//           [self presentViewController:alertController animated:YES completion:nil];
            NSLog(@"有相册权限");
        }
     if(messageModel.sourcePath != nil) {

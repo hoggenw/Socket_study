@@ -66,6 +66,8 @@
                         NSString *fileAbsolutePath = [cachePath stringByAppendingPathComponent:fileName];
                         [fileManager removeItemAtPath:fileAbsolutePath error:nil];
                     }
+                    //清除临时文件 这里面存有语音数据
+                    [self cleanCaches:NSTemporaryDirectory()];
                     [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
                     [[SDImageCache sharedImageCache] clearMemory];
                     self.viewModel = [SetViewModel new];
@@ -124,5 +126,21 @@
 }
 
 
+// 根据路径删除文件
+- (void)cleanCaches:(NSString *)path
+{
+    // 利用NSFileManager实现对文件的管理
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path]) {
+        // 获取该路径下面的文件名
+        NSArray *childrenFiles = [fileManager subpathsAtPath:path];
+        for (NSString *fileName in childrenFiles) {
+            // 拼接路径
+            NSString *absolutePath = [path stringByAppendingPathComponent:fileName];
+// 将文件删除
+            [fileManager removeItemAtPath:absolutePath error:nil];
+        }
+    }
 
+}
 @end

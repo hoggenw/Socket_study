@@ -174,8 +174,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
        
         [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
         // 序列化为Data
-        if (pmessage.messageType == YLMessageTypeImage) {
-            [self sendPictureMesaageBefore:pmessage messageModel:messageModel];
+        if (pmessage.messageType == YLMessageTypeImage || pmessage.messageType == YLMessageTypeVoice) {
+            [self sendPictureMesaageBefore:pmessage messageModel:messageModel ];
         }else {
             // 序列化为Data
             YLBaseMessageModel * base = [YLBaseMessageModel new];
@@ -218,7 +218,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             }
         }
         
-        if (pmessage.messageType == YLMessageTypeImage) {
+        if (pmessage.messageType == YLMessageTypeImage || pmessage.messageType == YLMessageTypeVoice ) {
             [self sendPictureMesaageBefore:pmessage messageModel:messageModel];
         }else {
             // 序列化为Data
@@ -311,6 +311,12 @@ dispatch_async(dispatch_get_main_queue(), block);\
     }];
     //重用uploadManager。一般地，只需要创建一个uploadManager对
     NSString * key = [NSString stringWithFormat:@"ihosdev/chat/%@.JPG",[[NSUUID UUID] UUIDString]] ;
+    if (pmessage.messageType == YLMessageTypeImage) {
+        key = [NSString stringWithFormat:@"ihosdev/chat/%@.JPG",[[NSUUID UUID] UUIDString]] ;
+    }else if(pmessage.messageType == YLMessageTypeVoice){
+        key = [NSString stringWithFormat:@"ihosdev/chat/%@.amr",[[NSUUID UUID] UUIDString]] ;
+    }
+  
     QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];
     [upManager putData:imageData key:key token:uploadtoken complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
         
@@ -321,6 +327,9 @@ dispatch_async(dispatch_get_main_queue(), block);\
             //                            NSLog(@"resp==  %@",resp);
             //http://qnfilesdev.schlwyy.com/ihosdev/chat/B5E10EB1-69AC-41AB-8745-ECA61A1078DE.JPG
             NSString * imageUrl =[NSString stringWithFormat:@"http://qnfilesdev.schlwyy.com/%@",key];
+//            if( pmessage.messageType == YLMessageTypeVoice){
+//                [FileManager removeFileOfPath: pmessage.messageSource];
+//            }
             pmessage.messageSource = imageUrl;
             // 序列化为Data
             YLBaseMessageModel * base = [YLBaseMessageModel new];
@@ -371,6 +380,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             pmessage.voiceData = messageModel.voiceData;
             pmessage.messageType = YLMessageTypeVoice;
             pmessage.voiceLength = (uint32_t) messageModel.voiceSeconds;
+            pmessage.messageSource = messageModel.voicePath;
             break;
         }
         case  YLMessageTypeVideo:{ // 视频
@@ -456,6 +466,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
         item2.date = [NSDate date];
         if (pmessage.messageType == YLMessageTypeImage) {
             item2.message = @"【图片】";
+        }else if (pmessage.messageType == YLMessageTypeVoice) {
+                item2.message = @"【语音】";
         }else {
             item2.message = pmessage.textString;
         }
@@ -494,6 +506,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
             item2.date = [NSDate date];
             if (pmessage.messageType == YLMessageTypeImage) {
                 item2.message = @"【图片】";
+            }else if (pmessage.messageType == YLMessageTypeVoice) {
+                item2.message = @"【语音】";
             }else {
                 item2.message = pmessage.textString;
             }

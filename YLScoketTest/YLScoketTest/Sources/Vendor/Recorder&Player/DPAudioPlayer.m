@@ -58,12 +58,15 @@ static DPAudioPlayer *playerManager = nil;
 
 - (void)startPlayWithURL:(NSString *)urlStr
 {
-    
+ 
+    if(urlStr.length <= 0){
+        [YLHintView showMessageOnThisPage:@"语音信息丢失"];
+    }
     
     if ([urlStr hasPrefix:@"/private"]) {
         //[self startPlayWithData: [NSData dataWithContentsOfFile:urlStr]];
        [self startPlayWithPath:[NSURL URLWithString: urlStr]];
-         NSLog(@"使用本地数据");
+         NSLog(@"使用本地数据： %@",urlStr);
     }else {
         __weak __typeof(&*self)weakSelf = self;
         [self downloadFileWithURL:urlStr parameters:@{} savedPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"AMRTemporaryRadio.amr"] downloadSuccess:^(NSURLResponse *response, NSURL *filePath) {
@@ -76,10 +79,7 @@ static DPAudioPlayer *playerManager = nil;
         }];
     }
     
-    
-    
 }
-
 
 
 -(void)startPlayWithPath:(NSURL *)path {
@@ -113,6 +113,7 @@ static DPAudioPlayer *playerManager = nil;
 
 - (void)startPlayWithData:(NSData *)data
 {
+    
     if (isPlaying) return;
     //打开红外传感器
     [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
@@ -163,7 +164,7 @@ static DPAudioPlayer *playerManager = nil;
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer*)player error:(NSError *)error{
     //解码错误执行的动作
-    NSLog(@"");
+    NSLog(@"解码错误执行的动作");
 }
 
 - (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player
