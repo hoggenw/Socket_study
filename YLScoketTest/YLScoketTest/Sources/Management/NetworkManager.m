@@ -14,7 +14,6 @@
 #ifdef DEBUG
 //https
 NSString * const BaseUrl = @"http://192.168.1.11:8099/";
-NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
 NSString * const SOCKETHOST = @"192.168.1.11";
 uint16_t const SOCKETHOSTPORT = 9696;
 
@@ -31,7 +30,6 @@ uint16_t const SOCKETHOSTPORT = 9696;
 
 #else
 NSString * const BaseUrl = @"http://www.wangchat.buzz:9001/";
-NSString * const WebBaseUrl = @"https://community.coinsolid.com/resum/download?resumUrl=";
 NSString * const SOCKETHOST = @"websocket.wangchat.buzz";
 uint16_t const SOCKETHOSTPORT = 9001;
 #endif

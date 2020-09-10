@@ -13,7 +13,7 @@ typedef void (^ReturnBlock)(NSDictionary *returnDict);
 
 
 extern NSString * const BaseUrl;              // 网络请求的BaseUrl
-extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
+//extern NSString * const WebBaseUrl;         // 通用网页的BaseUrl
 
 extern NSString * const SOCKETHOST;
 
