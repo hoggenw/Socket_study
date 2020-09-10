@@ -9,6 +9,7 @@
 #import "YLMessageTableViewCell.h"
 #import "ChatMessageModel.h"
 #import "YLSocketRocktManager.h"
+#import "amr_wav_converter.h"
 
 @implementation YLMessageTableViewCell
 
@@ -130,7 +131,16 @@
             [self.messageSendStatusImageView setTapActionWithBlock:^{
                 
                 if (messageModel.messageType == YLMessageTypeVoice) {
-                    messageModel.voiceData = [NSData dataWithContentsOfURL:[NSURL URLWithString: messageModel.sourcePath]];
+                    if(messageModel.sourcePath.length <= 0){
+                        [YLHintView showMessageOnThisPage:@"数据源不存在"];
+                        return;
+                    }
+                    NSString *amrRecordFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"AMRtemporaryRadio.amr"];
+                    wave_file_to_amr_file([messageModel.sourcePath cStringUsingEncoding:NSUTF8StringEncoding],[amrRecordFilePath cStringUsingEncoding:NSUTF8StringEncoding], 1, 16);
+                       
+                       //返回amr音频文件Data,用于传输或存储
+                    NSData *cacheAudioData = [NSData dataWithContentsOfFile:amrRecordFilePath];
+                    messageModel.voiceData = cacheAudioData;
                 }
                 
                 if (messageModel.messageType == YLMessageTypeImage) {
@@ -139,6 +149,23 @@
                 
                 [[YLSocketRocktManager shareManger] resendMassege: messageModel];
             }];
+            break;
+        }
+        case YLMessageSourceError:{//消息作废
+            
+            self.messageSendStatusImageView.userInteractionEnabled = true;
+            [self.messageSendStatusImageView removeAllSubViews];
+            self.messageSendStatusImageView.image  = [UIImage imageNamed:@"message_discard_voice"];
+//            [self.messageSendStatusImageView setTapActionWithBlock:^{
+//                ChatListUserModel *model = _dataArray[indexPath.row];
+//                model.selfId = [AccountManager sharedInstance].fetch.userID;
+//                if ([[LocalSQliteManager sharedInstance] deletChatListUserModel:model ]) {
+//                    [self.dataArray removeObject: model];
+//                    [self.tableView reloadData];
+//
+//                }
+//                [YLHintView showMessageOnThisPage:@"删除"];
+//            }];
             break;
         }
         default:

@@ -157,6 +157,18 @@
     
 }
 
+/*更新语音消息发送地址*/
+- (BOOL )setLocalChatMessageModelSendStateByMessageId:(NSString *)messageId vioceSource:(NSString *)messageSource{
+    __block  BOOL result = NO;
+    [self.queue inDatabase:^(FMDatabase *db) {
+        BOOL success=[db executeUpdate:@"update MessagesTabel SET messageSource = ?  WHERE  messageId=? ",messageSource,messageId];
+        result = success;
+    }];
+    //
+    return result;
+    
+}
+
 /**获取某个聊天未读的条数*/
 - (NSInteger )selectLocalChatMessageModelByUserId:(NSString *)userId{
     //从表中获取所要的数据

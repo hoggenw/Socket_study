@@ -36,6 +36,8 @@
 - (BOOL )setLocalChatMessageModelReadedByUserId:(NSString *)userId;
 /*更新消息发送状态*/
 - (BOOL )setLocalChatMessageModelSendStateByMessageId:(NSString *)messageId sendState:(YLMessageSendState) sendState;
+/*更新语音消息发送地址*/
+- (BOOL )setLocalChatMessageModelSendStateByMessageId:(NSString *)messageId vioceSource:(NSString *)messageSource;
 /**获取所有消息状态未发送*/
 -(NSArray<LocalChatMessageModel *> *)selectAllLocalChatMessageModels;
 

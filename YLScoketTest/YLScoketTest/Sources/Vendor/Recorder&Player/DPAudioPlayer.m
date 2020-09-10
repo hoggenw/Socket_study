@@ -58,7 +58,8 @@ static DPAudioPlayer *playerManager = nil;
 
 - (void)startPlayWithURL:(NSString *)urlStr
 {
- 
+    AVAuthorizationStatus microPhoneStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+
     if(urlStr.length <= 0){
         [YLHintView showMessageOnThisPage:@"语音信息丢失"];
     }
@@ -69,6 +70,7 @@ static DPAudioPlayer *playerManager = nil;
          NSLog(@"使用本地数据： %@",urlStr);
     }else {
         __weak __typeof(&*self)weakSelf = self;
+        
         [self downloadFileWithURL:urlStr parameters:@{} savedPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"AMRTemporaryRadio.amr"] downloadSuccess:^(NSURLResponse *response, NSURL *filePath) {
             NSData *data = [NSData dataWithContentsOfURL:filePath];
             [weakSelf startPlayWithData:data];
@@ -83,7 +85,10 @@ static DPAudioPlayer *playerManager = nil;
 
 
 -(void)startPlayWithPath:(NSURL *)path {
-    if (isPlaying) return;
+     
+    if (isPlaying){
+           [self stopPlaying];
+       }
     //打开红外传感器
     [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
     //默认情况下扬声器播放
@@ -114,7 +119,9 @@ static DPAudioPlayer *playerManager = nil;
 - (void)startPlayWithData:(NSData *)data
 {
     
-    if (isPlaying) return;
+    if (isPlaying){
+        [self stopPlaying];
+    }
     //打开红外传感器
     [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
     //默认情况下扬声器播放
@@ -164,6 +171,10 @@ static DPAudioPlayer *playerManager = nil;
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer*)player error:(NSError *)error{
     //解码错误执行的动作
+    [self stopPlaying];
+           if (self.playComplete) {
+               self.playComplete();
+           }
     NSLog(@"解码错误执行的动作");
 }
 

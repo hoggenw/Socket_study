@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, YLMessageSendState){
     YLMessageSending = 0,       // 消息发送中
     YLMessageSendSuccess = 1,          // 消息发送失败
     YLMessageSendFail = 2,          // 消息发送失败
+    YLMessageSourceError = 3,          // 语音消息重发源被系统删除
 };
 
 /**

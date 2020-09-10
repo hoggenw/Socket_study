@@ -10,7 +10,6 @@
 
 @interface YLVoiceMessageCell : YLMessageTableViewCell
 
-@property (nonatomic, strong)UIImageView * voiceImageView;
 @property (nonatomic, strong)UILabel * timeLabel;
 
 @end

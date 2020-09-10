@@ -49,6 +49,7 @@
 #define Y_Notification_Socket_Connet @"Y_Notification_Socket_Connet"
 #define Y_Notification_Reload_Friend_Group @"Y_Notification_Reload_Friend_Group"
 #define Y_Notification_Reload_FriendShips @"Y_Notification_Reload_FriendShips"
+#define Y_Notification_Close_Voice_Animation @"Y_Notification_Close_Voice_Animation"
 //发送登录请求
 #define POST_LOGINQUIT_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Account_Offline object:nil]
 //发送socket脸基尼请求

@@ -11,7 +11,19 @@
 #import "DPAudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
+
+@interface YLVoiceMessageCell ()
+
+
+@property (nonatomic, strong)YLImageView  * voiceImageView;
+@end
+
 @implementation YLVoiceMessageCell
+
+
+-(void)dealloc{
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:Y_Notification_Close_Voice_Animation  object: nil];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -28,8 +40,19 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self addSubview:self.timeLabel];
+        self.voiceImageView.userInteractionEnabled = true;
         [self addSubview: self.voiceImageView];
     }
+    
+    /**
+     *  通知更新
+     */
+    @weakify(self)
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName: Y_Notification_Close_Voice_Animation object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self)
+        [self.voiceImageView stopAnimating];
+        
+    }];
     return self;
 }
 
@@ -53,8 +76,10 @@
         float voiceY = self.messageBackgroundImageView.top + 10;
         [self.voiceImageView setFrame: CGRectMake(voiceX, voiceY, widthVoice, hieghtVoice)];
         
-        [self.timeLabel setFrame:CGRectMake(self.messageBackgroundImageView.left - 40, self.messageBackgroundImageView.top, 35, self.messageBackgroundImageView.height)];
+        [self.timeLabel setFrame:CGRectMake(self.messageBackgroundImageView.left - 40, self.messageBackgroundImageView.top, 30, self.messageBackgroundImageView.height)];
         self.timeLabel.textAlignment = NSTextAlignmentRight;
+         float messageSendStatusImageViewX = self.timeLabel.left ;
+         [self.messageSendStatusImageView setFrame:CGRectMake(messageSendStatusImageViewX - 30, (self.timeLabel.top + 10), 30, 30)];
         
     }
     else if (self.messageModel.ownerTyper == YLMessageOwnerTypeOther) {
@@ -80,32 +105,26 @@
     
     [super setMessageModel:messageModel];
     __weak typeof(self) weakSelf = self;
-    AVAuthorizationStatus microPhoneStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
-//      switch (microPhoneStatus) {
-//          case AVAuthorizationStatusDenied:
-//          case AVAuthorizationStatusRestricted:
-//          {
-//              NSLog(@"被拒绝");
-//          }
-//              break;
-//          case AVAuthorizationStatusNotDetermined:
-//          {
-//              // 没弹窗
-//               NSLog(@"没弹窗");
-//          }
-//              break;
-//          case AVAuthorizationStatusAuthorized:
-//          {
-//              // 有授权
-//               NSLog(@"有授权");
-//          }
-//              break;
-//
-//          default:
-//              break;
-//      }
-    
+
     [self.messageBackgroundImageView setTapActionWithBlock:^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Close_Voice_Animation object:nil];
+        [weakSelf.voiceImageView startAnimating];
+        if (messageModel.voiceData .length > 20) {
+            [[DPAudioPlayer sharedInstance] startPlayWithData: messageModel.voiceData];
+        }else{
+            //播放url
+           // NSLog(@"messageModel.voicePath : %@",messageModel.voicePath);
+            [[DPAudioPlayer sharedInstance] startPlayWithURL: messageModel.sourcePath];
+        }
+        
+        
+        [DPAudioPlayer sharedInstance].playComplete = ^{
+            [weakSelf.voiceImageView stopAnimating];
+        };
+    }];
+    
+    [self.voiceImageView setTapActionWithBlock:^{
         [weakSelf.voiceImageView startAnimating];
         if (messageModel.voiceData .length > 20) {
             [[DPAudioPlayer sharedInstance] startPlayWithData: messageModel.voiceData];
@@ -127,9 +146,9 @@
     
 }
 
--(UIImageView *)voiceImageView {
+-(YLImageView *)voiceImageView {
     if (_voiceImageView == nil) {
-        _voiceImageView = [[UIImageView alloc] init];
+        _voiceImageView = [[YLImageView  alloc] init];
         [_voiceImageView setContentMode:UIViewContentModeScaleAspectFill];
         [_voiceImageView setClipsToBounds:YES];
         _voiceImageView.userInteractionEnabled = true;

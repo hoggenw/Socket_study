@@ -23,6 +23,11 @@
 
 @implementation ChatShowMessageViewController
 
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:Y_Notification_Refresh_ChatMessage_State  object: nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = 1;

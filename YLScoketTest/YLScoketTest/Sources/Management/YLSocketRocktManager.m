@@ -169,9 +169,8 @@ dispatch_async(dispatch_get_main_queue(), block);\
     YLMessageModel * pmessage  = [self messageModelMesaagModel:messageModel];
     pmessage.messageId = messageModel.messageId;
     //存入本地，然后发送通知；
+    
     if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSending]) {
-        
-       
         [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
         // 序列化为Data
         if (pmessage.messageType == YLMessageTypeImage || pmessage.messageType == YLMessageTypeVoice) {
@@ -185,7 +184,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             base.data_p =  [pmessage data];
             [self sendMesaageWith:[base data]];
         }
-         [self initMessageBeat];
+        [self initMessageBeat];
         
     }else{
         [YLHintView showMessageOnThisPage:@"消失发送发生错误"];
@@ -219,7 +218,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         }
         
         if (pmessage.messageType == YLMessageTypeImage || pmessage.messageType == YLMessageTypeVoice ) {
-            [self sendPictureMesaageBefore:pmessage messageModel:messageModel];
+          //  [self sendPictureMesaageBefore:pmessage messageModel:messageModel];
         }else {
             // 序列化为Data
             YLBaseMessageModel * base = [YLBaseMessageModel new];
@@ -279,7 +278,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 -(void)sendPictureMesaageBefore:(YLMessageModel *) pmessage messageModel:(ChatMessageModel *)messageModel{
     
     //uploadtoken过期时间1天
-     NSString * uploadtoken = [UserDefUtils getStringForKey:@"qiniuTokenString"];
+    NSString * uploadtoken = [UserDefUtils getStringForKey:@"qiniuTokenString"];
     if ([JudgeUtil isQiNiuTokenExpire] || uploadtoken.length <= 0) {
         [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Upload_TokenAPI] paramBody:nil needToken:true showToast:false  returnBlock:^(NSDictionary *returnDict) {
             if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
@@ -297,7 +296,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
             
         }];
     }else{
-       
+        
         [self sendPictureMesaage: pmessage messageModel: messageModel uploadtoken: uploadtoken];
     }
     
@@ -306,6 +305,13 @@ dispatch_async(dispatch_get_main_queue(), block);\
 -(void)sendPictureMesaage:(YLMessageModel *) pmessage messageModel:(ChatMessageModel *)messageModel uploadtoken:(NSString *)uploadtoken{
     //图片数据
     NSData * imageData = messageModel.voiceData;
+    if (imageData == nil) {
+        [YLHintView showMessageOnThisPage:@"消息数据已遗失或者损坏"];
+        if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSourceError]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
+        }
+        return;
+    }
     QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
         builder.useHttps = YES;
     }];
@@ -316,7 +322,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
     }else if(pmessage.messageType == YLMessageTypeVoice){
         key = [NSString stringWithFormat:@"ihosdev/chat/%@.amr",[[NSUUID UUID] UUIDString]] ;
     }
-  
+    
     QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];
     [upManager putData:imageData key:key token:uploadtoken complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
         
@@ -327,9 +333,9 @@ dispatch_async(dispatch_get_main_queue(), block);\
             //                            NSLog(@"resp==  %@",resp);
             //http://qnfilesdev.schlwyy.com/ihosdev/chat/B5E10EB1-69AC-41AB-8745-ECA61A1078DE.JPG
             NSString * imageUrl =[NSString stringWithFormat:@"http://qnfilesdev.schlwyy.com/%@",key];
-//            if( pmessage.messageType == YLMessageTypeVoice){
-//                [FileManager removeFileOfPath: pmessage.messageSource];
-//            }
+            //            if( pmessage.messageType == YLMessageTypeVoice){
+            //                [FileManager removeFileOfPath: pmessage.messageSource];
+            //            }
             pmessage.messageSource = imageUrl;
             // 序列化为Data
             YLBaseMessageModel * base = [YLBaseMessageModel new];
@@ -341,7 +347,12 @@ dispatch_async(dispatch_get_main_queue(), block);\
             
         }
         else{
-            NSLog(@"失败");
+            NSString * errorString = [NSString stringWithFormat:@"%@",info.error.userInfo[@"error"]];
+            if ( [errorString isEqualToString:@"expired token"]) {
+                NSLog(@"token失效");
+                [self refreshUploadTokenWithMesaage: pmessage messageModel:messageModel];
+            }
+            NSLog(@"失败%@",info.error.userInfo[@"error"] );
         }
     } option:nil];
 }
@@ -453,12 +464,18 @@ dispatch_async(dispatch_get_main_queue(), block);\
         }
         
         YLMessageModel * pmessage  = [[YLMessageModel alloc] initWithData:baseModel.data_p error:&error];
-        //todo
         //更新本地数据库消息发送记录
         if ([[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId sendState:YLMessageSendSuccess]) {
             NSLog(@"更新消息状态成功");
+            if(pmessage.messageType == YLMessageTypeVoice){
+                if ( [[LocalSQliteManager sharedInstance] setLocalChatMessageModelSendStateByMessageId:pmessage.messageId vioceSource:pmessage.messageSource ]) {
+                    NSLog(@"更新语音消息数据源头");
+                }
+            }
             [[NSNotificationCenter defaultCenter] postNotificationName:Y_Notification_Refresh_ChatMessage_State object:nil];
         }
+        
+        
         //更新该聊天对像列表的最新消息
         ChatListUserModel *item2  = [ChatListUserModel new];
         item2.userId = pmessage.toUser.userId;
@@ -467,7 +484,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
         if (pmessage.messageType == YLMessageTypeImage) {
             item2.message = @"【图片】";
         }else if (pmessage.messageType == YLMessageTypeVoice) {
-                item2.message = @"【语音】";
+            item2.message = @"【语音】";
         }else {
             item2.message = pmessage.textString;
         }
@@ -563,6 +580,63 @@ dispatch_async(dispatch_get_main_queue(), block);\
 //sendPing的时候，如果网络通的话，则会收到回调，但是必须保证ScocketOpen，否则会crash
 - (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
     NSLog(@"收到PONG回调: %@",[[NSString alloc] initWithData:pongPayload encoding: NSUTF8StringEncoding]);
+}
+
+
+-(void)refreshUploadTokenWithMesaage:(YLMessageModel *) pmessage messageModel:(ChatMessageModel *)messageModel{
+    [[NetworkManager sharedInstance] postWithURL:[NSString stringWithFormat:@"%@%@",BaseUrl,Upload_TokenAPI] paramBody:nil needToken:true showToast:false  returnBlock:^(NSDictionary *returnDict) {
+        if ([@"0" isEqualToString: [NSString stringWithFormat:@"%@", returnDict[@"errno"]]]) {
+            
+            NSDictionary * tokenDic = returnDict[@"data"];
+            NSString * uploadtoken = [NSString stringWithFormat:@"%@",tokenDic[@"uploadToken"]];
+            NSLog(@"上传token%@",uploadtoken);
+            [UserDefUtils saveString:[[NSDate date] toStringWithFormat:@"YYYY-MM-dd HH:mm:ss"] forKey:@"qiniuTokenTimeString"];
+            [UserDefUtils saveString:uploadtoken forKey:@"qiniuTokenString"];
+            NSData * imageData = messageModel.voiceData;
+            QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+                builder.useHttps = YES;
+            }];
+            //重用uploadManager。一般地，只需要创建一个uploadManager对
+            NSString * key = [NSString stringWithFormat:@"ihosdev/chat/%@.JPG",[[NSUUID UUID] UUIDString]] ;
+            if (pmessage.messageType == YLMessageTypeImage) {
+                key = [NSString stringWithFormat:@"ihosdev/chat/%@.JPG",[[NSUUID UUID] UUIDString]] ;
+            }else if(pmessage.messageType == YLMessageTypeVoice){
+                key = [NSString stringWithFormat:@"ihosdev/chat/%@.amr",[[NSUUID UUID] UUIDString]] ;
+            }
+            
+            QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];
+            [upManager putData:imageData key:key token:uploadtoken complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+                
+                if(info.ok)
+                {
+                    NSLog(@"请求成功");
+                    //                           NSLog(@"info==  %@",info);
+                    //                            NSLog(@"resp==  %@",resp);
+                    //http://qnfilesdev.schlwyy.com/ihosdev/chat/B5E10EB1-69AC-41AB-8745-ECA61A1078DE.JPG
+                    NSString * imageUrl =[NSString stringWithFormat:@"http://qnfilesdev.schlwyy.com/%@",key];
+                    //            if( pmessage.messageType == YLMessageTypeVoice){
+                    //                [FileManager removeFileOfPath: pmessage.messageSource];
+                    //            }
+                    pmessage.messageSource = imageUrl;
+                    // 序列化为Data
+                    YLBaseMessageModel * base = [YLBaseMessageModel new];
+                    base.title = SokectTile;
+                    base.command = YLMessageCMDPersontoPerson;
+                    base.module = YLMessageCommonModule;
+                    base.data_p =  [pmessage data];
+                    [self sendMesaageWith:[base data]];
+                    
+                }
+                else{
+                    NSLog(@"失败%@",info.error);
+                }
+            } option:nil];
+        }else {
+            NSLog(@"获取上传token失败");
+            return;
+        }
+        
+    }];
 }
 
 @end
